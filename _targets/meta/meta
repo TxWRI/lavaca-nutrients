@@ -1,0 +1,8 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+clean_data|function|ba7252fe000719fc|||||||||||||||
+download_Q_data|function|51a0129a38a0a05f|||||||||||||||
+download_WQP_data|function|3ff72150341b9bd2|||||||||||||||
+model_data|stem|1eb5608917688c0c|452f2495861757a3|79ccd9f4d11c077c|-495503059||t19121.5589484923s|c4d001385e1e3128|3144113|rds|local|vector|||4.92|package dplyr was built under R version 4.1.3. package EcoHydRology was built under R version 4.1.3. package operators was built under R version 4.1.3. package readr was built under R version 4.1.3. package tidyr was built under R version 4.1.3|
+mugging_flow|function|5ec9831e8028dbd8|||||||||||||||
+qdata|stem|f3501a2ee8887e2b|27b45570878ee18c|396099fa40c04051|2045449679||t19104.7552231425s|eb040bf75cf3bd9b|242299|rds|local|vector|||3.99|package dplyr was built under R version 4.1.3. package readr was built under R version 4.1.3. package tidyr was built under R version 4.1.3. Missing column names filled in X5 5. 1037 parsing failures.  row col  expected    actual                        file12844   5 columns 4 columns dataTWDBGagedlktexanag12845   5 columns 4 columns dataTWDBGagedlktexanag12846   5 columns 4 columns dataTWDBGagedlktexanag12847   5 columns 4 columns dataTWDBGagedlktexanag12848   5 columns 4 columns dataTWDBGagedlktexanag..... ... ......... ......... ...........................See problems... for more details.|
+wqpdata|stem|c4b5d8ae273acdec|6efa7de142df38dd|5859807407b5ed6f|-910500034||t19104.7552338479s|4cbb1d14051710be|14057|rds|local|vector|||0.84||

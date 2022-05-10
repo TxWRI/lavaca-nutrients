@@ -1,6 +1,6 @@
 ---
 title: "Texas Coastal Nutrient Input Repository (Phase 1 - Lavaca Bay)"
-author: Michael Schramm
+author: Michael Schramm - Texas Water Resources Institute, Research Specialist
 output: github_document
 ---
 
