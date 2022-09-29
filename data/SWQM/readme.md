@@ -1,0 +1,1 @@
+Files obtained for TCEQ/LNRA water quality monitoring stations from the TCEQ SWQMIS database. Obtained April 20, 2022 from https://www80.tceq.texas.gov/SwqmisWeb/public/crpweb.faces

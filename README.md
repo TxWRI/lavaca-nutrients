@@ -1,6 +1,6 @@
 Texas Coastal Nutrient Input Repository (Phase 1 - Lavaca Bay)
 ================
-Michael Schramm
+Michael Schramm - Texas Water Resources Institute, Research Specialist
 
 This is a placeholder.
 
