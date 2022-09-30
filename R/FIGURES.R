@@ -7,7 +7,7 @@ prediction_bias <- function(model,
                             p2_y_title = "NO~3~-N Flux (kg/day)") {
   
   df <- df |> 
-    filter(site_no == site,
+    filter(site_no == {{site}},
            Date >= as.Date(date))
   
   df <- gratia::add_fitted(df,

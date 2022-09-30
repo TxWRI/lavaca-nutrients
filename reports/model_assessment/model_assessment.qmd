@@ -103,7 +103,7 @@ tar_read(summary_no3_08164000)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of NO~3~-N concentration GAM at Lavaca River at Edna, USGS-08164000."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of NO~3~-N GAM at Lavaca River at Edna, USGS-08164000."
 #| label: tbl-NO308164000-CV
 
 tar_read(cv_no3_08164000) |> 

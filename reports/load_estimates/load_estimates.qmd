@@ -1,0 +1,220 @@
+---
+title: "Supporting Materials: Load Estimates"
+author: 
+  - name: Michael Schramm
+    affiliations:
+      - name: Texas A\&M AgriLife Research
+        department: Texas Water Resources Institute
+    orcid: 0000-0003-1876-6592
+    email: michael.schramm@ag.tamu.edu
+abstract: |
+  This document includes figures and tables summarizing total loading estimates for the Lavaca River watershed.
+thanks: |
+  This project was funded by a Texas Coastal Management Program grant approved by the Texas Land Commissioner, providing financial assistance under the Coastal Zone Management Act of 1972, as amended, awarded by the National Oceanic and Atmospheric Administration (NOAA), Office for Coastal Management, pursuant to NOAA Award No. NA21NOS4190136. The views expressed herein are those of the author(s) and do not necessarily reflect the views of NOAA, the U.S. Department of Commerce, or any of their subagencies.
+format: 
+  pdf:
+    keep-md: true
+    keep-tex: true
+    documentclass: article
+    mainfont: MINIONPRO-REGULAR.OTF
+    sansfont: MORISTONPERSONAL-REGULAR.OTF
+    number-sections: true
+    fig-pos: 'h'
+    execute:
+      eval: true
+      echo: false
+      warning: false
+      error: false
+      message: false
+    include-in-header:
+      text: |
+        \usepackage{flafter, amsmath, booktabs, caption, longtable, changepage, multirow}
+        \newenvironment{widestuff}{\begin{table}[h]\begin{adjustwidth}{-4.5cm}{-4.5cm}\centering}{\end{adjustwidth}\end{table}}
+knitr: 
+  opts_chunk: 
+    dev: ragg_png
+    dpi: 200
+    # flextable options
+    ft.align: "center"
+    ft.latex.float: "none"
+    #ft.tabcolsep: 0
+    tab.lp: "tbl-"
+bibliography: reference.yml
+csl: https://raw.githubusercontent.com/TxWRI/csl/main/twri-technical-report.csl
+---
+```{r}
+#| label: setup
+#| echo: false
+
+library(dplyr)
+library(ggplot2)
+library(ggtext)
+library(patchwork)
+library(targets)
+library(twriTemplates)
+```
+
+
+# Load estimation and summarization
+
+Daily Nitrate-Nitrogen (NO~3~-N) and Total Phosphorus (TP) loads at stream sites were predicted using fitted GAM models. Standard deviations and credible intervals from GAM models can be obtained by drawing samples from the multivariate normal posterior distribution of the fitted GAM [@woodCONFIDENCEINTERVALSGENERALIZED2006; @marraCoveragePropertiesConfidence2012; @mcdowellImplicationsLagTimes2021]. Uncertainty in loads were reported as 95% credible intervals developed by drawing 1000 realizations of parameter estimates from the multivariate normal posterior distribution of the model parameters. We re-estimated the load for each realization and report the 2.5% and 97.5% quantiles. Monthly and annual loads were calculated by summing for each respective time period. Mean annual yields (daily load normalized by drainage area) were also calculated from daily load predictions to permit comparisons with other studies.
+
+# Total Load Estimates
+
+## Lavaca River at Edna, USGS-08164000
+
+```{r}
+#| echo: false
+#| label: no3_aggregate-08164000
+#| fig-cap: "Aggregated (a) monthly and (b) annual NO~3~-N loads at Lavaca River at Edna, USGS-08164000."
+#| fig-height: 6
+#| fig-width: 6
+
+a <- tar_read(aggregate_no3_08164000)[[1]] |> 
+  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d")) |> 
+  ggplot() +
+  geom_point(aes(x, NO3_Estimate)) +
+  geom_linerange(aes(x = x, ymin = NO3_Lower, ymax = NO3_Upper)) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
+               limits = c(as.Date("2005-01-01"), as.Date("2020-12-31")),
+               expand = c(0.025, 0.025)) +
+  labs(x = "", y = "Predicted Monthly NO<sub>3</sub>-N Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        axis.title.y = element_markdown(),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"))
+
+b <- tar_read(aggregate_no3_08164000)[[2]] |> 
+  ggplot() +
+  geom_point(aes(year, NO3_Estimate)) +
+  geom_line(aes(x = year, y = NO3_Estimate), linetype = "dashed", alpha = 0.5) +
+  geom_linerange(aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper)) +
+  labs(x = "", y = "Predicted Annual NO<sub>3</sub>-N Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"))
+
+a / b + plot_annotation(tag_levels = "a")
+```
+
+
+```{r}
+#| echo: false
+#| label: tp_aggregate-08164000
+#| fig-cap: "Aggregated (a) monthly and (b) annual TP loads at Lavaca River at Edna, USGS-08164000."
+#| fig-height: 6
+#| fig-width: 6
+
+a <- tar_read(aggregate_tp_08164000)[[1]] |> 
+  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d")) |> 
+  ggplot() +
+  geom_point(aes(x, TP_Estimate)) +
+  geom_linerange(aes(x = x, ymin = TP_Lower, ymax = TP_Upper)) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
+               limits = c(as.Date("2000-01-01"), as.Date("2020-12-31")),
+               expand = c(0.025, 0.025)) +
+  labs(x = "", y = "Predicted Monthly TP Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        axis.title.y = element_markdown(),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"))
+
+b <- tar_read(aggregate_tp_08164000)[[2]] |> 
+  ggplot() +
+  geom_point(aes(year, TP_Estimate)) +
+  geom_line(aes(x = year, y = TP_Estimate), linetype = "dashed", alpha = 0.5) +
+  geom_linerange(aes(x = year, ymin = TP_Lower, ymax = TP_Upper)) +
+  labs(x = "", y = "Predicted Annual TP Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"))
+
+a / b + plot_annotation(tag_levels = "a")
+```
+
+
+## Navidad River at Palmetto Bend Dam, Lake Texana
+
+```{r}
+#| echo: false
+#| label: no3_aggregate-texana
+#| fig-cap: "Aggregated (a) monthly and (b) annual NO~3~-N loads at Palmetto Bend Dam at Lake Texana."
+#| fig-height: 6
+#| fig-width: 6
+
+a <- tar_read(aggregate_no3_texana)[[1]] |> 
+  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d")) |> 
+  ggplot() +
+  geom_point(aes(x, NO3_Estimate)) +
+  geom_linerange(aes(x = x, ymin = NO3_Lower, ymax = NO3_Upper)) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
+               limits = c(as.Date("2005-01-01"), as.Date("2020-12-31")),
+               expand = c(0.025, 0.025)) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "", y = "Predicted Monthly NO<sub>3</sub>-N Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        axis.title.y = element_markdown(),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"))
+
+b <- tar_read(aggregate_no3_texana)[[2]] |> 
+  ggplot() +
+  geom_point(aes(year, NO3_Estimate)) +
+  geom_line(aes(x = year, y = NO3_Estimate), linetype = "dashed", alpha = 0.5) +
+  geom_linerange(aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper)) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "", y = "Predicted Annual NO<sub>3</sub>-N Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"))
+
+a / b + plot_annotation(tag_levels = "a")
+```
+
+```{r}
+#| echo: false
+#| label: tp_aggregate-texana
+#| fig-cap: "Aggregated (a) monthly and (b) annual TP loads at Palmetto Bend Dam at Lake Texana."
+#| fig-height: 6
+#| fig-width: 6
+
+a <- tar_read(aggregate_tp_texana)[[1]] |> 
+  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d")) |> 
+  ggplot() +
+  geom_point(aes(x, TP_Estimate)) +
+  geom_linerange(aes(x = x, ymin = TP_Lower, ymax = TP_Upper)) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
+               limits = c(as.Date("2000-01-01"), as.Date("2020-12-31")),
+               expand = c(0.025, 0.025)) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "", y = "Predicted Monthly TP Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        axis.title.y = element_markdown(),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"))
+
+b <- tar_read(aggregate_tp_texana)[[2]] |> 
+  ggplot() +
+  geom_point(aes(year, TP_Estimate)) +
+  geom_line(aes(x = year, y = TP_Estimate), linetype = "dashed", alpha = 0.5) +
+  geom_linerange(aes(x = year, ymin = TP_Lower, ymax = TP_Upper)) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "", y = "Predicted Annual TP Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"))
+
+a / b + plot_annotation(tag_levels = "a")
+```
+
+\clearpage
+
+# References

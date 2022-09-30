@@ -5,6 +5,7 @@ source("R/Models.R")
 source("R/CV.R")
 source("R/gt_functions.R")
 source("R/FIGURES.R")
+source("R/LOADESTIMATE.R")
 options(tidyverse.quiet = TRUE)
 targets::tar_option_set(packages = c("adc", 
                                      "arrow", 
@@ -15,6 +16,7 @@ targets::tar_option_set(packages = c("adc",
                                      "furrr", 
                                      "ggplot2", 
                                      "ggtext",
+                                     "glue",
                                      "gratia", 
                                      "hydroGOF", 
                                      "imputeTS", 
@@ -527,7 +529,100 @@ list(
                                  p2_x_labs = c("Predicted\nConcentration", "Observed\nConcentration"),
                                  p2_y_title = "TP Concentration (mg/mL)")),
 
-  tar_quarto(assess_gams, "reports/model_assessment/model_assessment.qmd")
+  ## assessment pdf
+  tar_quarto(assess_gams, "reports/model_assessment/model_assessment.qmd"),
+  
+  
+  ## Model Predictions
+  
+  tar_target(daily_no3_08164000,
+             predict_daily(
+               model = no3_08164000, # target
+               data = model_data, # target
+               site_no = "usgs08164000", # quoted string
+               date = "2005-01-01", # quoted string
+               output_name = NO3_Estimate, #unquoted
+               output_upper = NO3_Upper, #unquoted
+               output_lower = NO3_Lower #unquoted
+             )),
+
+  tar_target(aggregate_no3_08164000,
+             predict_month_year(
+               model = no3_08164000, # target
+               data = model_data, # target
+               site_no = "usgs08164000", # quoted string
+               date = "2005-01-01", # quoted string
+               sims = daily_no3_08164000,
+               output_name = NO3_Estimate, #unquoted
+               output_upper = NO3_Upper, #unquoted
+               output_lower = NO3_Lower #unquoted
+             )),
+
+  tar_target(daily_tp_08164000,
+             predict_daily(
+               model = tp_08164000, # target
+               data = model_data, # target
+               site_no = "usgs08164000", # quoted string
+               date = "2000-01-01", # quoted string
+               output_name = TP_Estimate, #unquoted
+               output_upper = TP_Upper, #unquoted
+               output_lower = TP_Lower #unquoted
+             )),
+
+  tar_target(aggregate_tp_08164000,
+             predict_month_year(
+               model = tp_08164000, # target
+               data = model_data, # target
+               site_no = "usgs08164000", # quoted string
+               date = "2000-01-01", # quoted string
+               sims = daily_tp_08164000,
+               output_name = TP_Estimate, #unquoted
+               output_upper = TP_Upper, #unquoted
+               output_lower = TP_Lower #unquoted
+             )),
+  
+  
+  tar_target(daily_no3_texana,
+             predict_daily_lk(model = no3_texana, # target
+                              data = model_data, # target
+                              site_no = "lktexana_g", # quoted string
+                              date = "2005-01-01", # quoted string
+                              output_name = NO3_Estimate, #unquoted
+                              output_upper = NO3_Upper, #unquoted
+                              output_lower = NO3_Lower #unquoted
+                              )),
+  tar_target(aggregate_no3_texana,
+             predict_month_year_lk(model = no3_texana, # target
+                              data = model_data, # target
+                              site_no = "lktexana_g", # quoted string
+                              date = "2005-01-01", # quoted string
+                              sims = daily_no3_texana,
+                              output_name = NO3_Estimate, #unquoted
+                              output_upper = NO3_Upper, #unquoted
+                              output_lower = NO3_Lower #unquoted
+             )),
+  
+  tar_target(daily_tp_texana,
+             predict_daily_lk(model = tp_texana, # target
+                              data = model_data, # target
+                              site_no = "lktexana_g", # quoted string
+                              date = "2000-01-01", # quoted string
+                              output_name = TP_Estimate, #unquoted
+                              output_upper = TP_Upper, #unquoted
+                              output_lower = TP_Lower #unquoted
+             )),
+  tar_target(aggregate_tp_texana,
+             predict_month_year_lk(model = tp_texana, # target
+                                   data = model_data, # target
+                                   site_no = "lktexana_g", # quoted string
+                                   date = "2000-01-01", # quoted string
+                                   sims = daily_tp_texana,
+                                   output_name = TP_Estimate, #unquoted
+                                   output_upper = TP_Upper, #unquoted
+                                   output_lower = TP_Lower #unquoted
+             )),
+  ## loading estimates pdf
+  tar_quarto(loading_estimates, "reports/load_estimates/load_estimates.qmd")
   
   
 )

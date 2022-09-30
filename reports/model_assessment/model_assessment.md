@@ -115,7 +115,7 @@ A. parametric coefficients & (Intercept) & 2.089 & 0.100 & 20.955 &  &  &  & 0.0
 :::
 :::
 
-::: {#tbl-NO308164000-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 10-fold cross-validation of NO~3~-N concentration GAM at Lavaca River at Edna, USGS-08164000.'}
+::: {#tbl-NO308164000-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 10-fold cross-validation of NO~3~-N GAM at Lavaca River at Edna, USGS-08164000.'}
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** |  **Median (IQR)**  |
 |:--------------------------|:------------------:|
