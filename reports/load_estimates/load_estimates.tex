@@ -184,7 +184,7 @@ NOAA, the U.S. Department of Commerce, or any of their subagencies.}}
 This document includes figures and tables summarizing total loading
 estimates for the Lavaca River watershed.
 \end{abstract}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, interior hidden, enhanced, frame hidden, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, sharp corners, interior hidden, enhanced, breakable]}{\end{tcolorbox}}\fi
 
 \hypertarget{load-estimation-and-summarization}{%
 \section{Load estimation and
@@ -200,9 +200,24 @@ by drawing 1000 realizations of parameter estimates from the
 multivariate normal posterior distribution of the model parameters. We
 re-estimated the load for each realization and report the 2.5\% and
 97.5\% quantiles. Monthly and annual loads were calculated by summing
-for each respective time period. Mean annual yields (daily load
-normalized by drainage area) were also calculated from daily load
-predictions to permit comparisons with other studies.
+for each respective time period.
+
+Daily flow variability is responsible for the majority of daily load
+variability. WRTDS utilizes a flow- normalization procedure that removes
+the influence of flow variability by treating daily flow as a random
+sample of all possible discharges on a given day
+(\textbf{hirschWeightedRegressionsTime2010?}). The flow-normalized
+estimates are not true estimates of load, but are indicative of
+potential changes in load that are not attributable to variability in
+daily flow. These flow-normalized estimates are most suitable for
+assessing changes in long-term trends. We implemented a similar
+procedure by setting flow-based covariates on each day of the year equal
+to each of the historical values for that day of the year between 2000
+and 2021. The flow-normalized estimate is simply the mean of the model
+predictions for each day considering all of the flow values.
+Flow-normalized estimates and credible intervals were aggregated to
+annual reporting periods following procedures used for predicted actual
+loading.
 
 \hypertarget{total-load-estimates}{%
 \section{Total Load Estimates}\label{total-load-estimates}}
@@ -237,27 +252,7 @@ at Edna, USGS-08164000.}
 \subsection{Navidad River at Palmetto Bend Dam, Lake
 Texana}\label{navidad-river-at-palmetto-bend-dam-lake-texana}}
 
-\begin{figure}[h]
-
-{\centering \includegraphics{load_estimates_files/figure-pdf/no3_aggregate-texana-1.png}
-
-}
-
-\caption{Aggregated (a) monthly and (b) annual NO\textsubscript{3}-N
-loads at Palmetto Bend Dam at Lake Texana.}
-
-\end{figure}
-
-\begin{figure}[h]
-
-{\centering \includegraphics{load_estimates_files/figure-pdf/tp_aggregate-texana-1.png}
-
-}
-
-\caption{Aggregated (a) monthly and (b) annual TP loads at Palmetto Bend
-Dam at Lake Texana.}
-
-\end{figure}
+\clearpage
 
 \hypertarget{references}{%
 \section*{References}\label{references}}

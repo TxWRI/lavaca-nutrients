@@ -57,7 +57,10 @@ library(twriTemplates)
 
 # Load estimation and summarization
 
-Daily Nitrate-Nitrogen (NO~3~-N) and Total Phosphorus (TP) loads at stream sites were predicted using fitted GAM models. Standard deviations and credible intervals from GAM models can be obtained by drawing samples from the multivariate normal posterior distribution of the fitted GAM [@woodCONFIDENCEINTERVALSGENERALIZED2006; @marraCoveragePropertiesConfidence2012; @mcdowellImplicationsLagTimes2021]. Uncertainty in loads were reported as 95% credible intervals developed by drawing 1000 realizations of parameter estimates from the multivariate normal posterior distribution of the model parameters. We re-estimated the load for each realization and report the 2.5% and 97.5% quantiles. Monthly and annual loads were calculated by summing for each respective time period. Mean annual yields (daily load normalized by drainage area) were also calculated from daily load predictions to permit comparisons with other studies.
+Daily Nitrate-Nitrogen (NO~3~-N) and Total Phosphorus (TP) loads at stream sites were predicted using fitted GAM models. Standard deviations and credible intervals from GAM models can be obtained by drawing samples from the multivariate normal posterior distribution of the fitted GAM [@woodCONFIDENCEINTERVALSGENERALIZED2006; @marraCoveragePropertiesConfidence2012; @mcdowellImplicationsLagTimes2021]. Uncertainty in loads were reported as 95% credible intervals developed by drawing 1000 realizations of parameter estimates from the multivariate normal posterior distribution of the model parameters. We re-estimated the load for each realization and report the 2.5% and 97.5% quantiles. Monthly and annual loads were calculated by summing for each respective time period. 
+
+Daily flow variability is responsible for the majority of daily load variability. WRTDS utilizes a flow- normalization procedure that removes the influence of flow variability by treating daily flow as a random sample of all possible discharges on a given day [@hirschWeightedRegressionsTime2010]. The flow-normalized estimates are not true estimates of load, but are indicative of potential changes in load that are not attributable to variability in daily flow. These flow-normalized estimates are most suitable for assessing changes in long-term trends. We implemented a similar procedure by setting flow-based covariates on each day of the year equal to each of the historical values for that day of the year between 2000 and 2021. The flow-normalized estimate is simply the mean of the model predictions for each day considering all of the flow values. Flow-normalized estimates and credible intervals were aggregated to annual reporting periods following procedures used for predicted actual loading.
+
 
 # Total Load Estimates
 
@@ -67,14 +70,23 @@ Daily Nitrate-Nitrogen (NO~3~-N) and Total Phosphorus (TP) loads at stream sites
 #| echo: false
 #| label: no3_aggregate-08164000
 #| fig-cap: "Aggregated (a) monthly and (b) annual NO~3~-N loads at Lavaca River at Edna, USGS-08164000."
-#| fig-height: 6
-#| fig-width: 6
+#| fig-height: 7
+#| fig-width: 5.5
 
-a <- tar_read(aggregate_no3_08164000)[[1]] |> 
-  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d")) |> 
-  ggplot() +
-  geom_point(aes(x, NO3_Estimate)) +
-  geom_linerange(aes(x = x, ymin = NO3_Lower, ymax = NO3_Upper)) +
+load <- tar_read(aggregate_no3_08164000)
+fn_load <- tar_read(aggregate_no3_08164000_fn)
+
+
+montly_load <- load[[1]] |> 
+  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d"))
+
+a <- ggplot() +
+  geom_point(data = montly_load,
+             aes(x, NO3_Estimate),
+                 color = "#1A3399") +
+  geom_linerange(data = montly_load,
+                 aes(x = x, ymin = NO3_Lower, ymax = NO3_Upper),
+                 color = "#1A3399") +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
                limits = c(as.Date("2005-01-01"), as.Date("2020-12-31")),
                expand = c(0.025, 0.025)) +
@@ -85,18 +97,42 @@ a <- tar_read(aggregate_no3_08164000)[[1]] |>
         panel.grid.major.x = element_line(color = "#d9d9d9",
                                           linetype = "dotted"))
 
-b <- tar_read(aggregate_no3_08164000)[[2]] |> 
-  ggplot() +
-  geom_point(aes(year, NO3_Estimate)) +
-  geom_line(aes(x = year, y = NO3_Estimate), linetype = "dashed", alpha = 0.5) +
-  geom_linerange(aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper)) +
-  labs(x = "", y = "Predicted Annual NO<sub>3</sub>-N Load [kg]") +
+
+b <- ggplot() +
+  geom_point(data = load[[2]], aes(year, NO3_Estimate, 
+                              color = "Total Annual Load",
+                              shape = "Total Annual Load")) +
+  geom_line(data = load[[2]], aes(x = year, y = NO3_Estimate,
+                             color = "Total Annual Load",
+                             linetype = "Total Annual Load"),
+            alpha = 0.5) +
+  geom_linerange(data = load[[2]], aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper,
+                                  color = "Total Annual Load")) +
+  geom_point(data = fn_load, aes(year, NO3_Estimate,
+                                 color = "Flow Normalized Annual Load",
+                                 shape = "Flow Normalized Annual Load")) +
+  geom_line(data = fn_load,
+            aes(x = year, y = NO3_Estimate,
+                color = "Flow Normalized Annual Load",
+                linetype = "Flow Normalized Annual Load"),
+            alpha = 0.5) +
+  # geom_linerange(data = fn_load,
+  #                aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper,
+  #                    color = "Flow Normalized Annual Load")) +
+  labs(x = "", y = "Annual NO<sub>3</sub>-N Load [kg]") +
+  scale_shape_manual(name = "values",
+                     values = c(21, 19)) +
+  scale_color_manual(name = "values",
+                     values = c("#7E1900", "#1A3399")) +
+  scale_linetype_manual(name = "values",
+                        values = c(1, 2)) +
+  coord_cartesian(ylim = c(0, 60000)) +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
         panel.grid.major.x = element_line(color = "#d9d9d9",
-                                          linetype = "dotted"))
-
-a / b + plot_annotation(tag_levels = "a")
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+(a / b) + plot_annotation(tag_levels = "a")
 ```
 
 
@@ -104,8 +140,8 @@ a / b + plot_annotation(tag_levels = "a")
 #| echo: false
 #| label: tp_aggregate-08164000
 #| fig-cap: "Aggregated (a) monthly and (b) annual TP loads at Lavaca River at Edna, USGS-08164000."
-#| fig-height: 6
-#| fig-width: 6
+#| fig-height: 4
+#| fig-width: 8
 
 a <- tar_read(aggregate_tp_08164000)[[1]] |> 
   mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d")) |> 
@@ -146,35 +182,35 @@ a / b + plot_annotation(tag_levels = "a")
 #| fig-height: 6
 #| fig-width: 6
 
-a <- tar_read(aggregate_no3_texana)[[1]] |> 
-  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d")) |> 
-  ggplot() +
-  geom_point(aes(x, NO3_Estimate)) +
-  geom_linerange(aes(x = x, ymin = NO3_Lower, ymax = NO3_Upper)) +
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
-               limits = c(as.Date("2005-01-01"), as.Date("2020-12-31")),
-               expand = c(0.025, 0.025)) +
-  scale_y_continuous(labels = scales::comma) +
-  labs(x = "", y = "Predicted Monthly NO<sub>3</sub>-N Load [kg]") +
-  theme_TWRI_print() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
-        axis.title.y = element_markdown(),
-        panel.grid.major.x = element_line(color = "#d9d9d9",
-                                          linetype = "dotted"))
-
-b <- tar_read(aggregate_no3_texana)[[2]] |> 
-  ggplot() +
-  geom_point(aes(year, NO3_Estimate)) +
-  geom_line(aes(x = year, y = NO3_Estimate), linetype = "dashed", alpha = 0.5) +
-  geom_linerange(aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper)) +
-  scale_y_continuous(labels = scales::comma) +
-  labs(x = "", y = "Predicted Annual NO<sub>3</sub>-N Load [kg]") +
-  theme_TWRI_print() +
-  theme(axis.title.y = element_markdown(),
-        panel.grid.major.x = element_line(color = "#d9d9d9",
-                                          linetype = "dotted"))
-
-a / b + plot_annotation(tag_levels = "a")
+# a <- tar_read(aggregate_no3_texana)[[1]] |> 
+#   mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d")) |> 
+#   ggplot() +
+#   geom_point(aes(x, NO3_Estimate)) +
+#   geom_linerange(aes(x = x, ymin = NO3_Lower, ymax = NO3_Upper)) +
+#   scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
+#                limits = c(as.Date("2005-01-01"), as.Date("2020-12-31")),
+#                expand = c(0.025, 0.025)) +
+#   scale_y_continuous(labels = scales::comma) +
+#   labs(x = "", y = "Predicted Monthly NO<sub>3</sub>-N Load [kg]") +
+#   theme_TWRI_print() +
+#   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+#         axis.title.y = element_markdown(),
+#         panel.grid.major.x = element_line(color = "#d9d9d9",
+#                                           linetype = "dotted"))
+# 
+# b <- tar_read(aggregate_no3_texana)[[2]] |> 
+#   ggplot() +
+#   geom_point(aes(year, NO3_Estimate)) +
+#   geom_line(aes(x = year, y = NO3_Estimate), linetype = "dashed", alpha = 0.5) +
+#   geom_linerange(aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper)) +
+#   scale_y_continuous(labels = scales::comma) +
+#   labs(x = "", y = "Predicted Annual NO<sub>3</sub>-N Load [kg]") +
+#   theme_TWRI_print() +
+#   theme(axis.title.y = element_markdown(),
+#         panel.grid.major.x = element_line(color = "#d9d9d9",
+#                                           linetype = "dotted"))
+# 
+# a / b + plot_annotation(tag_levels = "a")
 ```
 
 ```{r}
@@ -184,35 +220,35 @@ a / b + plot_annotation(tag_levels = "a")
 #| fig-height: 6
 #| fig-width: 6
 
-a <- tar_read(aggregate_tp_texana)[[1]] |> 
-  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d")) |> 
-  ggplot() +
-  geom_point(aes(x, TP_Estimate)) +
-  geom_linerange(aes(x = x, ymin = TP_Lower, ymax = TP_Upper)) +
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
-               limits = c(as.Date("2000-01-01"), as.Date("2020-12-31")),
-               expand = c(0.025, 0.025)) +
-  scale_y_continuous(labels = scales::comma) +
-  labs(x = "", y = "Predicted Monthly TP Load [kg]") +
-  theme_TWRI_print() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
-        axis.title.y = element_markdown(),
-        panel.grid.major.x = element_line(color = "#d9d9d9",
-                                          linetype = "dotted"))
-
-b <- tar_read(aggregate_tp_texana)[[2]] |> 
-  ggplot() +
-  geom_point(aes(year, TP_Estimate)) +
-  geom_line(aes(x = year, y = TP_Estimate), linetype = "dashed", alpha = 0.5) +
-  geom_linerange(aes(x = year, ymin = TP_Lower, ymax = TP_Upper)) +
-  scale_y_continuous(labels = scales::comma) +
-  labs(x = "", y = "Predicted Annual TP Load [kg]") +
-  theme_TWRI_print() +
-  theme(axis.title.y = element_markdown(),
-        panel.grid.major.x = element_line(color = "#d9d9d9",
-                                          linetype = "dotted"))
-
-a / b + plot_annotation(tag_levels = "a")
+# a <- tar_read(aggregate_tp_texana)[[1]] |> 
+#   mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d")) |> 
+#   ggplot() +
+#   geom_point(aes(x, TP_Estimate)) +
+#   geom_linerange(aes(x = x, ymin = TP_Lower, ymax = TP_Upper)) +
+#   scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
+#                limits = c(as.Date("2000-01-01"), as.Date("2020-12-31")),
+#                expand = c(0.025, 0.025)) +
+#   scale_y_continuous(labels = scales::comma) +
+#   labs(x = "", y = "Predicted Monthly TP Load [kg]") +
+#   theme_TWRI_print() +
+#   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+#         axis.title.y = element_markdown(),
+#         panel.grid.major.x = element_line(color = "#d9d9d9",
+#                                           linetype = "dotted"))
+# 
+# b <- tar_read(aggregate_tp_texana)[[2]] |> 
+#   ggplot() +
+#   geom_point(aes(year, TP_Estimate)) +
+#   geom_line(aes(x = year, y = TP_Estimate), linetype = "dashed", alpha = 0.5) +
+#   geom_linerange(aes(x = year, ymin = TP_Lower, ymax = TP_Upper)) +
+#   scale_y_continuous(labels = scales::comma) +
+#   labs(x = "", y = "Predicted Annual TP Load [kg]") +
+#   theme_TWRI_print() +
+#   theme(axis.title.y = element_markdown(),
+#         panel.grid.major.x = element_line(color = "#d9d9d9",
+#                                           linetype = "dotted"))
+# 
+# a / b + plot_annotation(tag_levels = "a")
 ```
 
 \clearpage

@@ -85,34 +85,32 @@ Hold-out data is often used to validate predictive ability of a model. Given the
 
 
 
-::: {.cell}
 ::: {.cell-output-display}
 \begin{widestuff}
 
 \caption{\label{tab:tbl-no3_08164000}NO\textsubscript{3}-N GAM summary - Lavaca River at Edna, USGS-08164000.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
 A. parametric coefficients & (Intercept) & 2.089 & 0.100 & 20.955 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 1.482 & 17.000 & 0.164 & 0.111\\
+ & s(ddate) &  &  &  & 1.482 & 17 & 0.164 & 0.111\\
 
- & s(yday) &  &  &  & 0.000 & 8.000 & 0.000 & 0.672\\
+ & s(yday) &  &  &  & 0.000 & 8 & 0.000 & 0.672\\
 
- & s(log1p(Flow)) &  &  &  & 6.897 & 9.000 & 25.879 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 6.897 & 9 & 25.880 & 0.000 ***\\
 
- & s(ma) &  &  &  & 0.001 & 5.000 & 0.000 & 0.391\\
+ & s(ma) &  &  &  & 0.001 & 5 & 0.000 & 0.391\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 4.125 & 5.000 & 3.882 & 0.001 ***\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 4.125 & 5 & 3.882 & 0.001 ***\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
 \multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.864, Deviance explained 0.844}\\
 \multicolumn{9}{l}{\textsuperscript{} -REML : 245.609, Scale est: 0.735, N: 74}\\
 \end{tabular}
 \end{widestuff}
-:::
 :::
 
 ::: {#tbl-NO308164000-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 10-fold cross-validation of NO~3~-N GAM at Lavaca River at Edna, USGS-08164000.'}
@@ -170,25 +168,25 @@ A. parametric coefficients & (Intercept) & 2.089 & 0.100 & 20.955 &  &  &  & 0.0
 
 \caption{\label{tab:tbl-tp_308164000}TP GAM summary - Lavaca River at Edna, USGS-08164000.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.926 & 0.047 & 61.775 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & 2.926 & 0.047 & 61.761 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 1.615 & 17.000 & 0.166 & 0.121\\
+ & s(ddate) &  &  &  & 1.607 & 17 & 0.166 & 0.121\\
 
- & s(yday) &  &  &  & 1.203 & 8.000 & 0.302 & 0.117\\
+ & s(yday) &  &  &  & 1.154 & 8 & 0.290 & 0.117\\
 
- & s(log1p(Flow)) &  &  &  & 3.868 & 4.000 & 43.061 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 3.867 & 4 & 42.896 & 0.000 ***\\
 
- & s(ma) &  &  &  & 3.392 & 5.000 & 2.294 & 0.004 **\\
+ & s(ma) &  &  &  & 3.443 & 5 & 2.329 & 0.004 **\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 1.992 & 4.000 & 1.145 & 0.046 *\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 1.971 & 4 & 1.143 & 0.045 *\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
 \multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.784, Deviance explained 0.905}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 306.645, Scale est: 0.179, N: 80}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : 306.623, Scale est: 0.180, N: 80}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -250,25 +248,25 @@ A. parametric coefficients & (Intercept) & 2.926 & 0.047 & 61.775 &  &  &  & 0.0
 
 \caption{\label{tab:tbl-no3_08164390}NO\textsubscript{3}-N GAM summary - Navidad River at Strane Pk nr Edna, USGS-08164390.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.106 & 0.070 & 29.903 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & 2.106 & 0.070 & 29.902 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 0.671 & 17.000 & 0.072 & 0.163\\
+ & s(ddate) &  &  &  & 0.671 & 17 & 0.072 & 0.163\\
 
- & s(yday) &  &  &  & 2.512 & 4.000 & 8.240 & 0.000 ***\\
+ & s(yday) &  &  &  & 2.512 & 4 & 8.240 & 0.000 ***\\
 
- & s(log1p(Flow)) &  &  &  & 4.809 & 5.000 & 99.021 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 4.809 & 5 & 99.018 & 0.000 ***\\
 
- & s(ltfa) &  &  &  & 0.002 & 5.000 & 0.000 & 0.611\\
+ & s(ltfa) &  &  &  & 0.002 & 5 & 0.000 & 0.611\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 1.524 & 4.000 & 0.875 & 0.073 +\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 1.524 & 4 & 0.875 & 0.073 +\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
 \multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.700, Deviance explained 0.933}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 184.491, Scale est: 0.293, N: 59}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : 184.492, Scale est: 0.293, N: 59}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -326,21 +324,21 @@ A. parametric coefficients & (Intercept) & 2.106 & 0.070 & 29.903 &  &  &  & 0.0
 
 \caption{\label{tab:tbl-tp_08164390}TP GAM summary - Navidad River at Strane Pk nr Edna, USGS-08164390.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
 A. parametric coefficients & (Intercept) & 2.679 & 0.036 & 73.819 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 5.634 & 17.000 & 2.168 & 0.000 ***\\
+ & s(ddate) &  &  &  & 5.634 & 17 & 2.168 & 0.000 ***\\
 
- & s(yday) &  &  &  & 0.695 & 4.000 & 0.241 & 0.250\\
+ & s(yday) &  &  &  & 0.695 & 4 & 0.241 & 0.250\\
 
- & s(log1p(Flow)) &  &  &  & 4.912 & 5.000 & 334.375 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 4.912 & 5 & 334.372 & 0.000 ***\\
 
- & s(ltfa) &  &  &  & 0.851 & 5.000 & 0.767 & 0.018 *\\
+ & s(ltfa) &  &  &  & 0.850 & 5 & 0.767 & 0.018 *\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.000 & 5.000 & 0.000 & 0.568\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.000 & 5 & 0.000 & 0.568\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
 \multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.975, Deviance explained 0.963}\\
@@ -405,25 +403,25 @@ A. parametric coefficients & (Intercept) & 2.679 & 0.036 & 73.819 &  &  &  & 0.0
 
 \caption{\label{tab:tbl-no3_08164450}NO\textsubscript{3}-N GAM summary - Sandy Creek nr Ganado, USGS-08164450.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.358 & 0.074 & 31.864 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & 2.358 & 0.074 & 31.863 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 0.000 & 17.000 & 0.000 & 0.548\\
+ & s(ddate) &  &  &  & 0.000 & 17 & 0.000 & 0.548\\
 
- & s(yday) &  &  &  & 1.951 & 4.000 & 2.492 & 0.004 **\\
+ & s(yday) &  &  &  & 1.951 & 4 & 2.492 & 0.004 **\\
 
- & s(log1p(Flow)) &  &  &  & 4.800 & 5.000 & 34.560 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 4.800 & 5 & 34.561 & 0.000 ***\\
 
- & s(stfa) &  &  &  & 2.457 & 5.000 & 0.986 & 0.086 +\\
+ & s(stfa) &  &  &  & 2.457 & 5 & 0.986 & 0.086 +\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 3.842 & 5.000 & 3.508 & 0.001 **\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 3.842 & 5 & 3.507 & 0.001 **\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
 \multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.793, Deviance explained 0.910}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 195.798, Scale est: 0.307, N: 56}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : 195.796, Scale est: 0.307, N: 56}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -481,25 +479,25 @@ A. parametric coefficients & (Intercept) & 2.358 & 0.074 & 31.864 &  &  &  & 0.0
 
 \caption{\label{tab:tbl-tp_08164450}TP GAM summary - Sandy Creek nr Ganado, USGS-08164450.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.631 & 0.073 & 36.086 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & 2.631 & 0.073 & 36.099 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 0.582 & 17.000 & 0.049 & 0.230\\
+ & s(ddate) &  &  &  & 0.583 & 17 & 0.049 & 0.230\\
 
- & s(yday) &  &  &  & 0.017 & 4.000 & 0.004 & 0.380\\
+ & s(yday) &  &  &  & 0.017 & 4 & 0.004 & 0.379\\
 
- & s(log1p(Flow)) &  &  &  & 8.206 & 9.000 & 58.072 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 8.207 & 9 & 58.137 & 0.000 ***\\
 
- & s(ltfa) &  &  &  & 0.191 & 5.000 & 0.043 & 0.302\\
+ & s(ltfa) &  &  &  & 0.193 & 5 & 0.043 & 0.302\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.000 & 4.000 & 0.000 & 0.534\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.000 & 4 & 0.000 & 0.533\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
 \multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.927, Deviance explained 0.888}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 269.508, Scale est: 0.399, N: 75}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : 269.490, Scale est: 0.398, N: 75}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -560,25 +558,25 @@ A. parametric coefficients & (Intercept) & 2.631 & 0.073 & 36.086 &  &  &  & 0.0
 
 \caption{\label{tab:tbl-no3_08164504}NO\textsubscript{3}-N GAM summary - E Mustang Creek nr Louise, USGS-08164504.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 0.405 & 0.231 & 1.752 &  &  &  & 0.085 +\\
+A. parametric coefficients & (Intercept) & 0.404 & 0.231 & 1.751 &  &  &  & 0.086 +\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 0.000 & 5.000 & 0.000 & 0.350\\
+ & s(ddate) &  &  &  & 0.000 & 5 & 0.000 & 0.350\\
 
- & s(yday) &  &  &  & 1.971 & 8.000 & 0.999 & 0.014 *\\
+ & s(yday) &  &  &  & 1.970 & 8 & 0.998 & 0.014 *\\
 
- & s(log1p(Flow)) &  &  &  & 3.731 & 4.000 & 46.682 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 3.731 & 4 & 46.681 & 0.000 ***\\
 
- & s(ma) &  &  &  & 0.000 & 5.000 & 0.000 & 0.933\\
+ & s(ma) &  &  &  & 0.000 & 5 & 0.000 & 0.933\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 0.001 & 4.000 & 0.000 & 0.498\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 0.001 & 4 & 0.000 & 0.498\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.568, Deviance explained 0.699}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 79.014, Scale est: 3.253, N: 61}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.567, Deviance explained 0.699}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : 79.012, Scale est: 3.254, N: 61}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -637,25 +635,25 @@ A. parametric coefficients & (Intercept) & 0.405 & 0.231 & 1.752 &  &  &  & 0.08
 
 \caption{\label{tab:tbl-tp_08164504}TP GAM summary - E Mustang Creek nr Louise, USGS-08164504.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & -0.124 & 0.139 & -0.889 &  &  &  & 0.377\\
+A. parametric coefficients & (Intercept) & -0.124 & 0.139 & -0.890 &  &  &  & 0.376\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 1.189 & 17.000 & 0.199 & 0.062 +\\
+ & s(ddate) &  &  &  & 1.189 & 17 & 0.199 & 0.062 +\\
 
- & s(yday) &  &  &  & 1.178 & 8.000 & 0.303 & 0.122\\
+ & s(yday) &  &  &  & 1.178 & 8 & 0.303 & 0.122\\
 
- & s(log1p(Flow)) &  &  &  & 3.850 & 4.000 & 107.446 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 3.850 & 4 & 107.443 & 0.000 ***\\
 
- & s(ma) &  &  &  & 0.000 & 5.000 & 0.000 & 0.583\\
+ & s(ma) &  &  &  & 0.000 & 5 & 0.000 & 0.583\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 0.008 & 4.000 & 0.002 & 0.400\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 0.008 & 4 & 0.002 & 0.400\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.862, Deviance explained 0.748}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 77.497, Scale est: 1.531, N: 79}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.862, Deviance explained 0.749}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : 77.488, Scale est: 1.532, N: 79}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -716,25 +714,25 @@ A. parametric coefficients & (Intercept) & -0.124 & 0.139 & -0.889 &  &  &  & 0.
 
 \caption{\label{tab:tbl-no3_08164503}NO\textsubscript{3}-N GAM summary - W Mustang Creek nr Ganado, USGS-08164503.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.575 & 0.088 & 29.194 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & 2.575 & 0.088 & 29.196 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 1.143 & 17.000 & 0.204 & 0.052 +\\
+ & s(ddate) &  &  &  & 1.143 & 17 & 0.204 & 0.052 +\\
 
- & s(yday) &  &  &  & 2.551 & 4.000 & 9.286 & 0.000 ***\\
+ & s(yday) &  &  &  & 2.551 & 4 & 9.288 & 0.000 ***\\
 
- & s(log1p(Flow)) &  &  &  & 5.798 & 6.000 & 69.907 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 5.798 & 6 & 69.920 & 0.000 ***\\
 
- & s(ma) &  &  &  & 0.481 & 5.000 & 0.124 & 0.238\\
+ & s(ma) &  &  &  & 0.481 & 5 & 0.124 & 0.238\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 0.669 & 5.000 & 0.150 & 0.313\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 0.670 & 5 & 0.150 & 0.312\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
 \multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.774, Deviance explained 0.879}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 242.096, Scale est: 0.490, N: 63}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : 242.088, Scale est: 0.490, N: 63}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -793,25 +791,25 @@ A. parametric coefficients & (Intercept) & 2.575 & 0.088 & 29.194 &  &  &  & 0.0
 
 \caption{\label{tab:tbl-tp_08164503}TP GAM summary - W Mustang Creek nr Ganado, USGS-08164503.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
 A. parametric coefficients & (Intercept) & 2.641 & 0.060 & 43.895 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 2.181 & 17.000 & 0.468 & 0.019 *\\
+ & s(ddate) &  &  &  & 2.181 & 17 & 0.468 & 0.019 *\\
 
- & s(yday) &  &  &  & 0.000 & 4.000 & 0.000 & 0.547\\
+ & s(yday) &  &  &  & 0.000 & 4 & 0.000 & 0.547\\
 
- & s(log1p(Flow)) &  &  &  & 8.118 & 9.000 & 81.409 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 8.118 & 9 & 81.410 & 0.000 ***\\
 
- & s(stfa) &  &  &  & 0.015 & 5.000 & 0.003 & 0.437\\
+ & s(stfa) &  &  &  & 0.015 & 5 & 0.003 & 0.437\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.000 & 5.000 & 0.000 & 0.831\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.000 & 5 & 0.000 & 0.831\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
 \multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.923, Deviance explained 0.880}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 291.985, Scale est: 0.293, N: 81}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : 291.984, Scale est: 0.293, N: 81}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -873,21 +871,21 @@ A. parametric coefficients & (Intercept) & 2.641 & 0.060 & 43.895 &  &  &  & 0.0
 
 \caption{\label{tab:tbl-no3_texana}NO\textsubscript{3}-N GAM summary - Navidad River at Palmetto Bend Dam.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
 A. parametric coefficients & (Intercept) & -1.445 & 0.079 & -18.313 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 0.000 & 8.000 & 0.000 & 0.567\\
+ & s(ddate) &  &  &  & 0.000 & 8 & 0.000 & 0.567\\
 
- & s(yday) &  &  &  & 2.572 & 8.000 & 4.185 & 0.000 ***\\
+ & s(yday) &  &  &  & 2.572 & 8 & 4.185 & 0.000 ***\\
 
- & s(log1p(inflow)) &  &  &  & 0.474 & 4.000 & 0.160 & 0.217\\
+ & s(log1p(inflow)) &  &  &  & 0.474 & 4 & 0.160 & 0.217\\
 
- & s(ltfa) &  &  &  & 2.794 & 4.000 & 4.078 & 0.001 ***\\
+ & s(ltfa) &  &  &  & 2.794 & 4 & 4.078 & 0.001 ***\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 2.137 & 5.000 & 1.000 & 0.048 *\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 2.137 & 5 & 1.000 & 0.048 *\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
 \multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.539, Deviance explained 0.497}\\
@@ -949,21 +947,21 @@ A. parametric coefficients & (Intercept) & -1.445 & 0.079 & -18.313 &  &  &  & 0
 
 \caption{\label{tab:tbl-tp_texana}TP GAM summary - Navidad River at Palmetto Bend Dam.}
 \centering
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{llllllrll}
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
 A. parametric coefficients & (Intercept) & -1.642 & 0.034 & -48.597 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 2.223 & 9.000 & 1.293 & 0.003 **\\
+ & s(ddate) &  &  &  & 2.223 & 9 & 1.293 & 0.003 **\\
 
- & s(yday) &  &  &  & 0.214 & 8.000 & 0.030 & 0.323\\
+ & s(yday) &  &  &  & 0.214 & 8 & 0.030 & 0.323\\
 
- & s(log1p(inflow)) &  &  &  & 0.000 & 9.000 & 0.000 & 0.425\\
+ & s(log1p(inflow)) &  &  &  & 0.000 & 9 & 0.000 & 0.425\\
 
- & s(ltfa) &  &  &  & 3.271 & 5.000 & 2.981 & 0.001 **\\
+ & s(ltfa) &  &  &  & 3.271 & 5 & 2.981 & 0.001 **\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 2.284 & 5.000 & 1.335 & 0.023 *\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 2.284 & 5 & 1.335 & 0.023 *\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
 \multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.364, Deviance explained 0.315}\\

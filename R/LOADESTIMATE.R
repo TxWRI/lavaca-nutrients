@@ -105,6 +105,33 @@ predict_month_year <- function(model, # target
 }
 
 
+predict_fn_annual <- function(data,
+                              output_name,
+                              output_lower,
+                              output_upper) {
+  
+  ## I'm not certain these credible intervals make sense here.
+  annually <- data$daily |> 
+    group_by(Date) |> 
+    summarise({{output_name}} := mean({{output_name}}, na.rm = TRUE)) |> 
+    ungroup() |> 
+    group_by(year = year(Date)) |> 
+    summarise({{output_name}} := sum({{output_name}}))
+  
+  sims_annual <- data$sims |> 
+    group_by(Date, run) |> 
+    summarise(simulated = mean(simulated, na.rm = TRUE)) |> 
+    group_by(year = year(Date), run) |>
+    summarise(fits = sum(simulated, na.rm = TRUE)) |>
+    summarise({{output_lower}} := quantile(fits, probs = 0.025, type = 8, na.rm = TRUE),
+              {{output_upper}} := quantile(fits, probs = 0.975, type = 8, na.rm = TRUE))
+  
+  annually <- annually |>
+    left_join(sims_annual, by = c("year" = "year"))
+  return(annually)
+}
+
+
 
 ## Simulate lake outputs
 
@@ -259,4 +286,7 @@ predict_month_year_lk <- function(model, # target
               annually))
   
 }
+
+
+
 

@@ -122,6 +122,7 @@ clean_data <- function(wq_df, q_df) {
     ## antecedant flow variables
     mutate(Flow = Flow,
            Flow_p1 = Flow + 1,
+           log1p_Flow = log(Flow_p1),
            # flow anomalies
            ltfa = fa(Flow_p1, Date, T_1 = "1 year",
                      T_2 = "period", transform = "log10"),
@@ -211,3 +212,22 @@ clean_data <- function(wq_df, q_df) {
   
 
 }
+
+
+
+### create flow-normalized dataset
+
+fn_data <-   function(model_data) {
+  
+  grouped <- model_data |> 
+    dplyr::select(site_no, log1p_Flow, stfa, ma, yday) |> 
+    group_by(site_no, yday) #|> 
+  
+  
+  
+  model_data |> 
+    dplyr::select(site_no, yday, ddate, Date) |> 
+    left_join(grouped)
+  
+}
+

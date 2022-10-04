@@ -94,6 +94,7 @@ library(gt)
 
 ```{r}
 #| echo: false
+#| output: asis
 
 tar_read(summary_no3_08164000)
 

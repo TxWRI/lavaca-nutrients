@@ -46,13 +46,16 @@ list(
   ## read and format data ----
   tar_target(
     wqpdata, download_WQP_data()
-  ),
+    ),
   tar_target(
     qdata, download_Q_data()
-  ),
+    ),
   tar_target(
     model_data, clean_data(wqpdata, qdata)
-  ),
+    ),
+  tar_target(flow_normalized_data,
+             fn_data(model_data)
+             ),
   
   ## fit GAM models ----
   
@@ -68,7 +71,7 @@ list(
       model_gam(formula = NO3_flux ~
                   s(ddate, bs = "tp", k = 18, m = 1) +
                   s(yday, bs = "cc") +
-                  s(log1p(Flow), k = 10, bs = "tp", m = 1) +
+                  s(log1p_Flow, k = 10, bs = "tp", m = 1) +
                   s(ma, k = 6, bs = "tp", m = 1) +
                   s(stfa, k = 6, bs = "tp", m = 1),
                 data = df,
@@ -94,7 +97,7 @@ list(
     tp_08164000, model_gam(formula = TP_flux ~
                              s(ddate, bs = "tp", k = 18, m = 1) +
                              s(yday, bs = "cc") +
-                             s(log1p(Flow), k = 5, bs = "tp", m = 1) +
+                             s(log1p_Flow, k = 5, bs = "tp", m = 1) +
                              s(ma, k = 6, bs = "tp", m = 1) +
                              s(stfa, k = 5, bs = "tp", m = 1),
                            data = model_data |> filter(site_no == "usgs08164000"),
@@ -123,7 +126,7 @@ list(
     no3_08164504, model_gam(formula = NO3_flux ~
                               s(ddate, bs = "tp", k = 6) +
                               s(yday, bs = "cc") +
-                              s(log1p(Flow), k = 5, bs = "tp", m = 1) +
+                              s(log1p_Flow, k = 5, bs = "tp", m = 1) +
                               s(ma, k = 6, bs = "tp", m = 1) +
                               s(stfa, k = 5, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164504"),
@@ -148,7 +151,7 @@ list(
     tp_08164504, model_gam(formula = TP_flux ~
                              s(ddate, bs = "tp", k = 18) +
                              s(yday, bs = "cc") +
-                             s(log1p(Flow), k = 5, bs = "tp", m = 1) +
+                             s(log1p_Flow, k = 5, bs = "tp", m = 1) +
                              s(ma, k = 6, bs = "tp", m = 1) +
                              s(stfa, k = 5, bs = "tp", m = 1),
                            data = model_data |> filter(site_no == "usgs08164504"),
@@ -175,7 +178,7 @@ list(
     no3_08164503, model_gam(formula = NO3_flux ~
                               s(ddate, bs = "tp", k = 18) +
                               s(yday, k = 6, bs = "cc") +
-                              s(log1p(Flow), k = 7, bs = "tp", m = 1) +
+                              s(log1p_Flow, k = 7, bs = "tp", m = 1) +
                               s(ma, k = 6, bs = "tp", m = 1) +
                               s(stfa, k = 6, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164503"),
@@ -200,7 +203,7 @@ list(
     tp_08164503, model_gam(formula = TP_flux ~
                              s(ddate, bs = "tp", k = 18) +
                              s(yday, k = 6, bs = "cc") +
-                             s(log1p(Flow), k = 10, bs = "tp", m = 1) +
+                             s(log1p_Flow, k = 10, bs = "tp", m = 1) +
                              s(stfa, k = 6, bs = "tp", m = 1) +
                              s(ma, k = 6, bs = "tp", m = 1),
                            data = model_data |> filter(site_no == "usgs08164503"),
@@ -226,7 +229,7 @@ list(
     no3_08164450, model_gam(formula = NO3_flux ~
                               s(ddate, bs = "tp", k = 18) +
                               s(yday, k = 6, bs = "cc") +
-                              s(log1p(Flow), k = 6, bs = "tp", m = 1) +
+                              s(log1p_Flow, k = 6, bs = "tp", m = 1) +
                               s(stfa, k = 6, bs = "tp", m = 1) +
                               s(ma, k = 6, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164450"),
@@ -250,7 +253,7 @@ list(
     tp_08164450, model_gam(formula = TP_flux ~
                              s(ddate, bs = "tp", k = 18) +
                              s(yday, k = 6, bs = "cc") +
-                             s(log1p(Flow), k = 10, bs = "tp", m = 1) +
+                             s(log1p_Flow, k = 10, bs = "tp", m = 1) +
                              s(ltfa, k = 6, bs = "tp", m = 1) +
                              s(ma, k = 5, bs = "tp", m = ),
                            data = model_data |> filter(site_no == "usgs08164450"),
@@ -276,7 +279,7 @@ list(
     no3_08164390, model_gam(formula = NO3_flux ~
                               s(ddate, bs = "tp", k = 18) +
                               s(yday, k = 6, bs = "cc") +
-                              s(log1p(Flow), k = 6, bs = "tp",  m = 1) +
+                              s(log1p_Flow, k = 6, bs = "tp",  m = 1) +
                               s(ltfa, k = 6, bs = "tp", m = 1) +
                               s(ma, k = 5, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164390"),
@@ -301,7 +304,7 @@ list(
     tp_08164390, model_gam(formula = TP_flux ~
                              s(ddate, bs = "tp", k = 18) +
                              s(yday, k = 6, bs = "cc") +
-                             s(log1p(Flow), k = 6, bs = "tp", m = 1) +
+                             s(log1p_Flow, k = 6, bs = "tp", m = 1) +
                              s(ltfa, k = 6, bs = "tp") +
                              s(ma, k = 6, bs = "tp"),
                            data = model_data |> filter(site_no == "usgs08164390"),
@@ -535,6 +538,7 @@ list(
   
   ## Model Predictions
   
+  ### NO3 daily
   tar_target(daily_no3_08164000,
              predict_daily(
                model = no3_08164000, # target
@@ -546,6 +550,7 @@ list(
                output_lower = NO3_Lower #unquoted
              )),
 
+  ### NO3 monthly and annually
   tar_target(aggregate_no3_08164000,
              predict_month_year(
                model = no3_08164000, # target
@@ -557,7 +562,28 @@ list(
                output_upper = NO3_Upper, #unquoted
                output_lower = NO3_Lower #unquoted
              )),
+  
+  ## flow-normalized NO3 daily
+  tar_target(daily_no3_08164000_fn,
+             predict_daily(
+               model = no3_08164000, # target
+               data = flow_normalized_data, # target
+               site_no = "usgs08164000", # quoted string
+               date = "2005-01-01", # quoted string
+               output_name = NO3_Estimate, #unquoted
+               output_upper = NO3_Upper, #unquoted
+               output_lower = NO3_Lower #unquoted
+             )),
 
+  ### flow-normalized NO3 annually
+  tar_target(aggregate_no3_08164000_fn,
+             predict_fn_annual(data = daily_no3_08164000_fn,
+                               output_name = NO3_Estimate,
+                               output_upper = NO3_Upper, #unquoted
+                               output_lower = NO3_Lower #unquoted
+             )),
+  
+  
   tar_target(daily_tp_08164000,
              predict_daily(
                model = tp_08164000, # target
@@ -581,6 +607,31 @@ list(
                output_lower = TP_Lower #unquoted
              )),
   
+  # ### flow-normalized TP daily
+  # tar_target(daily_tp_08164000_fn,
+  #            predict_daily(
+  #              model = tp_08164000, # target
+  #              data = flow_normalized_data, # target
+  #              site_no = "usgs08164000", # quoted string
+  #              date = "2005-01-01", # quoted string
+  #              output_name = TP_Estimate, #unquoted
+  #              output_upper = TP_Upper, #unquoted
+  #              output_lower = TP_Lower #unquoted
+  #            )),
+  # 
+  # ### flow-normalized TP monthly/annually
+  # tar_target(aggregate_tp_08164000_fn,
+  #            predict_month_year(
+  #              model = tp_08164000, # target
+  #              data = flow_normalized_data, # target
+  #              site_no = "usgs08164000", # quoted string
+  #              date = "2005-01-01", # quoted string
+  #              sims = daily_tp_08164000_fn,
+  #              output_name = TP_Estimate, #unquoted
+  #              output_upper = TP_Upper, #unquoted
+  #              output_lower = TP_Lower #unquoted
+  #            )),
+
   
   tar_target(daily_no3_texana,
              predict_daily_lk(model = no3_texana, # target
@@ -620,8 +671,9 @@ list(
                                    output_name = TP_Estimate, #unquoted
                                    output_upper = TP_Upper, #unquoted
                                    output_lower = TP_Lower #unquoted
-             )),
-  ## loading estimates pdf
+             ))
+  ,
+  # loading estimates pdf
   tar_quarto(loading_estimates, "reports/load_estimates/load_estimates.qmd")
   
   
