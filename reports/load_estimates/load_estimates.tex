@@ -184,7 +184,7 @@ NOAA, the U.S. Department of Commerce, or any of their subagencies.}}
 This document includes figures and tables summarizing total loading
 estimates for the Lavaca River watershed.
 \end{abstract}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, sharp corners, interior hidden, enhanced, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, boxrule=0pt, breakable, sharp corners, frame hidden]}{\end{tcolorbox}}\fi
 
 \hypertarget{load-estimation-and-summarization}{%
 \section{Load estimation and
@@ -205,19 +205,18 @@ for each respective time period.
 Daily flow variability is responsible for the majority of daily load
 variability. WRTDS utilizes a flow- normalization procedure that removes
 the influence of flow variability by treating daily flow as a random
-sample of all possible discharges on a given day
-(\textbf{hirschWeightedRegressionsTime2010?}). The flow-normalized
-estimates are not true estimates of load, but are indicative of
-potential changes in load that are not attributable to variability in
-daily flow. These flow-normalized estimates are most suitable for
-assessing changes in long-term trends. We implemented a similar
-procedure by setting flow-based covariates on each day of the year equal
-to each of the historical values for that day of the year between 2000
-and 2021. The flow-normalized estimate is simply the mean of the model
-predictions for each day considering all of the flow values.
-Flow-normalized estimates and credible intervals were aggregated to
-annual reporting periods following procedures used for predicted actual
-loading.
+sample of all possible discharges on a given day (Hirsch et al. 2010).
+The flow-normalized estimates are not true estimates of load, but are
+indicative of potential changes in load that are not attributable to
+variability in daily flow. These flow-normalized estimates are most
+suitable for assessing changes in long-term trends. We implemented a
+similar procedure by setting flow-based covariates on each day of the
+year equal to each of the historical values for that day of the year
+between 2000 and 2021. The flow-normalized estimate is simply the mean
+of the model predictions for each day considering all of the flow
+values. Flow-normalized estimates and credible intervals were aggregated
+to annual reporting periods following procedures used for predicted
+actual loading.
 
 \hypertarget{total-load-estimates}{%
 \section{Total Load Estimates}\label{total-load-estimates}}
@@ -260,6 +259,14 @@ Texana}\label{navidad-river-at-palmetto-bend-dam-lake-texana}}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-hirschWeightedRegressionsTime2010}{}}%
+Hirsch, R.M., Moyer, D.L., and Archfield, S.A. 2010. Weighted
+Regressions on Time, Discharge, and Season (WRTDS), with an Application
+to Chesapeake Bay River Inputs1: Weighted Regressions on Time,
+Discharge, and Season (WRTDS), With an Application to Chesapeake Bay
+River Inputs. JAWRA Journal of the American Water Resources Association
+46 (5): 857--80. \url{https://doi.org/10.1111/j.1752-1688.2010.00482.x}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-marraCoveragePropertiesConfidence2012}{}}%
 Marra, G., and Wood, S.N. 2012. Coverage Properties of Confidence
 Intervals for Generalized Additive Model Components: Coverage properties

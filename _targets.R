@@ -607,30 +607,25 @@ list(
                output_lower = TP_Lower #unquoted
              )),
   
-  # ### flow-normalized TP daily
-  # tar_target(daily_tp_08164000_fn,
-  #            predict_daily(
-  #              model = tp_08164000, # target
-  #              data = flow_normalized_data, # target
-  #              site_no = "usgs08164000", # quoted string
-  #              date = "2005-01-01", # quoted string
-  #              output_name = TP_Estimate, #unquoted
-  #              output_upper = TP_Upper, #unquoted
-  #              output_lower = TP_Lower #unquoted
-  #            )),
-  # 
-  # ### flow-normalized TP monthly/annually
-  # tar_target(aggregate_tp_08164000_fn,
-  #            predict_month_year(
-  #              model = tp_08164000, # target
-  #              data = flow_normalized_data, # target
-  #              site_no = "usgs08164000", # quoted string
-  #              date = "2005-01-01", # quoted string
-  #              sims = daily_tp_08164000_fn,
-  #              output_name = TP_Estimate, #unquoted
-  #              output_upper = TP_Upper, #unquoted
-  #              output_lower = TP_Lower #unquoted
-  #            )),
+  ### flow-normalized TP daily
+  tar_target(daily_tp_08164000_fn,
+             predict_daily(
+               model = tp_08164000, # target
+               data = flow_normalized_data, # target
+               site_no = "usgs08164000", # quoted string
+               date = "2000-01-01", # quoted string
+               output_name = TP_Estimate, #unquoted
+               output_upper = TP_Upper, #unquoted
+               output_lower = TP_Lower #unquoted
+             )),
+  
+  ### flow-normalized TP annually
+  tar_target(aggregate_tp_08164000_fn,
+             predict_fn_annual(data = daily_tp_08164000_fn,
+                               output_name = TP_Estimate,
+                               output_upper = TP_Upper, #unquoted
+                               output_lower = TP_Lower #unquoted
+             )),
 
   
   tar_target(daily_no3_texana,

@@ -70,7 +70,7 @@ Daily flow variability is responsible for the majority of daily load variability
 #| echo: false
 #| label: no3_aggregate-08164000
 #| fig-cap: "Aggregated (a) monthly and (b) annual NO~3~-N loads at Lavaca River at Edna, USGS-08164000."
-#| fig-height: 7
+#| fig-height: 6.5
 #| fig-width: 5.5
 
 load <- tar_read(aggregate_no3_08164000)
@@ -140,14 +140,24 @@ b <- ggplot() +
 #| echo: false
 #| label: tp_aggregate-08164000
 #| fig-cap: "Aggregated (a) monthly and (b) annual TP loads at Lavaca River at Edna, USGS-08164000."
-#| fig-height: 4
-#| fig-width: 8
+#| fig-height: 6.5
+#| fig-width: 5.5
 
-a <- tar_read(aggregate_tp_08164000)[[1]] |> 
-  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d")) |> 
-  ggplot() +
-  geom_point(aes(x, TP_Estimate)) +
-  geom_linerange(aes(x = x, ymin = TP_Lower, ymax = TP_Upper)) +
+
+load <- tar_read(aggregate_tp_08164000)
+fn_load <- tar_read(aggregate_tp_08164000_fn)
+
+
+montly_load <- load[[1]] |> 
+  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d"))
+
+a <- ggplot() +
+  geom_point(data = montly_load,
+             aes(x, TP_Estimate),
+                 color = "#1A3399") +
+  geom_linerange(data = montly_load,
+                 aes(x = x, ymin = TP_Lower, ymax = TP_Upper),
+                 color = "#1A3399") +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
                limits = c(as.Date("2000-01-01"), as.Date("2020-12-31")),
                expand = c(0.025, 0.025)) +
@@ -158,18 +168,39 @@ a <- tar_read(aggregate_tp_08164000)[[1]] |>
         panel.grid.major.x = element_line(color = "#d9d9d9",
                                           linetype = "dotted"))
 
-b <- tar_read(aggregate_tp_08164000)[[2]] |> 
-  ggplot() +
-  geom_point(aes(year, TP_Estimate)) +
-  geom_line(aes(x = year, y = TP_Estimate), linetype = "dashed", alpha = 0.5) +
-  geom_linerange(aes(x = year, ymin = TP_Lower, ymax = TP_Upper)) +
-  labs(x = "", y = "Predicted Annual TP Load [kg]") +
+
+b <- ggplot() +
+  geom_point(data = load[[2]], aes(year, TP_Estimate, 
+                              color = "Total Annual Load",
+                              shape = "Total Annual Load")) +
+  geom_line(data = load[[2]], aes(x = year, y = TP_Estimate,
+                             color = "Total Annual Load",
+                             linetype = "Total Annual Load"),
+            alpha = 0.5) +
+  geom_linerange(data = load[[2]], aes(x = year, ymin = TP_Lower, ymax = TP_Upper,
+                                  color = "Total Annual Load")) +
+  geom_point(data = fn_load, aes(year, TP_Estimate,
+                                 color = "Flow Normalized Annual Load",
+                                 shape = "Flow Normalized Annual Load")) +
+  geom_line(data = fn_load,
+            aes(x = year, y = TP_Estimate,
+                color = "Flow Normalized Annual Load",
+                linetype = "Flow Normalized Annual Load"),
+            alpha = 0.5) +
+  labs(x = "", y = "Annual TP Load [kg]") +
+  scale_shape_manual(name = "values",
+                     values = c(21, 19)) +
+  scale_color_manual(name = "values",
+                     values = c("#7E1900", "#1A3399")) +
+  scale_linetype_manual(name = "values",
+                        values = c(1, 2)) +
+  coord_cartesian(ylim = c(0, 60000)) +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
         panel.grid.major.x = element_line(color = "#d9d9d9",
-                                          linetype = "dotted"))
-
-a / b + plot_annotation(tag_levels = "a")
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+(a / b) + plot_annotation(tag_levels = "a")
 ```
 
 
