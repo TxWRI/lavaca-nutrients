@@ -53,7 +53,11 @@ gam_gt <- function(model, caption, label) {
     select(!c(part, statistic)) |>
     dplyr::rename(c("Component" = "group",
                     "Term" = "term")) |> 
-    mutate(ref.df = ref.df) 
+    mutate(ref.df = ref.df) |> 
+    mutate(Term = case_when(
+      Term == "s(log1p_Flow)" ~ "s(log1p(Flow))",
+      Term != "s(log1p_Flow)" ~ Term
+    ))
   
   ## get gof metrics
   data_g <- glance_gam(model)
