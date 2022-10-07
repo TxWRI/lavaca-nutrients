@@ -56,6 +56,7 @@ gam_gt <- function(model, caption, label) {
     mutate(ref.df = ref.df) |> 
     mutate(Term = case_when(
       Term == "s(log1p_Flow)" ~ "s(log1p(Flow))",
+      Term == "s(log1p_inflow)" ~ "s(log1p(Inflow))",
       Term != "s(log1p_Flow)" ~ Term
     ))
   

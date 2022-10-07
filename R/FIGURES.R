@@ -47,18 +47,21 @@ prediction_bias_dam <- function(model,
                                 constituent,
                                 p2_x_labs = c("Predicted Concentration", "Observed Concentration"),
                                 p2_y_title = "NO<sub>3</sub>-N Concentration (mg/mL)") {
-  gaged_inflow <- df |>
-    filter(site_no != "lktexana_g") |>
-    filter(site_no != "usgs08164000") |>
-    select(c(Date, site_no, Flow)) |>
+  gaged_inflow <- df |> 
+    filter(site_no != "lktexana_g") |> 
+    filter(site_no != "usgs08164000") |> 
+    select(c(Date, site_no, Flow)) |> 
     pivot_wider(names_from = site_no,
-                values_from = Flow) |>
+                values_from = Flow) |> 
     mutate(inflow = usgs08164390 + usgs08164450 + usgs08164503 + usgs08164504)
   
-  below_tex <- df |>
-    filter(site_no == "lktexana_g") |>
-    mutate(inflow = gaged_inflow$inflow) |>
-    mutate(# flow anomalies
+  below_tex <- df |> 
+    filter(site_no == "lktexana_g") |> 
+    # select(-c("NH3", "TKN", "censored_TKN")) |> 
+    mutate(inflow = gaged_inflow$inflow) |> 
+    mutate(
+      log1p_inflow = log1p(inflow),
+      # flow anomalies
       ltfa = fa(inflow+1, Date, T_1 = "1 year",
                 T_2 = "period", transform = "log"),
       stfa = fa(inflow+1, Date, T_1 = "1 day",

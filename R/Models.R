@@ -23,13 +23,15 @@ gam_b_texana <- function(formula,
   
   data <- format_dam_data(data)
   
-  gam(formula = formula,
-      data = data,
-      select = TRUE,
-      knots = list(yday = c(1, 366)),
-      family = family,
-      method = "REML",
-      optimizer = "efs") 
+  model_gam(formula, data, family)
+  
+  # gam(formula = formula,
+  #     data = data,
+  #     select = TRUE,
+  #     knots = list(yday = c(1, 366)),
+  #     family = family,
+  #     method = "REML",
+  #     optimizer = "efs") 
 }
 
 

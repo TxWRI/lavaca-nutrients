@@ -80,11 +80,15 @@ Daily flow variability is responsible for the majority of daily load variability
 
 
 ::: {.cell}
-
+::: {.cell-output-display}
+![Aggregated (a) monthly and (b) annual NO~3~-N loads at Palmetto Bend Dam at Lake Texana.](load_estimates_files/figure-pdf/no3_aggregate-texana-1.png)
+:::
 :::
 
 ::: {.cell}
-
+::: {.cell-output-display}
+![Aggregated (a) monthly and (b) annual TP loads at Palmetto Bend Dam at Lake Texana.](load_estimates_files/figure-pdf/tp_aggregate-texana-1.png)
+:::
 :::
 
 

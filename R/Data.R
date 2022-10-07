@@ -254,7 +254,8 @@ fn_lk_data <-   function(model_data) {
       # smooth discounted flow
       ma = sdf(log1p(inflow))) |>
     dplyr::select(Flow, inflow, log1p_inflow, stfa, ma, yday) |>
-    group_by(yday)
+    group_by(yday) |> 
+    mutate(log1p_Flow = log1p(Flow))
   
   
   model_data |>
