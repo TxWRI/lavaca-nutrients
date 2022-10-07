@@ -23,13 +23,15 @@ gam_b_texana <- function(formula,
   
   data <- format_dam_data(data)
   
-  gam(formula = formula,
-      data = data,
-      select = TRUE,
-      knots = list(yday = c(1, 366)),
-      family = family,
-      method = "REML",
-      optimizer = "efs") 
+  model_gam(formula, data, family)
+  
+  # gam(formula = formula,
+  #     data = data,
+  #     select = TRUE,
+  #     knots = list(yday = c(1, 366)),
+  #     family = family,
+  #     method = "REML",
+  #     optimizer = "efs") 
 }
 
 
@@ -46,7 +48,9 @@ format_dam_data <- function(data) {
     filter(site_no == "lktexana_g") |> 
     # select(-c("NH3", "TKN", "censored_TKN")) |> 
     mutate(inflow = gaged_inflow$inflow) |> 
-    mutate(# flow anomalies
+    mutate(
+      log1p_inflow = log1p(inflow),
+      # flow anomalies
       ltfa = fa(inflow+1, Date, T_1 = "1 year",
                 T_2 = "period", transform = "log"),
       stfa = fa(inflow+1, Date, T_1 = "1 day",

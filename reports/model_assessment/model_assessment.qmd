@@ -61,13 +61,13 @@ where $Y$ is the response variable that is a function of the sum of some smoothe
  - $stfa$ is a short-term flow anomaly, a unitless term that reflects the difference in the current discharge from flows in the previous month;
  - $ma$ is the exponentially smoothed flow which is used to incorporate the influence of past flows on current load or concentration estimates;
 
-The model was slightly altered for the Lake Texana site where daily load measurements are not a function of natural flow processes, but of operation decisions. Here, we expect concentration to vary as a function of tributary inputs and some unknown lake metabolism processes. At this location, daily concentrations were modeled as a function of total inflow to the lake. Each of the flow based covariates ($log1p(Q)$, $stfa$, and $ma$) were calculated based on total inflow from gaged tributaries. Total loads below Palmetto Bend Dam are then estimated using nutrient concentration in Lake Texana and reported mean daily dam discharges.
+The model was slightly altered for the Lake Texana site where daily load measurements are not a function of natural flow processes, but of operation decisions. Here, we expect concentration and load discharged from the dam to vary as a function of tributary inputs and some unknown lake metabolism processes. At this location, daily concentrations were modeled as a function of total inflow to the lake. Each of the flow based covariates ($log1p(Q)$, $stfa$, and $ma$) were calculated based on total inflow from gaged tributaries. Mean daily discharge was also included as a covariate under the assumption that hydraulic dynamics can substantially vary near the outlet of the dam based on the amount of water being discharged and influence nutrient concentration. Even under high inflow conditions, discharge might be low if it has been dry, conversely discharge could be higher than inflows if lake levels are high. Total loads below Palmetto Bend Dam were estimated using nutrient concentration in Lake Texana and reported mean daily dam discharges.
 
 Thin plate regression splines were used for $ddate$, $log1p(Q)$, $ltfa$, and $ma$. A cyclic cubic regression spline was used for $yday$ to ensure ends of the spline match (day 1 and day 366 should match). First-order penalties were applied to the smooths of flow-based variables which penalize departures from a flat function to help constrain extrapolations for high flow measurements. GAMs were fit using the `gam()` function in the "mgcv" package in R version 4.2.1. Basis dimensions used for smooths were adjusted after using the `gam.check()` function to ensure models were not oversmoothed. Model residuals were inspected for distributional assumptions using the "gratia" package.
 
 Left-censored nutrient concentrations were not uncommon in this dataset. Several methods are available to account for censored data. We decided to transform left-censored data to one-half the detection limit based on the fact that higher concentrations and loadings are typically associated with high-flow events and low-flow/low-concentration events will account for a small proportion of total loadings [@mcdowellImplicationsLagTimes2021]. The "cenGAM" package in R provides the Tobit I family to accommodate censored data using the "gam" function in R. Censored Gamma models can be fit using a Bayesian framework with the "brms" package in R. Initial exploration using "cenGAM" and "brms" packages resulted in models that overestimated nutrient concentrations relative to "mgcv" [@bergbuschUnexpectedShiftPhytoplankton2021]. All models were fit using the Gamma family and log link function.
 
-Hold-out data is often used to validate predictive ability of a model. Given the small-sample size, we used all the available data to fit models at each site and implemented repeated 10-fold cross validation to assess model performance. Cross-validation predictions were assessed using King-Glupta Efficiency (KGE), R^2^, and Percent Bias across all folds.
+Hold-out data is often used to validate predictive ability of a model. Given the small-sample size, we used all the available data to fit models at each site and implemented repeated 5-fold cross validation to assess model performance. Cross-validation predictions were assessed using King-Glupta Efficiency (KGE), R^2^, and Percent Bias across all folds.
 
 # Model Results
 
@@ -87,6 +87,7 @@ library(flextable)
 library(adc)
 library(scico)
 library(gt)
+library(units)
 ```
 
 ### NO~3~-N
@@ -94,6 +95,7 @@ library(gt)
 
 ```{r}
 #| echo: false
+#| output: asis
 
 tar_read(summary_no3_08164000)
 
@@ -103,7 +105,7 @@ tar_read(summary_no3_08164000)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of NO~3~-N concentration GAM at Lavaca River at Edna, USGS-08164000."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N GAM at Lavaca River at Edna, USGS-08164000."
 #| label: tbl-NO308164000-CV
 
 tar_read(cv_no3_08164000) |> 
@@ -171,6 +173,9 @@ gratia::add_fitted(tar_read(model_data) |>
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
   labs(y = "NO<sub>3</sub>-N [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
@@ -195,7 +200,7 @@ tar_read(summary_tp_08164000)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of TP load GAM at Lavaca River at Edna, USGS-08164000."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at Lavaca River at Edna, USGS-08164000."
 #| label: tbl-TP308164000-CV
 
 tar_read(cv_tp_08164000) |> 
@@ -261,6 +266,9 @@ gratia::add_fitted(tar_read(model_data) |>
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
   labs(y = "TP [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
@@ -287,7 +295,7 @@ tar_read(summary_no3_08164390)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of NO~3~-N concentration GAM at Navidad River at Strane Pk nr Edna,, USGS-NO308164390."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N concentration GAM at Navidad River at Strane Pk nr Edna,, USGS-NO308164390."
 #| label: tbl-NO308164390-CV
 
 tar_read(cv_no3_08164390) |>
@@ -356,6 +364,9 @@ gratia::add_fitted(tar_read(model_data) |>
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
   labs(y = "NO<sub>3</sub>-N [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
@@ -379,7 +390,7 @@ tar_read(summary_tp_08164390)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of TP load GAM at Navidad River at Strane Pk nr Edna, USGS-08164390."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at Navidad River at Strane Pk nr Edna, USGS-08164390."
 #| label: tbl-TP08164390-CV
 
 tar_read(cv_tp_08164390) |> 
@@ -447,6 +458,9 @@ gratia::add_fitted(tar_read(model_data) |>
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
   labs(y = "TP [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
@@ -471,7 +485,7 @@ tar_read(summary_no3_08164450)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of NO~3~-N concentration GAM at Sandy Creek nr Ganado, USGS-08164450."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N concentration GAM at Sandy Creek nr Ganado, USGS-08164450."
 #| label: tbl-NO308164450-CV
 
 tar_read(cv_no3_08164450) |> 
@@ -542,6 +556,9 @@ gratia::add_fitted(tar_read(model_data) |>
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
   labs(y = "NO<sub>3</sub>-N [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
@@ -564,7 +581,7 @@ tar_read(summary_tp_08164450)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of TP load GAM at Sandy Creek nr Ganado, USGS-08164450."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at Sandy Creek nr Ganado, USGS-08164450."
 #| label: tbl-TP08164450-CV
 
 tar_read(cv_tp_08164450) |> 
@@ -632,6 +649,9 @@ gratia::add_fitted(tar_read(model_data) |>
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
   labs(y = "TP [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
@@ -655,7 +675,7 @@ tar_read(summary_no3_08164504)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of NO~3~-N load GAM at E Mustang Creek nr Louise, USGS-08164504."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N load GAM at E Mustang Creek nr Louise, USGS-08164504."
 #| label: tbl-NO308164504-CV
 
 tar_read(cv_no3_08164504) |> 
@@ -724,6 +744,9 @@ gratia::add_fitted(tar_read(model_data) |>
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
   labs(y = "NO<sub>3</sub>-N [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
@@ -748,7 +771,7 @@ tar_read(summary_tp_08164504)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of TP load GAM at E Mustang Creek nr Louise, USGS-08164504."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at E Mustang Creek nr Louise, USGS-08164504."
 #| label: tbl-TP08164504-CV
 
 tar_read(cv_tp_08164504) |> 
@@ -817,6 +840,9 @@ gratia::add_fitted(tar_read(model_data) |>
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
   labs(y = "TP [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
@@ -841,7 +867,7 @@ tar_read(summary_no3_08164503)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of NO~3~-N load GAM at W Mustang Creek nr Ganado, USGS-08164503."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N load GAM at W Mustang Creek nr Ganado, USGS-08164503."
 #| label: tbl-NO08164503-CV
 
 tar_read(cv_no3_08164503) |> 
@@ -910,6 +936,9 @@ gratia::add_fitted(tar_read(model_data) |>
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
   labs(y = "NO<sub>3</sub>-N [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
@@ -932,7 +961,7 @@ tar_read(summary_tp_08164503)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of TP load GAM at W Mustang Creek nr Ganado, USGS-08164503."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at W Mustang Creek nr Ganado, USGS-08164503."
 #| label: tbl-TP08164503-CV
 
 tar_read(cv_tp_08164503) |> 
@@ -1000,6 +1029,9 @@ gratia::add_fitted(tar_read(model_data) |>
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
   labs(y = "TP [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
@@ -1025,7 +1057,7 @@ tar_read(summary_no3_texana)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of NO~3~-N load GAM at Palmetto Bend Dam."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N load GAM at Palmetto Bend Dam."
 #| label: tbl-NO3PalmettoBend-CV
 
 tar_read(cv_no3_texana) |> 
@@ -1093,8 +1125,11 @@ format_dam_data <- function(data) {
 
   below_tex <- data |>
     filter(site_no == "lktexana_g") |>
+    # select(-c("NH3", "TKN", "censored_TKN")) |>
     mutate(inflow = gaged_inflow$inflow) |>
-    mutate(# flow anomalies
+    mutate(
+      log1p_inflow = log1p(inflow),
+      # flow anomalies
       ltfa = fa(inflow+1, Date, T_1 = "1 year",
                 T_2 = "period", transform = "log"),
       stfa = fa(inflow+1, Date, T_1 = "1 day",
@@ -1114,12 +1149,23 @@ gratia::add_fitted(data = data,
     mutate(censored_NO3 = case_when(
     is.na(censored_NO3) ~ "Measured NO<sub>3</sub>-N",
     !is.na(censored_NO3) ~ "Censored Value"
-  )) |> 
+  )) |>
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |>
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
-  geom_point(aes(Date, NO3, color = censored_NO3), alpha = 0.8) +
+  geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
-  labs(y = "NO<sub>3</sub> [mg/L]", x = "Date") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
+  labs(y = "NO<sub>3</sub> [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
         legend.title = element_blank(),
@@ -1143,7 +1189,7 @@ tar_read(summary_tp_texana)
 
 ```{r}
 #| echo: false
-#| tbl-cap: "Summary of goodness-of-fit metrics for 10-fold cross-validation of TP GAM at Palmetto Bend Dam."
+#| tbl-cap: "Summary of goodness-of-fit metrics for 5-fold cross-validation of TP GAM at Palmetto Bend Dam."
 #| label: tbl-TPPalmettoBend-CV
 
 tar_read(cv_tp_texana) |> 
@@ -1208,15 +1254,26 @@ gratia::add_fitted(data = data,
                    model = tar_read(tp_texana),
                    value = ".fits",
                    type = "response") |>
-    mutate(censored_TP = case_when(
+  mutate(censored_TP = case_when(
     is.na(censored_TP) ~ "Measured TP",
     !is.na(censored_TP) ~ "Censored Value"
   )) |>
+  mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |>
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
-  geom_point(aes(Date, TP, color = censored_TP), alpha = 0.8) +
+  geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
   scale_color_brewer(palette = "Set1") +
-  labs(y = "TP [mg/L]", x = "Date") +
+  scale_y_continuous(trans = scales::pseudo_log_trans(0.1, 1000000), 
+                     breaks = scales::log_breaks(base = 10), 
+                     expand = c(0, 0)) +
+  labs(y = "TP [kg/day]", x = "Date") +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
         legend.title = element_blank(),

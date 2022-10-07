@@ -30,15 +30,16 @@ gam_gt <- function(model, caption, label) {
     dplyr::rename(c("Component" = "group",
                     "Term" = "term")) 
   
+  ref.df <- data.frame(summary(model)$s.table)$Ref.df
   
   ## return smooth terms as tibble
   models <- list("edf" = model,
-                 "ref.df" = model,
+                 #"ref.df" = model,
                  "F-value" = model,
                  "p-value" = model)
   
   b <- modelsummary(models, estimate =c("edf" = "df",
-                                        "Ref.df" = "ref.df",
+                                        #"Ref.df" = "ref.df",
                                         "F-value" = "statistic",
                                         "p-value" = "{p.value} {stars}"),
                     output = "data.frame",
@@ -47,45 +48,49 @@ gam_gt <- function(model, caption, label) {
                     shape = component + term ~ model,
                     statistic = NULL,
                     group_map = c("conditional" = "A. parametric coefficients",
-                                  "smooth_terms" = "B. smooth terms")) |> 
-    filter(part != "gof") |> 
-    select(!c(part, statistic)) |> 
+                                  "smooth_terms" = "B. smooth terms")) |>
+    filter(part != "gof") |>
+    select(!c(part, statistic)) |>
     dplyr::rename(c("Component" = "group",
-                    "Term" = "term")) 
+                    "Term" = "term")) |> 
+    mutate(ref.df = ref.df) |> 
+    mutate(Term = case_when(
+      Term == "s(log1p_Flow)" ~ "s(log1p(Flow))",
+      Term == "s(log1p_inflow)" ~ "s(log1p(Inflow))",
+      Term != "s(log1p_Flow)" ~ Term
+    ))
   
   ## get gof metrics
   data_g <- glance_gam(model)
   
   
-  out_tab <- bind_rows(a,b) |> 
-    select(Component, Term, Estimate, Std.Error, `t-value`, edf, ref.df, `F-value`, `p-value`) |> 
+  out_tab <- bind_rows(a,b) |>
+    select(Component, Term, Estimate, Std.Error, `t-value`, edf, ref.df, `F-value`, `p-value`) |>
     group_by(Component)
   
   names(out_tab)[9] <- paste0(names(out_tab)[9],
-                             footnote_marker_number(1,"latex"))
+                              footnote_marker_number(1,"latex"))
   
   kbl(out_tab, format = "latex", booktabs = TRUE, escape = FALSE,
       table.envir = "widestuff", ## wraps the adjust width environment provided at the top of the quarto file
       caption = caption, ## have to set caption here, not in  quarto to keep formatting
       label = label ## label too, or else quarto strips formatting and rewraps table env and screws everything up
-      ) |> 
-    collapse_rows(columns = 1, 
+  ) |>
+    collapse_rows(columns = 1,
                   latex_hline = "major",
                   valign = "top") |>
     add_footnote("Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1",
-                 notation = "number") |> 
-    add_footnote(sprintf("Adjusted R-squared: %s, Deviance explained %s", 
-                         format(data_g$adj.r.squared, digits = 3, format = "f", nsmall = 3), 
+                 notation = "number") |>
+    add_footnote(sprintf("Adjusted R-squared: %s, Deviance explained %s",
+                         format(data_g$adj.r.squared, digits = 3, format = "f", nsmall = 3),
                          format(data_g$deviance, digits = 3, format = "f", nsmall = 3)),
-                 notation = "none") |> 
-    add_footnote(sprintf("%s : %s, Scale est: %s, N: %d", 
-                         data_g$method, 
-                         format(data_g$sp.crit, format = "f", digits = 3, nsmall = 3), 
-                         format(data_g$scale.est, digits = 3, nsmall = 3), 
+                 notation = "none") |>
+    add_footnote(sprintf("%s : %s, Scale est: %s, N: %d",
+                         data_g$method,
+                         format(data_g$sp.crit, format = "f", digits = 3, nsmall = 3),
+                         format(data_g$scale.est, digits = 3, nsmall = 3),
                          data_g$nobs),
                  notation = "none")
-  
-  
 }
 
 

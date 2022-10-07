@@ -54,11 +54,14 @@ download_Q_data <- function(usgs_dir = "data/USGS",
   ## read TWDB data
   
   # texana is gaged flow and can be used as is.
+  # need to convert from acre-feet per day to cubic feet per second!
   texana <- read_table("data/TWDB/Gaged/lktexanag", col_types = "nnnn_") |> 
     pivot_longer(cols = lktexana_g, names_to = "site_no", values_to = "Flow") |> 
     mutate(Date = lubridate::ymd(paste0(year,"-", month,"-", day)),
            agency_cd = "TWDB") |> 
-    select(-c(year, month, day))
+    select(-c(year, month, day)) |> 
+    #convert to cubic feet per second
+    mutate(Flow = (Flow * (43560/86400)))
   
   q |> 
     bind_rows(texana)
@@ -122,6 +125,7 @@ clean_data <- function(wq_df, q_df) {
     ## antecedant flow variables
     mutate(Flow = Flow,
            Flow_p1 = Flow + 1,
+           log1p_Flow = log(Flow_p1),
            # flow anomalies
            ltfa = fa(Flow_p1, Date, T_1 = "1 year",
                      T_2 = "period", transform = "log10"),
@@ -210,4 +214,53 @@ clean_data <- function(wq_df, q_df) {
            TP = drop_units(TP)) -> q_df
   
 
+}
+
+
+
+### create flow-normalized dataset
+
+fn_data <-   function(model_data) {
+  
+  grouped <- model_data |> 
+    dplyr::select(site_no, Flow, log1p_Flow, stfa, ma, yday) |> 
+    group_by(site_no, yday) #|> 
+  
+  
+  
+  model_data |> 
+    dplyr::select(site_no, yday, ddate, Date) |> 
+    left_join(grouped)
+  
+}
+
+
+fn_lk_data <-   function(model_data) {
+  
+  inflow <- model_data |>
+    filter(site_no != "usgs08164000") |> 
+    select(c(Date, site_no, Flow, yday)) |> 
+    pivot_wider(names_from = site_no,
+                values_from = Flow) |> 
+    mutate(inflow = usgs08164390 + usgs08164450 + usgs08164503 + usgs08164504) |> 
+    select(Date, Flow = lktexana_g, inflow, yday) |> 
+    mutate(
+      log1p_inflow = log1p(inflow),
+      # flow anomalies
+      ltfa = fa(inflow+1, Date, T_1 = "1 year",
+                T_2 = "period", transform = "log"),
+      stfa = fa(inflow+1, Date, T_1 = "1 day",
+                T_2 = "1 month", transform = "log"),
+      # smooth discounted flow
+      ma = sdf(log1p(inflow))) |>
+    dplyr::select(Flow, inflow, log1p_inflow, stfa, ma, yday) |>
+    group_by(yday) |> 
+    mutate(log1p_Flow = log1p(Flow))
+  
+  
+  model_data |>
+    filter(site_no == "lktexana_g") |>
+    ungroup()  |> 
+    dplyr::select(site_no, yday, ddate, Date) |> 
+    left_join(inflow)
 }
