@@ -5,7 +5,7 @@
 # gt captions with markdown or latex formatting don't render
 # properly in quarto yet.
 
-gam_gt <- function(model, caption, label) {
+gam_gt <- function(model, caption, label, escape = FALSE, format = "latex") {
   
   options(knitr.kable.NA = '')
   ## return parametric terms as tibble
@@ -69,9 +69,12 @@ gam_gt <- function(model, caption, label) {
     group_by(Component)
   
   names(out_tab)[9] <- paste0(names(out_tab)[9],
-                              footnote_marker_number(1,"latex"))
+                              footnote_marker_number(1,format))
   
-  kbl(out_tab, format = "latex", booktabs = TRUE, escape = FALSE,
+  
+
+  
+  kbl(out_tab, format = format, booktabs = TRUE, escape = escape,
       table.envir = "widestuff", ## wraps the adjust width environment provided at the top of the quarto file
       caption = caption, ## have to set caption here, not in  quarto to keep formatting
       label = label ## label too, or else quarto strips formatting and rewraps table env and screws everything up

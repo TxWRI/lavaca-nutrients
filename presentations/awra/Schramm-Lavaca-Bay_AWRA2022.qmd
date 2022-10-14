@@ -1,0 +1,381 @@
+---
+title: "Statistical Modeling and Trends in Freshwater Derived Nutrient Loads, Lavaca Bay, Texas"
+subtitle: "2022 AWRA Annual Water Conference"
+author: "Michael Schramm"
+institute: "Texas Water Resources Institute, Texas A&M AgriLife Research"
+date: "2022-11-08"
+format: revealjs
+bibliography: reference.yml
+csl: https://raw.githubusercontent.com/TxWRI/csl/main/twri-technical-report.csl
+#navigation
+progress: true
+slide-number: true
+title-slide-attributes:
+    data-background-image: images/lavaca_bay_resize.png
+    data-background-opacity: "0.50"
+    data-background-size: contain
+    data-background-repeat: "no-repeat"
+    data-background-color: "white"
+
+---
+## Acknowledgements {.smaller}
+
+Stakeholder advisory committee:
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Dr. Mike Wetz - TAMU-CC
+
+Bill Balboa - Matagorda Bay Foundation
+
+Janet Weaver - Lavaca Bay Foundation
+
+Chad Kinsfather - Lavaca-Navidad River Authority
+
+
+:::
+
+::: {.column width="50%"}
+
+Brian Koch - Texas State Soil and Water Conservation Board
+
+Jason Pinchback - Texas General Land Office
+
+RJ Shelly - Texas Sea Grant
+
+:::
+
+::::
+
+Graduate Students:
+
+Shubham Jain - Ph.D Candidate TAMU Biological and Agricultural Engineering
+
+Funding:
+
+Funded in part by grants from the Texas General Land Office and the National Oceanic and Atmospheric Administration.
+
+::: {style="font-size: .75em; text-align: center"}
+This project was funded by a Texas Coastal Management Program grant approved by the Texas Land Commissioner, providing financial assistance under the Coastal Zone Management Act of 1972, as amended, awarded by the National Oceanic and Atmospheric Administration (NOAA), Office for Coastal Management, pursuant to NOAA Award No. NA21NOS4190136. The views expressed herein are those of the author(s) and do not necessarily reflect the views of NOAA, the U.S. Department of Commerce, or any of their subagencies.
+:::
+
+## Background
+
+```{r targets}
+#| echo: false
+#| tar_globals: TRUE
+#| tar_interactive: TRUE
+library(targets)
+options(tidyverse.quiet=TRUE)
+store = "../../_targets"
+source("../../R/gt_functions.R")
+
+source("../../_targets_packages.R")
+
+```
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![](images/lavaca_bay_resize.png)
+:::
+
+::: {.column width="50%"}
+### Lavaca Bay Watershed 
+
+  - 3,146 miles^2^
+  - 50% Pasture and rangeland
+  - 20% Cultivated cropland (cotton, soy, corn, sorghum)
+  - 17% Forested
+  - 5% Suburban, urban
+
+:::
+
+::::
+
+
+## Primary Watershed Issues
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+![Lavaca River Watershed Protection Plan for elevated indicator bacteria and depressed dissolved  oxygen.](images/lbwpp.png)
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="50%"}
+
+![Persistant mercury contamination at shuttered industrial sites. Image by Kimiko Fieg [@priestDecadesLaterMercury2018].](images/mercury.png)
+
+:::
+
+::::
+
+
+    
+## Other concerns
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+![](images/bugica.png)
+
+ - @bugicaWaterQualityTrends2020 identify Lavaca Bay as potential risk for eutrophication due to trends in nutrient concentrations in the Bay.
+ 
+ 
+:::
+
+::: {.column width="40%"}
+
+  - Possible concerns for Total Phosphorus at some FW sites. 
+  
+  - Texas does not currently have nutrient standards for streams.
+  
+  - Long-term quarterly monitoring, no historical storm or flow-biased data to this point.
+ 
+:::
+
+ 
+::::
+ 
+# Questions
+ 
+ - Can we quantify nutrient loads exported to Lavaca Bay?
+ - Are there trends?
+ - Can we identify correlations in nutrient loading and DO (controlling for discharge)?
+ 
+
+## Methods
+ 
+ - Loading estimates:
+ 
+    - Generalized Additive Models [@kuhnertQuantifyingTotalSuspended2012; @robsonPredictionSedimentParticulate2015a; @mcdowellImplicationsLagTimes2021]
+      - model error structure and specify link function
+      - dependent variables can be smooth functions allowing non-linear responses.
+    - Repeated 5-fold cross-validation
+    
+    
+## Methods
+
+GAM model:
+    
+
+$$
+    Y = s(date) + s(day) + s(log1p(Q)) + s(stfa) + s(ma)
+$$
+
+- $date$ = decimal date;
+- $day$ = numeric day of year;
+- $Q$ = mean daily discharge;
+- $stfa$ = short term flow anomaly [@vecchiaTrendsConcentrationsUse2009; @zhangImprovingRiverineConstituent2017];
+- $ma$ = exponential moving average [@kuhnertQuantifyingTotalSuspended2012; @zhangImprovingRiverineConstituent2017].
+
+::: {.notes}
+GAMs were fit using mgcv in R. Based on previous experience and literature we chose a Gamma error distribution with a log link function to fit the models.
+
+Date represents the long term trend, the day of year represents a seasonal trend fitted with a cyclic cubic regression spline, flow +1 is log transformed. The stfa term is the short-term flow anomaly and describes how difference the current flow is from the previous month, and ma is an exponentially weighted moving average that accounts for the influence of flow events that occurred in the past on current nutrient concentration and load.
+
+A thin plate regression spline was used for other terms. The number of knots in each smoothing term were adjusted after inspecting model residuals and using the gam.check function in the mgcv package. Insterad of using a stepwise model selection process, the select = TRUE option was used when fitting models to allow terms to be penalized to zero if the fitting process determined the term did not improve the model.
+
+:::
+
+## Methods
+
+Loading estimates:
+
+ - Model predictions of daily load estimates summed to monthly and annual loading.
+ - 95% credible intervals developed from 1000 draws of parameter estimates from the multivariate normal posterior distribution of model parameters provided by mgcv::gam function in R.
+ - Flow-normalized estimates calculated similar to WRTDS, assume daily flow variables are random occurrence from all possible values on that day of year.
+ 
+ 
+## Results
+
+### NO~3~-N Load GAM at Lavaca River
+
+```{r}
+#| echo: false
+#| fig-cap: "Comparisons of (a) in-sample and out-of-sample mean daily discharge and (b) predicted daily fluxes (for both sampled and non-sampled days) and measured daily fluxes."
+#| fig-height: 4
+#| fig-width: 8
+
+tar_read(bias_plot_no3_08164000, store = store)
+```
+
+## Results {.smaller}
+
+### NO~3~-N GAM at Lavaca River
+
+
+::: {style="font-size: .75em; text-align: center"}
+
+```{r}
+#| echo: false
+#| 
+gam_gt(tar_read(no3_08164000, store = store),
+       caption = "",
+       label = "tbl-no3_08164000",
+       format = "html",
+       escape = FALSE)
+```
+:::
+
+
+```{r}
+#| echo: false
+
+tar_read(cv_no3_08164000, store = store) |> 
+  ungroup() |> 
+  dplyr::select(-c(data, id)) |> 
+  gtsummary::tbl_summary(
+    label = list(kge ~ "KGE",
+                 r2 ~ "R<sup>2</sup>",
+                 pbias ~ "Percent Bias"),
+    type = list(pbias ~ "continuous")
+  ) |> 
+  gtsummary::modify_header(label = "Goodness of Fit Metric",
+                           gtsummary::all_stat_cols() ~ "Median (IQR)") |> 
+  gtsummary::as_kable(format = "html", escape = FALSE)
+```
+
+
+## Results {.smaller}
+
+### TP GAM Navidad River/Palmetto Bend Dam
+
+
+::: {style="font-size: .75em; text-align: center"}
+
+```{r}
+#| echo: false
+#| 
+gam_gt(tar_read(tp_texana, store = store),
+       caption = "",
+       label = "tbl-no3_08164000",
+       format = "html",
+       escape = FALSE)
+```
+:::
+
+
+```{r}
+#| echo: false
+
+tar_read(cv_tp_texana, store = store) |> 
+  ungroup() |> 
+  dplyr::select(-c(data, id)) |> 
+  gtsummary::tbl_summary(
+    label = list(kge ~ "KGE",
+                 r2 ~ "R<sup>2</sup>",
+                 pbias ~ "Percent Bias"),
+    type = list(pbias ~ "continuous")
+  ) |> 
+  gtsummary::modify_header(label = "Goodness of Fit Metric",
+                           gtsummary::all_stat_cols() ~ "Median (IQR)") |> 
+  gtsummary::as_kable(format = "html", escape = FALSE)
+```
+ 
+
+## Total Loads
+
+
+```{r}
+#| echo: false
+#| fig-height: 6
+#| fig-width: 8
+#| fig-cap: "Aggregated (a) monthly and (b) annual NO~3~-N loads at Lavaca River at Edna, USGS-08164000."
+
+load <- tar_read(daily_no3_08164000, store = store)
+fn_load <- tar_read(daily_no3_08164000_fn, store = store)
+
+
+montly_load <- load$monthly |> 
+  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d"))
+
+a <- ggplot() +
+  geom_point(data = montly_load,
+             aes(x, NO3_Estimate),
+             color = "#1A3399") +
+  geom_linerange(data = montly_load,
+                 aes(x = x, ymin = NO3_Lower, ymax = NO3_Upper),
+                 color = "#1A3399") +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
+               limits = c(as.Date("2005-01-01"), as.Date("2020-12-31")),
+               expand = c(0.025, 0.025)) +
+  labs(x = "", y = "Predicted Monthly NO<sub>3</sub>-N Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        axis.title.y = element_markdown(),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"))
+
+b <- ggplot() +
+  geom_point(data = load$annually, aes(year, NO3_Estimate,
+                                   color = "Total Annual Load",
+                                   shape = "Total Annual Load")) +
+  geom_line(data = load$annually, aes(x = year, y = NO3_Estimate,
+                                  color = "Total Annual Load",
+                                  linetype = "Total Annual Load"),
+            alpha = 0.5) +
+  geom_linerange(data = load$annually, aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper,
+                                       color = "Total Annual Load")) +
+  geom_point(data = fn_load$annually, aes(year, NO3_Estimate,
+                                 color = "Flow Normalized Annual Load",
+                                 shape = "Flow Normalized Annual Load")) +
+  geom_line(data = fn_load$annually,
+            aes(x = year, y = NO3_Estimate,
+                color = "Flow Normalized Annual Load",
+                linetype = "Flow Normalized Annual Load"),
+            alpha = 0.5) +
+  # geom_linerange(data = fn_load,
+  #                aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper,
+  #                    color = "Flow Normalized Annual Load")) +
+  labs(x = "", y = "Annual NO<sub>3</sub>-N Load [kg]") +
+  scale_shape_manual(name = "values",
+                     values = c(21, 19)) +
+  scale_color_manual(name = "values",
+                     values = c("#7E1900", "#1A3399")) +
+  scale_linetype_manual(name = "values",
+                        values = c(1, 2)) +
+  coord_cartesian(ylim = c(0, 60000)) +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+
+(a / b) + plot_annotation(tag_levels = "a")
+```
+
+
+## Regional Study Comparison
+
+::: {style="font-size: .85em; text-align: center"}
+
+| Parameter | Estimated Yield | Approach | Time Period | Reference |
+|-----------|-----------------|-------|-------------|-----------|
+| TP        | 14.1 kg/km^2^/yr| GAM   | 2000-2020   | -         |
+| TP        | 18 kg/km^2^/yr   | SPARROW | 2002 | @rebichSourcesDeliveryNutrients2011   |
+| TP        | 45.2 kg/km^2^/yr| SPARROW | 2012      | @wiseSpatiallyReferencedModels2019 |
+| TP        | 42 kg/km^2^/yr   | SWAT    | 1977-2005 | @omaniEstimationSedimentNutrient2014 |
+| TP        | 28.9 kg/km^2^/yr | LOADEST | 1972-1993 | @dunnTrendsNutrientInflows1996 |
+| TP        | 6.2 kg/km^2^/yr  | NA      | 1968-1987 | @longleyFreshwaterInflowsTexas1994  |
+
+:::
+
+## Further work
+
+- Comparison of above lake and below lake loads
+- Develop supplemental river and estuary monitoring plans
+- Combine estuary water quality data sets
+ 
+## References
+ 
+ 
+

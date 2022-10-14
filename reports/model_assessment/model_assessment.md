@@ -94,21 +94,21 @@ Hold-out data is often used to validate predictive ability of a model. Given the
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.089 & 0.100 & 20.955 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & -2.349 & 0.150 & -15.679 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 1.482 & 17 & 0.164 & 0.111\\
+ & s(ddate) &  &  &  & 6.475 & 17 & 2.494 & 0.000 ***\\
 
- & s(yday) &  &  &  & 0.000 & 8 & 0.000 & 0.672\\
+ & s(yday) &  &  &  & 2.234 & 8 & 2.601 & 0.000 ***\\
 
- & s(log1p(Flow)) &  &  &  & 6.897 & 9 & 25.880 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 6.256 & 9 & 5.079 & 0.000 ***\\
 
- & s(ma) &  &  &  & 0.001 & 5 & 0.000 & 0.391\\
+ & s(ma) &  &  &  & 1.851 & 5 & 0.764 & 0.017 *\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 4.125 & 5 & 3.882 & 0.001 ***\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 4.630 & 5 & 10.577 & 0.000 ***\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.864, Deviance explained 0.844}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 245.609, Scale est: 0.735, N: 74}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.831, Deviance explained 0.881}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : -31.859, Scale est: 0.00988, N: 74}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -117,9 +117,9 @@ A. parametric coefficients & (Intercept) & 2.089 & 0.100 & 20.955 &  &  &  & 0.0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** | **Median (IQR)**  |
 |:--------------------------|:-----------------:|
-|KGE                        | 0.74 (0.47, 0.83) |
-|R^2^                       | 0.69 (0.57, 0.76) |
-|Percent Bias               |   -8 (-21, -1)    |
+|KGE                        | 0.63 (0.55, 0.72) |
+|R^2^                       | 0.72 (0.68, 0.80) |
+|Percent Bias               |    9 (-8, 12)     |
 :::
 :::
 
@@ -172,21 +172,21 @@ A. parametric coefficients & (Intercept) & 2.089 & 0.100 & 20.955 &  &  &  & 0.0
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.926 & 0.047 & 61.761 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & -1.611 & 0.045 & -35.811 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 1.607 & 17 & 0.166 & 0.121\\
+ & s(ddate) &  &  &  & 3.262 & 17 & 0.408 & 0.045 *\\
 
- & s(yday) &  &  &  & 1.154 & 8 & 0.290 & 0.117\\
+ & s(yday) &  &  &  & 1.266 & 8 & 0.352 & 0.094 +\\
 
- & s(log1p(Flow)) &  &  &  & 3.867 & 4 & 42.896 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 0.953 & 4 & 0.405 & 0.133\\
 
- & s(ma) &  &  &  & 3.443 & 5 & 2.329 & 0.004 **\\
+ & s(ma) &  &  &  & 0.000 & 5 & 0.000 & 0.510\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 1.971 & 4 & 1.143 & 0.045 *\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 2.585 & 4 & 2.857 & 0.003 **\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.784, Deviance explained 0.905}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 306.623, Scale est: 0.180, N: 80}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.274, Deviance explained 0.250}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : -70.944, Scale est: 0.162, N: 80}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -194,11 +194,11 @@ A. parametric coefficients & (Intercept) & 2.926 & 0.047 & 61.761 &  &  &  & 0.0
 
 ::: {#tbl-TP308164000-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at Lavaca River at Edna, USGS-08164000.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** |  **Median (IQR)**  |
-|:--------------------------|:------------------:|
-|KGE                        | 0.64 (0.55, 0.71)  |
-|R^2^                       | 0.53 (0.46, 0.60)  |
-|Percent Bias               | -4.8 (-14.6, -3.3) |
+|**Goodness of Fit Metric** |   **Median (IQR)**   |
+|:--------------------------|:--------------------:|
+|KGE                        |  0.77 (0.71, 0.81)   |
+|R^2^                       |  0.77 (0.72, 0.82)   |
+|Percent Bias               | -7.45 (-9.10, -6.35) |
 :::
 :::
 
@@ -252,21 +252,21 @@ A. parametric coefficients & (Intercept) & 2.926 & 0.047 & 61.761 &  &  &  & 0.0
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.107 & 0.071 & 29.581 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & -2.010 & 0.100 & -20.154 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 0.626 & 17 & 0.066 & 0.164\\
+ & s(ddate) &  &  &  & 1.285 & 17 & 0.704 & 0.001 ***\\
 
- & s(yday) &  &  &  & 2.506 & 4 & 8.140 & 0.000 ***\\
+ & s(yday) &  &  &  & 2.541 & 4 & 5.150 & 0.000 ***\\
 
- & s(log1p(Flow)) &  &  &  & 4.797 & 5 & 70.663 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 3.788 & 5 & 4.777 & 0.000 ***\\
 
- & s(stfa) &  &  &  & 0.984 & 5 & 0.215 & 0.294\\
+ & s(stfa) &  &  &  & 2.992 & 5 & 3.209 & 0.001 ***\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.750 & 4 & 0.305 & 0.123\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.000 & 4 & 0.000 & 0.308\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.703, Deviance explained 0.933}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 184.656, Scale est: 0.299, N: 59}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.720, Deviance explained 0.770}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : -46.798, Scale est: 0.00726, N: 59}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -274,11 +274,11 @@ A. parametric coefficients & (Intercept) & 2.107 & 0.071 & 29.581 &  &  &  & 0.0
 
 ::: {#tbl-NO308164390-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N concentration GAM at Navidad River at Strane Pk nr Edna,, USGS-NO308164390.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** | **Median (IQR)**  |
-|:--------------------------|:-----------------:|
-|KGE                        | 0.36 (0.22, 0.40) |
-|R^2^                       | 0.38 (0.30, 0.49) |
-|Percent Bias               |  -22 (-26, -16)   |
+|**Goodness of Fit Metric** |   **Median (IQR)**   |
+|:--------------------------|:--------------------:|
+|KGE                        |  0.60 (0.58, 0.65)   |
+|R^2^                       |  0.71 (0.65, 0.77)   |
+|Percent Bias               | -18.4 (-21.4, -16.5) |
 :::
 :::
 
@@ -328,21 +328,21 @@ A. parametric coefficients & (Intercept) & 2.107 & 0.071 & 29.581 &  &  &  & 0.0
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.681 & 0.037 & 71.651 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & -1.597 & 0.038 & -42.298 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 6.178 & 17 & 2.595 & 0.000 ***\\
+ & s(ddate) &  &  &  & 7.120 & 17 & 3.465 & 0.000 ***\\
 
- & s(yday) &  &  &  & 0.000 & 4 & 0.000 & 0.369\\
+ & s(yday) &  &  &  & 0.456 & 4 & 0.147 & 0.270\\
 
- & s(log1p(Flow)) &  &  &  & 4.910 & 5 & 316.610 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 2.630 & 5 & 2.428 & 0.002 **\\
 
- & s(stfa) &  &  &  & 0.000 & 5 & 0.000 & 0.971\\
+ & s(stfa) &  &  &  & 0.000 & 5 & 0.000 & 0.690\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.000 & 5 & 0.000 & 0.937\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.000 & 5 & 0.000 & 0.759\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.975, Deviance explained 0.961}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 254.624, Scale est: 0.108, N: 77}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.550, Deviance explained 0.486}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : -76.491, Scale est: 0.110, N: 77}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -350,11 +350,11 @@ A. parametric coefficients & (Intercept) & 2.681 & 0.037 & 71.651 &  &  &  & 0.0
 
 ::: {#tbl-TP08164390-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at Navidad River at Strane Pk nr Edna, USGS-08164390.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** |  **Median (IQR)**   |
-|:--------------------------|:-------------------:|
-|KGE                        |  0.75 (0.59, 0.78)  |
-|R^2^                       |  0.93 (0.84, 0.94)  |
-|Percent Bias               | -10.2 (-18.2, -9.5) |
+|**Goodness of Fit Metric** |   **Median (IQR)**    |
+|:--------------------------|:---------------------:|
+|KGE                        | 0.951 (0.944, 0.960)  |
+|R^2^                       | 0.982 (0.973, 0.984)  |
+|Percent Bias               | -9.10 (-10.10, -8.27) |
 :::
 :::
 
@@ -407,21 +407,21 @@ A. parametric coefficients & (Intercept) & 2.681 & 0.037 & 71.651 &  &  &  & 0.0
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.358 & 0.074 & 31.863 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & -1.942 & 0.081 & -24.046 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 0.000 & 17 & 0.000 & 0.548\\
+ & s(ddate) &  &  &  & 0.000 & 17 & 0.000 & 0.916\\
 
- & s(yday) &  &  &  & 1.951 & 4 & 2.492 & 0.004 **\\
+ & s(yday) &  &  &  & 2.018 & 4 & 2.777 & 0.003 **\\
 
- & s(log1p(Flow)) &  &  &  & 4.800 & 5 & 34.561 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 2.338 & 9 & 0.481 & 0.101\\
 
- & s(stfa) &  &  &  & 2.457 & 5 & 0.986 & 0.086 +\\
+ & s(stfa) &  &  &  & 0.000 & 5 & 0.000 & 0.585\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 3.842 & 5 & 3.507 & 0.001 **\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 4.201 & 5 & 5.113 & 0.000 ***\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.793, Deviance explained 0.910}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 195.796, Scale est: 0.307, N: 56}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.261, Deviance explained 0.505}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : -51.428, Scale est: 0.365, N: 56}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -431,9 +431,9 @@ A. parametric coefficients & (Intercept) & 2.358 & 0.074 & 31.863 &  &  &  & 0.0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** | **Median (IQR)**  |
 |:--------------------------|:-----------------:|
-|KGE                        | 0.44 (0.37, 0.47) |
-|R^2^                       | 0.28 (0.26, 0.33) |
-|Percent Bias               |   -16 (-20, -7)   |
+|KGE                        | 0.47 (0.34, 0.50) |
+|R^2^                       | 0.49 (0.38, 0.57) |
+|Percent Bias               |   -15 (-20, -8)   |
 :::
 :::
 
@@ -483,21 +483,21 @@ A. parametric coefficients & (Intercept) & 2.358 & 0.074 & 31.863 &  &  &  & 0.0
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.633 & 0.073 & 35.934 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & -1.729 & 0.067 & -25.973 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 0.487 & 17 & 0.038 & 0.251\\
+ & s(ddate) &  &  &  & 9.316 & 17 & 4.295 & 0.000 ***\\
 
- & s(yday) &  &  &  & 0.003 & 4 & 0.001 & 0.393\\
+ & s(yday) &  &  &  & 0.000 & 4 & 0.000 & 0.730\\
 
- & s(log1p(Flow)) &  &  &  & 8.200 & 9 & 57.412 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 6.939 & 9 & 2.967 & 0.000 ***\\
 
- & s(stfa) &  &  &  & 0.000 & 5 & 0.000 & 0.501\\
+ & s(stfa) &  &  &  & 2.097 & 5 & 0.757 & 0.090 +\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.000 & 4 & 0.000 & 0.530\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 2.171 & 4 & 3.529 & 0.000 ***\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.930, Deviance explained 0.887}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 269.592, Scale est: 0.403, N: 75}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.757, Deviance explained 0.824}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : -34.024, Scale est: 0.00944, N: 75}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -505,11 +505,11 @@ A. parametric coefficients & (Intercept) & 2.633 & 0.073 & 35.934 &  &  &  & 0.0
 
 ::: {#tbl-TP08164450-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at Sandy Creek nr Ganado, USGS-08164450.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** |  **Median (IQR)**  |
-|:--------------------------|:------------------:|
-|KGE                        | 0.69 (0.61, 0.73)  |
-|R^2^                       | 0.80 (0.72, 0.87)  |
-|Percent Bias               | -9.2 (-13.6, -7.6) |
+|**Goodness of Fit Metric** | **Median (IQR)**  |
+|:--------------------------|:-----------------:|
+|KGE                        | 0.78 (0.56, 0.81) |
+|R^2^                       | 0.81 (0.67, 0.86) |
+|Percent Bias               |    -6 (-9, -3)    |
 :::
 :::
 
@@ -562,21 +562,21 @@ A. parametric coefficients & (Intercept) & 2.633 & 0.073 & 35.934 &  &  &  & 0.0
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 0.404 & 0.231 & 1.751 &  &  &  & 0.086 +\\
+A. parametric coefficients & (Intercept) & -0.481 & 0.159 & -3.029 &  &  &  & 0.004 **\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 0.000 & 5 & 0.000 & 0.350\\
+ & s(ddate) &  &  &  & 0.000 & 17 & 0.000 & 0.788\\
 
- & s(yday) &  &  &  & 1.970 & 8 & 0.998 & 0.014 *\\
+ & s(yday) &  &  &  & 2.557 & 4 & 6.592 & 0.000 ***\\
 
- & s(log1p(Flow)) &  &  &  & 3.731 & 4 & 46.681 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 2.793 & 4 & 3.688 & 0.001 **\\
 
- & s(ma) &  &  &  & 0.000 & 5 & 0.000 & 0.933\\
+ & s(ma) &  &  &  & 0.000 & 5 & 0.000 & 0.684\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 0.001 & 4 & 0.000 & 0.498\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 0.003 & 4 & 0.000 & 0.529\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.567, Deviance explained 0.699}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 79.012, Scale est: 3.254, N: 61}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.348, Deviance explained 0.498}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : 43.671, Scale est: 1.541, N: 61}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -584,11 +584,11 @@ A. parametric coefficients & (Intercept) & 0.404 & 0.231 & 1.751 &  &  &  & 0.08
 
 ::: {#tbl-NO308164504-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N load GAM at E Mustang Creek nr Louise, USGS-08164504.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** |  **Median (IQR)**  |
-|:--------------------------|:------------------:|
-|KGE                        | 0.04 (-0.20, 0.07) |
-|R^2^                       | 0.25 (0.10, 0.32)  |
-|Percent Bias               |   -36 (-42, -28)   |
+|**Goodness of Fit Metric** | **Median (IQR)**  |
+|:--------------------------|:-----------------:|
+|KGE                        | 0.37 (0.26, 0.41) |
+|R^2^                       | 0.54 (0.48, 0.57) |
+|Percent Bias               |  -47 (-54, -44)   |
 :::
 :::
 
@@ -639,21 +639,21 @@ A. parametric coefficients & (Intercept) & 0.404 & 0.231 & 1.751 &  &  &  & 0.08
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & -0.124 & 0.139 & -0.890 &  &  &  & 0.376\\
+A. parametric coefficients & (Intercept) & -1.001 & 0.081 & -12.331 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 1.189 & 17 & 0.199 & 0.062 +\\
+ & s(ddate) &  &  &  & 0.044 & 17 & 0.003 & 0.343\\
 
- & s(yday) &  &  &  & 1.178 & 8 & 0.303 & 0.122\\
+ & s(yday) &  &  &  & 0.385 & 8 & 0.057 & 0.293\\
 
- & s(log1p(Flow)) &  &  &  & 3.850 & 4 & 107.443 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 1.642 & 4 & 1.416 & 0.005 **\\
 
- & s(ma) &  &  &  & 0.000 & 5 & 0.000 & 0.583\\
+ & s(ma) &  &  &  & 1.184 & 5 & 0.447 & 0.086 +\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 0.008 & 4 & 0.002 & 0.400\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 1.015 & 4 & 0.415 & 0.117\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.862, Deviance explained 0.749}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 77.488, Scale est: 1.532, N: 79}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.263, Deviance explained 0.246}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : -2.438, Scale est: 0.521, N: 79}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -661,11 +661,11 @@ A. parametric coefficients & (Intercept) & -0.124 & 0.139 & -0.890 &  &  &  & 0.
 
 ::: {#tbl-TP08164504-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at E Mustang Creek nr Louise, USGS-08164504.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** | **Median (IQR)**  |
-|:--------------------------|:-----------------:|
-|KGE                        | 0.52 (0.48, 0.61) |
-|R^2^                       | 0.78 (0.67, 0.82) |
-|Percent Bias               |  -13 (-18, -12)   |
+|**Goodness of Fit Metric** |   **Median (IQR)**   |
+|:--------------------------|:--------------------:|
+|KGE                        | 0.851 (0.812, 0.855) |
+|R^2^                       | 0.854 (0.839, 0.859) |
+|Percent Bias               |  -9.2 (-12.7, -7.5)  |
 :::
 :::
 
@@ -718,21 +718,21 @@ A. parametric coefficients & (Intercept) & -0.124 & 0.139 & -0.890 &  &  &  & 0.
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.575 & 0.088 & 29.196 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & -1.217 & 0.085 & -14.372 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 1.143 & 17 & 0.204 & 0.052 +\\
+ & s(ddate) &  &  &  & 1.161 & 17 & 0.210 & 0.048 *\\
 
- & s(yday) &  &  &  & 2.551 & 4 & 9.288 & 0.000 ***\\
+ & s(yday) &  &  &  & 2.554 & 4 & 8.892 & 0.000 ***\\
 
- & s(log1p(Flow)) &  &  &  & 5.798 & 6 & 69.920 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 5.355 & 6 & 7.166 & 0.000 ***\\
 
- & s(ma) &  &  &  & 0.481 & 5 & 0.124 & 0.238\\
+ & s(ma) &  &  &  & 0.855 & 5 & 0.267 & 0.151\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 0.670 & 5 & 0.150 & 0.312\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(stfa) &  &  &  & 1.272 & 5 & 0.352 & 0.199\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.774, Deviance explained 0.879}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 242.088, Scale est: 0.490, N: 63}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.566, Deviance explained 0.632}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : -2.104, Scale est: 0.452, N: 63}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -742,9 +742,9 @@ A. parametric coefficients & (Intercept) & 2.575 & 0.088 & 29.196 &  &  &  & 0.0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** | **Median (IQR)**  |
 |:--------------------------|:-----------------:|
-|KGE                        | 0.36 (0.24, 0.49) |
-|R^2^                       | 0.57 (0.44, 0.64) |
-|Percent Bias               |  -32 (-40, -26)   |
+|KGE                        | 0.51 (0.32, 0.69) |
+|R^2^                       | 0.55 (0.44, 0.70) |
+|Percent Bias               |  -17 (-22, -11)   |
 :::
 :::
 
@@ -795,21 +795,21 @@ A. parametric coefficients & (Intercept) & 2.575 & 0.088 & 29.196 &  &  &  & 0.0
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & 2.641 & 0.060 & 43.895 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & -1.150 & 0.063 & -18.148 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 2.181 & 17 & 0.468 & 0.019 *\\
+ & s(ddate) &  &  &  & 2.054 & 17 & 0.411 & 0.025 *\\
 
- & s(yday) &  &  &  & 0.000 & 4 & 0.000 & 0.547\\
+ & s(yday) &  &  &  & 0.000 & 4 & 0.000 & 0.573\\
 
- & s(log1p(Flow)) &  &  &  & 8.118 & 9 & 81.410 & 0.000 ***\\
+ & s(log1p(Flow)) &  &  &  & 0.000 & 9 & 0.000 & 0.648\\
 
- & s(stfa) &  &  &  & 0.015 & 5 & 0.003 & 0.437\\
+ & s(stfa) &  &  &  & 0.235 & 5 & 0.050 & 0.342\\
 
-\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.000 & 5 & 0.000 & 0.831\\
+\multirow[t]{-5}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 0.285 & 5 & 0.067 & 0.293\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.923, Deviance explained 0.880}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : 291.984, Scale est: 0.293, N: 81}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.0843, Deviance explained 0.142}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : -33.755, Scale est: 0.325, N: 81}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -817,11 +817,11 @@ A. parametric coefficients & (Intercept) & 2.641 & 0.060 & 43.895 &  &  &  & 0.0
 
 ::: {#tbl-TP08164503-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at W Mustang Creek nr Ganado, USGS-08164503.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** |  **Median (IQR)**  |
-|:--------------------------|:------------------:|
-|KGE                        | 0.78 (0.73, 0.80)  |
-|R^2^                       | 0.88 (0.87, 0.90)  |
-|Percent Bias               | -7.0 (-12.1, -6.1) |
+|**Goodness of Fit Metric** |   **Median (IQR)**   |
+|:--------------------------|:--------------------:|
+|KGE                        | 0.864 (0.838, 0.882) |
+|R^2^                       | 0.890 (0.887, 0.896) |
+|Percent Bias               | -6.50 (-9.12, -4.70) |
 :::
 :::
 
@@ -875,23 +875,23 @@ A. parametric coefficients & (Intercept) & 2.641 & 0.060 & 43.895 &  &  &  & 0.0
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & -1.384 & 0.113 & -12.212 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & -1.456 & 0.078 & -18.664 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 0.000 & 8 & 0.000 & 0.605\\
+ & s(ddate) &  &  &  & 11.783 & 14 & 3.702 & 0.000 ***\\
 
- & s(yday) &  &  &  & 2.523 & 8 & 3.871 & 0.000 ***\\
+ & s(yday) &  &  &  & 2.924 & 8 & 6.812 & 0.000 ***\\
 
- & s(log1p(Inflow)) &  &  &  & 0.000 & 4 & 0.000 & 0.714\\
+ & s(log1p(Inflow)) &  &  &  & 0.000 & 4 & 0.000 & 0.353\\
 
- & s(log1p(Flow)) &  &  &  & 0.000 & 4 & 0.000 & 0.581\\
+ & s(log1p(Flow)) &  &  &  & 2.804 & 9 & 1.303 & 0.002 **\\
 
- & s(stfa) &  &  &  & 0.002 & 4 & 0.000 & 0.431\\
+ & s(stfa) &  &  &  & 1.154 & 4 & 0.619 & 0.070 +\\
 
-\multirow[t]{-6}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 2.884 & 5 & 2.769 & 0.002 **\\
+\multirow[t]{-6}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 3.478 & 5 & 2.980 & 0.001 **\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.466, Deviance explained 0.513}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : -8.419, Scale est: 0.0355, N: 62}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.811, Deviance explained 0.878}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : -11.573, Scale est: 0.0128, N: 62}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -901,9 +901,9 @@ A. parametric coefficients & (Intercept) & -1.384 & 0.113 & -12.212 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** | **Median (IQR)**  |
 |:--------------------------|:-----------------:|
-|KGE                        | 0.30 (0.23, 0.51) |
-|R^2^                       | 0.89 (0.87, 0.91) |
-|Percent Bias               |  -38 (-43, -24)   |
+|KGE                        | 0.49 (0.31, 0.66) |
+|R^2^                       | 0.79 (0.69, 0.89) |
+|Percent Bias               |  -43 (-57, -32)   |
 :::
 :::
 
@@ -977,11 +977,11 @@ A. parametric coefficients & (Intercept) & -1.624 & 0.037 & -44.377 &  &  &  & 0
 
 ::: {#tbl-TPPalmettoBend-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of TP GAM at Palmetto Bend Dam.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** |    **Median (IQR)**     |
-|:--------------------------|:-----------------------:|
-|KGE                        |    0.65 (0.62, 0.69)    |
-|R^2^                       |  0.966 (0.950, 0.969)   |
-|Percent Bias               | -18.20 (-20.60, -15.07) |
+|**Goodness of Fit Metric** |   **Median (IQR)**   |
+|:--------------------------|:--------------------:|
+|KGE                        | 0.877 (0.862, 0.911) |
+|R^2^                       | 0.961 (0.956, 0.975) |
+|Percent Bias               | -17.6 (-21.1, -12.7) |
 :::
 :::
 

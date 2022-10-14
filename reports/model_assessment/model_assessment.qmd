@@ -169,6 +169,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_NO3) ~ "Measured NO<sub>3</sub>-N",
     !is.na(censored_NO3) ~ "Censored Value"
   )) |> 
+  mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
@@ -262,6 +270,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_TP) ~ "Measured TP",
     !is.na(censored_TP) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
@@ -360,6 +376,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_NO3) ~ "Measured NO<sub>3</sub>-N",
     !is.na(censored_NO3) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
@@ -454,6 +478,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_TP) ~ "Measured TP",
     !is.na(censored_TP) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
@@ -552,6 +584,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_NO3) ~ "Measured NO<sub>3</sub>-N",
     !is.na(censored_NO3) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
@@ -645,6 +685,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_TP) ~ "Measured TP",
     !is.na(censored_TP) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
@@ -740,6 +788,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_NO3) ~ "Measured NO<sub>3</sub>-N",
     !is.na(censored_NO3) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
@@ -836,6 +892,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_TP) ~ "Measured TP",
     !is.na(censored_TP) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
@@ -932,6 +996,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_NO3) ~ "Measured NO<sub>3</sub>-N",
     !is.na(censored_NO3) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
@@ -1025,6 +1097,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_TP) ~ "Measured TP",
     !is.na(censored_TP) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +

@@ -71,14 +71,14 @@ list(
         filter(site_no == "usgs08164000") |> 
         filter(!is.na(NO3))
       
-      model_gam(formula = NO3_flux ~
+      model_gam(formula = trans_NO3 ~
                   s(ddate, bs = "tp", k = 18, m = 1) +
                   s(yday, bs = "cc") +
                   s(log1p_Flow, k = 10, bs = "tp", m = 1) +
                   s(ma, k = 6, bs = "tp", m = 1) +
                   s(stfa, k = 6, bs = "tp", m = 1),
                 data = df,
-                family = Gamma(link = "log")
+                family = gaussian(link = "log")
                 )
       }
     ),
@@ -97,7 +97,7 @@ list(
 
   #### TP GAM
   tar_target(
-    tp_08164000, model_gam(formula = TP_flux ~
+    tp_08164000, model_gam(formula = trans_TP ~
                              s(ddate, bs = "tp", k = 18, m = 1) +
                              s(yday, bs = "cc") +
                              s(log1p_Flow, k = 5, bs = "tp", m = 1) +
@@ -106,52 +106,52 @@ list(
                            data = model_data |> filter(site_no == "usgs08164000"),
                            family = Gamma(link = "log"))
   ),
-  
+
   #### TP CV
   tar_target(
     cv_tp_08164000, {
-      
+
       df <- model_data |>
         filter(site_no == "usgs08164000") |>
         filter(!is.na(TP))
-      
+
       cross_validate(model = tp_08164000,
                      data = df,
                      constituent = TP_flux)}
   ),
-  
-  
+
+
 
   ### E Mustang Creek nr Louise ----
-  
+
   #### NO3
   tar_target(
-    no3_08164504, model_gam(formula = NO3_flux ~
-                              s(ddate, bs = "tp", k = 6) +
-                              s(yday, bs = "cc") +
+    no3_08164504, model_gam(formula = trans_NO3 ~
+                              s(ddate, bs = "tp", k = 18, m = 1) +
+                              s(yday, k = 6, bs = "cc") +
                               s(log1p_Flow, k = 5, bs = "tp", m = 1) +
                               s(ma, k = 6, bs = "tp", m = 1) +
                               s(stfa, k = 5, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164504"),
                             family = Gamma(link = "log"))
   ),
-  
+
   #### CV NO3 ----
   tar_target(
     cv_no3_08164504, {
-      
+
       df <- model_data |>
         filter(site_no == "usgs08164504") |>
         filter(!is.na(NO3))
-      
+
       cross_validate(model = no3_08164504,
                      data = df,
                      constituent = NO3_flux)}
   ),
-  
+
   #### GAM TP
   tar_target(
-    tp_08164504, model_gam(formula = TP_flux ~
+    tp_08164504, model_gam(formula = trans_TP ~
                              s(ddate, bs = "tp", k = 18) +
                              s(yday, bs = "cc") +
                              s(log1p_Flow, k = 5, bs = "tp", m = 1) +
@@ -160,25 +160,25 @@ list(
                            data = model_data |> filter(site_no == "usgs08164504"),
                            family = Gamma(link = "log"))
   ),
-  
+
   #### CV TP ----
   tar_target(
     cv_tp_08164504, {
-      
+
       df <- model_data |>
         filter(site_no == "usgs08164504") |>
         filter(!is.na(TP))
-      
+
       cross_validate(model = tp_08164504,
                      data = df,
                      constituent = TP_flux)}
   ),
 
   ### W Mustang Creek nr Ganado ----
-  
+
   #### NO3 ----
   tar_target(
-    no3_08164503, model_gam(formula = NO3_flux ~
+    no3_08164503, model_gam(formula = trans_NO3 ~
                               s(ddate, bs = "tp", k = 18) +
                               s(yday, k = 6, bs = "cc") +
                               s(log1p_Flow, k = 7, bs = "tp", m = 1) +
@@ -187,23 +187,23 @@ list(
                             data = model_data |> filter(site_no == "usgs08164503"),
                             family = Gamma(link = "log"))
   ),
-  
+
   #### CV NO3 ----
   tar_target(
     cv_no3_08164503, {
-      
+
       df <- model_data |>
         filter(site_no == "usgs08164503") |>
         filter(!is.na(NO3))
-      
+
       cross_validate(model = no3_08164503,
                      data = df,
                      constituent = NO3_flux)}
   ),
-  
+
   #### TP ----
   tar_target(
-    tp_08164503, model_gam(formula = TP_flux ~
+    tp_08164503, model_gam(formula = trans_TP ~
                              s(ddate, bs = "tp", k = 18) +
                              s(yday, k = 6, bs = "cc") +
                              s(log1p_Flow, k = 10, bs = "tp", m = 1) +
@@ -215,11 +215,11 @@ list(
   #### CV TP ----
   tar_target(
     cv_tp_08164503, {
-      
+
       df <- model_data |>
         filter(site_no == "usgs08164503") |>
         filter(!is.na(TP))
-      
+
       cross_validate(model = tp_08164503,
                      data = df,
                      constituent = TP_flux)}
@@ -229,10 +229,10 @@ list(
 
   #### NO3 -----
   tar_target(
-    no3_08164450, model_gam(formula = NO3_flux ~
+    no3_08164450, model_gam(formula = trans_NO3 ~
                               s(ddate, bs = "tp", k = 18) +
                               s(yday, k = 6, bs = "cc") +
-                              s(log1p_Flow, k = 6, bs = "tp", m = 1) +
+                              s(log1p_Flow, k = 10, bs = "tp", m = 1) +
                               s(stfa, k = 6, bs = "tp", m = 1) +
                               s(ma, k = 6, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164450"),
@@ -241,70 +241,70 @@ list(
   #### CV NO3 ----
   tar_target(
     cv_no3_08164450, {
-      
+
       df <- model_data |>
         filter(site_no == "usgs08164450") |>
         filter(!is.na(NO3))
-      
+
       cross_validate(model = no3_08164450,
                      data = df,
                      constituent = NO3_flux)}
   ),
-  
+
   #### TP -----
   tar_target(
-    tp_08164450, model_gam(formula = TP_flux ~
+    tp_08164450, model_gam(formula = trans_TP ~
                              s(ddate, bs = "tp", k = 18) +
                              s(yday, k = 6, bs = "cc") +
                              s(log1p_Flow, k = 10, bs = "tp", m = 1) +
                              s(stfa, k = 6, bs = "tp", m = 1) +
                              s(ma, k = 5, bs = "tp", m = ),
                            data = model_data |> filter(site_no == "usgs08164450"),
-                           family = Gamma(link = "log"))
+                           family = gaussian(link = "log"))
   ),
   #### CV TP ----
   tar_target(
     cv_tp_08164450, {
-      
+
       df <- model_data |>
         filter(site_no == "usgs08164450") |>
         filter(!is.na(TP))
-      
+
       cross_validate(model = tp_08164450,
                      data = df,
                      constituent = TP_flux)}
   ),
 
   ### Navidad River at Strane Pk nr Edna ----
-  
+
   #### NO3
   tar_target(
-    no3_08164390, model_gam(formula = NO3_flux ~
+    no3_08164390, model_gam(formula = trans_NO3 ~
                               s(ddate, bs = "tp", k = 18) +
                               s(yday, k = 6, bs = "cc") +
                               s(log1p_Flow, k = 6, bs = "tp",  m = 1) +
                               s(stfa, k = 6, bs = "tp", m = 1) +
                               s(ma, k = 5, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164390"),
-                            family = Gamma(link = "log"))
+                            family = gaussian(link = "log"))
   ),
-  
+
   #### CV NO3 ----
   tar_target(
     cv_no3_08164390, {
-      
+
       df <- model_data |>
         filter(site_no == "usgs08164390") |>
         filter(!is.na(NO3))
-      
+
       cross_validate(model = no3_08164390,
                      data = df,
                      constituent = NO3_flux)}
   ),
-  
+
   #### TP -----
   tar_target(
-    tp_08164390, model_gam(formula = TP_flux ~
+    tp_08164390, model_gam(formula = trans_TP ~
                              s(ddate, bs = "tp", k = 18) +
                              s(yday, k = 6, bs = "cc") +
                              s(log1p_Flow, k = 6, bs = "tp", m = 1) +
@@ -313,47 +313,47 @@ list(
                            data = model_data |> filter(site_no == "usgs08164390"),
                            family = Gamma(link = "log"))
   ),
-  
+
   #### CV TP ----
   tar_target(
     cv_tp_08164390, {
-      
+
       df <- model_data |>
         filter(site_no == "usgs08164390") |>
         filter(!is.na(TP))
-      
+
       cross_validate(model = tp_08164390,
                      data = df,
                      constituent = TP_flux)}
   ),
 
-  
+
   # for the lake outlet we model the concentration at the outlet as a function
   # of the total inflow, time, and related antecedent flow conditions.
   # total load is estimate as lake discharge x concentration.
-  
-  # note the family for no3 model is quasi with log link to better fit residuals
-  
+
+  # note the family is gaussian with log link to better fit residuals
+
   ## goodness of fit metrics are evaluated by load for consistency with other models.
-  
-  
+
+
   ## below lk texana ----
-  
+
   ### NO3 ----
   tar_target(
     no3_texana, gam_b_texana(
       formula = trans_NO3 ~
-        s(ddate, bs = "tp", m = 1) +
+        s(ddate, k = 15, bs = "tp", m = 1) +
         s(yday, k = 10, bs = "cc") +
         s(log1p_inflow, k = 5, bs = "tp", m = 1) +
-        s(log1p_Flow, k = 5, bs = "tp", m = 1) +
+        s(log1p_Flow, k = 10, bs = "tp", m = 1) +
         s(stfa, k = 5, bs = "tp", m = 1) +
         s(ma, k = 6, bs = "tp", m = 1),
       data = model_data,
       family = gaussian(link = "log")
     )
   ),
-  
+
   ### CV NO3----
   tar_target(
     cv_no3_texana, {
@@ -364,7 +364,7 @@ list(
       cross_validate(model = no3_texana,
                      data = df,
                      constituent = NO3_flux,
-                     lake = TRUE)}
+                     strata = log1p_Flow)}
   ),
 
   ### TP -----
@@ -392,7 +392,7 @@ list(
       cross_validate(model = tp_texana,
                      data = df,
                      constituent = TP_flux,
-                     lake = TRUE)}
+                     strata = log1p_Flow)}
   ),
 
   ## print model outputs and appraisal ----
@@ -562,7 +562,7 @@ list(
                output_lower = NO3_Lower #unquoted
              )),
 
-  ## flow-normalized NO3 
+  ## flow-normalized NO3
   tar_target(daily_no3_08164000_fn,
              predict_daily(
                model = no3_08164000, # target
@@ -598,7 +598,7 @@ list(
                output_lower = TP_Lower, #unquoted
                fn_data = TRUE
              )),
-  
+
   ### NO3 Lake Texana
   tar_target(daily_no3_texana,
              predict_daily_lk(model = no3_texana, # target
@@ -622,30 +622,30 @@ list(
                output_lower = NO3_Lower, #unquoted
                fn_data  = TRUE
              )),
-
-
-  tar_target(daily_tp_texana,
-             predict_daily_lk(model = tp_texana, # target
-                              data = model_data, # target
-                              site_no = "lktexana_g", # quoted string
-                              date = "2000-01-01", # quoted string
-                              output_name = TP_Estimate, #unquoted
-                              output_upper = TP_Upper, #unquoted
-                              output_lower = TP_Lower #unquoted
-             )),
-  tar_target(daily_tp_texana_fn,
-             predict_daily_lk(model = tp_texana, # target
-                              data = flow_normalized_lk_data, # target
-                              site_no = "lktexana_g", # quoted string
-                              date = "2000-01-01", # quoted string
-                              output_name = TP_Estimate, #unquoted
-                              output_upper = TP_Upper, #unquoted
-                              output_lower = TP_Lower, #unquoted
-                              fn_data = TRUE
-             ))
-  ,
+  # 
+  # 
+  # tar_target(daily_tp_texana,
+  #            predict_daily_lk(model = tp_texana, # target
+  #                             data = model_data, # target
+  #                             site_no = "lktexana_g", # quoted string
+  #                             date = "2000-01-01", # quoted string
+  #                             output_name = TP_Estimate, #unquoted
+  #                             output_upper = TP_Upper, #unquoted
+  #                             output_lower = TP_Lower #unquoted
+  #            )),
+  # tar_target(daily_tp_texana_fn,
+  #            predict_daily_lk(model = tp_texana, # target
+  #                             data = flow_normalized_lk_data, # target
+  #                             site_no = "lktexana_g", # quoted string
+  #                             date = "2000-01-01", # quoted string
+  #                             output_name = TP_Estimate, #unquoted
+  #                             output_upper = TP_Upper, #unquoted
+  #                             output_lower = TP_Lower, #unquoted
+  #                             fn_data = TRUE
+  #            ))
+  # ,
   # loading estimates pdf
   tar_quarto(loading_estimates, "reports/load_estimates/load_estimates.qmd")
-  # 
+  #
   
 )

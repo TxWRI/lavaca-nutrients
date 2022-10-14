@@ -1,13 +1,14 @@
 cross_validate <- function(model,
                            data,
                            constituent,
-                           lake = FALSE) {
+                           strata = Flow) {
   
   formula <- model$formula
   family <- model$family
   
   # create splits via leave one out cv
-  data <- vfold_cv(data, v = 5, repeats = 10, strata = log1p_Flow, pool = 0.50)
+  set.seed(seed = 1972) 
+  data <- vfold_cv(data, v = 5, repeats = 10, strata = {{ strata }}, pool = 0.50)
   
   out <- data |>
     # mutate from tidymodels splits to dataframes
@@ -29,8 +30,9 @@ cross_validate <- function(model,
     dplyr::group_by(id) |>
     tidyr::unnest(c(assessment,preds)) 
   
-  if(lake == TRUE) {
-    out <- out |> 
+  
+  # convert c to flux
+  out <- out |>
       mutate(preds = as_units(preds, "mg/L"),
              Flow = as_units(Flow, "ft^3/s"),
              Flow = set_units(Flow, "L/s"),
@@ -39,14 +41,13 @@ cross_validate <- function(model,
              Flow = set_units(Flow, "ft^3/s"),
              Flow = drop_units(Flow),
              preds = drop_units(preds))
-  }
-  
-    out <- out |> 
+
+    out <- out |>
       dplyr::select(id, {{ constituent }}, preds) |>
       tidyr::nest(data = c( {{ constituent }}, preds)) |>
       dplyr::mutate(
         kge = map(data,
-                ~KGE(sim = (as.numeric(pull(.x, preds))),
+                ~NSE(sim = (as.numeric(pull(.x, preds))),
                      obs = as.numeric(pull(.x, {{constituent}}))
                      )),
         r2 = map(data,

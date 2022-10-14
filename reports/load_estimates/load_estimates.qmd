@@ -91,6 +91,7 @@ a <- ggplot() +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
                limits = c(as.Date("2005-01-01"), as.Date("2020-12-31")),
                expand = c(0.025, 0.025)) +
+  scale_y_continuous(labels = scales::comma) +
   labs(x = "", y = "Predicted Monthly NO<sub>3</sub>-N Load [kg]") +
   theme_TWRI_print() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
@@ -126,7 +127,8 @@ b <- ggplot() +
                      values = c("#7E1900", "#1A3399")) +
   scale_linetype_manual(name = "values",
                         values = c(1, 2)) +
-  coord_cartesian(ylim = c(0, 60000)) +
+  scale_y_continuous(labels = scales::comma) +
+  coord_cartesian(ylim = c(0, 500000)) +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
         panel.grid.major.x = element_line(color = "#d9d9d9",
@@ -162,6 +164,7 @@ a <- ggplot() +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
                limits = c(as.Date("2000-01-01"), as.Date("2020-12-31")),
                expand = c(0.025, 0.025)) +
+  scale_y_continuous(labels = scales::comma) +
   labs(x = "", y = "Predicted Monthly TP Load [kg]") +
   theme_TWRI_print() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
@@ -195,7 +198,8 @@ b <- ggplot() +
                      values = c("#7E1900", "#1A3399")) +
   scale_linetype_manual(name = "values",
                         values = c(1, 2)) +
-  coord_cartesian(ylim = c(0, 60000)) +
+  scale_y_continuous(labels = scales::comma) +
+  coord_cartesian(ylim = c(0, 500000)) +
   theme_TWRI_print() +
   theme(axis.title.y = element_markdown(),
         panel.grid.major.x = element_line(color = "#d9d9d9",
@@ -205,6 +209,7 @@ b <- ggplot() +
 (a / b) + plot_annotation(tag_levels = "a")
 ```
 
+\clearpage
 
 ## Navidad River at Palmetto Bend Dam, Lake Texana
 
@@ -219,7 +224,7 @@ b <- ggplot() +
 load <- tar_read(daily_no3_texana)
 fn_load <- tar_read(daily_no3_texana_fn)
 
-montly_load <- load$monthly |> 
+montly_load <- load$monthly |>
   mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d"))
 
 a <- ggplot() +
@@ -290,7 +295,7 @@ b <- ggplot() +
 load <- tar_read(daily_tp_texana)
 fn_load <- tar_read(daily_tp_texana_fn)
 
-montly_load <- load$monthly |> 
+montly_load <- load$monthly |>
   mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d"))
 
 a <- ggplot() +
@@ -303,6 +308,7 @@ a <- ggplot() +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y-%m",
                limits = c(as.Date("2000-01-01"), as.Date("2020-12-31")),
                expand = c(0.025, 0.025)) +
+  scale_y_continuous(labels = scales::comma) +
   labs(x = "", y = "Predicted Monthly TP Load [kg]") +
   theme_TWRI_print() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
