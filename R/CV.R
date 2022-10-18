@@ -46,7 +46,7 @@ cross_validate <- function(model,
       dplyr::select(id, {{ constituent }}, preds) |>
       tidyr::nest(data = c( {{ constituent }}, preds)) |>
       dplyr::mutate(
-        kge = map(data,
+        NSE = map(data,
                 ~NSE(sim = (as.numeric(pull(.x, preds))),
                      obs = as.numeric(pull(.x, {{constituent}}))
                      )),
@@ -62,6 +62,6 @@ cross_validate <- function(model,
                          obs = as.numeric(pull(.x, {{constituent}}))
                          ))
       ) |>
-      unnest(c(kge, r2, pbias))
+      unnest(c(NSE, r2, pbias))
     out
   }

@@ -337,9 +337,6 @@
       margin-right: 0; 
     }
   </style>
-  
-  <script src="Schramm-Lavaca-Bay_AWRA2022_files/libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="Schramm-Lavaca-Bay_AWRA2022_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -505,134 +502,25 @@ Michael Schramm
 <li>Flow-normalized estimates calculated similar to WRTDS, assume daily flow variables are random occurrence from all possible values on that day of year.</li>
 </ul>
 </section>
-<section id="results" class="slide level2">
+<section id="results" class="slide level2 smaller">
 <h2>Results</h2>
-<h3 id="no3-n-load-gam-at-lavaca-river">NO<sub>3</sub>-N Load GAM at Lavaca River</h3>
-
-<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-1-1.png" width="768" class="r-stretch quarto-figure-center"><p class="caption">Comparisons of (a) in-sample and out-of-sample mean daily discharge and (b) predicted daily fluxes (for both sampled and non-sampled days) and measured daily fluxes.</p></section>
-<section id="results-1" class="slide level2 smaller">
-<h2>Results</h2>
-<h3 id="no3-n-gam-at-lavaca-river">NO<sub>3</sub>-N GAM at Lavaca River</h3>
-<div style="font-size: .75em; text-align: center">
-<div class="cell">
-<div class="cell-output-display">
-
-<table>
-<caption></caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Component </th>
-   <th style="text-align:left;"> Term </th>
-   <th style="text-align:left;"> Estimate </th>
-   <th style="text-align:left;"> Std.Error </th>
-   <th style="text-align:left;"> t-value </th>
-   <th style="text-align:left;"> edf </th>
-   <th style="text-align:right;"> ref.df </th>
-   <th style="text-align:left;"> F-value </th>
-   <th style="text-align:left;"> p-value<sup>1</sup> </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> A. parametric coefficients </td>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:left;"> -2.349 </td>
-   <td style="text-align:left;"> 0.150 </td>
-   <td style="text-align:left;"> -15.679 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:right;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 0.000 *** </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B. smooth terms </td>
-   <td style="text-align:left;"> s(ddate) </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 6.475 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:left;"> 2.494 </td>
-   <td style="text-align:left;"> 0.000 *** </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B. smooth terms </td>
-   <td style="text-align:left;"> s(yday) </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 2.234 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;"> 2.601 </td>
-   <td style="text-align:left;"> 0.000 *** </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B. smooth terms </td>
-   <td style="text-align:left;"> s(log1p(Flow)) </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 6.256 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:left;"> 5.079 </td>
-   <td style="text-align:left;"> 0.000 *** </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B. smooth terms </td>
-   <td style="text-align:left;"> s(ma) </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 1.851 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:left;"> 0.764 </td>
-   <td style="text-align:left;"> 0.017 * </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B. smooth terms </td>
-   <td style="text-align:left;"> s(stfa) </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 4.630 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:left;"> 10.577 </td>
-   <td style="text-align:left;"> 0.000 *** </td>
-  </tr>
-</tbody>
-<tfoot>
-<tr>
-<td style="padding: 0; border:0;" colspan="100%"><sup></sup> -REML : -31.859, Scale est: 0.00988, N: 74</td>
-</tr>
-</tfoot>
-<tfoot>
-<tr>
-<td style="padding: 0; border:0;" colspan="100%"><sup></sup> Adjusted R-squared: 0.831, Deviance explained 0.881</td>
-</tr>
-</tfoot>
-<tfoot>
-<tr>
-<td style="padding: 0; border:0;" colspan="100%"><sup>1</sup> Signif. codes: 0 &lt;= '***' &lt; 0.001 &lt; '**' &lt; 0.01 &lt; '*' &lt; 0.05 &lt; '+' &lt; 0.1</td>
-</tr>
-</tfoot>
-</table>
-
-</div>
-</div>
-</div>
+<h3 id="lavaca-river-cross-validation">Lavaca River Cross-Validation</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>NO<sub>3</sub>-N</strong></p>
 <div class="cell">
 <div class="cell-output-display">
 
 <table>
  <thead>
   <tr>
-   <th style="text-align:left;"> Goodness of Fit Metric </th>
+   <th style="text-align:left;"> Metric </th>
    <th style="text-align:center;"> Median (IQR) </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> KGE </td>
+   <td style="text-align:left;"> NSE </td>
    <td style="text-align:center;"> 0.63 (0.55, 0.72) </td>
   </tr>
   <tr>
@@ -648,128 +536,45 @@ Michael Schramm
 
 </div>
 </div>
-</section>
-<section id="results-2" class="slide level2 smaller">
-<h2>Results</h2>
-<h3 id="tp-gam-navidad-riverpalmetto-bend-dam">TP GAM Navidad River/Palmetto Bend Dam</h3>
-<div style="font-size: .75em; text-align: center">
+</div><div class="column" style="width:50%;">
+<p><strong>TP</strong></p>
 <div class="cell">
 <div class="cell-output-display">
 
 <table>
-<caption></caption>
  <thead>
   <tr>
-   <th style="text-align:left;"> Component </th>
-   <th style="text-align:left;"> Term </th>
-   <th style="text-align:left;"> Estimate </th>
-   <th style="text-align:left;"> Std.Error </th>
-   <th style="text-align:left;"> t-value </th>
-   <th style="text-align:left;"> edf </th>
-   <th style="text-align:right;"> ref.df </th>
-   <th style="text-align:left;"> F-value </th>
-   <th style="text-align:left;"> p-value<sup>1</sup> </th>
+   <th style="text-align:left;"> Metric </th>
+   <th style="text-align:center;"> Median (IQR) </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> A. parametric coefficients </td>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:left;"> -1.624 </td>
-   <td style="text-align:left;"> 0.037 </td>
-   <td style="text-align:left;"> -44.377 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:right;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 0.000 *** </td>
+   <td style="text-align:left;"> NGE </td>
+   <td style="text-align:center;"> 0.77 (0.71, 0.81) </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> B. smooth terms </td>
-   <td style="text-align:left;"> s(ddate) </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 3.214 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;"> 1.862 </td>
-   <td style="text-align:left;"> 0.001 *** </td>
+   <td style="text-align:left;"> R<sup>2</sup> </td>
+   <td style="text-align:center;"> 0.77 (0.72, 0.82) </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> B. smooth terms </td>
-   <td style="text-align:left;"> s(yday) </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 1.309 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;"> 0.374 </td>
-   <td style="text-align:left;"> 0.088 + </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B. smooth terms </td>
-   <td style="text-align:left;"> s(log1p(Inflow)) </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 0.003 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:left;"> 0.000 </td>
-   <td style="text-align:left;"> 0.360 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B. smooth terms </td>
-   <td style="text-align:left;"> s(log1p(Flow)) </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 1.104 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:left;"> 0.561 </td>
-   <td style="text-align:left;"> 0.098 + </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B. smooth terms </td>
-   <td style="text-align:left;"> s(stfa) </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 0.000 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:left;"> 0.000 </td>
-   <td style="text-align:left;"> 0.470 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B. smooth terms </td>
-   <td style="text-align:left;"> s(ma) </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 2.262 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:left;"> 1.669 </td>
-   <td style="text-align:left;"> 0.006 ** </td>
+   <td style="text-align:left;"> Percent Bias </td>
+   <td style="text-align:center;"> -7.45 (-9.10, -6.35) </td>
   </tr>
 </tbody>
-<tfoot>
-<tr>
-<td style="padding: 0; border:0;" colspan="100%"><sup></sup> -REML :  -99.963, Scale est: 0.00403, N: 81</td>
-</tr>
-</tfoot>
-<tfoot>
-<tr>
-<td style="padding: 0; border:0;" colspan="100%"><sup></sup> Adjusted R-squared: 0.321, Deviance explained 0.388</td>
-</tr>
-</tfoot>
-<tfoot>
-<tr>
-<td style="padding: 0; border:0;" colspan="100%"><sup>1</sup> Signif. codes: 0 &lt;= '***' &lt; 0.001 &lt; '**' &lt; 0.01 &lt; '*' &lt; 0.05 &lt; '+' &lt; 0.1</td>
-</tr>
-</tfoot>
 </table>
 
 </div>
 </div>
 </div>
+</div>
+</section>
+<section id="results-1" class="slide level2 smaller">
+<h2>Results</h2>
+<h3 id="navidad-riverpalmetto-bend-dam-cross-validation">Navidad River/Palmetto Bend Dam Cross-Validation</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>NO<sub>3</sub>-N</strong></p>
 <div class="cell">
 <div class="cell-output-display">
 
@@ -782,7 +587,37 @@ Michael Schramm
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> KGE </td>
+   <td style="text-align:left;"> NSE </td>
+   <td style="text-align:center;"> 0.47 (0.33, 0.59) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R<sup>2</sup> </td>
+   <td style="text-align:center;"> 0.77 (0.66, 0.90) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Percent Bias </td>
+   <td style="text-align:center;"> -45 (-55, -38) </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>**TP*</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Goodness of Fit Metric </th>
+   <th style="text-align:center;"> Median (IQR) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> NSE </td>
    <td style="text-align:center;"> 0.877 (0.862, 0.911) </td>
   </tr>
   <tr>
@@ -798,26 +633,28 @@ Michael Schramm
 
 </div>
 </div>
+</div>
+</div>
 </section>
 <section id="total-loads" class="slide level2">
 <h2>Total Loads</h2>
 
-<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" class="r-stretch quarto-figure-center"><p class="caption">Aggregated (a) monthly and (b) annual NO<sub>3</sub>-N loads at Lavaca River at Edna, USGS-08164000.</p></section>
+<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" class="r-stretch quarto-figure-center"><p class="caption">Aggregated (a) monthly and (b) annual NO<sub>3</sub>-N loads at Lavaca River at Edna, USGS-08164000.</p></section>
 <section id="regional-study-comparison" class="slide level2">
 <h2>Regional Study Comparison</h2>
 <div style="font-size: .85em; text-align: center">
 <table>
 <colgroup>
-<col style="width: 18%">
-<col style="width: 28%">
-<col style="width: 11%">
-<col style="width: 22%">
-<col style="width: 18%">
+<col style="width: 17%">
+<col style="width: 27%">
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 17%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Parameter</th>
-<th>Estimated Yield</th>
+<th>Estimated Yield (kg/km<sup>2</sup>/yr)</th>
 <th>Approach</th>
 <th>Time Period</th>
 <th>Reference</th>
@@ -826,42 +663,42 @@ Michael Schramm
 <tbody>
 <tr class="odd">
 <td>TP</td>
-<td>14.1 kg/km<sup>2</sup>/yr</td>
+<td>42.9 (34.4, 54.0)</td>
 <td>GAM</td>
 <td>2000-2020</td>
 <td>-</td>
 </tr>
 <tr class="even">
 <td>TP</td>
-<td>18 kg/km<sup>2</sup>/yr</td>
+<td>18</td>
 <td>SPARROW</td>
 <td>2002</td>
 <td><span class="citation" data-cites="rebichSourcesDeliveryNutrients2011">Rebich et al. (<a href="#/references" role="doc-biblioref" onclick="">2011</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>TP</td>
-<td>45.2 kg/km<sup>2</sup>/yr</td>
+<td>45.2</td>
 <td>SPARROW</td>
 <td>2012</td>
 <td><span class="citation" data-cites="wiseSpatiallyReferencedModels2019">Wise et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span></td>
 </tr>
 <tr class="even">
 <td>TP</td>
-<td>42 kg/km<sup>2</sup>/yr</td>
+<td>42</td>
 <td>SWAT</td>
 <td>1977-2005</td>
 <td><span class="citation" data-cites="omaniEstimationSedimentNutrient2014">Omani et al. (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>TP</td>
-<td>28.9 kg/km<sup>2</sup>/yr</td>
+<td>28.9</td>
 <td>LOADEST</td>
 <td>1972-1993</td>
 <td><span class="citation" data-cites="dunnTrendsNutrientInflows1996">Dunn (<a href="#/references" role="doc-biblioref" onclick="">1996</a>)</span></td>
 </tr>
 <tr class="even">
 <td>TP</td>
-<td>6.2 kg/km<sup>2</sup>/yr</td>
+<td>6.2</td>
 <td>NA</td>
 <td>1968-1987</td>
 <td><span class="citation" data-cites="longleyFreshwaterInflowsTexas1994">Longley et al. (<a href="#/references" role="doc-biblioref" onclick="">1994</a>)</span></td>

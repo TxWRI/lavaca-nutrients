@@ -6,6 +6,7 @@ source("R/CV.R")
 source("R/gt_functions.R")
 source("R/FIGURES.R")
 source("R/LOADESTIMATE.R")
+source("R/write_files.R")
 options(tidyverse.quiet = TRUE)
 targets::tar_option_set(packages = c("adc", 
                                      "arrow", 
@@ -343,7 +344,7 @@ list(
   tar_target(
     no3_texana, gam_b_texana(
       formula = trans_NO3 ~
-        s(ddate, k = 15, bs = "tp", m = 1) +
+        s(ddate, k = 10, bs = "tp", m = 1) +
         s(yday, k = 10, bs = "cc") +
         s(log1p_inflow, k = 5, bs = "tp", m = 1) +
         s(log1p_Flow, k = 10, bs = "tp", m = 1) +
@@ -622,28 +623,38 @@ list(
                output_lower = NO3_Lower, #unquoted
                fn_data  = TRUE
              )),
-  # 
-  # 
-  # tar_target(daily_tp_texana,
-  #            predict_daily_lk(model = tp_texana, # target
-  #                             data = model_data, # target
-  #                             site_no = "lktexana_g", # quoted string
-  #                             date = "2000-01-01", # quoted string
-  #                             output_name = TP_Estimate, #unquoted
-  #                             output_upper = TP_Upper, #unquoted
-  #                             output_lower = TP_Lower #unquoted
-  #            )),
-  # tar_target(daily_tp_texana_fn,
-  #            predict_daily_lk(model = tp_texana, # target
-  #                             data = flow_normalized_lk_data, # target
-  #                             site_no = "lktexana_g", # quoted string
-  #                             date = "2000-01-01", # quoted string
-  #                             output_name = TP_Estimate, #unquoted
-  #                             output_upper = TP_Upper, #unquoted
-  #                             output_lower = TP_Lower, #unquoted
-  #                             fn_data = TRUE
-  #            ))
-  # ,
+
+
+  tar_target(daily_tp_texana,
+             predict_daily_lk(model = tp_texana, # target
+                              data = model_data, # target
+                              site_no = "lktexana_g", # quoted string
+                              date = "2000-01-01", # quoted string
+                              output_name = TP_Estimate, #unquoted
+                              output_upper = TP_Upper, #unquoted
+                              output_lower = TP_Lower #unquoted
+             )),
+  tar_target(daily_tp_texana_fn,
+             predict_daily_lk(model = tp_texana, # target
+                              data = flow_normalized_lk_data, # target
+                              site_no = "lktexana_g", # quoted string
+                              date = "2000-01-01", # quoted string
+                              output_name = TP_Estimate, #unquoted
+                              output_upper = TP_Upper, #unquoted
+                              output_lower = TP_Lower, #unquoted
+                              fn_data = TRUE
+             ))
+  ,
+  
+  
+  # create loading output file (csv)
+  tar_target(write_daily, 
+             loads_to_csv(list("lav" = tar_read(daily_tp_08164000), 
+                               "tex" = tar_read(daily_tp_texana)),
+                          df = "daily",
+                          output = "data/Output/daily_loads/tp_daily_loads.csv"),
+             format = "file"),
+  
   # loading estimates pdf
   tar_quarto(loading_estimates, "reports/load_estimates/load_estimates.qmd")
   #

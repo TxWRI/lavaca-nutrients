@@ -1,16 +1,4 @@
 
-## simulate posterior distribution of the fitted GAM to obtain 95% pointwise 
-## confidence intervals
-
-sim_posterior <- function(model, nsim, newdata) {
-  sims <- gratia:::simulate.gam(model, nsim = nsim, newdata = newdata, seed = 1972)
-  colnames(sims) <- paste0("sim", seq_len(nsim))
-  sims <- setNames(stack(as.data.frame(sims)), c("simulated", "run"))
-  sims <- transform(sims, Date = rep(newdata$Date, nsim), simulated = simulated) %>%
-    as_tibble()
-  return(sims)
-  
-}
 
 predict_daily <- function(model, # target
                           data, # target
@@ -133,14 +121,14 @@ predict_daily <- function(model, # target
   monthly <- daily |> 
     mutate(month = floor_date(Date, "month")) |> 
     mutate(month = as.character(month, format = "%Y-%m")) |> 
-    group_by(month) |> 
+    group_by(month, site_no) |> 
     summarise({{output_name}} := sum({{output_name}}, na.rm = TRUE),
               {{output_upper}} := sum({{output_upper}}, na.rm = TRUE),
               {{output_lower}} := sum({{output_lower}}, na.rm = TRUE))
   
   ## sum to year
   annually <- daily |> 
-    group_by(year = year(Date)) |> 
+    group_by(year = year(Date), site_no) |> 
     summarise({{output_name}} := sum({{output_name}}, na.rm = TRUE),
               {{output_upper}} := sum({{output_upper}}, na.rm = TRUE),
               {{output_lower}} := sum({{output_lower}}, na.rm = TRUE))
@@ -293,14 +281,15 @@ predict_daily_lk <- function(model, # target
   monthly <- daily |> 
     mutate(month = floor_date(Date, "month")) |> 
     mutate(month = as.character(month, format = "%Y-%m")) |> 
-    group_by(month) |> 
+    group_by(month, site_no) |> 
     summarise({{output_name}} := sum({{output_name}}, na.rm = TRUE),
               {{output_upper}} := sum({{output_upper}}, na.rm = TRUE),
               {{output_lower}} := sum({{output_lower}}, na.rm = TRUE))
   
   ## sum to year
   annually <- daily |> 
-    group_by(year = year(Date)) |> 
+    group_by(year = year(Date),
+             site_no) |> 
     summarise({{output_name}} := sum({{output_name}}, na.rm = TRUE),
               {{output_upper}} := sum({{output_upper}}, na.rm = TRUE),
               {{output_lower}} := sum({{output_lower}}, na.rm = TRUE))

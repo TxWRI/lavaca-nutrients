@@ -69,7 +69,7 @@ Thin plate regression splines were used for $ddate$, $log1p(Q)$, $ltfa$, and $ma
 
 Left-censored nutrient concentrations were not uncommon in this dataset. Several methods are available to account for censored data. We decided to transform left-censored data to one-half the detection limit based on the fact that higher concentrations and loadings are typically associated with high-flow events and low-flow/low-concentration events will account for a small proportion of total loadings [@mcdowellImplicationsLagTimes2021]. The "cenGAM" package in R provides the Tobit I family to accommodate censored data using the "gam" function in R. Censored Gamma models can be fit using a Bayesian framework with the "brms" package in R. Initial exploration using "cenGAM" and "brms" packages resulted in models that overestimated nutrient concentrations relative to "mgcv" [@bergbuschUnexpectedShiftPhytoplankton2021]. All models were fit using the Gamma family and log link function.
 
-Hold-out data is often used to validate predictive ability of a model. Given the small-sample size, we used all the available data to fit models at each site and implemented repeated 5-fold cross validation to assess model performance. Cross-validation predictions were assessed using King-Glupta Efficiency (KGE), R^2^, and Percent Bias across all folds.
+Hold-out data is often used to validate predictive ability of a model. Given the small-sample size, we used all the available data to fit models at each site and implemented repeated 5-fold cross validation to assess model performance. Cross-validation predictions were assessed using Nash-Sutcliffe Efficiency (NSE), R^2^, and Percent Bias across all folds.
 
 # Model Results
 
@@ -117,7 +117,7 @@ A. parametric coefficients & (Intercept) & -2.349 & 0.150 & -15.679 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** | **Median (IQR)**  |
 |:--------------------------|:-----------------:|
-|KGE                        | 0.63 (0.55, 0.72) |
+|NSE                        | 0.63 (0.55, 0.72) |
 |R^2^                       | 0.72 (0.68, 0.80) |
 |Percent Bias               |    9 (-8, 12)     |
 :::
@@ -196,7 +196,7 @@ A. parametric coefficients & (Intercept) & -1.611 & 0.045 & -35.811 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** |   **Median (IQR)**   |
 |:--------------------------|:--------------------:|
-|KGE                        |  0.77 (0.71, 0.81)   |
+|NSE                        |  0.77 (0.71, 0.81)   |
 |R^2^                       |  0.77 (0.72, 0.82)   |
 |Percent Bias               | -7.45 (-9.10, -6.35) |
 :::
@@ -276,7 +276,7 @@ A. parametric coefficients & (Intercept) & -2.010 & 0.100 & -20.154 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** |   **Median (IQR)**   |
 |:--------------------------|:--------------------:|
-|KGE                        |  0.60 (0.58, 0.65)   |
+|NSE                        |  0.60 (0.58, 0.65)   |
 |R^2^                       |  0.71 (0.65, 0.77)   |
 |Percent Bias               | -18.4 (-21.4, -16.5) |
 :::
@@ -352,7 +352,7 @@ A. parametric coefficients & (Intercept) & -1.597 & 0.038 & -42.298 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** |   **Median (IQR)**    |
 |:--------------------------|:---------------------:|
-|KGE                        | 0.951 (0.944, 0.960)  |
+|NSE                        | 0.951 (0.944, 0.960)  |
 |R^2^                       | 0.982 (0.973, 0.984)  |
 |Percent Bias               | -9.10 (-10.10, -8.27) |
 :::
@@ -431,7 +431,7 @@ A. parametric coefficients & (Intercept) & -1.942 & 0.081 & -24.046 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** | **Median (IQR)**  |
 |:--------------------------|:-----------------:|
-|KGE                        | 0.47 (0.34, 0.50) |
+|NSE                        | 0.47 (0.34, 0.50) |
 |R^2^                       | 0.49 (0.38, 0.57) |
 |Percent Bias               |   -15 (-20, -8)   |
 :::
@@ -507,7 +507,7 @@ A. parametric coefficients & (Intercept) & -1.729 & 0.067 & -25.973 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** | **Median (IQR)**  |
 |:--------------------------|:-----------------:|
-|KGE                        | 0.78 (0.56, 0.81) |
+|NSE                        | 0.78 (0.56, 0.81) |
 |R^2^                       | 0.81 (0.67, 0.86) |
 |Percent Bias               |    -6 (-9, -3)    |
 :::
@@ -586,7 +586,7 @@ A. parametric coefficients & (Intercept) & -0.481 & 0.159 & -3.029 &  &  &  & 0.
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** | **Median (IQR)**  |
 |:--------------------------|:-----------------:|
-|KGE                        | 0.37 (0.26, 0.41) |
+|NSE                        | 0.37 (0.26, 0.41) |
 |R^2^                       | 0.54 (0.48, 0.57) |
 |Percent Bias               |  -47 (-54, -44)   |
 :::
@@ -663,7 +663,7 @@ A. parametric coefficients & (Intercept) & -1.001 & 0.081 & -12.331 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** |   **Median (IQR)**   |
 |:--------------------------|:--------------------:|
-|KGE                        | 0.851 (0.812, 0.855) |
+|NSE                        | 0.851 (0.812, 0.855) |
 |R^2^                       | 0.854 (0.839, 0.859) |
 |Percent Bias               |  -9.2 (-12.7, -7.5)  |
 :::
@@ -742,7 +742,7 @@ A. parametric coefficients & (Intercept) & -1.217 & 0.085 & -14.372 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** | **Median (IQR)**  |
 |:--------------------------|:-----------------:|
-|KGE                        | 0.51 (0.32, 0.69) |
+|NSE                        | 0.51 (0.32, 0.69) |
 |R^2^                       | 0.55 (0.44, 0.70) |
 |Percent Bias               |  -17 (-22, -11)   |
 :::
@@ -819,7 +819,7 @@ A. parametric coefficients & (Intercept) & -1.150 & 0.063 & -18.148 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** |   **Median (IQR)**   |
 |:--------------------------|:--------------------:|
-|KGE                        | 0.864 (0.838, 0.882) |
+|NSE                        | 0.864 (0.838, 0.882) |
 |R^2^                       | 0.890 (0.887, 0.896) |
 |Percent Bias               | -6.50 (-9.12, -4.70) |
 :::
@@ -875,23 +875,23 @@ A. parametric coefficients & (Intercept) & -1.150 & 0.063 & -18.148 &  &  &  & 0
 \toprule
 Component & Term & Estimate & Std.Error & t-value & edf & ref.df & F-value & p-value\textsuperscript{1}\\
 \midrule
-A. parametric coefficients & (Intercept) & -1.456 & 0.078 & -18.664 &  &  &  & 0.000 ***\\
+A. parametric coefficients & (Intercept) & -1.384 & 0.113 & -12.212 &  &  &  & 0.000 ***\\
 \cmidrule{1-9}
- & s(ddate) &  &  &  & 11.783 & 14 & 3.702 & 0.000 ***\\
+ & s(ddate) &  &  &  & 0.000 & 9 & 0.000 & 0.601\\
 
- & s(yday) &  &  &  & 2.924 & 8 & 6.812 & 0.000 ***\\
+ & s(yday) &  &  &  & 2.523 & 8 & 3.871 & 0.000 ***\\
 
- & s(log1p(Inflow)) &  &  &  & 0.000 & 4 & 0.000 & 0.353\\
+ & s(log1p(Inflow)) &  &  &  & 0.000 & 4 & 0.000 & 0.714\\
 
- & s(log1p(Flow)) &  &  &  & 2.804 & 9 & 1.303 & 0.002 **\\
+ & s(log1p(Flow)) &  &  &  & 0.000 & 9 & 0.000 & 0.510\\
 
- & s(stfa) &  &  &  & 1.154 & 4 & 0.619 & 0.070 +\\
+ & s(stfa) &  &  &  & 0.002 & 4 & 0.000 & 0.431\\
 
-\multirow[t]{-6}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 3.478 & 5 & 2.980 & 0.001 **\\
+\multirow[t]{-6}{*}{\raggedright\arraybackslash B. smooth terms} & s(ma) &  &  &  & 2.884 & 5 & 2.769 & 0.002 **\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{1} Signif. codes: 0 <= '***' < 0.001 < '**' < 0.01 < '*' < 0.05 < '+' < 0.1}\\
-\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.811, Deviance explained 0.878}\\
-\multicolumn{9}{l}{\textsuperscript{} -REML : -11.573, Scale est: 0.0128, N: 62}\\
+\multicolumn{9}{l}{\textsuperscript{} Adjusted R-squared: 0.466, Deviance explained 0.513}\\
+\multicolumn{9}{l}{\textsuperscript{} -REML : -8.419, Scale est: 0.0355, N: 62}\\
 \end{tabular}
 \end{widestuff}
 :::
@@ -901,9 +901,9 @@ A. parametric coefficients & (Intercept) & -1.456 & 0.078 & -18.664 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** | **Median (IQR)**  |
 |:--------------------------|:-----------------:|
-|KGE                        | 0.49 (0.31, 0.66) |
-|R^2^                       | 0.79 (0.69, 0.89) |
-|Percent Bias               |  -43 (-57, -32)   |
+|NSE                        | 0.47 (0.33, 0.59) |
+|R^2^                       | 0.77 (0.66, 0.90) |
+|Percent Bias               |  -45 (-55, -38)   |
 :::
 :::
 
@@ -979,7 +979,7 @@ A. parametric coefficients & (Intercept) & -1.624 & 0.037 & -44.377 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** |   **Median (IQR)**   |
 |:--------------------------|:--------------------:|
-|KGE                        | 0.877 (0.862, 0.911) |
+|NSE                        | 0.877 (0.862, 0.911) |
 |R^2^                       | 0.961 (0.956, 0.975) |
 |Percent Bias               | -17.6 (-21.1, -12.7) |
 :::
