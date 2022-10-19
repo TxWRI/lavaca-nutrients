@@ -6,7 +6,7 @@ institute: "Texas Water Resources Institute, Texas A&M AgriLife Research"
 date: "2022-11-08"
 format: revealjs
 bibliography: reference.yml
-csl: https://raw.githubusercontent.com/TxWRI/csl/main/twri-technical-report.csl
+csl: https://www.zotero.org/styles/chicago-author-date?source=1
 #navigation
 progress: true
 slide-number: true
@@ -144,6 +144,12 @@ source("../../_targets_packages.R")
 
  
 ::::
+
+
+## Lavaca Bay Watersheds
+
+![](images/lb_simple.png)
+
  
 # Questions
  
@@ -151,6 +157,7 @@ source("../../_targets_packages.R")
  - Are there trends?
  - Can we identify correlations in nutrient loading and DO (controlling for discharge)?
  
+
 
 ## Methods
  
@@ -391,7 +398,6 @@ C
 | TP        | 42.9 (34.4, 54.0) | GAM   | 2000-2020   | -         |
 | TP        | 18    | SPARROW | 2002 | @rebichSourcesDeliveryNutrients2011   |
 | TP        | 45.2 | SPARROW | 2012      | @wiseSpatiallyReferencedModels2019 |
-| TP        | 38   | SWAT    |
 | TP        | 42   | SWAT    | 1977-2005 | @omaniEstimationSedimentNutrient2014 |
 | TP        | 28.9 | LOADEST | 1972-1993 | @dunnTrendsNutrientInflows1996 |
 | TP        | 6.2  | NA      | 1968-1987 | @longleyFreshwaterInflowsTexas1994  |
@@ -407,6 +413,8 @@ C
 - Limited NO~2~-N and TKN limit ability to estimate DIN and DON 
  
 ## References
- 
- 
 
+
+ 
+::: {#refs style="font-size: .65em"}
+:::
