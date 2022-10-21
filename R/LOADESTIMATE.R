@@ -10,9 +10,12 @@ predict_daily <- function(model, # target
                           fn_data = FALSE
                           ) {
   
+  # data <- data |>
+  #   filter(site_no == {{site_no}},
+  #          Date >= as.Date(date)) 
+  
   data <- data |>
-    filter(site_no == {{site_no}},
-           Date >= as.Date(date))  
+    filter(site_no == {{site_no}}) 
   
   ## if actual predictions of load
   if (!isTRUE(fn_data)) {
@@ -52,6 +55,7 @@ predict_daily <- function(model, # target
     daily <- out |>
       mutate({{output_upper}} := daily_ci$upper.ci,
              {{output_lower}} := daily_ci$lower.ci) |> 
+      filter(Date >= as.Date(date)) |>
       mutate(Flow = as_units(Flow, "ft^3/s")) |> 
       mutate(Flow = set_units(Flow, "L/s")) |> 
       mutate({{output_name}} := as_units({{output_name}}, "mg/L")) |> 
@@ -96,6 +100,7 @@ predict_daily <- function(model, # target
     ## calculate daily loads
     daily <- out |> 
       ungroup() |> 
+      filter(Date >= as.Date(date)) |>
       mutate(Flow = as_units(Flow, "ft^3/s")) |> 
       mutate(Flow = set_units(Flow, "L/s")) |> 
       mutate({{output_name}} := as_units({{output_name}}, "mg/L"),

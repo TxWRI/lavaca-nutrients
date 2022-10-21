@@ -7,7 +7,7 @@
 <link href="Schramm-Lavaca-Bay_AWRA2022_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Schramm-Lavaca-Bay_AWRA2022_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Schramm-Lavaca-Bay_AWRA2022_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.231">
+  <meta name="generator" content="quarto-1.2.190">
 
   <meta name="author" content="Michael Schramm">
   <title>Statistical Modeling and Trends in Freshwater Derived Nutrient Loads, Lavaca Bay, Texas</title>
@@ -406,20 +406,28 @@ Michael Schramm
 <h2>Primary Watershed Issues</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/lbwpp.png"></p>
-<p></p><figcaption>Lavaca River Watershed Protection Plan for elevated indicator bacteria and depressed dissolved oxygen.</figcaption><p></p>
+<p><img data-src="images/lbwpp.png" style="width:80.0%"></p>
+<p></p><figcaption>Watershed plans and TMDLs for indicator bacteria in FW streams.</figcaption><p></p>
 </figure>
 </div>
-</div><div class="column" style="width:10%;">
+</div>
+</div>
+</div><div class="column" style="width:20%;">
 
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/mercury.png"></p>
+<p><img data-src="images/mercury.png" style="width:80.0%"></p>
 <p></p><figcaption>Persistant mercury contamination at shuttered industrial sites. Image by Kimiko Fieg <span class="citation" data-cites="priestDecadesLaterMercury2018">(<a href="#/references" role="doc-biblioref" onclick="">Priest 2018</a>)</span>.</figcaption><p></p>
 </figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -468,18 +476,21 @@ Michael Schramm
 </ul></li>
 </ul>
 </section>
-<section id="methods-1" class="slide level2">
+<section id="methods-1" class="slide level2 smaller">
 <h2>Methods</h2>
 <p>GAM model:</p>
 <p><span class="math display">\[
-    Y = s(date) + s(day) + s(log1p(Q)) + s(stfa) + s(ma)
+    Y = s(date) + s(day) + s(log1p(Q)) + s(fa) + s(ma)
 \]</span></p>
 <ul>
+<li><span class="math inline">\(Y\)</span> = NO<sub>3</sub> or TP concentration;</li>
+<li><span class="math inline">\(s\)</span> = smoothing function;</li>
 <li><span class="math inline">\(date\)</span> = decimal date;</li>
 <li><span class="math inline">\(day\)</span> = numeric day of year;</li>
 <li><span class="math inline">\(Q\)</span> = mean daily discharge;</li>
-<li><span class="math inline">\(stfa\)</span> = short term flow anomaly <span class="citation" data-cites="vecchiaTrendsConcentrationsUse2009 zhangImprovingRiverineConstituent2017">(<a href="#/references" role="doc-biblioref" onclick="">Vecchia et al. 2009</a>; <a href="#/references" role="doc-biblioref" onclick="">Zhang and Ball 2017</a>)</span>;</li>
+<li><span class="math inline">\(fa\)</span> = short- or long-term flow anomaly (stfa, ltfa) <span class="citation" data-cites="vecchiaTrendsConcentrationsUse2009 zhangImprovingRiverineConstituent2017">(<a href="#/references" role="doc-biblioref" onclick="">Vecchia et al. 2009</a>; <a href="#/references" role="doc-biblioref" onclick="">Zhang and Ball 2017</a>)</span>;</li>
 <li><span class="math inline">\(ma\)</span> = exponential moving average <span class="citation" data-cites="kuhnertQuantifyingTotalSuspended2012 zhangImprovingRiverineConstituent2017">(<a href="#/references" role="doc-biblioref" onclick="">Kuhnert et al. 2012</a>; <a href="#/references" role="doc-biblioref" onclick="">Zhang and Ball 2017</a>)</span>.</li>
+<li>Gamma family with log-link</li>
 </ul>
 <aside class="notes">
 <p>GAMs were fit using mgcv in R. Based on previous experience and literature we chose a Gamma error distribution with a log link function to fit the models.</p>
@@ -501,16 +512,26 @@ Michael Schramm
 <h2>Methods</h2>
 <p>Loading estimates:</p>
 <ul>
-<li>Model predictions of daily load estimates summed to monthly and annual loading.</li>
-<li>95% credible intervals developed from 1000 draws of parameter estimates from the multivariate normal posterior distribution of model parameters provided by mgcv::gam function in R.</li>
-<li>Flow-normalized estimates calculated similar to WRTDS, assume daily flow variables are random occurrence from all possible values on that day of year.</li>
+<li>Prediction of <strong>daily loads</strong> from GAM models at each site
+<ul>
+<li>predicted concentrations <span class="math inline">\(\times\)</span> mean daily streamflow</li>
+<li>aggregated to monthly and annual totals</li>
+</ul></li>
+<li>Report <strong>model uncertainty</strong>
+<ul>
+<li><strong>95% credible intervals</strong> developed from 1000 draws of parameter estimates from the multivariate normal posterior distribution of model parameters provided by mgcv::gam function in R.</li>
+</ul></li>
+<li>Account for variance in mean daily discharge
+<ul>
+<li><strong>Flow-normalized estimates</strong> calculated similar to WRTDS, assume daily flow variables are random occurrence from all possible values on that day of year.</li>
+</ul></li>
 </ul>
 </section>
 <section id="results" class="slide level2 smaller">
 <h2>Results</h2>
-<h3 id="lavaca-river-cross-validation">Lavaca River Cross-Validation</h3>
+<h3 id="lavaca-river">Lavaca River</h3>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="font-size: 1em">
 <p><strong>NO<sub>3</sub>-N</strong></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -525,22 +546,27 @@ Michael Schramm
 <tbody>
   <tr>
    <td style="text-align:left;"> NSE </td>
-   <td style="text-align:center;"> 0.63 (0.55, 0.72) </td>
+   <td style="text-align:center;"> 0.758 (0.714, 0.765) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> R<sup>2</sup> </td>
-   <td style="text-align:center;"> 0.72 (0.68, 0.80) </td>
+   <td style="text-align:center;"> 0.761 (0.728, 0.771) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Percent Bias </td>
-   <td style="text-align:center;"> 9 (-8, 12) </td>
+   <td style="text-align:center;"> -7.80 (-9.02, -4.15) </td>
   </tr>
 </tbody>
 </table>
 
 </div>
 </div>
-</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-4-1.png" width="2400"></p>
+</div>
+</div>
+</div><div class="column" style="font-size: 1em">
 <p><strong>TP</strong></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -554,7 +580,7 @@ Michael Schramm
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> NGE </td>
+   <td style="text-align:left;"> NSE </td>
    <td style="text-align:center;"> 0.77 (0.71, 0.81) </td>
   </tr>
   <tr>
@@ -570,14 +596,19 @@ Michael Schramm
 
 </div>
 </div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-6-1.png" width="2400"></p>
+</div>
+</div>
 </div>
 </div>
 </section>
 <section id="results-1" class="slide level2 smaller">
 <h2>Results</h2>
-<h3 id="navidad-riverpalmetto-bend-dam-cross-validation">Navidad River/Palmetto Bend Dam Cross-Validation</h3>
-<div class="columns">
-<div class="column" style="width:50%;">
+<h3 id="navidad-riverpalmetto-bend-dam">Navidad River/Palmetto Bend Dam</h3>
+<div class="columns" style="font-size: .9em">
+<div class="column">
 <p><strong>NO<sub>3</sub>-N</strong></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -585,29 +616,34 @@ Michael Schramm
 <table>
  <thead>
   <tr>
-   <th style="text-align:left;"> Goodness of Fit Metric </th>
+   <th style="text-align:left;"> Metric </th>
    <th style="text-align:center;"> Median (IQR) </th>
   </tr>
  </thead>
 <tbody>
   <tr>
    <td style="text-align:left;"> NSE </td>
-   <td style="text-align:center;"> 0.47 (0.33, 0.59) </td>
+   <td style="text-align:center;"> 0.42 (0.34, 0.46) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> R<sup>2</sup> </td>
-   <td style="text-align:center;"> 0.77 (0.66, 0.90) </td>
+   <td style="text-align:center;"> 0.60 (0.52, 0.66) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Percent Bias </td>
-   <td style="text-align:center;"> -45 (-55, -38) </td>
+   <td style="text-align:center;"> -43 (-47, -38) </td>
   </tr>
 </tbody>
 </table>
 
 </div>
 </div>
-</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-8-1.png" width="2400"></p>
+</div>
+</div>
+</div><div class="column">
 <p><strong>TP</strong></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -615,7 +651,7 @@ Michael Schramm
 <table>
  <thead>
   <tr>
-   <th style="text-align:left;"> Goodness of Fit Metric </th>
+   <th style="text-align:left;"> Metric </th>
    <th style="text-align:center;"> Median (IQR) </th>
   </tr>
  </thead>
@@ -637,16 +673,37 @@ Michael Schramm
 
 </div>
 </div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-10-1.png" width="2400"></p>
+</div>
+</div>
 </div>
 </div>
 </section>
-<section id="total-loads" class="slide level2">
-<h2>Total Loads</h2>
-
-<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" class="r-stretch quarto-figure-center"><p class="caption">Aggregated (a) monthly and (b) annual NO<sub>3</sub>-N loads at Lavaca River at Edna, USGS-08164000.</p></section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div style="text-align: center">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-11-1.png" width="2400"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div style="text-align: center">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-12-1.png" width="2400"></p>
+</div>
+</div>
+</div>
+</section>
 <section id="regional-study-comparison" class="slide level2">
 <h2>Regional Study Comparison</h2>
-<div style="font-size: .85em; text-align: center">
+<div style="font-size: 1em; text-align: center">
 <table>
 <colgroup>
 <col style="width: 17%">
@@ -674,24 +731,24 @@ Michael Schramm
 </tr>
 <tr class="even">
 <td>TP</td>
-<td>18</td>
-<td>SPARROW</td>
-<td>2002</td>
-<td><span class="citation" data-cites="rebichSourcesDeliveryNutrients2011">Rebich et al. (<a href="#/references" role="doc-biblioref" onclick="">2011</a>)</span></td>
-</tr>
-<tr class="odd">
-<td>TP</td>
 <td>45.2</td>
 <td>SPARROW</td>
 <td>2012</td>
 <td><span class="citation" data-cites="wiseSpatiallyReferencedModels2019">Wise, Anning, and Miller (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>TP</td>
 <td>42</td>
 <td>SWAT</td>
 <td>1977-2005</td>
 <td><span class="citation" data-cites="omaniEstimationSedimentNutrient2014">Omani, Srinivasan, and Lee (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span></td>
+</tr>
+<tr class="even">
+<td>TP</td>
+<td>20.81-91.58</td>
+<td>SPARROW</td>
+<td>2002</td>
+<td><span class="citation" data-cites="rebichSourcesDeliveryNutrients2011">Rebich et al. (<a href="#/references" role="doc-biblioref" onclick="">2011</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>TP</td>
@@ -700,15 +757,28 @@ Michael Schramm
 <td>1972-1993</td>
 <td><span class="citation" data-cites="dunnTrendsNutrientInflows1996">Dunn (<a href="#/references" role="doc-biblioref" onclick="">1996</a>)</span></td>
 </tr>
-<tr class="even">
-<td>TP</td>
-<td>6.2</td>
-<td>NA</td>
-<td>1968-1987</td>
-<td><span class="citation" data-cites="longleyFreshwaterInflowsTexas1994">Longley, Powell, and Green (<a href="#/references" role="doc-biblioref" onclick="">1994</a>)</span></td>
-</tr>
 </tbody>
 </table>
+</div>
+</section>
+<section id="trends" class="slide level2">
+<h2>Trends?</h2>
+<ul>
+<li>High variability in actual loads that reflect total discharge</li>
+<li>Flow-normalized loads:</li>
+</ul>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-13-1.png" width="2400"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-14-1.png" width="2400"></p>
+</div>
 </div>
 </section>
 <section id="further-work" class="slide level2">
@@ -731,9 +801,6 @@ Dunn, David. 1996. <span>“Trends in Nutrient Inflows to the Gulf of Mexico fro
 </div>
 <div id="ref-kuhnertQuantifyingTotalSuspended2012" class="csl-entry" role="doc-biblioentry">
 Kuhnert, Petra M., Brent L. Henderson, Stephen E. Lewis, Zoe T. Bainbridge, Scott N. Wilkinson, and Jon E. Brodie. 2012. <span>“Quantifying Total Suspended Sediment Export from the Burdekin River Catchment Using the Loads Regression Estimator Tool: REGRESSION ESTIMATOR TOOL FOR POLLUTANT LOADS.”</span> <em>Water Resources Research</em> 48 (4). <a href="https://doi.org/10.1029/2011WR011080">https://doi.org/10.1029/2011WR011080</a>.
-</div>
-<div id="ref-longleyFreshwaterInflowsTexas1994" class="csl-entry" role="doc-biblioentry">
-Longley, William, Gary Powell, and Albert Green. 1994. <span>“Freshwater Inflows to Texas Bays and Estuaries: Ecological Relationships and Methods for Determination of Needs.”</span> Austin, TX: Texas Water Development Board.
 </div>
 <div id="ref-mcdowellImplicationsLagTimes2021" class="csl-entry" role="doc-biblioentry">
 McDowell, R. W., Z. P. Simpson, A. G. Ausseil, Z. Etheridge, and R. Law. 2021. <span>“The Implications of Lag Times Between Nitrate Leaching Losses and Riverine Loads for Water Quality Policy.”</span> <em>Scientific Reports</em> 11 (1): 16450. <a href="https://doi.org/10.1038/s41598-021-95302-1">https://doi.org/10.1038/s41598-021-95302-1</a>.
@@ -941,9 +1008,9 @@ Zhang, Qian, and William P. Ball. 2017. <span>“Improving Riverine Constituent 
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1920,
 
-        height: 700,
+        height: 1080,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -981,15 +1048,12 @@ Zhang, Qian, and William P. Ball. 2017. <span>“Improving Riverine Constituent 
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
       // slide changes (different for each slide format).
       (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
           const event = window.document.createEvent("Event");
           event.initEvent("slideenter", true, true);
           window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
 
           // dispatch for shiny
           if (window.jQuery) {
@@ -1000,6 +1064,13 @@ Zhang, Qian, and William P. Ball. 2017. <span>“Improving Riverine Constituent 
               window.jQuery(currentSlide).trigger("shown");
             }
           }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
         }
 
         // hookup for slidy

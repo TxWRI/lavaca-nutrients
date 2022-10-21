@@ -74,12 +74,12 @@ list(
       
       model_gam(formula = trans_NO3 ~
                   s(ddate, bs = "tp", k = 18, m = 1) +
-                  s(yday, bs = "cc") +
+                  s(yday, k = 6, bs = "cc") +
                   s(log1p_Flow, k = 10, bs = "tp", m = 1) +
-                  s(ma, k = 6, bs = "tp", m = 1) +
-                  s(stfa, k = 6, bs = "tp", m = 1),
+                  s(ma, k = 10, bs = "tp", m = 1) +
+                  s(ltfa, k = 10, bs = "tp", m = 1),
                 data = df,
-                family = gaussian(link = "log")
+                family = Gamma(link = "log")
                 )
       }
     ),
@@ -132,7 +132,7 @@ list(
                               s(yday, k = 6, bs = "cc") +
                               s(log1p_Flow, k = 5, bs = "tp", m = 1) +
                               s(ma, k = 6, bs = "tp", m = 1) +
-                              s(stfa, k = 5, bs = "tp", m = 1),
+                              s(ltfa, k = 10, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164504"),
                             family = Gamma(link = "log"))
   ),
@@ -184,7 +184,7 @@ list(
                               s(yday, k = 6, bs = "cc") +
                               s(log1p_Flow, k = 7, bs = "tp", m = 1) +
                               s(ma, k = 6, bs = "tp", m = 1) +
-                              s(stfa, k = 6, bs = "tp", m = 1),
+                              s(ltfa, k = 10, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164503"),
                             family = Gamma(link = "log"))
   ),
@@ -233,9 +233,9 @@ list(
     no3_08164450, model_gam(formula = trans_NO3 ~
                               s(ddate, bs = "tp", k = 18) +
                               s(yday, k = 6, bs = "cc") +
-                              s(log1p_Flow, k = 10, bs = "tp", m = 1) +
-                              s(stfa, k = 6, bs = "tp", m = 1) +
-                              s(ma, k = 6, bs = "tp", m = 1),
+                              s(log1p_Flow, k = 6, bs = "tp", m = 1) +
+                              s(ma, k = 6, bs = "tp", m = 1) +
+                              s(ltfa, k = 6, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164450"),
                             family = Gamma(link = "log"))
   ),
@@ -284,8 +284,8 @@ list(
                               s(ddate, bs = "tp", k = 18) +
                               s(yday, k = 6, bs = "cc") +
                               s(log1p_Flow, k = 6, bs = "tp",  m = 1) +
-                              s(stfa, k = 6, bs = "tp", m = 1) +
-                              s(ma, k = 5, bs = "tp", m = 1),
+                              s(ma, k = 5, bs = "tp", m = 1) +
+                              s(ltfa, k = 10, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164390"),
                             family = gaussian(link = "log"))
   ),
@@ -348,8 +348,8 @@ list(
         s(yday, k = 10, bs = "cc") +
         s(log1p_inflow, k = 5, bs = "tp", m = 1) +
         s(log1p_Flow, k = 10, bs = "tp", m = 1) +
-        s(stfa, k = 5, bs = "tp", m = 1) +
-        s(ma, k = 6, bs = "tp", m = 1),
+        s(ma, k = 6, bs = "tp", m = 1) +
+        s(ltfa, k = 10, bs = "tp", m = 1),
       data = model_data,
       family = gaussian(link = "log")
     )

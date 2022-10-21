@@ -223,7 +223,7 @@ clean_data <- function(wq_df, q_df) {
 fn_data <-   function(model_data) {
   
   grouped <- model_data |> 
-    dplyr::select(site_no, Flow, log1p_Flow, stfa, ma, yday) |> 
+    dplyr::select(site_no, Flow, log1p_Flow, stfa, ltfa, ma, yday) |> 
     group_by(site_no, yday) #|> 
   
   
@@ -253,7 +253,7 @@ fn_lk_data <-   function(model_data) {
                 T_2 = "1 month", transform = "log"),
       # smooth discounted flow
       ma = sdf(log1p(inflow))) |>
-    dplyr::select(Flow, inflow, log1p_inflow, stfa, ma, yday) |>
+    dplyr::select(Flow, inflow, log1p_inflow, stfa, ltfa, ma, yday) |>
     group_by(yday) |> 
     mutate(log1p_Flow = log1p(Flow))
   
