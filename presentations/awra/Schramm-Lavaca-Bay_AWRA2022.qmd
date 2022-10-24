@@ -1,13 +1,14 @@
 ---
 title: "Statistical Modeling and Trends in Freshwater Derived Nutrient Loads, Lavaca Bay, Texas"
 subtitle: "2022 AWRA Annual Water Conference"
-author: "Michael Schramm"
+author: "Michael Schramm - michael.schramm@ag.tamu.edu"
 institute: "Texas Water Resources Institute, Texas A&M AgriLife Research"
 date: "2022-11-08"
 format: 
   revealjs:
     width: 1920
     height: 1080
+    theme: [default, custom.scss]
 bibliography: reference.yml
 csl: https://www.zotero.org/styles/chicago-author-date?source=1
 #navigation
@@ -19,6 +20,7 @@ title-slide-attributes:
     data-background-size: contain
     data-background-repeat: "no-repeat"
     data-background-color: "white"
+    data-background-position: "right"
 
 ---
 ## Acknowledgements {.smaller}
@@ -29,7 +31,7 @@ Stakeholder advisory committee:
 
 ::: {.column width="50%"}
 
-Dr. Mike Wetz - TAMU-CC
+Dr. Mike Wetz - Harte Intitute, TAMU-CC
 
 Bill Balboa - Matagorda Bay Foundation
 
@@ -77,7 +79,7 @@ source("../../R/gt_functions.R")
 
 source("../../_targets_packages.R")
 library(ragg)
-knitr::opts_chunk$set(dpi = 300,
+knitr::opts_chunk$set(dpi = 180,
                       dev = "ragg_png")
 
 ```
@@ -86,7 +88,11 @@ knitr::opts_chunk$set(dpi = 300,
 
 ::: {.column width="50%"}
 
-![](images/lavaca_bay_resize.png)
+```{r}
+#| out-width: 75%
+knitr::include_graphics("images/lavaca_bay_resize.png")
+```
+
 :::
 
 ::: {.column width="50%"}
@@ -143,7 +149,7 @@ knitr::include_graphics("images/mercury.png")
 
 ![](images/bugica.png)
 
- - @bugicaWaterQualityTrends2020 identify Lavaca Bay as potential risk for eutrophication due to trends in nutrient concentrations in the Bay.
+ - @bugicaWaterQualityTrends2020 identify euthrophication risk in Lavaca Bay due to 🡅 TP and 🡅 Chlorophyll-a concentrations.
  
  
 :::
@@ -162,27 +168,61 @@ knitr::include_graphics("images/mercury.png")
 ::::
 
 
-## Lavaca Bay Watersheds
-
-![](images/lb_simple.png)
-
  
 # Questions
  
  - Can we quantify nutrient loads exported to Lavaca Bay?
  - Are there trends?
- - Can we identify correlations in nutrient loading and DO (controlling for discharge)?
+ - Can we identify correlations in nutrient loading and estuary water quality (controlling for discharge)?
  
+
+
+
+
+
+## Lavaca Bay Watersheds
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| out-width: 60%
+knitr::include_graphics("images/lb_simple.png")
+```
+
+:::
+
+
+::: {.column width="40%"}
+
+- 1.3 million acre-feet per year
+- 65% from Lavaca/Navidad watershed
+    - 61% from Navidad at Palemtto Bend Dam
+    - 32% from Lavaca near City of Edna
+    - 7% ungaged downstream runoff
+
+:::
+
+
+:::: 
 
 
 ## Methods
  
  - Loading estimates:
  
-    - Generalized Additive Models [@kuhnertQuantifyingTotalSuspended2012; @robsonPredictionSedimentParticulate2015a; @mcdowellImplicationsLagTimes2021]
+    - **Specify Concentration Regression Model** - Generalized Additive Models [@kuhnertQuantifyingTotalSuspended2012; @robsonPredictionSedimentParticulate2015a; @mcdowellImplicationsLagTimes2021]
       - model error structure and specify link function
       - dependent variables can be smooth functions allowing non-linear responses.
-    - Repeated 5-fold cross-validation
+    - **Model performance** - Repeated 5-fold cross-validation
+    - **Predict daily loads** - Point estimates with uncertainty
+    
+```{r}
+#| fig-cap: "5-fold CV procedure. Image from Boehmke & Greenwell 2020 (https://bradleyboehmke.github.io/HOML/)"
+#| out-width: 70%
+knitr::include_graphics("images/cv-bb.png")
+```
     
     
 ## Methods {.smaller}
@@ -220,7 +260,7 @@ Loading estimates:
     - predicted concentrations $\times$ mean daily streamflow
     - aggregated to monthly and annual totals
  - Report **model uncertainty**
-    - **95% credible intervals** developed from 1000 draws of parameter estimates from the multivariate normal posterior distribution of model parameters provided by mgcv::gam function in R.
+    - **95% credible intervals** developed from 1000 draws of parameter estimates from the multivariate normal posterior distribution of model parameters provided by `mgcv::gam` function in R.
  - Account for variance in mean daily discharge
     - **Flow-normalized estimates** calculated similar to WRTDS, assume daily flow variables are random occurrence from all possible values on that day of year.
  
@@ -516,7 +556,9 @@ ggplot() +
 
 
 
-##
+## Results
+
+**Total Loadings**
 
 ::: {style="text-align: center"}
 
@@ -642,7 +684,9 @@ D
 
 
 
-##
+## Results
+
+**Total Loadings**
 
 ::: {style="text-align: center"}
 
@@ -780,16 +824,20 @@ D
 :::
 
 
-## Trends?
+## What About Trends?
 
  - High variability in actual loads that reflect total discharge
  - Flow-normalized loads:
  
-##
+## Results
+
+:::: {.columns}
+
+::: {.column width="50%"}
 
 ```{r}
 #| fig-height: 2.5
-#| fig-width: 8
+#| fig-width: 5
 fn_load <- tar_read(daily_no3_08164000_fn, store = store)
 a <- fn_load$annually[fn_load$annually$year == 2005,]$NO3_Estimate
 b <- fn_load$annually[fn_load$annually$year == 2020,]$NO3_Estimate
@@ -815,7 +863,8 @@ ggplot(df) +
                             label = paste0(prefix, percent_change, "% \n compared to 2005"),
                            direction = "y", hjust = "left",
                            nudge_x = 1,
-                           family = "OpenSansCondensed_TWRI") +
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
   scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
   scale_y_continuous(expand = expansion(mult = 0.5)) +
   labs(x = "", y = expression(paste("Centered ", hat(y))),
@@ -827,7 +876,7 @@ ggplot(df) +
 
 ```{r}
 #| fig-height: 2.5
-#| fig-width: 8
+#| fig-width: 5
 
 
 fn_load <- tar_read(daily_tp_08164000_fn, store = store)
@@ -856,8 +905,9 @@ ggplot(df) +
                            aes(year, log(TP_Estimate) - log(u)),
                            label = paste0(prefix, percent_change, "% \n compared to 2000"),
                            direction = "y", hjust = "left",
-                           nudge_x = 1,
-                           family = "OpenSansCondensed_TWRI") +
+                           nudge_x = 1, nudge_y = .25,
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
   scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
   scale_y_continuous(expand = expansion(mult = 0.5)) +
   labs(x = "", y = expression(paste("Centered ", hat(y))),
@@ -865,6 +915,101 @@ ggplot(df) +
   theme_TWRI_print() +
   theme(plot.subtitle = element_markdown())
 ```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-height: 2.5
+#| fig-width: 5
+fn_load <- tar_read(daily_no3_texana_fn, store = store)
+a <- fn_load$annually[fn_load$annually$year == 2005,]$NO3_Estimate
+b <- fn_load$annually[fn_load$annually$year == 2020,]$NO3_Estimate
+
+
+percent_change <- round((b-a)/a,2) * 100
+prefix <- if (percent_change < 0) {"-"} else {"+"}
+percent_change <- abs(percent_change)
+
+df <- fn_load$annually
+u <- mean(df$NO3_Estimate)
+
+ggplot(df) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             alpha = 0.7) +
+  geom_point(aes(year, log(NO3_Estimate) - log(u)),
+             color = "#1A3399") +
+  geom_linerange(aes(year, ymin = log(NO3_Lower)-log(u), ymax = log(NO3_Upper)-log(u)),
+                 color = "#1A3399") +
+  ggrepel::geom_text_repel(data = df |> filter(year == 2020),
+                            aes(year, log(NO3_Estimate) - log(u)),
+                            label = paste0(prefix, percent_change, "% \n compared to 2005"),
+                           direction = "y", hjust = "left",
+                           nudge_x = 1,
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
+  scale_y_continuous(expand = expansion(mult = 0.5)) +
+  labs(x = "", y = expression(paste("Centered ", hat(y))),
+       subtitle = "Flow-Normalized NO<sub>3</sub>-N Load, Navidad River") +
+  theme_TWRI_print() +
+  theme(plot.subtitle = element_markdown())
+```
+
+
+
+```{r}
+#| fig-height: 2.5
+#| fig-width: 5
+
+
+fn_load <- tar_read(daily_tp_texana_fn, store = store)
+
+
+a <- fn_load$annually[fn_load$annually$year == 2000,]$TP_Estimate
+b <- fn_load$annually[fn_load$annually$year == 2020,]$TP_Estimate
+
+
+percent_change <- round((b-a)/a,2) * 100
+prefix <- if (percent_change < 0) {"-"} else {"+"}
+percent_change <- abs(percent_change)
+
+df <- fn_load$annually
+u <- mean(df$TP_Estimate)
+
+ggplot(df) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             alpha = 0.7) +
+  geom_point(aes(year, log(TP_Estimate) - log(u)),
+             color = "#1A3399") +
+  geom_linerange(aes(year, ymin = log(TP_Lower)-log(u), ymax = log(TP_Upper)-log(u)),
+                 color = "#1A3399") +
+  ggrepel::geom_text_repel(data = df |> filter(year == 2020),
+                           aes(year, log(TP_Estimate) - log(u)),
+                           label = paste0(prefix, percent_change, "% \n compared to 2000"),
+                           direction = "y", hjust = "left",
+                           nudge_x = 1, nudge_y = -0.25,
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
+  scale_y_continuous(expand = expansion(mult = 0.5)) +
+  labs(x = "", y = expression(paste("Centered ", hat(y))),
+       subtitle = "Flow-Normalized TP Load, Navidad River") +
+  theme_TWRI_print() +
+  theme(plot.subtitle = element_markdown())
+```
+:::
+::::
+
+# Conclusions
+
+  - GAMs provide suitable performance in load estimation;
+  - Supplemental flow-biased monitoring to help identify significant changes and trends;
+  - High variance in loads, source of loads changes under drought conditions;
+  - Decrease in flow-normalized TP loads from Navidad River
 
 
 ## Further work

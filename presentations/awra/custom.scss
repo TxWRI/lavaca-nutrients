@@ -1,0 +1,49 @@
+/*-- scss:defaults --*/
+// importing fonts
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+// fonts
+$font-family-sans-serif: 'Source Sans Pro', Tahoma, sans-serif !default;
+
+// headings
+$presentation-heading-font: 'Source Sans Pro',  Tahoma, sans-serif  !default;
+$presentation-heading-color: #333 !default;
+$h1-font-size: 1.25em !default;
+$h2-font-size: 1em !default;
+$h3-font-size: 1em !default;
+
+// text alignment
+$presentation-slide-text-align: left !default;
+$presentation-title-slide-text-align: left !default;
+$reveal-slide-text-align: $presentation-slide-text-align  !default;
+$reveal-title-slide-text-align: $presentation-title-slide-text-align  !default;
+
+// general  
+.slide-logo {
+  display: block !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 10px !important;
+  max-height: 15% !important;
+  height: 100% !important;
+  width: auto !important;
+}
+
+#title-slide .quarto-title-authors {
+  display: flex;
+  justify-content: left;
+
+  .quarto-title-author {
+    padding-left: 0em;
+    padding-right: 0em;
+    width: 100%;
+  }
+}
+
+#title-slide p.author::before, #title-slide div.quarto-title-author::before {
+  content: "";
+  display: block;
+  border: none;
+  height: 3px;
+  margin-bottom: 1em;
+}
