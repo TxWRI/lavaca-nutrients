@@ -278,6 +278,65 @@ references:
   volume: '11'
 
 
+
+- id: murphyNutrientImprovementsChesapeake2022
+  abstract: >-
+    In Chesapeake Bay in the United States, decades of management eﬀorts have
+    resulted in modest reductions of nutrient loads from the watershed, but the
+    corresponding improvements in estuarine water quality have not consistently
+    followed. Generalized additive models were used to directly link river ﬂows
+    and nutrient loads from the watershed to nutrient trends in the estuary on a
+    station-by-station basis, which allowed for identiﬁcation of exactly when
+    and where responses are happening. Results show that Chesapeake Bay’s total
+    nitrogen and total phosphorus conditions are mostly improving after
+    accounting for variation in freshwater ﬂow. Almost all of these improving
+    nutrient concentrations in the estuary can be explained by reductions in
+    watershed loads entering through 16 rivers and 145 nearby point sources,
+    with the nearby point source reductions being slightly more eﬀective at
+    explaining estuarine nutrient trends. Overall, these two major types of
+    loads from multiple locations across the watershed are together necessary
+    and responsible for the improving estuarine nutrient conditions, a ﬁnding
+    that is highly relevant to managing valuable estuarine resources worldwide.
+  accessed:
+    - year: 2022
+      month: 10
+      day: 25
+  author:
+    - family: Murphy
+      given: Rebecca R.
+    - family: Keisman
+      given: Jennifer
+    - family: Harcum
+      given: Jon
+    - family: Karrh
+      given: Renee R.
+    - family: Lane
+      given: Mike
+    - family: Perry
+      given: Elgin S.
+    - family: Zhang
+      given: Qian
+  citation-key: murphyNutrientImprovementsChesapeake2022
+  container-title: Environmental Science & Technology
+  container-title-short: Environ. Sci. Technol.
+  DOI: 10.1021/acs.est.1c05388
+  ISSN: 0013-936X, 1520-5851
+  issue: '1'
+  issued:
+    - year: 2022
+      month: 1
+      day: 4
+  language: en
+  page: 260-270
+  source: DOI.org (Crossref)
+  title: >-
+    Nutrient Improvements in Chesapeake Bay: Direct Effect of Load Reductions
+    and Implications for Coastal Management
+  title-short: Nutrient Improvements in Chesapeake Bay
+  type: article-journal
+  URL: https://pubs.acs.org/doi/10.1021/acs.est.1c05388
+  volume: '56'
+
 - id: omaniEstimationSedimentNutrient2014
   abstract: >-
     Due to the lack of water quality data in the lower watersheds of the Texas

@@ -487,6 +487,20 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 <section id="methods" class="slide level2">
 <h2>Methods</h2>
 <ul>
+<li>Two components
+<ul>
+<li><ol type="1">
+<li>Develop estimates of NO<sub>3</sub>-N and TP loading from Lavaca and Navidad Rivers</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>Link nutrient loads and river discharge to changes in nutrient concentration in Lavaca Bay</li>
+</ol></li>
+</ul></li>
+</ul>
+</section>
+<section id="methods-1" class="slide level2">
+<h2>Methods</h2>
+<ul>
 <li><p>Loading estimates:</p>
 <ul>
 <li><strong>Specify Concentration Regression Model</strong> - Generalized Additive Models <span class="citation" data-cites="kuhnertQuantifyingTotalSuspended2012 robsonPredictionSedimentParticulate2015a mcdowellImplicationsLagTimes2021">(<a href="#/references" role="doc-biblioref" onclick="">Kuhnert et al. 2012</a>; <a href="#/references" role="doc-biblioref" onclick="">Robson and Dourdet 2015</a>; <a href="#/references" role="doc-biblioref" onclick="">McDowell et al. 2021</a>)</span>
@@ -500,7 +514,7 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 </ul>
 
 <img data-src="images/cv-bb.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">5-fold CV procedure. Image from Boehmke &amp; Greenwell 2020 (https://bradleyboehmke.github.io/HOML/)</p></section>
-<section id="methods-1" class="slide level2 smaller">
+<section id="methods-2" class="slide level2 smaller">
 <h2>Methods</h2>
 <p>GAM model:</p>
 <p><span class="math display">\[
@@ -532,7 +546,7 @@ Michael Schramm - michael.schramm@ag.tamu.edu
           display:block!important;
       }</style></aside>
 </section>
-<section id="methods-2" class="slide level2">
+<section id="methods-3" class="slide level2">
 <h2>Methods</h2>
 <p>Loading estimates:</p>
 <ul>
@@ -549,6 +563,18 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 <ul>
 <li><strong>Flow-normalized estimates</strong> calculated similar to WRTDS, assume daily flow variables are random occurrence from all possible values on that day of year.</li>
 </ul></li>
+</ul>
+</section>
+<section id="methods-4" class="slide level2">
+<h2>Methods</h2>
+<p>Link loads and flows to Lavaca Bay nutrient concentrations:</p>
+<p><span class="math display">\[
+Y = s(Flow) + s(Load) + s(Day) + s(Date)
+\]</span></p>
+<ul>
+<li><span class="math inline">\(Flow\)</span> is seasonally normalized</li>
+<li><span class="math inline">\(Load\)</span> is flow normalized</li>
+<li>Simplified methodology from <span class="citation" data-cites="murphyNutrientImprovementsChesapeake2022">Murphy et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</li>
 </ul>
 </section>
 <section id="results" class="slide level2 smaller">
@@ -855,6 +881,9 @@ Kuhnert, Petra M., Brent L. Henderson, Stephen E. Lewis, Zoe T. Bainbridge, Scot
 </div>
 <div id="ref-mcdowellImplicationsLagTimes2021" class="csl-entry" role="doc-biblioentry">
 McDowell, R. W., Z. P. Simpson, A. G. Ausseil, Z. Etheridge, and R. Law. 2021. <span>“The Implications of Lag Times Between Nitrate Leaching Losses and Riverine Loads for Water Quality Policy.”</span> <em>Scientific Reports</em> 11 (1): 16450. <a href="https://doi.org/10.1038/s41598-021-95302-1">https://doi.org/10.1038/s41598-021-95302-1</a>.
+</div>
+<div id="ref-murphyNutrientImprovementsChesapeake2022" class="csl-entry" role="doc-biblioentry">
+Murphy, Rebecca R., Jennifer Keisman, Jon Harcum, Renee R. Karrh, Mike Lane, Elgin S. Perry, and Qian Zhang. 2022. <span>“Nutrient Improvements in Chesapeake Bay: Direct Effect of Load Reductions and Implications for Coastal Management.”</span> <em>Environmental Science &amp; Technology</em> 56 (1): 260–70. <a href="https://doi.org/10.1021/acs.est.1c05388">https://doi.org/10.1021/acs.est.1c05388</a>.
 </div>
 <div id="ref-omaniEstimationSedimentNutrient2014" class="csl-entry" role="doc-biblioentry">
 Omani, N., R. Srinivasan, and T. Lee. 2014. <span>“Estimation of Sediment and Nutrient Loads to Bays from Gauged and Ungauged Watersheds.”</span> <em>Applied Engineering in Agriculture</em>, December, 869–87. <a href="https://doi.org/10.13031/aea.30.10162">https://doi.org/10.13031/aea.30.10162</a>.

@@ -656,7 +656,76 @@ list(
              format = "file"),
   
   # loading estimates pdf
-  tar_quarto(loading_estimates, "reports/load_estimates/load_estimates.qmd")
-  #
+  tar_quarto(loading_estimates, "reports/load_estimates/load_estimates.qmd"),
+  
+  ##############################################################################
+  # This section creates gams that evaluate Lavaca Bay trends! -----------------
+  ##############################################################################
+  ### Read lavaca bay inflow
+  tar_target(lbay_inflow,
+             load_lb_inflow()),
+  
+  ### lavaca bay seasonally adjusted flow
+  tar_target(lbay_adj_flow,
+             adjust_lbay_inflow(lbay_inflow)),
+  
+  ## estuary wq data
+  tar_target(lbay_wq_data,
+             load_est_wq_data()),
+  
+  ## estuary model data
+  tar_target(estuary_model_data,
+             create_est_model_data(lbay_wq_data,
+                                   lbay_adj_flow)),
+  
+  ## calculate total loads and flow normalize
+  tar_target(estuary_tp_loads,
+              fn_estuary_tp_loads(daily_tp_08164000,
+                                  daily_tp_texana,
+                                  lbay_inflow)),
+  tar_target(estuary_no3_loads,
+             fn_estuary_no3_loads(daily_no3_08164000,
+                                 daily_no3_texana,
+                                 lbay_inflow)),
+  
+  ## fit gams
+  tar_target(tp_lavaca_13563,
+             estuary_gam(formula = log(value) ~ 
+                           s(flw_res) + # explanatory variable
+                           s(TP_resid) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") +
+                           s(ddate), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads,
+                         response_parameter = "00665",
+                         predictor_parameter = TP_resid,
+                         date = "2000-01-02",
+                         station = "13563") ),
+  
+  tar_target(tp_lavaca_13383,
+             estuary_gam(formula = log(value) ~ 
+                           s(flw_res) + # explanatory variable
+                           s(TP_resid) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") +
+                           s(ddate), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads,
+                         response_parameter = "00665",
+                         predictor_parameter = TP_resid,
+                         date = "2000-01-02",
+                         station = "13383") ),
+  
+  tar_target(tp_lavaca_13384,
+             estuary_gam(formula = log(value) ~ 
+                           s(flw_res) + # explanatory variable
+                           s(TP_resid) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") +
+                           s(ddate), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads,
+                         response_parameter = "00665",
+                         predictor_parameter = TP_resid,
+                         date = "2000-01-02",
+                         station = "13384") )
   
 )

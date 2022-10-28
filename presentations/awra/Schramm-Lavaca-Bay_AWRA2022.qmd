@@ -109,39 +109,8 @@ knitr::include_graphics("images/lavaca_bay_resize.png")
 ::::
 
 
-## Primary Watershed Issues
 
-:::: {.columns}
-
-::: {.column width="40%"}
-
-```{r}
-#| fig-cap: "Watershed plans and TMDLs for indicator bacteria in FW streams."
-#| out-width: 80%
-knitr::include_graphics("images/lbwpp.png")
-```
-
-:::
-
-::: {.column width="20%"}
-:::
-
-::: {.column width="40%"}
-
-
-```{r}
-#| fig-cap: "Persistant mercury contamination at shuttered industrial sites. Image by Kimiko Fieg [@priestDecadesLaterMercury2018]."
-#| out-width: 80%
-knitr::include_graphics("images/mercury.png")
-```
-
-:::
-
-::::
-
-
-    
-## Other concerns
+## Background
 
 :::: {.columns}
 
@@ -209,12 +178,18 @@ knitr::include_graphics("images/lb_simple.png")
 
 
 ## Methods
- 
+
+ - Two components
+    - (1) Develop estimates of NO~3~-N and TP loading from Lavaca and Navidad Rivers
+    - (2) Link nutrient loads and river discharge to changes in nutrient concentration in Lavaca Bay
+
+## Methods
+
  - Loading estimates:
  
     - **Specify Concentration Regression Model** - Generalized Additive Models [@kuhnertQuantifyingTotalSuspended2012; @robsonPredictionSedimentParticulate2015a; @mcdowellImplicationsLagTimes2021]
       - model error structure and specify link function
-      - dependent variables can be smooth functions allowing non-linear responses.
+      - predictor variables can be smooth functions allowing non-linear responses.
     - **Model performance** - Repeated 5-fold cross-validation
     - **Predict daily loads** - Point estimates with uncertainty
     
@@ -264,7 +239,18 @@ Loading estimates:
  - Account for variance in mean daily discharge
     - **Flow-normalized estimates** calculated similar to WRTDS, assume daily flow variables are random occurrence from all possible values on that day of year.
  
- 
+
+## Methods
+
+Link loads and flows to Lavaca Bay nutrient concentrations:
+
+$$
+Y = s(Flow) + s(Load) + s(Day) + s(Date)
+$$
+
+ - $Flow$ is seasonally normalized
+ - $Load$ is flow normalized
+ - Simplified methodology from @murphyNutrientImprovementsChesapeake2022.
 
 ## Results {.smaller}
 
