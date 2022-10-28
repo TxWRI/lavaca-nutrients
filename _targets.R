@@ -689,43 +689,59 @@ list(
                                  lbay_inflow)),
   
   ## fit gams
+  #### Temporal model to look at percent change over time
+  tar_target(tp_lavaca_13563_time,
+             estuary_gam(formula = value ~ 
+                           ddate +
+                           s(day, k = 5,  bs = "cc") +
+                           s(ddate, k = 15, bs = "tp") +
+                           te(day, ddate, k = c(5,8), bs = c("cc", "tp")),
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads,
+                         response_parameter = "00665",
+                         predictor_parameter = TP_resid,
+                         date = "2000-01-02",
+                         station = "13563")),
+  
   tar_target(tp_lavaca_13563,
-             estuary_gam(formula = log(value) ~ 
+             estuary_gam(formula = value ~
+                           ddate +
                            s(flw_res) + # explanatory variable
                            s(TP_resid) + #explanatory variable
-                           s(day, k = 5,  bs = "cc") +
-                           s(ddate), # trend,
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate) + # trend,
+                           te(day, ddate, k = c(5,8), bs = c("cc", "tp")),
                          model_data = estuary_model_data,
                          loads = estuary_tp_loads,
                          response_parameter = "00665",
                          predictor_parameter = TP_resid,
                          date = "2000-01-02",
-                         station = "13563") ),
-  
-  tar_target(tp_lavaca_13383,
-             estuary_gam(formula = log(value) ~ 
-                           s(flw_res) + # explanatory variable
-                           s(TP_resid) + #explanatory variable
-                           s(day, k = 5,  bs = "cc") +
-                           s(ddate), # trend,
-                         model_data = estuary_model_data,
-                         loads = estuary_tp_loads,
-                         response_parameter = "00665",
-                         predictor_parameter = TP_resid,
-                         date = "2000-01-02",
-                         station = "13383") ),
-  
-  tar_target(tp_lavaca_13384,
-             estuary_gam(formula = log(value) ~ 
-                           s(flw_res) + # explanatory variable
-                           s(TP_resid) + #explanatory variable
-                           s(day, k = 5,  bs = "cc") +
-                           s(ddate), # trend,
-                         model_data = estuary_model_data,
-                         loads = estuary_tp_loads,
-                         response_parameter = "00665",
-                         predictor_parameter = TP_resid,
-                         date = "2000-01-02",
-                         station = "13384") )
+                         station = "13563"))
+  # 
+  # tar_target(tp_lavaca_13383,
+  #            estuary_gam(formula = log(value) ~ 
+  #                          s(flw_res) + # explanatory variable
+  #                          s(TP_resid) + #explanatory variable
+  #                          s(day, k = 5,  bs = "cc") +
+  #                          s(ddate), # trend,
+  #                        model_data = estuary_model_data,
+  #                        loads = estuary_tp_loads,
+  #                        response_parameter = "00665",
+  #                        predictor_parameter = TP_resid,
+  #                        date = "2000-01-02",
+  #                        station = "13383") ),
+  # 
+  # tar_target(tp_lavaca_13384,
+  #            estuary_gam(formula = log(value) ~ 
+  #                          s(flw_res) + # explanatory variable
+  #                          s(TP_resid) + #explanatory variable
+  #                          s(day, k = 5,  bs = "cc") +
+  #                          s(ddate), # trend,
+  #                        model_data = estuary_model_data,
+  #                        loads = estuary_tp_loads,
+  #                        response_parameter = "00665",
+  #                        predictor_parameter = TP_resid,
+  #                        date = "2000-01-02",
+  #                        station = "13384") )
   
 )

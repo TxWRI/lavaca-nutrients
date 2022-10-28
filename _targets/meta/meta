@@ -1,5 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|b3f3aa9f144d0c72|||||||||||||||
+.Random.seed|object|3dc782d93c745148|||||||||||||||
 adjust_lbay_inflow|function|61bff3e41cf72381|||||||||||||||
 aggregate_no3_08164000|stem|2a0194757c72a0c9|092ac21a21804b44|aae8575af4be4ffe|1197344138||t19269.5943668149s|f1a7c7dfc13860de|5753|rds|local|vector|||2.46||
 aggregate_no3_08164000_fn|stem|9947fbf606b5161b|872f19fb8c30cbda|60ee806239609bff|1575889202||t19269.8563011101s|c2d292eb6cbc57a8|662|rds|local|vector|||40.79||
@@ -52,8 +52,8 @@ daily_tp_texana|stem|1373a6fbb7476173|b8bf123fde25a77a|865bb73abfb4e2fc|36549260
 daily_tp_texana_fn|stem|64a346d348e2c47e|8acc479c726fd736|8d2decf6f305dd81|-1310778825||t19285.7535010011s|b48a0b01eaa1dc26|3401482|rds|local|vector|||95.69||
 download_Q_data|function|097e3a9c2d06cde5|||||||||||||||
 download_WQP_data|function|3ff72150341b9bd2|||||||||||||||
-estuary_gam|function|acbe412000731a82|||||||||||||||
-estuary_gam_model|function|ea7a97bd6f00995e|||||||||||||||
+estuary_gam|function|46f51f2a7932500a|||||||||||||||
+estuary_gam_model|function|4d7627f555804d30|||||||||||||||
 estuary_model_data|stem|92ad199d5bbe7a23|7dded39f7ea2dfe8|298142c7dff6ccd0|-1354744962||t19290.7039647624s|c58f3c0a963e8d53|18794|rds|local|vector|||0||
 estuary_no3_loads|stem|70198149b3e87694|fe76a00cc353a25b|4a270924fedf8fc2|460806597||t19290.7627007286s|d9ed6ff3fd3829f8|117937|rds|local|vector|||0.07||
 estuary_tp_loads|stem|c288c92920bb9949|384889e1ea4a2974|4b2b2f1109e640a7|-908481736||t19290.7606116425s|4ef81ecf3168f36c|153730|rds|local|vector|||0.07||
@@ -142,7 +142,8 @@ tp_08164503|stem|f0f33aca435fa09c|0a768c310361f0a8|fa443038618d8c00|-1832290259|
 tp_08164504|stem|84dcf6de25ca5719|01147e3cf0a25ba2|fa443038618d8c00|1044729650||t19285.5892795828s|aac67d8d83918d73|2063131|rds|local|vector|||0.33||
 tp_lavaca_13383|stem|13d7bf65570c95f5|de94bffac344a3a9|94b962a61c0f376f|-1736560972||t19293.6848689544s|3b3f771d7ddad788|64529|rds|local|vector|||0.22||
 tp_lavaca_13384|stem|4fa11ee8e8167144|9fe0912065391ae3|94b962a61c0f376f|-2042918353||t19293.6848703289s|3f73efcdf8bb6dc0|65423|rds|local|vector|||0.06||
-tp_lavaca_13563|stem|bfaebad41f8bb957|ba461303a74159c8|94b962a61c0f376f|1884935051||t19290.7930173822s|0c155e9096dcaba6|65003|rds|local|vector|||0.14||
+tp_lavaca_13563|stem|0e66fe2bec233d0a|19ffa8f734a1b255|bb5309573bea3d10|1884935051||t19293.8340722052s|4966b674b73c3322|163038|rds|local|vector|||0.49||
+tp_lavaca_13563_time|stem|dc7a2157f9103866|ca68bc5555bf65b0|599a4bb205c44a8e|111845060||t19293.8340660555s|84ec1c3a0b9533e5|282950|rds|local|vector|||0.25||
 tp_texana|stem|5efab5a31d3a7dd9|3e7539d9701f5ea5|78f60f9244d80bc6|380152123||t19278.8029844758s|6c82d571d77b5347|2065259|rds|local|vector|||1.33||
 wqpdata|stem|5d59fc4d1e4dde01|6efa7de142df38dd|5859807407b5ed6f|-910500034||t19285.5892712278s|a5228c2f07dc2025|14057|rds|local|vector|||4.1||
 write_daily|stem|e1b552e5dee995bc|84c875ffbd0de69a|21307f9804b598ad|-1685729964|data/Output/daily_loads/tp_daily_loads.csv|t19285.5946362296s|52b01af00a9c070f|1744442|file|local|vector|||1.49||

@@ -133,5 +133,6 @@ estuary_gam_model <- function(formula, data) {
       data = data,
       knots = list(day = c(1,366)),
       method = "REML",
-      select = TRUE)
+      select = TRUE,
+      family = Gamma(link = "log"))
 }
