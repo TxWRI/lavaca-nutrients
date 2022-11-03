@@ -7,7 +7,7 @@
 <link href="Schramm-Lavaca-Bay_AWRA2022_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Schramm-Lavaca-Bay_AWRA2022_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Schramm-Lavaca-Bay_AWRA2022_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.190">
+  <meta name="generator" content="quarto-1.2.231">
 
   <meta name="author" content="Michael Schramm - michael.schramm@ag.tamu.edu">
   <title>Statistical Modeling and Trends in Freshwater Derived Nutrient Loads, Lavaca Bay, Texas</title>
@@ -337,6 +337,9 @@
       margin-right: 0; 
     }
   </style>
+  
+  <script src="Schramm-Lavaca-Bay_AWRA2022_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="Schramm-Lavaca-Bay_AWRA2022_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -537,14 +540,24 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 </section>
 <section id="methods-4" class="slide level2">
 <h2>Methods</h2>
-<p>Link loads and flows to Lavaca Bay nutrient concentrations:</p>
+<p>Does variation in Flow and Load explain Bay nutrient concentration?</p>
+<p><strong>Temporal Model</strong></p>
 <p><span class="math display">\[
-Y = s(Flow) + s(Load) + s(Day) + s(Date)
+Y = s(Day) + s(Date) + ti(Day, Date)
+\]</span></p>
+<p><strong>Flow Model</strong></p>
+<p><span class="math display">\[
+Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow)
+\]</span></p>
+<p><strong>Full Model</strong></p>
+<p><span class="math display">\[
+Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 \]</span></p>
 <ul>
 <li><span class="math inline">\(Flow\)</span> is seasonally normalized</li>
 <li><span class="math inline">\(Load\)</span> is flow normalized</li>
-<li>Simplified methodology from <span class="citation" data-cites="murphyNutrientImprovementsChesapeake2022">Murphy et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</li>
+<li>Simplified methodology from <span class="citation" data-cites="murphy_generalized_2019">Murphy et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> and <span class="citation" data-cites="murphyNutrientImprovementsChesapeake2022">Murphy et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</li>
+<li>Compare AIC</li>
 </ul>
 </section>
 <section id="results" class="slide level2 smaller">
@@ -817,24 +830,78 @@ Y = s(Flow) + s(Load) + s(Day) + s(Date)
 </div>
 </div>
 </div>
-</section></section>
+</section>
+<section id="estuary-models" class="slide level2">
+<h2>Estuary Models</h2>
+<p><strong>Example: Site 13563 TP</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> df </th>
+   <th style="text-align:right;"> AIC </th>
+   <th style="text-align:right;"> adj.r.sq </th>
+   <th style="text-align:right;"> dev.expl </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Temporal Model </td>
+   <td style="text-align:right;"> 9.735954 </td>
+   <td style="text-align:right;"> -222.5104 </td>
+   <td style="text-align:right;"> 0.1492214 </td>
+   <td style="text-align:right;"> 0.2597455 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Flow Model </td>
+   <td style="text-align:right;"> 8.479287 </td>
+   <td style="text-align:right;"> -241.3721 </td>
+   <td style="text-align:right;"> 0.3383421 </td>
+   <td style="text-align:right;"> 0.4107901 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Flow and Load Model </td>
+   <td style="text-align:right;"> 14.272933 </td>
+   <td style="text-align:right;"> -252.4411 </td>
+   <td style="text-align:right;"> 0.4755137 </td>
+   <td style="text-align:right;"> 0.5754284 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+
+<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-19-1.png" width="900" class="r-stretch"></section>
+<section id="estuary-models-1" class="slide level2">
+<h2>Estuary Models</h2>
+<p><strong>Example: Site 13563 TP</strong></p>
+
+<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-20-1.png" width="1800" class="r-stretch"></section>
+<section id="estuary-models-2" class="slide level2">
+<h2>Estuary Models</h2>
+<p><strong>Example: Site 13563 TP</strong></p>
+
+<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-21-1.png" width="1800" class="r-stretch"></section></section>
 <section>
 <section id="conclusions" class="title-slide slide level1 center">
 <h1>Conclusions</h1>
 <ul>
-<li>GAMs provide suitable performance in load estimation;</li>
-<li>Supplemental flow-biased monitoring to help identify significant changes and trends;</li>
-<li>High variance in loads, source of loads changes under drought conditions;</li>
-<li>Decrease in flow-normalized TP loads from Navidad River</li>
+<li>GAMs are useful framework for development of load estimation models;</li>
+<li>Identified high variance in loads, with notable change in river source under drought conditions;</li>
+<li>Identified decrease in flow-normalized TP loads from the Navidad River;</li>
+<li>Initial use of GAMS as a framework to explore estuary water quality responses to river inputs.</li>
 </ul>
 </section>
 <section id="further-work" class="slide level2">
 <h2>Further work</h2>
 <ul>
-<li><p>Comparison of above lake and below lake loads</p></li>
-<li><p>Develop supplemental river and estuary monitoring plans</p></li>
-<li><p>Combine estuary water quality data sets</p></li>
-<li><p>Limited NO<sub>2</sub>-N and TKN limit ability to estimate DIN and DON</p></li>
+<li>Comparison of above lake and below lake loads;</li>
+<li>Develop/fund supplemental flow-biased monitoring to identify significant changes and trends;</li>
+<li>Continue work on estuary water quality responses…</li>
 </ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
@@ -854,6 +921,9 @@ McDowell, R. W., Z. P. Simpson, A. G. Ausseil, Z. Etheridge, and R. Law. 2021. <
 </div>
 <div id="ref-murphyNutrientImprovementsChesapeake2022" class="csl-entry" role="doc-biblioentry">
 Murphy, Rebecca R., Jennifer Keisman, Jon Harcum, Renee R. Karrh, Mike Lane, Elgin S. Perry, and Qian Zhang. 2022. <span>“Nutrient Improvements in Chesapeake Bay: Direct Effect of Load Reductions and Implications for Coastal Management.”</span> <em>Environmental Science &amp; Technology</em> 56 (1): 260–70. <a href="https://doi.org/10.1021/acs.est.1c05388">https://doi.org/10.1021/acs.est.1c05388</a>.
+</div>
+<div id="ref-murphy_generalized_2019" class="csl-entry" role="doc-biblioentry">
+Murphy, Rebecca R., Elgin Perry, Jon Harcum, and Jennifer Keisman. 2019. <span>“A Generalized Additive Model Approach to Evaluating Water Quality: Chesapeake Bay Case Study.”</span> <em>Environmental Modelling &amp; Software</em> 118 (August): 1–13. <a href="https://doi.org/10.1016/j.envsoft.2019.03.027">https://doi.org/10.1016/j.envsoft.2019.03.027</a>.
 </div>
 <div id="ref-omaniEstimationSedimentNutrient2014" class="csl-entry" role="doc-biblioentry">
 Omani, N., R. Srinivasan, and T. Lee. 2014. <span>“Estimation of Sediment and Nutrient Loads to Bays from Gauged and Ungauged Watersheds.”</span> <em>Applied Engineering in Agriculture</em>, December, 869–87. <a href="https://doi.org/10.13031/aea.30.10162">https://doi.org/10.13031/aea.30.10162</a>.
@@ -1095,12 +1165,15 @@ Zhang, Qian, and William P. Ball. 2017. <span>“Improving Riverine Constituent 
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
       // slide changes (different for each slide format).
       (function () {
-        function fireSlideChanged(previousSlide, currentSlide) {
-
-          // dispatch for htmlwidgets
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
           const event = window.document.createEvent("Event");
           event.initEvent("slideenter", true, true);
           window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
 
           // dispatch for shiny
           if (window.jQuery) {
@@ -1111,13 +1184,6 @@ Zhang, Qian, and William P. Ball. 2017. <span>“Improving Riverine Constituent 
               window.jQuery(currentSlide).trigger("shown");
             }
           }
-        }
-
-        // hookup for reveal
-        if (window.Reveal) {
-          window.Reveal.addEventListener("slidechanged", function(event) {
-            fireSlideChanged(event.previousSlide, event.currentSlide);
-          });
         }
 
         // hookup for slidy

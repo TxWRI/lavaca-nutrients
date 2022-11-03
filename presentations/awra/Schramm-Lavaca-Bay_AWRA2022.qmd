@@ -242,15 +242,30 @@ Loading estimates:
 
 ## Methods
 
-Link loads and flows to Lavaca Bay nutrient concentrations:
+Does variation in Flow and Load explain Bay nutrient concentration?
+
+**Temporal Model**
 
 $$
-Y = s(Flow) + s(Load) + s(Day) + s(Date)
+Y = s(Day) + s(Date) + ti(Day, Date)
+$$
+
+**Flow Model**
+
+$$
+Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow)
+$$
+
+**Full Model**
+
+$$
+Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 $$
 
  - $Flow$ is seasonally normalized
  - $Load$ is flow normalized
- - Simplified methodology from @murphyNutrientImprovementsChesapeake2022.
+ - Simplified methodology from @murphy_generalized_2019 and @murphyNutrientImprovementsChesapeake2022.
+ - Compare AIC
 
 ## Results {.smaller}
 
@@ -990,21 +1005,135 @@ ggplot(df) +
 :::
 ::::
 
+## Estuary Models
+
+**Example: Site 13563 TP**
+
+```{r}
+temporal_model <- tar_read(tp_lavaca_13563_temporal, store = store)
+flow_model <- tar_read(tp_lavaca_13563_flow, store = store)
+full_model <- tar_read(tp_lavaca_13563_full, store = store)
+
+est_summary <- AIC(temporal_model, flow_model, full_model)
+row.names(est_summary) <- c("Temporal Model", "Flow Model", "Flow and Load Model")
+
+r_sq <- c(summary(temporal_model)$r.sq, summary(flow_model)$r.sq, summary(full_model)$r.sq)
+dev_exp <- c(summary(temporal_model)$dev.expl, summary(flow_model)$dev.expl, summary(full_model)$dev.expl)
+est_summary$adj.r.sq <- r_sq
+est_summary$dev.expl <- dev_exp
+
+kableExtra::kbl(est_summary)
+```
+
+
+```{r}
+#| fig-height: 2.5
+#| fig-width: 5
+m2 <- tar_read(tp_lavaca_13563_full, store = store)
+est_loads <- tar_read(estuary_tp_loads, store = store)
+
+est_data <- tar_read(estuary_model_data, store = store)
+est_data <- est_data |> 
+  filter(parameter_code == "00665", station_id == "13563") |> 
+  mutate(ddate = decimal_date(end_date))
+
+predict_data <- est_loads|> 
+  select(end_date = Date,
+         Discharge = Discharge,
+         TP_resid = TP_resid) |> 
+  mutate(ddate = decimal_date(end_date),
+         day = yday(end_date)) 
+
+
+fitted <- fitted_values(m2, data = tar_read(tp_lavaca_prediction_data, store = store))
+ggplot(est_data) +
+  geom_point(aes(end_date, value)) +
+  geom_line(data = fitted, aes(end_date, fitted),
+            alpha = 0.5) +
+  geom_hline(yintercept = 0.21, linetype = 2) +
+  theme_TWRI_print() +
+  labs(x = "Date", y = "TP (mg/L)")
+```
+
+## Estuary Models
+
+**Example: Site 13563 TP**
+
+```{r}
+## hold everything equal but load
+df <- data_slice(m2,
+                 TP_resid = evenly(TP_resid, n = 100),
+                 ddate = decimal_date(as.Date("2000-07-15")),
+                 day = yday(as.Date("2000-07-15")))
+
+
+a <- fitted_values(m2, data = df) |>  
+  ggplot(aes(TP_resid, fitted)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.25) +
+  labs(y = "TP [mg/L]", x = "Flow Adjusted log(Load) [kg]",
+       subtitle = "Response of TP concentration to flow adjusted load") +
+  coord_cartesian(ylim = c(0, 0.3)) +
+  theme_TWRI_print()
+
+df <- data_slice(m2,
+                 flw_res = evenly(flw_res, n = 100),
+                 ddate = decimal_date(as.Date("2000-07-15")),
+                 day = yday(as.Date("2000-07-15")))
+b <- fitted_values(m2, data = df) |>  
+  ggplot(aes(flw_res, fitted)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.25) +
+  labs(y = "TP [mg/L]", x = "Seasonally Adjusted log(Flow) [cfs]",
+       subtitle = "Response of TP concentration to seasonally adjusted flow") +
+  coord_cartesian(ylim = c(0, 0.3)) +
+  theme_TWRI_print()
+
+a + b
+
+```
+
+## Estuary Models
+
+**Example: Site 13563 TP**
+
+```{r}
+## hold everything equal but load
+df <- data_slice(m2,
+                 ddate = 2020,
+                 day = c(15, 106, 197, 289),
+                 TP_resid = evenly(TP_resid),
+                 flw_res = evenly(flw_res))
+
+df <- fitted_values(m2, data = df) |> 
+  mutate(facet_lab = as.Date(paste0(ddate,"-",day), "%Y-%j"))
+
+ggplot(data = df) +
+  geom_raster(aes(flw_res, TP_resid, fill = fitted)) +
+  facet_wrap(~facet_lab) +
+  geom_contour(aes(flw_res, TP_resid, fill = fitted, z = fitted), color = "white", breaks = 0.21) +
+  scale_fill_viridis_c() +
+  labs(y = "Flow Adjusted log(Load) [kg]", x = "Seasonally Adjusted log(Flow) [cfs]",
+       subtitle = "Response of TP concentration to adjust flow and adjusted load") +
+  theme_TWRI_print()
+
+```
+
 # Conclusions
 
-  - GAMs provide suitable performance in load estimation;
-  - Supplemental flow-biased monitoring to help identify significant changes and trends;
-  - High variance in loads, source of loads changes under drought conditions;
-  - Decrease in flow-normalized TP loads from Navidad River
+  - GAMs are useful framework for development of load estimation models;
+  - Identified high variance in loads, with notable change in river source under drought conditions;
+  - Identified decrease in flow-normalized TP loads from the Navidad River;
+  - Initial use of GAMS as a framework to explore estuary water quality responses to river inputs.
 
 
 ## Further work
 
-- Comparison of above lake and below lake loads
-- Develop supplemental river and estuary monitoring plans
-- Combine estuary water quality data sets
+  - Comparison of above lake and below lake loads;
+  - Develop/fund supplemental flow-biased monitoring to identify significant changes and trends;
+  - Continue work on estuary water quality responses...
 
-- Limited NO~2~-N and TKN limit ability to estimate DIN and DON 
+
  
 ## References
 

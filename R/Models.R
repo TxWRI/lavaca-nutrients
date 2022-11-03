@@ -78,7 +78,7 @@ fn_estuary_tp_loads <- function(lavaca_loads,
                  data = loads,
                  family = gaussian())
   
-  loads$TP_resid <- residuals(tp_flow)
+  loads$TP_resid <- residuals(tp_flow, type = "response")
   
   loads
   
@@ -101,7 +101,7 @@ fn_estuary_no3_loads <- function(lavaca_loads,
                  data = loads,
                  family = gaussian())
   
-  loads$NO3_resid <- residuals(no3_flow)
+  loads$NO3_resid <- residuals(no3_flow, type = "response")
   
   loads
   
@@ -115,6 +115,24 @@ estuary_gam <- function(formula,
                         predictor_parameter = TP_resid,
                         date,
                         station) {
+  
+  data <- estuary_gam_data(model_data,
+                           loads,
+                           response_parameter,
+                           predictor_parameter = TP_resid,
+                           date,
+                           station)
+  
+  estuary_gam_model(formula = formula,
+                    data = data)
+}
+
+estuary_gam_data <- function(model_data,
+                             loads,
+                             response_parameter,
+                             predictor_parameter = TP_resid,
+                             date,
+                             station) {
   data <- model_data |> 
     mutate(ddate = decimal_date(end_date),
            day = yday(end_date)) |> 
@@ -123,9 +141,7 @@ estuary_gam <- function(formula,
     filter(end_date >= as.Date(date)) |> 
     left_join(loads |> select(Date, {{predictor_parameter}}), 
               by = c("end_date" = "Date"))
-  
-  estuary_gam_model(formula = formula,
-                    data = data)
+  data
 }
 
 estuary_gam_model <- function(formula, data) {

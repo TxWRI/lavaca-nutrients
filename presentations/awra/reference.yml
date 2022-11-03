@@ -278,6 +278,52 @@ references:
   volume: '11'
 
 
+- id: murphy_generalized_2019
+  abstract: >-
+    Nutrient reduction efforts have been undertaken in recent decades to
+    mitigate the impacts of eutrophication in coastal and estuarine systems
+    worldwide. To track progress in response to one of these efforts we use
+    Generalized Additive Models (GAMs) to evaluate a diverse suite of water
+    quality constituents over a 32-year period in the Chesapeake Bay, an estuary
+    on the east coast of the United States. Model development included selecting
+    a GAM structure to describe nonlinear seasonally-varying changes over time,
+    incorporating hydrologic variability via either river flow or salinity, and
+    using interventions to model method or laboratory changes suspected to
+    impact data. This approach, transferable to other systems, allows for
+    evaluation of water quality data in a statistically rigorous way, while
+    being suitable for application to many sites and variables. This enables
+    consistent generation of annual updates, while providing a tool for
+    developing insights to a range of management- and researchfocused questions.
+  accessed:
+    - year: 2020
+      month: 2
+      day: 19
+  author:
+    - family: Murphy
+      given: Rebecca R.
+    - family: Perry
+      given: Elgin
+    - family: Harcum
+      given: Jon
+    - family: Keisman
+      given: Jennifer
+  citation-key: murphy_generalized_2019
+  container-title: Environmental Modelling & Software
+  DOI: 10.1016/j.envsoft.2019.03.027
+  ISSN: '13648152'
+  issued:
+    - year: 2019
+      month: 8
+  language: en
+  page: 1-13
+  source: Crossref
+  title: >-
+    A Generalized Additive Model approach to evaluating water quality:
+    Chesapeake Bay case study
+  title-short: A Generalized Additive Model approach to evaluating water quality
+  type: article-journal
+  URL: https://linkinghub.elsevier.com/retrieve/pii/S1364815218307801
+  volume: '118'
 
 - id: murphyNutrientImprovementsChesapeake2022
   abstract: >-
