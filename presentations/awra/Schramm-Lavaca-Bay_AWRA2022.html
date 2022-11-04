@@ -7,7 +7,7 @@
 <link href="Schramm-Lavaca-Bay_AWRA2022_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Schramm-Lavaca-Bay_AWRA2022_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Schramm-Lavaca-Bay_AWRA2022_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.231">
+  <meta name="generator" content="quarto-1.2.190">
 
   <meta name="author" content="Michael Schramm - michael.schramm@ag.tamu.edu">
   <title>Statistical Modeling and Trends in Freshwater Derived Nutrient Loads, Lavaca Bay, Texas</title>
@@ -345,7 +345,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-color="white" data-background-image="images/lavaca_bay_resize.png" data-background-opacity="0.50" data-background-position="right" data-background-repeat="no-repeat" data-background-size="contain" class="quarto-title-block center">
+<section id="title-slide" data-background-color="white" data-background-image="images/lavaca_bay_resize.png" data-background-opacity="0.50" data-background-position="right" data-background-repeat="no-repeat" data-background-size="auto" class="quarto-title-block center">
   <h1 class="title">Statistical Modeling and Trends in Freshwater Derived Nutrient Loads, Lavaca Bay, Texas</h1>
   <p class="subtitle">2022 AWRA Annual Water Conference</p>
 
@@ -367,7 +367,7 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 <p>Stakeholder advisory committee:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Dr.&nbsp;Mike Wetz - Harte Intitute, TAMU-CC</p>
+<p>Dr.&nbsp;Mike Wetz - Harte Institute, TAMU-CC</p>
 <p>Bill Balboa - Matagorda Bay Foundation</p>
 <p>Janet Weaver - Lavaca Bay Foundation</p>
 <p>Chad Kinsfather - Lavaca-Navidad River Authority</p>
@@ -379,9 +379,8 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 </div>
 <p>Graduate Students:</p>
 <p>Shubham Jain - Ph.D Candidate TAMU Biological and Agricultural Engineering</p>
-<p>Funding:</p>
-<p>Funded in part by grants from the Texas General Land Office and the National Oceanic and Atmospheric Administration.</p>
-<div style="font-size: .75em; text-align: center">
+
+<img data-src="images/logo.png" width="1452" class="r-stretch"><div style="font-size: .75em; text-align: center">
 <p>This project was funded by a Texas Coastal Management Program grant approved by the Texas Land Commissioner, providing financial assistance under the Coastal Zone Management Act of 1972, as amended, awarded by the National Oceanic and Atmospheric Administration (NOAA), Office for Coastal Management, pursuant to NOAA Award No.&nbsp;NA21NOS4190136. The views expressed herein are those of the author(s) and do not necessarily reflect the views of NOAA, the U.S. Department of Commerce, or any of their subagencies.</p>
 </div>
 </section>
@@ -415,7 +414,7 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 <div class="column" style="width:60%;">
 <p><img data-src="images/bugica.png"></p>
 <ul>
-<li><span class="citation" data-cites="bugicaWaterQualityTrends2020">Bugica, Sterba-Boatwright, and Wetz (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> identify euthrophication risk in Lavaca Bay due to 🡅 TP and 🡅 Chlorophyll-a concentrations.</li>
+<li><span class="citation" data-cites="bugicaWaterQualityTrends2020">Bugica, Sterba-Boatwright, and Wetz (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> identify eutrophication risk in Lavaca Bay due to 🡅 TP and 🡅 Chlorophyll-a concentrations.</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <ul>
@@ -427,12 +426,15 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 </div>
 </section>
 <section>
-<section id="questions" class="title-slide slide level1 center">
-<h1>Questions</h1>
+<section id="project-objectives" class="title-slide slide level1 center">
+<h1>Project Objectives</h1>
 <ul>
-<li>Can we quantify nutrient loads exported to Lavaca Bay?</li>
-<li>Are there trends?</li>
-<li>Can we identify correlations in nutrient loading and estuary water quality (controlling for discharge)?</li>
+<li><ol type="1">
+<li>Develop estimates of NO<sub>3</sub>-N and TP loading from Lavaca and Navidad Rivers</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>Link nutrient loads and river discharge to changes in nutrient concentration in Lavaca Bay</li>
+</ol></li>
 </ul>
 </section>
 <section id="lavaca-bay-watersheds" class="slide level2">
@@ -449,7 +451,7 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 <li>1.3 million acre-feet per year</li>
 <li>65% from Lavaca/Navidad watershed
 <ul>
-<li>61% from Navidad at Palemtto Bend Dam</li>
+<li>61% from Navidad at Palmetto Bend Dam</li>
 <li>32% from Lavaca near City of Edna</li>
 <li>7% ungaged downstream runoff</li>
 </ul></li>
@@ -458,20 +460,6 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 </div>
 </section>
 <section id="methods" class="slide level2">
-<h2>Methods</h2>
-<ul>
-<li>Two components
-<ul>
-<li><ol type="1">
-<li>Develop estimates of NO<sub>3</sub>-N and TP loading from Lavaca and Navidad Rivers</li>
-</ol></li>
-<li><ol start="2" type="1">
-<li>Link nutrient loads and river discharge to changes in nutrient concentration in Lavaca Bay</li>
-</ol></li>
-</ul></li>
-</ul>
-</section>
-<section id="methods-1" class="slide level2">
 <h2>Methods</h2>
 <ul>
 <li><p>Loading estimates:</p>
@@ -487,23 +475,23 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 </ul>
 
 <img data-src="images/cv-bb.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">5-fold CV procedure. Image from Boehmke &amp; Greenwell 2020 (https://bradleyboehmke.github.io/HOML/)</p></section>
-<section id="methods-2" class="slide level2 smaller">
+<section id="methods-1" class="slide level2 smaller">
 <h2>Methods</h2>
-<p>GAM model:</p>
 <p><span class="math display">\[
-    Y = s(date) + s(day) + s(log1p(Q)) + s(fa) + s(ma)
+    Y = s(ddate) + s(yday) + s(log1p(Flow)) + s(ma) + s(fa)
 \]</span></p>
 <ul>
 <li><span class="math inline">\(Y\)</span> = NO<sub>3</sub> or TP concentration;</li>
 <li><span class="math inline">\(s\)</span> = smoothing function;</li>
-<li><span class="math inline">\(date\)</span> = decimal date;</li>
-<li><span class="math inline">\(day\)</span> = numeric day of year;</li>
-<li><span class="math inline">\(Q\)</span> = mean daily discharge;</li>
-<li><span class="math inline">\(fa\)</span> = short- or long-term flow anomaly (stfa, ltfa) <span class="citation" data-cites="vecchiaTrendsConcentrationsUse2009 zhangImprovingRiverineConstituent2017">(<a href="#/references" role="doc-biblioref" onclick="">Vecchia et al. 2009</a>; <a href="#/references" role="doc-biblioref" onclick="">Zhang and Ball 2017</a>)</span>;</li>
+<li><span class="math inline">\(ddate\)</span> = decimal date;</li>
+<li><span class="math inline">\(yday\)</span> = numeric day of year;</li>
+<li><span class="math inline">\(Flow\)</span> = mean daily discharge;</li>
 <li><span class="math inline">\(ma\)</span> = exponential moving average <span class="citation" data-cites="kuhnertQuantifyingTotalSuspended2012 zhangImprovingRiverineConstituent2017">(<a href="#/references" role="doc-biblioref" onclick="">Kuhnert et al. 2012</a>; <a href="#/references" role="doc-biblioref" onclick="">Zhang and Ball 2017</a>)</span>.</li>
+<li><span class="math inline">\(fa\)</span> = short- or long-term flow anomaly (stfa, ltfa) <span class="citation" data-cites="vecchiaTrendsConcentrationsUse2009 zhangImprovingRiverineConstituent2017">(<a href="#/references" role="doc-biblioref" onclick="">Vecchia et al. 2009</a>; <a href="#/references" role="doc-biblioref" onclick="">Zhang and Ball 2017</a>)</span>;</li>
 <li>Gamma family with log-link</li>
 </ul>
-<aside class="notes">
+
+<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-5-1.png" width="1080" class="r-stretch"><aside class="notes">
 <p>GAMs were fit using mgcv in R. Based on previous experience and literature we chose a Gamma error distribution with a log link function to fit the models.</p>
 <p>Date represents the long term trend, the day of year represents a seasonal trend fitted with a cyclic cubic regression spline, flow +1 is log transformed. The stfa term is the short-term flow anomaly and describes how difference the current flow is from the previous month, and ma is an exponentially weighted moving average that accounts for the influence of flow events that occurred in the past on current nutrient concentration and load.</p>
 <p>A thin plate regression spline was used for other terms. The number of knots in each smoothing term were adjusted after inspecting model residuals and using the gam.check function in the mgcv package. Insterad of using a stepwise model selection process, the select = TRUE option was used when fitting models to allow terms to be penalized to zero if the fitting process determined the term did not improve the model.</p>
@@ -519,7 +507,7 @@ Michael Schramm - michael.schramm@ag.tamu.edu
           display:block!important;
       }</style></aside>
 </section>
-<section id="methods-3" class="slide level2">
+<section id="methods-2" class="slide level2">
 <h2>Methods</h2>
 <p>Loading estimates:</p>
 <ul>
@@ -538,9 +526,9 @@ Michael Schramm - michael.schramm@ag.tamu.edu
 </ul></li>
 </ul>
 </section>
-<section id="methods-4" class="slide level2">
+<section id="methods-3" class="slide level2 smaller">
 <h2>Methods</h2>
-<p>Does variation in Flow and Load explain Bay nutrient concentration?</p>
+<p>Do variations in Flow and Load explain Bay nutrient concentration?</p>
 <p><strong>Temporal Model</strong></p>
 <p><span class="math display">\[
 Y = s(Day) + s(Date) + ti(Day, Date)
@@ -554,10 +542,10 @@ Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow)
 Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 \]</span></p>
 <ul>
-<li><span class="math inline">\(Flow\)</span> is seasonally normalized</li>
-<li><span class="math inline">\(Load\)</span> is flow normalized</li>
-<li>Simplified methodology from <span class="citation" data-cites="murphy_generalized_2019">Murphy et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> and <span class="citation" data-cites="murphyNutrientImprovementsChesapeake2022">Murphy et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</li>
-<li>Compare AIC</li>
+<li><span class="math inline">\(Flow\)</span> is seasonally adjusted</li>
+<li><span class="math inline">\(Load\)</span> is flow adjusted</li>
+<li>Simplified methodology following <span class="citation" data-cites="murphy_generalized_2019">Murphy et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> and <span class="citation" data-cites="murphyNutrientImprovementsChesapeake2022">Murphy et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</li>
+<li>Compare AIC and other model metrics</li>
 </ul>
 </section>
 <section id="results" class="slide level2 smaller">
@@ -596,7 +584,7 @@ Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-5-1.png" width="1440"></p>
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-7-1.png" width="1440"></p>
 </div>
 </div>
 </div><div class="column" style="font-size: 1em">
@@ -631,7 +619,7 @@ Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-7-1.png" width="1440"></p>
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-9-1.png" width="1440"></p>
 </div>
 </div>
 </div>
@@ -673,7 +661,7 @@ Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-9-1.png" width="1440"></p>
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-11-1.png" width="1440"></p>
 </div>
 </div>
 </div><div class="column">
@@ -708,7 +696,7 @@ Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-11-1.png" width="1440"></p>
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-13-1.png" width="1440"></p>
 </div>
 </div>
 </div>
@@ -716,22 +704,20 @@ Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 </section>
 <section id="results-2" class="slide level2">
 <h2>Results</h2>
-<p><strong>Total Loadings</strong></p>
 <div style="text-align: center">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-12-1.png" width="1440"></p>
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-14-1.png" width="1440"></p>
 </div>
 </div>
 </div>
 </section>
 <section id="results-3" class="slide level2">
 <h2>Results</h2>
-<p><strong>Total Loadings</strong></p>
 <div style="text-align: center">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-13-1.png" width="1440"></p>
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-15-1.png" width="1440"></p>
 </div>
 </div>
 </div>
@@ -802,22 +788,8 @@ Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 <li>High variability in actual loads that reflect total discharge</li>
 <li>Flow-normalized loads:</li>
 </ul>
-</section>
-<section id="results-4" class="slide level2">
-<h2>Results</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-14-1.png" width="900"></p>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-15-1.png" width="900"></p>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-16-1.png" width="900"></p>
@@ -826,6 +798,17 @@ Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 <div class="cell">
 <div class="cell-output-display">
 <p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-17-1.png" width="900"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-18-1.png" width="900"></p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-19-1.png" width="900"></p>
 </div>
 </div>
 </div>
@@ -875,25 +858,31 @@ Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 </div>
 </div>
 
-<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-19-1.png" width="900" class="r-stretch"></section>
+<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-21-1.png" width="900" class="r-stretch"></section>
 <section id="estuary-models-1" class="slide level2">
 <h2>Estuary Models</h2>
 <p><strong>Example: Site 13563 TP</strong></p>
 
-<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-20-1.png" width="1800" class="r-stretch"></section>
+<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-22-1.png" width="1800" class="r-stretch"></section>
 <section id="estuary-models-2" class="slide level2">
 <h2>Estuary Models</h2>
 <p><strong>Example: Site 13563 TP</strong></p>
 
-<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-21-1.png" width="1800" class="r-stretch"></section></section>
+<img data-src="Schramm-Lavaca-Bay_AWRA2022_files/figure-revealjs/unnamed-chunk-23-1.png" width="1800" class="r-stretch"></section></section>
 <section>
 <section id="conclusions" class="title-slide slide level1 center">
 <h1>Conclusions</h1>
 <ul>
-<li>GAMs are useful framework for development of load estimation models;</li>
-<li>Identified high variance in loads, with notable change in river source under drought conditions;</li>
-<li>Identified decrease in flow-normalized TP loads from the Navidad River;</li>
-<li>Initial use of GAMS as a framework to explore estuary water quality responses to river inputs.</li>
+<li>GAMs
+<ul>
+<li>Useful framework for statistical load estimation and exploratory analysis of estuarine water quality.</li>
+</ul></li>
+<li>Nutrient Loading
+<ul>
+<li>High variance in actual loads.</li>
+<li>Shifts in riverine sources during drought conditions.</li>
+<li>Changes in watershed loads explains some variation in estuary nutrient concentration.</li>
+</ul></li>
 </ul>
 </section>
 <section id="further-work" class="slide level2">
@@ -903,7 +892,12 @@ Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 <li>Develop/fund supplemental flow-biased monitoring to identify significant changes and trends;</li>
 <li>Continue work on estuary water quality responses…</li>
 </ul>
-</section>
+<p><strong>Thank You!</strong></p>
+<p>Michael Schramm - michael.schramm@ag.tamu.edu</p>
+<p>Texas Water Resources Institute</p>
+<p>Texas A&amp;M AgriLife Research</p>
+
+<img data-src="images/logo.png" width="774" class="r-stretch"></section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" style="font-size: .65em" role="doc-bibliography">
@@ -1125,9 +1119,9 @@ Zhang, Qian, and William P. Ball. 2017. <span>“Improving Riverine Constituent 
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1920,
+        width: 1050,
 
-        height: 1080,
+        height: 700,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -1165,15 +1159,12 @@ Zhang, Qian, and William P. Ball. 2017. <span>“Improving Riverine Constituent 
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
       // slide changes (different for each slide format).
       (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
           const event = window.document.createEvent("Event");
           event.initEvent("slideenter", true, true);
           window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
 
           // dispatch for shiny
           if (window.jQuery) {
@@ -1184,6 +1175,13 @@ Zhang, Qian, and William P. Ball. 2017. <span>“Improving Riverine Constituent 
               window.jQuery(currentSlide).trigger("shown");
             }
           }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
         }
 
         // hookup for slidy

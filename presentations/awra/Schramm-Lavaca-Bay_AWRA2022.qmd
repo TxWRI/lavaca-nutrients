@@ -6,8 +6,6 @@ institute: "Texas Water Resources Institute, Texas A&M AgriLife Research"
 date: "2022-11-08"
 format: 
   revealjs:
-    width: 1920
-    height: 1080
     theme: [default, custom.scss]
 bibliography: reference.yml
 csl: https://www.zotero.org/styles/chicago-author-date?source=1
@@ -17,7 +15,7 @@ slide-number: true
 title-slide-attributes:
     data-background-image: images/lavaca_bay_resize.png
     data-background-opacity: "0.50"
-    data-background-size: contain
+    data-background-size: auto
     data-background-repeat: "no-repeat"
     data-background-color: "white"
     data-background-position: "right"
@@ -31,7 +29,7 @@ Stakeholder advisory committee:
 
 ::: {.column width="50%"}
 
-Dr. Mike Wetz - Harte Intitute, TAMU-CC
+Dr. Mike Wetz - Harte Institute, TAMU-CC
 
 Bill Balboa - Matagorda Bay Foundation
 
@@ -58,13 +56,17 @@ Graduate Students:
 
 Shubham Jain - Ph.D Candidate TAMU Biological and Agricultural Engineering
 
-Funding:
 
-Funded in part by grants from the Texas General Land Office and the National Oceanic and Atmospheric Administration.
+
+```{r}
+knitr::include_graphics("images/logo.png")
+```
+
 
 ::: {style="font-size: .75em; text-align: center"}
 This project was funded by a Texas Coastal Management Program grant approved by the Texas Land Commissioner, providing financial assistance under the Coastal Zone Management Act of 1972, as amended, awarded by the National Oceanic and Atmospheric Administration (NOAA), Office for Coastal Management, pursuant to NOAA Award No. NA21NOS4190136. The views expressed herein are those of the author(s) and do not necessarily reflect the views of NOAA, the U.S. Department of Commerce, or any of their subagencies.
 :::
+
 
 ## Background
 
@@ -118,7 +120,7 @@ knitr::include_graphics("images/lavaca_bay_resize.png")
 
 ![](images/bugica.png)
 
- - @bugicaWaterQualityTrends2020 identify euthrophication risk in Lavaca Bay due to 🡅 TP and 🡅 Chlorophyll-a concentrations.
+ - @bugicaWaterQualityTrends2020 identify eutrophication risk in Lavaca Bay due to 🡅 TP and 🡅 Chlorophyll-a concentrations.
  
  
 :::
@@ -138,11 +140,10 @@ knitr::include_graphics("images/lavaca_bay_resize.png")
 
 
  
-# Questions
+# Project Objectives
  
- - Can we quantify nutrient loads exported to Lavaca Bay?
- - Are there trends?
- - Can we identify correlations in nutrient loading and estuary water quality (controlling for discharge)?
+  - (1) Develop estimates of NO~3~-N and TP loading from Lavaca and Navidad Rivers
+  - (2) Link nutrient loads and river discharge to changes in nutrient concentration in Lavaca Bay
  
 
 
@@ -167,7 +168,7 @@ knitr::include_graphics("images/lb_simple.png")
 
 - 1.3 million acre-feet per year
 - 65% from Lavaca/Navidad watershed
-    - 61% from Navidad at Palemtto Bend Dam
+    - 61% from Navidad at Palmetto Bend Dam
     - 32% from Lavaca near City of Edna
     - 7% ungaged downstream runoff
 
@@ -176,12 +177,6 @@ knitr::include_graphics("images/lb_simple.png")
 
 :::: 
 
-
-## Methods
-
- - Two components
-    - (1) Develop estimates of NO~3~-N and TP loading from Lavaca and Navidad Rivers
-    - (2) Link nutrient loads and river discharge to changes in nutrient concentration in Lavaca Bay
 
 ## Methods
 
@@ -202,21 +197,30 @@ knitr::include_graphics("images/cv-bb.png")
     
 ## Methods {.smaller}
 
-GAM model:
-    
 
 $$
-    Y = s(date) + s(day) + s(log1p(Q)) + s(fa) + s(ma)
+    Y = s(ddate) + s(yday) + s(log1p(Flow)) + s(ma) + s(fa)
 $$
 
 - $Y$ = NO~3~ or TP concentration;
 - $s$ = smoothing function;
-- $date$ = decimal date;
-- $day$ = numeric day of year;
-- $Q$ = mean daily discharge;
-- $fa$ = short- or long-term flow anomaly (stfa, ltfa) [@vecchiaTrendsConcentrationsUse2009; @zhangImprovingRiverineConstituent2017];
+- $ddate$ = decimal date;
+- $yday$ = numeric day of year;
+- $Flow$ = mean daily discharge;
 - $ma$ = exponential moving average [@kuhnertQuantifyingTotalSuspended2012; @zhangImprovingRiverineConstituent2017].
+- $fa$ = short- or long-term flow anomaly (stfa, ltfa) [@vecchiaTrendsConcentrationsUse2009; @zhangImprovingRiverineConstituent2017];
 - Gamma family with log-link
+
+```{r}
+#| fig-width: 6
+#| fig-height: 2
+tar_read(tp_08164000, store = store) |> 
+  gratia::draw(nrow = 1,              
+               residuals = FALSE,
+               dist = 0.25,
+               continuous_fill = scico::scale_fill_scico(palette = "vik")) & theme_TWRI_print() & theme(plot.title = element_text(size = 12, face = "plain"))
+```
+
 
 ::: {.notes}
 GAMs were fit using mgcv in R. Based on previous experience and literature we chose a Gamma error distribution with a log link function to fit the models.
@@ -240,9 +244,9 @@ Loading estimates:
     - **Flow-normalized estimates** calculated similar to WRTDS, assume daily flow variables are random occurrence from all possible values on that day of year.
  
 
-## Methods
+## Methods {.smaller}
 
-Does variation in Flow and Load explain Bay nutrient concentration?
+Do variations in Flow and Load explain Bay nutrient concentration?
 
 **Temporal Model**
 
@@ -262,10 +266,10 @@ $$
 Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
 $$
 
- - $Flow$ is seasonally normalized
- - $Load$ is flow normalized
- - Simplified methodology from @murphy_generalized_2019 and @murphyNutrientImprovementsChesapeake2022.
- - Compare AIC
+ - $Flow$ is seasonally adjusted
+ - $Load$ is flow adjusted
+ - Simplified methodology following @murphy_generalized_2019 and @murphyNutrientImprovementsChesapeake2022.
+ - Compare AIC and other model metrics
 
 ## Results {.smaller}
 
@@ -559,13 +563,11 @@ ggplot() +
 
 ## Results
 
-**Total Loadings**
-
 ::: {style="text-align: center"}
 
 ```{r}
 #| echo: false
-#| fig-height: 5
+#| fig-height: 4.75
 #| fig-width: 8
 
 load_lav_no3 <- tar_read(daily_no3_08164000, store = store)
@@ -634,7 +636,7 @@ c <- ggplot() +
                            hjust = "center",
                            nudge_x = 2, family = "MoristonPersonal-Medium", 
                            lineheight = 0.65,
-                           size = 3) +
+                           size = 2.75) +
   ggrepel::geom_text_repel(data = prop |> filter(year == 2020, 
                                                  site == "Navidad River"), 
                            aes(x = year, y = proportion*0.5), 
@@ -642,7 +644,7 @@ c <- ggplot() +
                            hjust = "center",
                            nudge_x = 2, family = "MoristonPersonal-Medium", 
                            lineheight = 0.65,
-                           size = 3) +
+                           size = 2.75) +
   scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
   scale_x_continuous(breaks = c(2005:2020),
                      expand = expansion(mult = c(0.05, 0.2))) +
@@ -655,6 +657,35 @@ c <- ggplot() +
         legend.title = element_blank())
 
 
+d <- tar_read(qdata, store = store) |> 
+  filter(site_no %in% c("8164000", "lktexana_g")) |>
+  filter(Date >= as.Date("2005-01-01")) |> 
+  mutate(site = case_when(
+    site_no == "8164000" ~ "Lavaca River",
+    site_no == "lktexana_g" ~ "Navidad River"
+  )) |> 
+  mutate(year = year(Date)) |> 
+
+  mutate(Flow = as_units(Flow, "ft^3/s")) |> 
+  mutate(Flow = set_units(Flow, "ft^3/day")) |> 
+  mutate(Flow = set_units(Flow, "1E6gallons/day")) |> 
+  group_by(year, site) |> 
+  summarise(Flow = sum(Flow, na.rm = TRUE)) |> 
+  mutate(Flow = drop_units(Flow)) |> 
+  ggplot() +
+  geom_col(aes(year, Flow, fill = site)) +
+  scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
+  scale_x_continuous(breaks = c(2005:2020),
+                     expand = expansion(mult = c(0.05, 0.2))) +
+  scale_y_continuous(expand = c(0,0)) +
+  labs(x = "", y = "Annual Discharge<br>[Millon Gallons]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 12),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+
+  
 layout <- "
 A
 A
@@ -669,14 +700,19 @@ C
 C
 C
 D
+D
+D
+D
+E
 "
 
 
-(a / b / c / guide_area()) + 
+(a / b / c / d / guide_area()) + 
   plot_layout(guides = 'collect', design  = layout) +
   plot_annotation(subtitle = "Total NO<sub>3</sub>-N Loadings") & 
   theme(plot.margin = ggplot2::margin(0.05,.1,0,.1,unit = "in"),
         plot.subtitle = element_markdown(family = "MoristonPersonal-Medium"))
+
 
 ```
 
@@ -687,13 +723,11 @@ D
 
 ## Results
 
-**Total Loadings**
-
 ::: {style="text-align: center"}
 
 ```{r}
 #| echo: false
-#| fig-height: 5
+#| fig-height: 4.75
 #| fig-width: 8
 
 load_lav_tp <- tar_read(daily_tp_08164000, store = store)
@@ -762,7 +796,7 @@ c <- ggplot() +
                            hjust = "center",
                            nudge_x = 2, family = "MoristonPersonal-Medium", 
                            lineheight = 0.65,
-                           size = 3) +
+                           size = 2.75) +
   ggrepel::geom_text_repel(data = prop |> filter(year == 2020, 
                                                  site == "Navidad River"), 
                            aes(x = year, y = proportion*0.5), 
@@ -770,7 +804,7 @@ c <- ggplot() +
                            hjust = "center",
                            nudge_x = 2, family = "MoristonPersonal-Medium", 
                            lineheight = 0.65,
-                           size = 3) +
+                           size = 2.75) +
   scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
   scale_x_continuous(breaks = c(2000:2020),
                      expand = expansion(mult = c(0.05, 0.2))) +
@@ -783,6 +817,35 @@ c <- ggplot() +
         legend.title = element_blank())
 
 
+d <- tar_read(qdata, store = store) |> 
+  filter(site_no %in% c("8164000", "lktexana_g")) |>
+  filter(Date >= as.Date("2000-01-01")) |> 
+  mutate(site = case_when(
+    site_no == "8164000" ~ "Lavaca River",
+    site_no == "lktexana_g" ~ "Navidad River"
+  )) |> 
+  mutate(year = year(Date)) |> 
+
+  mutate(Flow = as_units(Flow, "ft^3/s")) |> 
+  mutate(Flow = set_units(Flow, "ft^3/day")) |> 
+  mutate(Flow = set_units(Flow, "1E6gallons/day")) |> 
+  group_by(year, site) |> 
+  summarise(Flow = sum(Flow, na.rm = TRUE)) |> 
+  mutate(Flow = drop_units(Flow)) |> 
+  ggplot() +
+  geom_col(aes(year, Flow, fill = site)) +
+  scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
+  scale_x_continuous(breaks = c(2000:2020),
+                     expand = expansion(mult = c(0.05, 0.2))) +
+  scale_y_continuous(expand = c(0,0)) +
+  labs(x = "", y = "Annual Discharge<br>[Millon Gallons]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 12),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+
+  
 layout <- "
 A
 A
@@ -797,10 +860,13 @@ C
 C
 C
 D
+D
+D
+D
+E
 "
 
-
-(a / b / c / guide_area()) + 
+(a / b / c / d / guide_area()) + 
   plot_layout(guides = 'collect', design  = layout) +
   plot_annotation(subtitle = "Total TP Loadings") & 
   theme(plot.margin = ggplot2::margin(0.05,.1,0,.1,unit = "in"),
@@ -829,15 +895,13 @@ D
 
  - High variability in actual loads that reflect total discharge
  - Flow-normalized loads:
- 
-## Results
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 
 ```{r}
-#| fig-height: 2.5
+#| fig-height: 2
 #| fig-width: 5
 fn_load <- tar_read(daily_no3_08164000_fn, store = store)
 a <- fn_load$annually[fn_load$annually$year == 2005,]$NO3_Estimate
@@ -876,7 +940,7 @@ ggplot(df) +
 
 
 ```{r}
-#| fig-height: 2.5
+#| fig-height: 2
 #| fig-width: 5
 
 
@@ -922,7 +986,7 @@ ggplot(df) +
 ::: {.column width="50%"}
 
 ```{r}
-#| fig-height: 2.5
+#| fig-height: 2
 #| fig-width: 5
 fn_load <- tar_read(daily_no3_texana_fn, store = store)
 a <- fn_load$annually[fn_load$annually$year == 2005,]$NO3_Estimate
@@ -962,7 +1026,7 @@ ggplot(df) +
 
 
 ```{r}
-#| fig-height: 2.5
+#| fig-height: 2
 #| fig-width: 5
 
 
@@ -1121,19 +1185,31 @@ ggplot(data = df) +
 
 # Conclusions
 
-  - GAMs are useful framework for development of load estimation models;
-  - Identified high variance in loads, with notable change in river source under drought conditions;
-  - Identified decrease in flow-normalized TP loads from the Navidad River;
-  - Initial use of GAMS as a framework to explore estuary water quality responses to river inputs.
-
+  - GAMs
+      - Useful framework for statistical load estimation and exploratory analysis of estuarine water quality.
+  - Nutrient Loading
+      - High variance in actual loads.
+      - Shifts in riverine sources during drought conditions.
+      - Changes in watershed loads explains some variation in estuary nutrient concentration.
 
 ## Further work
 
   - Comparison of above lake and below lake loads;
   - Develop/fund supplemental flow-biased monitoring to identify significant changes and trends;
   - Continue work on estuary water quality responses...
+  
+**Thank You!**
+
+Michael Schramm - michael.schramm@ag.tamu.edu
+
+Texas Water Resources Institute
+
+Texas A&M AgriLife Research
 
 
+```{r}
+knitr::include_graphics("images/logo.png")
+```
  
 ## References
 
