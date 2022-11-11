@@ -60,3 +60,95 @@ format_dam_data <- function(data) {
   return(below_tex)
 }
 
+
+# Estuary models -------------
+
+fn_estuary_tp_loads <- function(lavaca_loads,
+                                navidad_loads,
+                                flow) {
+  loads <- lavaca_loads$daily |> 
+    bind_rows(navidad_loads$daily) |> 
+    select(Date, TP_Estimate) |> 
+    group_by(Date) |> 
+    summarise(TP = sum(TP_Estimate)) |> 
+    filter(Date >= as.Date("2000-01-02")) |> 
+    left_join(flow, by = c("Date" = "Date"))
+  
+  tp_flow <- gam(log(TP) ~ log1p(Discharge),
+                 data = loads,
+                 family = gaussian())
+  
+  loads$TP_resid <- residuals(tp_flow, type = "response")
+  
+  loads
+  
+}
+
+
+
+fn_estuary_no3_loads <- function(lavaca_loads,
+                                navidad_loads,
+                                flow) {
+  loads <- lavaca_loads$daily |> 
+    bind_rows(navidad_loads$daily) |> 
+    select(Date, NO3_Estimate) |> 
+    group_by(Date) |> 
+    summarise(NO3 = sum(NO3_Estimate)) |> 
+    filter(Date >= as.Date("2005-01-02")) |> 
+    left_join(flow, by = c("Date" = "Date"))
+  
+  no3_flow <- gam(log(NO3) ~ log1p(Discharge),
+                 data = loads,
+                 family = gaussian())
+  
+  loads$NO3_resid <- residuals(no3_flow, type = "response")
+  
+  loads
+  
+}
+
+
+estuary_gam <- function(formula,
+                        model_data,
+                        loads,
+                        response_parameter,
+                        predictor_parameter = TP_resid,
+                        date,
+                        station) {
+  
+  data <- estuary_gam_data(model_data,
+                           loads,
+                           response_parameter,
+                           predictor_parameter = TP_resid,
+                           date,
+                           station)
+  
+  estuary_gam_model(formula = formula,
+                    data = data)
+}
+
+estuary_gam_data <- function(model_data,
+                             loads,
+                             response_parameter,
+                             predictor_parameter = TP_resid,
+                             date,
+                             station) {
+  data <- model_data |> 
+    mutate(ddate = decimal_date(end_date),
+           day = yday(end_date)) |> 
+    filter(parameter_code == {{response_parameter}}) |> 
+    filter(station_id == {{station}}) |> 
+    filter(end_date >= as.Date(date)) |> 
+    left_join(loads |> select(Date, {{predictor_parameter}}), 
+              by = c("end_date" = "Date"))
+  data
+}
+
+estuary_gam_model <- function(formula, data) {
+  gam(formula,
+      data = data,
+      knots = list(day = c(1,366)),
+      method = "REML",
+      select = TRUE,
+      family = Gamma(link = "log"))
+}

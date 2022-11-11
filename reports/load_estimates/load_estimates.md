@@ -75,6 +75,7 @@ Daily flow variability is responsible for the majority of daily load variability
 :::
 
 
+\clearpage
 
 ## Navidad River at Palmetto Bend Dam, Lake Texana
 
@@ -90,6 +91,33 @@ Daily flow variability is responsible for the majority of daily load variability
 ![Aggregated (a) monthly and (b) annual TP loads at Palmetto Bend Dam at Lake Texana.](load_estimates_files/figure-pdf/tp_aggregate-texana-1.png)
 :::
 :::
+
+
+\clearpage
+
+## Total Export
+
+### NO~3~-N
+
+
+::: {.cell}
+::: {.cell-output-display}
+![Modelled monthly and annual total NO~3~-N input to Lavaca Bay](load_estimates_files/figure-pdf/no3_total_export-1.png)
+:::
+:::
+
+
+\clearpage
+
+### TP
+
+
+::: {.cell}
+::: {.cell-output-display}
+![Modelled monthly and annual total TP input to Lavaca Bay](load_estimates_files/figure-pdf/tp_total_export-1.png)
+:::
+:::
+
 
 
 \clearpage

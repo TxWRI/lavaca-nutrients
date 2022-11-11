@@ -223,7 +223,7 @@ clean_data <- function(wq_df, q_df) {
 fn_data <-   function(model_data) {
   
   grouped <- model_data |> 
-    dplyr::select(site_no, Flow, log1p_Flow, stfa, ma, yday) |> 
+    dplyr::select(site_no, Flow, log1p_Flow, stfa, ltfa, ma, yday) |> 
     group_by(site_no, yday) #|> 
   
   
@@ -253,7 +253,7 @@ fn_lk_data <-   function(model_data) {
                 T_2 = "1 month", transform = "log"),
       # smooth discounted flow
       ma = sdf(log1p(inflow))) |>
-    dplyr::select(Flow, inflow, log1p_inflow, stfa, ma, yday) |>
+    dplyr::select(Flow, inflow, log1p_inflow, stfa, ltfa, ma, yday) |>
     group_by(yday) |> 
     mutate(log1p_Flow = log1p(Flow))
   
@@ -263,4 +263,66 @@ fn_lk_data <-   function(model_data) {
     ungroup()  |> 
     dplyr::select(site_no, yday, ddate, Date) |> 
     left_join(inflow)
+}
+
+
+
+
+## Read Lavaca Bay Inflow Data
+
+load_lb_inflow <- function() {
+  ## need to load TWDB data
+  files <- fs::dir_ls("data/TWDB/Modeled/")
+  
+  files |> 
+    map_df(~{read_table(.x,
+                        col_names = c("year", "month", "day", "afd"), 
+                        col_types = "nnnn",
+                        skip = 1) |> 
+        bind_rows()}) |> 
+    mutate(Date = lubridate::ymd(paste0(year,"-", month,"-", day))) |> 
+    group_by(Date) |> 
+    summarize(Discharge = sum(afd)) |> 
+    mutate(Discharge = (Discharge * (43560/86400)))
+}
+
+
+## develop seasonally adjusted lavaca bay inflow
+
+adjust_lbay_inflow <- function(flow) {
+  flow_out <- flow |> 
+    mutate(day = yday(Date))
+  
+  m_flow <- gam(log1p(Discharge) ~ s(day, bs = "cc"),
+                data = flow_out,
+                method = "REML")
+  flow$flw_res <- residuals(m_flow)
+  
+  return(flow)
+}
+
+
+## return estuary wq data
+
+load_est_wq_data <- function() {
+  df <- readr::read_delim("data/SWQM-LavacaBay/SWQM-LavacaBay.txt", 
+                          delim = "|", escape_double = FALSE, col_types = cols(Segment = col_character(), 
+                                                                               `Station ID` = col_character(), `End Date` = col_date(format = "%m/%d/%Y"), 
+                                                                               `End Time` = col_skip(), `End Depth` = col_skip(), 
+                                                                               `Start Date` = col_skip(), `Start Time` = col_skip(), 
+                                                                               `Start Depth` = col_skip(), `Composite Category` = col_skip(), 
+                                                                               `Composite Type` = col_skip(), Comments = col_skip()), 
+                          trim_ws = TRUE) |> 
+    janitor::clean_names()
+  df
+}
+
+
+## create estuary model data
+create_est_model_data <- function(wq_data,
+                                  flow) {
+  wq_data <- wq_data |> 
+    left_join(flow, by = c("end_date" = 'Date')) 
+  wq_data
+  
 }

@@ -67,7 +67,7 @@ Thin plate regression splines were used for $ddate$, $log1p(Q)$, $ltfa$, and $ma
 
 Left-censored nutrient concentrations were not uncommon in this dataset. Several methods are available to account for censored data. We decided to transform left-censored data to one-half the detection limit based on the fact that higher concentrations and loadings are typically associated with high-flow events and low-flow/low-concentration events will account for a small proportion of total loadings [@mcdowellImplicationsLagTimes2021]. The "cenGAM" package in R provides the Tobit I family to accommodate censored data using the "gam" function in R. Censored Gamma models can be fit using a Bayesian framework with the "brms" package in R. Initial exploration using "cenGAM" and "brms" packages resulted in models that overestimated nutrient concentrations relative to "mgcv" [@bergbuschUnexpectedShiftPhytoplankton2021]. All models were fit using the Gamma family and log link function.
 
-Hold-out data is often used to validate predictive ability of a model. Given the small-sample size, we used all the available data to fit models at each site and implemented repeated 5-fold cross validation to assess model performance. Cross-validation predictions were assessed using King-Glupta Efficiency (KGE), R^2^, and Percent Bias across all folds.
+Hold-out data is often used to validate predictive ability of a model. Given the small-sample size, we used all the available data to fit models at each site and implemented repeated 5-fold cross validation to assess model performance. Cross-validation predictions were assessed using Nash-Sutcliffe Efficiency (NSE), R^2^, and Percent Bias across all folds.
 
 # Model Results
 
@@ -112,7 +112,7 @@ tar_read(cv_no3_08164000) |>
   ungroup() |> 
   dplyr::select(-c(data, id)) |> 
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")
@@ -169,6 +169,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_NO3) ~ "Measured NO<sub>3</sub>-N",
     !is.na(censored_NO3) ~ "Censored Value"
   )) |> 
+  mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
@@ -207,7 +215,7 @@ tar_read(cv_tp_08164000) |>
   ungroup() |> 
   dplyr::select(-c(data, id)) |> 
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")
@@ -262,6 +270,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_TP) ~ "Measured TP",
     !is.na(censored_TP) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
@@ -302,7 +318,7 @@ tar_read(cv_no3_08164390) |>
   ungroup() |>
   dplyr::select(-c(data, id)) |>
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")
@@ -360,6 +376,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_NO3) ~ "Measured NO<sub>3</sub>-N",
     !is.na(censored_NO3) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
@@ -397,7 +421,7 @@ tar_read(cv_tp_08164390) |>
   ungroup() |> 
   dplyr::select(-c(data, id)) |> 
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")
@@ -454,6 +478,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_TP) ~ "Measured TP",
     !is.na(censored_TP) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
@@ -492,7 +524,7 @@ tar_read(cv_no3_08164450) |>
   ungroup() |> 
   dplyr::select(-c(data, id)) |> 
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")
@@ -552,6 +584,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_NO3) ~ "Measured NO<sub>3</sub>-N",
     !is.na(censored_NO3) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
@@ -588,7 +628,7 @@ tar_read(cv_tp_08164450) |>
   ungroup() |> 
   dplyr::select(-c(data, id)) |> 
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")
@@ -645,6 +685,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_TP) ~ "Measured TP",
     !is.na(censored_TP) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
@@ -682,7 +730,7 @@ tar_read(cv_no3_08164504) |>
   ungroup() |> 
   dplyr::select(-c(data, id)) |> 
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")
@@ -740,6 +788,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_NO3) ~ "Measured NO<sub>3</sub>-N",
     !is.na(censored_NO3) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
@@ -778,7 +834,7 @@ tar_read(cv_tp_08164504) |>
   ungroup() |> 
   dplyr::select(-c(data, id)) |> 
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")
@@ -836,6 +892,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_TP) ~ "Measured TP",
     !is.na(censored_TP) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
@@ -874,7 +938,7 @@ tar_read(cv_no3_08164503) |>
   ungroup() |> 
   dplyr::select(-c(data, id)) |> 
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")
@@ -932,6 +996,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_NO3) ~ "Measured NO<sub>3</sub>-N",
     !is.na(censored_NO3) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, NO3_flux, color = censored_NO3), alpha = 0.8) +
@@ -968,7 +1040,7 @@ tar_read(cv_tp_08164503) |>
   ungroup() |> 
   dplyr::select(-c(data, id)) |> 
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")
@@ -1025,6 +1097,14 @@ gratia::add_fitted(tar_read(model_data) |>
     is.na(censored_TP) ~ "Measured TP",
     !is.na(censored_TP) ~ "Censored Value"
   )) |> 
+    mutate(.fits = as_units(.fits, "mg/L"),
+         Flow = as_units(Flow, "ft^3/s"),
+         Flow = set_units(Flow, "L/s"),
+         .fits = .fits*Flow,
+         .fits = set_units(.fits, "kg/day"),
+         Flow = set_units(Flow, "ft^3/s"),
+         Flow = drop_units(Flow),
+         .fits = drop_units(.fits)) |> 
   ggplot() +
   geom_line(aes(Date, .fits, linetype = "Model Predictions"), alpha = 0.5) +
   geom_point(aes(Date, TP_flux, color = censored_TP), alpha = 0.8) +
@@ -1064,7 +1144,7 @@ tar_read(cv_no3_texana) |>
   ungroup() |> 
   dplyr::select(-c(data, id)) |> 
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")
@@ -1196,7 +1276,7 @@ tar_read(cv_tp_texana) |>
   ungroup() |> 
   dplyr::select(-c(data, id)) |> 
   gtsummary::tbl_summary(
-    label = list(kge ~ "KGE",
+    label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
     type = list(pbias ~ "continuous")

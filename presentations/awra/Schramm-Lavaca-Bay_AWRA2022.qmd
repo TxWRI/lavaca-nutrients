@@ -1,0 +1,1219 @@
+---
+title: "Statistical Modeling and Trends in Freshwater Derived Nutrient Loads, Lavaca Bay, Texas"
+subtitle: "2022 AWRA Annual Water Conference"
+author: "Michael Schramm - michael.schramm@ag.tamu.edu"
+institute: "Texas Water Resources Institute, Texas A&M AgriLife Research"
+date: "2022-11-08"
+format: 
+  revealjs:
+    theme: [default, custom.scss]
+bibliography: reference.yml
+csl: https://www.zotero.org/styles/chicago-author-date?source=1
+#navigation
+progress: true
+slide-number: true
+title-slide-attributes:
+    data-background-image: images/lavaca_bay_resize.png
+    data-background-opacity: "0.50"
+    data-background-size: auto
+    data-background-repeat: "no-repeat"
+    data-background-color: "white"
+    data-background-position: "right"
+
+---
+## Acknowledgements {.smaller}
+
+Stakeholder advisory committee:
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Dr. Mike Wetz - Harte Institute, TAMU-CC
+
+Bill Balboa - Matagorda Bay Foundation
+
+Janet Weaver - Lavaca Bay Foundation
+
+Chad Kinsfather - Lavaca-Navidad River Authority
+
+
+:::
+
+::: {.column width="50%"}
+
+Brian Koch - Texas State Soil and Water Conservation Board
+
+Jason Pinchback - Texas General Land Office
+
+RJ Shelly - Texas Sea Grant
+
+:::
+
+::::
+
+Graduate Students:
+
+Shubham Jain - Ph.D Candidate TAMU Biological and Agricultural Engineering
+
+
+
+```{r}
+knitr::include_graphics("images/logo.png")
+```
+
+
+::: {style="font-size: .75em; text-align: center"}
+This project was funded by a Texas Coastal Management Program grant approved by the Texas Land Commissioner, providing financial assistance under the Coastal Zone Management Act of 1972, as amended, awarded by the National Oceanic and Atmospheric Administration (NOAA), Office for Coastal Management, pursuant to NOAA Award No. NA21NOS4190136. The views expressed herein are those of the author(s) and do not necessarily reflect the views of NOAA, the U.S. Department of Commerce, or any of their subagencies.
+:::
+
+
+## Background
+
+```{r targets}
+#| echo: false
+#| tar_globals: TRUE
+#| tar_interactive: TRUE
+library(targets)
+options(tidyverse.quiet=TRUE)
+store = "../../_targets"
+source("../../R/gt_functions.R")
+
+source("../../_targets_packages.R")
+library(ragg)
+knitr::opts_chunk$set(dpi = 180,
+                      dev = "ragg_png")
+
+```
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| out-width: 75%
+knitr::include_graphics("images/lavaca_bay_resize.png")
+```
+
+:::
+
+::: {.column width="50%"}
+### Lavaca Bay Watershed 
+
+  - 3,146 miles^2^
+  - 50% Pasture and rangeland
+  - 20% Cultivated cropland (cotton, soy, corn, sorghum)
+  - 17% Forested
+  - 5% Suburban, urban
+
+:::
+
+::::
+
+
+
+## Background
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+![](images/bugica.png)
+
+ - @bugicaWaterQualityTrends2020 identify eutrophication risk in Lavaca Bay due to 🡅 TP and 🡅 Chlorophyll-a concentrations.
+ 
+ 
+:::
+
+::: {.column width="40%"}
+
+  - Possible concerns for Total Phosphorus at some FW sites. 
+  
+  - Texas does not currently have nutrient standards for streams.
+  
+  - Long-term quarterly monitoring, no historical storm or flow-biased data to this point.
+ 
+:::
+
+ 
+::::
+
+
+ 
+# Project Objectives
+ 
+  - (1) Develop estimates of NO~3~-N and TP loading from Lavaca and Navidad Rivers
+  - (2) Link nutrient loads and river discharge to changes in nutrient concentration in Lavaca Bay
+ 
+
+
+
+
+
+## Lavaca Bay Watersheds
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| out-width: 60%
+knitr::include_graphics("images/lb_simple.png")
+```
+
+:::
+
+
+::: {.column width="40%"}
+
+- 1.3 million acre-feet per year
+- 65% from Lavaca/Navidad watershed
+    - 61% from Navidad at Palmetto Bend Dam
+    - 32% from Lavaca near City of Edna
+    - 7% ungaged downstream runoff
+
+:::
+
+
+:::: 
+
+
+## Methods
+
+ - Loading estimates:
+ 
+    - **Specify Concentration Regression Model** - Generalized Additive Models [@kuhnertQuantifyingTotalSuspended2012; @robsonPredictionSedimentParticulate2015a; @mcdowellImplicationsLagTimes2021]
+      - model error structure and specify link function
+      - predictor variables can be smooth functions allowing non-linear responses.
+    - **Model performance** - Repeated 5-fold cross-validation
+    - **Predict daily loads** - Point estimates with uncertainty
+    
+```{r}
+#| fig-cap: "5-fold CV procedure. Image from Boehmke & Greenwell 2020 (https://bradleyboehmke.github.io/HOML/)"
+#| out-width: 70%
+knitr::include_graphics("images/cv-bb.png")
+```
+    
+    
+## Methods {.smaller}
+
+
+$$
+    Y = s(ddate) + s(yday) + s(log1p(Flow)) + s(ma) + s(fa)
+$$
+
+- $Y$ = NO~3~ or TP concentration;
+- $s$ = smoothing function;
+- $ddate$ = decimal date;
+- $yday$ = numeric day of year;
+- $Flow$ = mean daily discharge;
+- $ma$ = exponential moving average [@kuhnertQuantifyingTotalSuspended2012; @zhangImprovingRiverineConstituent2017].
+- $fa$ = short- or long-term flow anomaly (stfa, ltfa) [@vecchiaTrendsConcentrationsUse2009; @zhangImprovingRiverineConstituent2017];
+- Gamma family with log-link
+
+```{r}
+#| fig-width: 6
+#| fig-height: 2
+tar_read(tp_08164000, store = store) |> 
+  gratia::draw(nrow = 1,              
+               residuals = FALSE,
+               dist = 0.25,
+               continuous_fill = scico::scale_fill_scico(palette = "vik")) & theme_TWRI_print() & theme(plot.title = element_text(size = 12, face = "plain"))
+```
+
+
+::: {.notes}
+GAMs were fit using mgcv in R. Based on previous experience and literature we chose a Gamma error distribution with a log link function to fit the models.
+
+Date represents the long term trend, the day of year represents a seasonal trend fitted with a cyclic cubic regression spline, flow +1 is log transformed. The stfa term is the short-term flow anomaly and describes how difference the current flow is from the previous month, and ma is an exponentially weighted moving average that accounts for the influence of flow events that occurred in the past on current nutrient concentration and load.
+
+A thin plate regression spline was used for other terms. The number of knots in each smoothing term were adjusted after inspecting model residuals and using the gam.check function in the mgcv package. Insterad of using a stepwise model selection process, the select = TRUE option was used when fitting models to allow terms to be penalized to zero if the fitting process determined the term did not improve the model.
+
+:::
+
+## Methods
+
+Loading estimates:
+
+ - Prediction of **daily loads** from GAM models at each site 
+    - predicted concentrations $\times$ mean daily streamflow
+    - aggregated to monthly and annual totals
+ - Report **model uncertainty**
+    - **95% credible intervals** developed from 1000 draws of parameter estimates from the multivariate normal posterior distribution of model parameters provided by `mgcv::gam` function in R.
+ - Account for variance in mean daily discharge
+    - **Flow-normalized estimates** calculated similar to WRTDS, assume daily flow variables are random occurrence from all possible values on that day of year.
+ 
+
+## Methods {.smaller}
+
+Do variations in Flow and Load explain Bay nutrient concentration?
+
+**Temporal Model**
+
+$$
+Y = s(Day) + s(Date) + ti(Day, Date)
+$$
+
+**Flow Model**
+
+$$
+Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow)
+$$
+
+**Full Model**
+
+$$
+Y = s(Day) + s(Date) + ti(Day, Date) + s(Flow) + s(Load)
+$$
+
+ - $Flow$ is seasonally adjusted
+ - $Load$ is flow adjusted
+ - Simplified methodology following @murphy_generalized_2019 and @murphyNutrientImprovementsChesapeake2022.
+ - Compare AIC and other model metrics
+
+## Results {.smaller}
+
+### Lavaca River
+
+:::: {.columns}
+
+::: {.column style="font-size: 1em"}
+
+**NO~3~-N**
+
+```{r}
+#| echo: false
+
+tar_read(cv_no3_08164000, store = store) |> 
+  ungroup() |> 
+  dplyr::select(-c(data, id)) |> 
+  gtsummary::tbl_summary(
+    label = list(NSE ~ "NSE",
+                 r2 ~ "R<sup>2</sup>",
+                 pbias ~ "Percent Bias"),
+    type = list(pbias ~ "continuous")
+  ) |> 
+  gtsummary::modify_header(label = "Metric",
+                           gtsummary::all_stat_cols() ~ "Median (IQR)") |> 
+  gtsummary::as_kable(format = "html", escape = FALSE)
+```
+
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+load <- tar_read(daily_no3_08164000, store = store)
+fn_load <- tar_read(daily_no3_08164000_fn, store = store)
+
+ggplot() +
+  geom_point(data = load$annually, aes(year, NO3_Estimate,
+                                   color = "Total Annual Load",
+                                   shape = "Total Annual Load")) +
+  geom_line(data = load$annually, aes(x = year, y = NO3_Estimate,
+                                  color = "Total Annual Load",
+                                  linetype = "Total Annual Load"),
+            alpha = 0.5) +
+  geom_linerange(data = load$annually, aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper,
+                                       color = "Total Annual Load")) +
+  geom_point(data = fn_load$annually, aes(year, NO3_Estimate,
+                                 color = "Flow Normalized Annual Load",
+                                 shape = "Flow Normalized Annual Load")) +
+  geom_line(data = fn_load$annually,
+            aes(x = year, y = NO3_Estimate,
+                color = "Flow Normalized Annual Load",
+                linetype = "Flow Normalized Annual Load"),
+            alpha = 0.5) +
+  labs(x = "", y = "Annual NO<sub>3</sub>-N Load [kg]") +
+  scale_shape_manual(name = "values",
+                     values = c(21, 19)) +
+  scale_color_manual(name = "values",
+                     values = c("#7E1900", "#1A3399")) +
+  scale_linetype_manual(name = "values",
+                        values = c(1, 2)) +
+  scale_y_log10(labels = scales::comma) +
+  coord_cartesian(ylim = c(1000, 1000000)) +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 18),
+        axis.text = element_text(size = 16),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 18))
+```
+:::
+
+
+::: {.column style="font-size: 1em"}
+
+**TP**
+
+```{r}
+#| echo: false
+
+tar_read(cv_tp_08164000, store = store) |> 
+  ungroup() |> 
+  dplyr::select(-c(data, id)) |> 
+  gtsummary::tbl_summary(
+    label = list(NSE ~ "NSE",
+                 r2 ~ "R<sup>2</sup>",
+                 pbias ~ "Percent Bias"),
+    type = list(pbias ~ "continuous")
+  ) |> 
+  gtsummary::modify_header(label = "Metric",
+                           gtsummary::all_stat_cols() ~ "Median (IQR)") |> 
+  gtsummary::as_kable(format = "html", escape = FALSE)
+```
+
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+
+
+load <- tar_read(daily_tp_08164000, store = store)
+fn_load <- tar_read(daily_tp_08164000_fn, store = store)
+
+ggplot() +
+  geom_point(data = load$annually, aes(year, TP_Estimate,
+                              color = "Total Annual Load",
+                              shape = "Total Annual Load")) +
+  geom_line(data = load$annually, aes(x = year, y = TP_Estimate,
+                             color = "Total Annual Load",
+                             linetype = "Total Annual Load"),
+            alpha = 0.5) +
+  geom_linerange(data = load$annually, aes(x = year, ymin = TP_Lower, ymax = TP_Upper,
+                                  color = "Total Annual Load")) +
+  geom_point(data = fn_load$annually, aes(year, TP_Estimate,
+                                 color = "Flow Normalized Annual Load",
+                                 shape = "Flow Normalized Annual Load")) +
+  geom_line(data = fn_load$annually,
+            aes(x = year, y = TP_Estimate,
+                color = "Flow Normalized Annual Load",
+                linetype = "Flow Normalized Annual Load"),
+            alpha = 0.5) +
+  labs(x = "", y = "Annual TP Load [kg]") +
+  scale_shape_manual(name = "values",
+                     values = c(21, 19)) +
+  scale_color_manual(name = "values",
+                     values = c("#7E1900", "#1A3399")) +
+  scale_linetype_manual(name = "values",
+                        values = c(1, 2)) +
+  scale_y_log10(labels = scales::comma) +
+  coord_cartesian(ylim = c(1000, 1000000)) +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 18),
+        axis.text = element_text(size = 16),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 18))
+```
+
+:::
+
+::::
+
+
+
+## Results {.smaller}
+
+### Navidad River/Palmetto Bend Dam
+
+:::: {.columns style="font-size: .9em"}
+
+::: {.column}
+
+**NO~3~-N**
+
+```{r}
+#| echo: false
+
+tar_read(cv_no3_texana, store = store) |> 
+  ungroup() |> 
+  dplyr::select(-c(data, id)) |> 
+  gtsummary::tbl_summary(
+    label = list(NSE ~ "NSE",
+                 r2 ~ "R<sup>2</sup>",
+                 pbias ~ "Percent Bias"),
+    type = list(pbias ~ "continuous")
+  ) |> 
+  gtsummary::modify_header(label = "Metric",
+                           gtsummary::all_stat_cols() ~ "Median (IQR)") |> 
+  gtsummary::as_kable(format = "html", escape = FALSE)
+```
+
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+
+load <- tar_read(daily_no3_texana, store = store)
+fn_load <- tar_read(daily_no3_texana_fn, store = store)
+
+ggplot() +
+  geom_point(data = load$annually, aes(year, NO3_Estimate,
+                                       color = "Total Annual Load",
+                                       shape = "Total Annual Load")) +
+  geom_line(data = load$annually, aes(x = year, y = NO3_Estimate,
+                                      color = "Total Annual Load",
+                                      linetype = "Total Annual Load"),
+            alpha = 0.5) +
+  geom_linerange(data = load$annually, aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper,
+                                           color = "Total Annual Load")) +
+  geom_point(data = fn_load$annually, aes(year, NO3_Estimate,
+                                          color = "Flow Normalized Annual Load",
+                                          shape = "Flow Normalized Annual Load")) +
+  geom_line(data = fn_load$annually,
+            aes(x = year, y = NO3_Estimate,
+                color = "Flow Normalized Annual Load",
+                linetype = "Flow Normalized Annual Load"),
+            alpha = 0.5) +
+  labs(x = "", y = "Annual NO<sub>3</sub>-N Load [kg]") +
+  scale_shape_manual(name = "values",
+                     values = c(21, 19)) +
+  scale_color_manual(name = "values",
+                     values = c("#7E1900", "#1A3399")) +
+  scale_linetype_manual(name = "values",
+                        values = c(1, 2)) +
+  scale_y_log10(labels = scales::comma) +
+  coord_cartesian(ylim = c(1000, 1000000)) +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 18),
+        axis.text = element_text(size = 16),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 18))
+```
+
+:::
+
+::: {.column}
+
+**TP**
+
+```{r}
+#| echo: false
+
+tar_read(cv_tp_texana, store = store) |> 
+  ungroup() |> 
+  dplyr::select(-c(data, id)) |> 
+  gtsummary::tbl_summary(
+    label = list(NSE ~ "NSE",
+                 r2 ~ "R<sup>2</sup>",
+                 pbias ~ "Percent Bias"),
+    type = list(pbias ~ "continuous")
+  ) |> 
+  gtsummary::modify_header(label = "Metric",
+                           gtsummary::all_stat_cols() ~ "Median (IQR)") |> 
+  gtsummary::as_kable(format = "html", escape = FALSE)
+```
+
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+
+
+load <- tar_read(daily_tp_texana, store = store)
+fn_load <- tar_read(daily_tp_texana_fn, store = store)
+
+ggplot() +
+  geom_point(data = load$annually, aes(year, TP_Estimate,
+                              color = "Total Annual Load",
+                              shape = "Total Annual Load")) +
+  geom_line(data = load$annually, aes(x = year, y = TP_Estimate,
+                             color = "Total Annual Load",
+                             linetype = "Total Annual Load"),
+            alpha = 0.5) +
+  geom_linerange(data = load$annually, aes(x = year, ymin = TP_Lower, ymax = TP_Upper,
+                                  color = "Total Annual Load")) +
+  geom_point(data = fn_load$annually, aes(year, TP_Estimate,
+                                 color = "Flow Normalized Annual Load",
+                                 shape = "Flow Normalized Annual Load")) +
+  geom_line(data = fn_load$annually,
+            aes(x = year, y = TP_Estimate,
+                color = "Flow Normalized Annual Load",
+                linetype = "Flow Normalized Annual Load"),
+            alpha = 0.5) +
+  labs(x = "", y = "Annual TP Load [kg]") +
+  scale_shape_manual(name = "values",
+                     values = c(21, 19)) +
+  scale_color_manual(name = "values",
+                     values = c("#7E1900", "#1A3399")) +
+  scale_linetype_manual(name = "values",
+                        values = c(1, 2)) +
+  scale_y_log10(labels = scales::comma) +
+  coord_cartesian(ylim = c(1000, 1000000)) +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 18),
+        axis.text = element_text(size = 16),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank(),
+        legend.text = element_text(size = 18))
+```
+
+:::
+
+::::
+
+
+
+
+## Results
+
+::: {style="text-align: center"}
+
+```{r}
+#| echo: false
+#| fig-height: 4.75
+#| fig-width: 8
+
+load_lav_no3 <- tar_read(daily_no3_08164000, store = store)
+load_nav_no3 <- tar_read(daily_no3_texana, store = store)
+
+load_lav_no3$monthly |> 
+  mutate(site = "Lavaca River") -> lavaca_no3_monthly
+
+load_nav_no3$monthly |> 
+  mutate(site = "Navidad River") -> navidad_no3_monthly
+
+
+no3_month <- bind_rows(lavaca_no3_monthly, navidad_no3_monthly) |> 
+  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d"))
+
+
+a <- ggplot(no3_month) +
+  geom_col(aes(x, NO3_Estimate, fill = site)) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y",
+               limits = c(as.Date("2005-01-01"), as.Date("2020-12-31")),
+               expand = expansion(mult = c(0.05, 0.2))) +
+  scale_y_continuous(labels = scales::comma) +
+  scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
+  labs(x = "", y = "Predicted Monthly<br>NO<sub>3</sub>-N Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 12),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+
+
+load_lav_no3$annually |> 
+  mutate(site = "Lavaca River") -> lavaca_no3_annually
+
+load_nav_no3$annually |> 
+  mutate(site = "Navidad River") -> navidad_no3_annually
+
+
+no3_annual <- bind_rows(lavaca_no3_annually, navidad_no3_annually) |> 
+  mutate(x = as.Date(paste0(year, "-01-01"), "%Y-%m-%d"))
+
+b <- ggplot(no3_annual) +
+  geom_col(aes(year, NO3_Estimate, fill = site), width = 0.8) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.2)), 
+                     breaks = c(2005:2020)) +
+  scale_y_continuous(labels = scales::comma) +
+  scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
+  labs(x = "", y = "Predicted Annual<br>NO<sub>3</sub>-N Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 12),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+
+
+prop <- no3_annual |> 
+  mutate(proportion = NO3_Estimate/sum(NO3_Estimate))
+
+
+c <- ggplot() +
+  geom_col(data = prop, aes(year, proportion, fill  = site)) +
+  ggrepel::geom_text_repel(data = prop |> filter(year == 2020, 
+                                                 site == "Lavaca River"), 
+                           aes(x = year, y = 1-(proportion*0.5)), 
+                           label = "Mean = 26%\n(Lavaca)", direction = "y", 
+                           hjust = "center",
+                           nudge_x = 2, family = "MoristonPersonal-Medium", 
+                           lineheight = 0.65,
+                           size = 2.75) +
+  ggrepel::geom_text_repel(data = prop |> filter(year == 2020, 
+                                                 site == "Navidad River"), 
+                           aes(x = year, y = proportion*0.5), 
+                           label = "Mean = 74%\n(Navidad)", direction = "y", 
+                           hjust = "center",
+                           nudge_x = 2, family = "MoristonPersonal-Medium", 
+                           lineheight = 0.65,
+                           size = 2.75) +
+  scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
+  scale_x_continuous(breaks = c(2005:2020),
+                     expand = expansion(mult = c(0.05, 0.2))) +
+  scale_y_continuous(expand = c(0,0)) +
+  labs(x = "", y = "Proportion of Annual<br>NO<sub>3</sub>-N Load") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 12),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+
+
+d <- tar_read(qdata, store = store) |> 
+  filter(site_no %in% c("8164000", "lktexana_g")) |>
+  filter(Date >= as.Date("2005-01-01")) |> 
+  mutate(site = case_when(
+    site_no == "8164000" ~ "Lavaca River",
+    site_no == "lktexana_g" ~ "Navidad River"
+  )) |> 
+  mutate(year = year(Date)) |> 
+
+  mutate(Flow = as_units(Flow, "ft^3/s")) |> 
+  mutate(Flow = set_units(Flow, "ft^3/day")) |> 
+  mutate(Flow = set_units(Flow, "1E6gallons/day")) |> 
+  group_by(year, site) |> 
+  summarise(Flow = sum(Flow, na.rm = TRUE)) |> 
+  mutate(Flow = drop_units(Flow)) |> 
+  ggplot() +
+  geom_col(aes(year, Flow, fill = site)) +
+  scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
+  scale_x_continuous(breaks = c(2005:2020),
+                     expand = expansion(mult = c(0.05, 0.2))) +
+  scale_y_continuous(expand = c(0,0)) +
+  labs(x = "", y = "Annual Discharge<br>[Millon Gallons]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 12),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+
+  
+layout <- "
+A
+A
+A
+A
+B
+B
+B
+B
+C
+C
+C
+C
+D
+D
+D
+D
+E
+"
+
+
+(a / b / c / d / guide_area()) + 
+  plot_layout(guides = 'collect', design  = layout) +
+  plot_annotation(subtitle = "Total NO<sub>3</sub>-N Loadings") & 
+  theme(plot.margin = ggplot2::margin(0.05,.1,0,.1,unit = "in"),
+        plot.subtitle = element_markdown(family = "MoristonPersonal-Medium"))
+
+
+```
+
+
+:::
+
+
+
+## Results
+
+::: {style="text-align: center"}
+
+```{r}
+#| echo: false
+#| fig-height: 4.75
+#| fig-width: 8
+
+load_lav_tp <- tar_read(daily_tp_08164000, store = store)
+load_nav_tp <- tar_read(daily_tp_texana, store = store)
+
+load_lav_tp$monthly |> 
+  mutate(site = "Lavaca River") -> lavaca_tp_monthly
+
+load_nav_tp$monthly |> 
+  mutate(site = "Navidad River") -> navidad_tp_monthly
+
+
+tp_month <- bind_rows(lavaca_tp_monthly, navidad_tp_monthly) |> 
+  mutate(x = as.Date(paste0(month, "-01"), "%Y-%m-%d"))
+
+
+a <- ggplot(tp_month) +
+  geom_col(aes(x, TP_Estimate, fill = site)) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y",
+               limits = c(as.Date("2000-01-01"), as.Date("2020-12-31")),
+               expand = expansion(mult = c(0.05, 0.2))) +
+  scale_y_continuous(labels = scales::comma) +
+  scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
+  labs(x = "", y = "Predicted Monthly<br>TP Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 12),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+
+
+load_lav_tp$annually |> 
+  mutate(site = "Lavaca River") -> lavaca_tp_annually
+
+load_nav_tp$annually |> 
+  mutate(site = "Navidad River") -> navidad_tp_annually
+
+
+tp_annual <- bind_rows(lavaca_tp_annually, navidad_tp_annually) |> 
+  mutate(x = as.Date(paste0(year, "-01-01"), "%Y-%m-%d"))
+
+b <- ggplot(tp_annual) +
+  geom_col(aes(year, TP_Estimate, fill = site), width = 0.8) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.2)), 
+                     breaks = c(2000:2020)) +
+  scale_y_continuous(labels = scales::comma) +
+  scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
+  labs(x = "", y = "Predicted Annual<br>TP Load [kg]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 12),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+
+
+prop <- tp_annual |> 
+  mutate(proportion = TP_Estimate/sum(TP_Estimate))
+
+
+c <- ggplot() +
+  geom_col(data = prop, aes(year, proportion, fill  = site)) +
+  ggrepel::geom_text_repel(data = prop |> filter(year == 2020, 
+                                                 site == "Lavaca River"), 
+                           aes(x = year, y = 1-(proportion*0.5)), 
+                           label = "Mean = 40%\n(Lavaca)", direction = "y", 
+                           hjust = "center",
+                           nudge_x = 2, family = "MoristonPersonal-Medium", 
+                           lineheight = 0.65,
+                           size = 2.75) +
+  ggrepel::geom_text_repel(data = prop |> filter(year == 2020, 
+                                                 site == "Navidad River"), 
+                           aes(x = year, y = proportion*0.5), 
+                           label = "Mean = 60%\n(Navidad)", direction = "y", 
+                           hjust = "center",
+                           nudge_x = 2, family = "MoristonPersonal-Medium", 
+                           lineheight = 0.65,
+                           size = 2.75) +
+  scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
+  scale_x_continuous(breaks = c(2000:2020),
+                     expand = expansion(mult = c(0.05, 0.2))) +
+  scale_y_continuous(expand = c(0,0)) +
+  labs(x = "", y = "Proportion of Annual<br>TP Load") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 12),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+
+
+d <- tar_read(qdata, store = store) |> 
+  filter(site_no %in% c("8164000", "lktexana_g")) |>
+  filter(Date >= as.Date("2000-01-01")) |> 
+  mutate(site = case_when(
+    site_no == "8164000" ~ "Lavaca River",
+    site_no == "lktexana_g" ~ "Navidad River"
+  )) |> 
+  mutate(year = year(Date)) |> 
+
+  mutate(Flow = as_units(Flow, "ft^3/s")) |> 
+  mutate(Flow = set_units(Flow, "ft^3/day")) |> 
+  mutate(Flow = set_units(Flow, "1E6gallons/day")) |> 
+  group_by(year, site) |> 
+  summarise(Flow = sum(Flow, na.rm = TRUE)) |> 
+  mutate(Flow = drop_units(Flow)) |> 
+  ggplot() +
+  geom_col(aes(year, Flow, fill = site)) +
+  scale_fill_scico_d(palette = "broc", begin = 0.25, end = 0.75) +
+  scale_x_continuous(breaks = c(2000:2020),
+                     expand = expansion(mult = c(0.05, 0.2))) +
+  scale_y_continuous(expand = c(0,0)) +
+  labs(x = "", y = "Annual Discharge<br>[Millon Gallons]") +
+  theme_TWRI_print() +
+  theme(axis.title.y = element_markdown(size = 12),
+        panel.grid.major.x = element_line(color = "#d9d9d9",
+                                          linetype = "dotted"),
+        legend.title = element_blank())
+
+  
+layout <- "
+A
+A
+A
+A
+B
+B
+B
+B
+C
+C
+C
+C
+D
+D
+D
+D
+E
+"
+
+(a / b / c / d / guide_area()) + 
+  plot_layout(guides = 'collect', design  = layout) +
+  plot_annotation(subtitle = "Total TP Loadings") & 
+  theme(plot.margin = ggplot2::margin(0.05,.1,0,.1,unit = "in"),
+        plot.subtitle = element_markdown(family = "MoristonPersonal-Medium"))
+
+```
+
+:::
+
+## Regional Study Comparison
+
+::: {style="font-size: 1em; text-align: center"}
+
+| Parameter | Reported Yield (kg/km^2^/yr) | Approach | Time Period | Reference |
+|-----------|-----------------|----------|-------------|-----------|
+| TP        | 42.9 (34.4, 54.0) | GAM   | 2000-2020   | -         |
+| TP        | 45.2 | SPARROW | 2012      | @wiseSpatiallyReferencedModels2019 |
+| TP        | 42   | SWAT    | 1977-2005 | @omaniEstimationSedimentNutrient2014 |
+| TP        | 20.81-91.58    | SPARROW | 2002 | @rebichSourcesDeliveryNutrients2011   |
+| TP        | 28.9 | LOADEST | 1972-1993 | @dunnTrendsNutrientInflows1996 |
+
+:::
+
+
+## What About Trends?
+
+ - High variability in actual loads that reflect total discharge
+ - Flow-normalized loads:
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-height: 2
+#| fig-width: 5
+fn_load <- tar_read(daily_no3_08164000_fn, store = store)
+a <- fn_load$annually[fn_load$annually$year == 2005,]$NO3_Estimate
+b <- fn_load$annually[fn_load$annually$year == 2020,]$NO3_Estimate
+
+
+percent_change <- round((b-a)/a,2) * 100
+prefix <- if (percent_change < 0) {"-"} else {"+"}
+percent_change <- abs(percent_change)
+
+df <- fn_load$annually
+u <- mean(df$NO3_Estimate)
+
+ggplot(df) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             alpha = 0.7) +
+  geom_point(aes(year, log(NO3_Estimate) - log(u)),
+             color = "#1A3399") +
+  geom_linerange(aes(year, ymin = log(NO3_Lower)-log(u), ymax = log(NO3_Upper)-log(u)),
+                 color = "#1A3399") +
+  ggrepel::geom_text_repel(data = df |> filter(year == 2020),
+                            aes(year, log(NO3_Estimate) - log(u)),
+                            label = paste0(prefix, percent_change, "% \n compared to 2005"),
+                           direction = "y", hjust = "left",
+                           nudge_x = 1,
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
+  scale_y_continuous(expand = expansion(mult = 0.5)) +
+  labs(x = "", y = expression(paste("Centered ", hat(y))),
+       subtitle = "Flow-Normalized NO<sub>3</sub>-N Load, Lavaca River") +
+  theme_TWRI_print() +
+  theme(plot.subtitle = element_markdown())
+```
+
+
+```{r}
+#| fig-height: 2
+#| fig-width: 5
+
+
+fn_load <- tar_read(daily_tp_08164000_fn, store = store)
+
+
+a <- fn_load$annually[fn_load$annually$year == 2000,]$TP_Estimate
+b <- fn_load$annually[fn_load$annually$year == 2020,]$TP_Estimate
+
+
+percent_change <- round((b-a)/a,2) * 100
+prefix <- if (percent_change < 0) {"-"} else {"+"}
+percent_change <- abs(percent_change)
+
+df <- fn_load$annually
+u <- mean(df$TP_Estimate)
+
+ggplot(df) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             alpha = 0.7) +
+  geom_point(aes(year, log(TP_Estimate) - log(u)),
+             color = "#1A3399") +
+  geom_linerange(aes(year, ymin = log(TP_Lower)-log(u), ymax = log(TP_Upper)-log(u)),
+                 color = "#1A3399") +
+  ggrepel::geom_text_repel(data = df |> filter(year == 2020),
+                           aes(year, log(TP_Estimate) - log(u)),
+                           label = paste0(prefix, percent_change, "% \n compared to 2000"),
+                           direction = "y", hjust = "left",
+                           nudge_x = 1, nudge_y = .25,
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
+  scale_y_continuous(expand = expansion(mult = 0.5)) +
+  labs(x = "", y = expression(paste("Centered ", hat(y))),
+       subtitle = "Flow-Normalized TP Load, Lavaca River") +
+  theme_TWRI_print() +
+  theme(plot.subtitle = element_markdown())
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-height: 2
+#| fig-width: 5
+fn_load <- tar_read(daily_no3_texana_fn, store = store)
+a <- fn_load$annually[fn_load$annually$year == 2005,]$NO3_Estimate
+b <- fn_load$annually[fn_load$annually$year == 2020,]$NO3_Estimate
+
+
+percent_change <- round((b-a)/a,2) * 100
+prefix <- if (percent_change < 0) {"-"} else {"+"}
+percent_change <- abs(percent_change)
+
+df <- fn_load$annually
+u <- mean(df$NO3_Estimate)
+
+ggplot(df) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             alpha = 0.7) +
+  geom_point(aes(year, log(NO3_Estimate) - log(u)),
+             color = "#1A3399") +
+  geom_linerange(aes(year, ymin = log(NO3_Lower)-log(u), ymax = log(NO3_Upper)-log(u)),
+                 color = "#1A3399") +
+  ggrepel::geom_text_repel(data = df |> filter(year == 2020),
+                            aes(year, log(NO3_Estimate) - log(u)),
+                            label = paste0(prefix, percent_change, "% \n compared to 2005"),
+                           direction = "y", hjust = "left",
+                           nudge_x = 1,
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
+  scale_y_continuous(expand = expansion(mult = 0.5)) +
+  labs(x = "", y = expression(paste("Centered ", hat(y))),
+       subtitle = "Flow-Normalized NO<sub>3</sub>-N Load, Navidad River") +
+  theme_TWRI_print() +
+  theme(plot.subtitle = element_markdown())
+```
+
+
+
+```{r}
+#| fig-height: 2
+#| fig-width: 5
+
+
+fn_load <- tar_read(daily_tp_texana_fn, store = store)
+
+
+a <- fn_load$annually[fn_load$annually$year == 2000,]$TP_Estimate
+b <- fn_load$annually[fn_load$annually$year == 2020,]$TP_Estimate
+
+
+percent_change <- round((b-a)/a,2) * 100
+prefix <- if (percent_change < 0) {"-"} else {"+"}
+percent_change <- abs(percent_change)
+
+df <- fn_load$annually
+u <- mean(df$TP_Estimate)
+
+ggplot(df) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             alpha = 0.7) +
+  geom_point(aes(year, log(TP_Estimate) - log(u)),
+             color = "#1A3399") +
+  geom_linerange(aes(year, ymin = log(TP_Lower)-log(u), ymax = log(TP_Upper)-log(u)),
+                 color = "#1A3399") +
+  ggrepel::geom_text_repel(data = df |> filter(year == 2020),
+                           aes(year, log(TP_Estimate) - log(u)),
+                           label = paste0(prefix, percent_change, "% \n compared to 2000"),
+                           direction = "y", hjust = "left",
+                           nudge_x = 1, nudge_y = -0.25,
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
+  scale_y_continuous(expand = expansion(mult = 0.5)) +
+  labs(x = "", y = expression(paste("Centered ", hat(y))),
+       subtitle = "Flow-Normalized TP Load, Navidad River") +
+  theme_TWRI_print() +
+  theme(plot.subtitle = element_markdown())
+```
+:::
+::::
+
+## Estuary Models
+
+**Example: Site 13563 TP**
+
+```{r}
+temporal_model <- tar_read(tp_lavaca_13563_temporal, store = store)
+flow_model <- tar_read(tp_lavaca_13563_flow, store = store)
+full_model <- tar_read(tp_lavaca_13563_full, store = store)
+
+est_summary <- AIC(temporal_model, flow_model, full_model)
+row.names(est_summary) <- c("Temporal Model", "Flow Model", "Flow and Load Model")
+
+r_sq <- c(summary(temporal_model)$r.sq, summary(flow_model)$r.sq, summary(full_model)$r.sq)
+dev_exp <- c(summary(temporal_model)$dev.expl, summary(flow_model)$dev.expl, summary(full_model)$dev.expl)
+est_summary$adj.r.sq <- r_sq
+est_summary$dev.expl <- dev_exp
+
+kableExtra::kbl(est_summary)
+```
+
+
+```{r}
+#| fig-height: 2.5
+#| fig-width: 5
+m2 <- tar_read(tp_lavaca_13563_full, store = store)
+est_loads <- tar_read(estuary_tp_loads, store = store)
+
+est_data <- tar_read(estuary_model_data, store = store)
+est_data <- est_data |> 
+  filter(parameter_code == "00665", station_id == "13563") |> 
+  mutate(ddate = decimal_date(end_date))
+
+predict_data <- est_loads|> 
+  select(end_date = Date,
+         Discharge = Discharge,
+         TP_resid = TP_resid) |> 
+  mutate(ddate = decimal_date(end_date),
+         day = yday(end_date)) 
+
+
+fitted <- fitted_values(m2, data = tar_read(tp_lavaca_prediction_data, store = store))
+ggplot(est_data) +
+  geom_point(aes(end_date, value)) +
+  geom_line(data = fitted, aes(end_date, fitted),
+            alpha = 0.5) +
+  geom_hline(yintercept = 0.21, linetype = 2) +
+  theme_TWRI_print() +
+  labs(x = "Date", y = "TP (mg/L)")
+```
+
+## Estuary Models
+
+**Example: Site 13563 TP**
+
+```{r}
+## hold everything equal but load
+df <- data_slice(m2,
+                 TP_resid = evenly(TP_resid, n = 100),
+                 ddate = decimal_date(as.Date("2000-07-15")),
+                 day = yday(as.Date("2000-07-15")))
+
+
+a <- fitted_values(m2, data = df) |>  
+  ggplot(aes(TP_resid, fitted)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.25) +
+  labs(y = "TP [mg/L]", x = "Flow Adjusted log(Load) [kg]",
+       subtitle = "Response of TP concentration to flow adjusted load") +
+  coord_cartesian(ylim = c(0, 0.3)) +
+  theme_TWRI_print()
+
+df <- data_slice(m2,
+                 flw_res = evenly(flw_res, n = 100),
+                 ddate = decimal_date(as.Date("2000-07-15")),
+                 day = yday(as.Date("2000-07-15")))
+b <- fitted_values(m2, data = df) |>  
+  ggplot(aes(flw_res, fitted)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.25) +
+  labs(y = "TP [mg/L]", x = "Seasonally Adjusted log(Flow) [cfs]",
+       subtitle = "Response of TP concentration to seasonally adjusted flow") +
+  coord_cartesian(ylim = c(0, 0.3)) +
+  theme_TWRI_print()
+
+a + b
+
+```
+
+## Estuary Models
+
+**Example: Site 13563 TP**
+
+```{r}
+## hold everything equal but load
+df <- data_slice(m2,
+                 ddate = 2020,
+                 day = c(15, 106, 197, 289),
+                 TP_resid = evenly(TP_resid),
+                 flw_res = evenly(flw_res))
+
+df <- fitted_values(m2, data = df) |> 
+  mutate(facet_lab = as.Date(paste0(ddate,"-",day), "%Y-%j"))
+
+ggplot(data = df) +
+  geom_raster(aes(flw_res, TP_resid, fill = fitted)) +
+  facet_wrap(~facet_lab) +
+  geom_contour(aes(flw_res, TP_resid, fill = fitted, z = fitted), color = "white", breaks = 0.21) +
+  scale_fill_viridis_c() +
+  labs(y = "Flow Adjusted log(Load) [kg]", x = "Seasonally Adjusted log(Flow) [cfs]",
+       subtitle = "Response of TP concentration to adjust flow and adjusted load") +
+  theme_TWRI_print()
+
+```
+
+# Conclusions
+
+  - GAMs
+      - Useful framework for statistical load estimation and exploratory analysis of estuarine water quality.
+  - Nutrient Loading
+      - High variance in actual loads.
+      - Shifts in riverine sources during drought conditions.
+      - Changes in watershed loads explains some variation in estuary nutrient concentration.
+
+## Further work
+
+  - Comparison of above lake and below lake loads;
+  - Develop/fund supplemental flow-biased monitoring to identify significant changes and trends;
+  - Continue work on estuary water quality responses...
+  
+**Thank You!**
+
+Michael Schramm - michael.schramm@ag.tamu.edu
+
+Texas Water Resources Institute
+
+Texas A&M AgriLife Research
+
+
+```{r}
+knitr::include_graphics("images/logo.png")
+```
+ 
+## References
+
+
+ 
+::: {#refs style="font-size: .65em"}
+:::
