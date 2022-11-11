@@ -1,0 +1,473 @@
+---
+references:
+- id: brickerEffectsNutrientEnrichment2008
+  accessed:
+    - year: 2022
+      month: 4
+      day: 5
+  author:
+    - family: Bricker
+      given: S.B.
+    - family: Longstaff
+      given: B.
+    - family: Dennison
+      given: W.
+    - family: Jones
+      given: A.
+    - family: Boicourt
+      given: K.
+    - family: Wicks
+      given: C.
+    - family: Woerner
+      given: J.
+  citation-key: brickerEffectsNutrientEnrichment2008
+  container-title: Harmful Algae
+  container-title-short: Harmful Algae
+  DOI: 10.1016/j.hal.2008.08.028
+  ISSN: '15689883'
+  issue: '1'
+  issued:
+    - year: 2008
+      month: 12
+  language: en
+  page: 21-32
+  source: DOI.org (Crossref)
+  title: 'Effects of nutrient enrichment in the nation''s estuaries: A decade of change'
+  title-short: Effects of nutrient enrichment in the nation's estuaries
+  type: article-journal
+  URL: https://linkinghub.elsevier.com/retrieve/pii/S1568988308001182
+  volume: '8'
+
+
+- id: bugicaWaterQualityTrends2020
+  abstract: >-
+    Coastal watersheds in Texas have experienced signiﬁcant human population
+    growth over the past several decades, yet there have been no comprehensive
+    assessments of water quality trends in Texas estuaries. Here, analysis of
+    historical estuarine water quality data indicates regional “hot spots” of
+    change. Galveston Bay and Oso Bay, which have highly urbanized watersheds,
+    currently exhibit symptoms of eutrophication. Symptoms of eutrophication
+    were also found in the Baﬃn Bay-Upper Laguna Madre complex, which has a
+    sparsely populated but agriculturally-intensive watershed. Increasing
+    salinity was observed in estuaries of the central Texas coast and are
+    attributed to long-term decreases in freshwater inﬂow. Another artifact of
+    decreasing freshwater inﬂow is a reduction in the delivery of carbonate
+    minerals to estuaries, which manifests as decreases in pH. With ﬁndings from
+    this study, targeted studies can now be directed at the estuaries that are
+    experiencing water quality degradation in order to guide future management
+    eﬀorts.
+  accessed:
+    - year: 2020
+      month: 4
+      day: 8
+  author:
+    - family: Bugica
+      given: Kalman
+    - family: Sterba-Boatwright
+      given: Blair
+    - family: Wetz
+      given: Michael S.
+  citation-key: bugicaWaterQualityTrends2020
+  container-title: Marine Pollution Bulletin
+  DOI: 10.1016/j.marpolbul.2020.110903
+  ISSN: 0025326X
+  issued:
+    - year: 2020
+      month: 3
+  language: en
+  page: '110903'
+  source: Crossref
+  title: Water quality trends in Texas estuaries
+  type: article-journal
+  URL: https://linkinghub.elsevier.com/retrieve/pii/S0025326X20300217
+  volume: '152'
+
+
+- id: cohnValiditySimpleStatistical1992
+  accessed:
+    - year: 2022
+      month: 4
+      day: 26
+  author:
+    - family: Cohn
+      given: Timothy A.
+    - family: Caulder
+      given: Dana L.
+    - family: Gilroy
+      given: Edward J.
+    - family: Zynjuk
+      given: Linda D.
+    - family: Summers
+      given: Robert M.
+  citation-key: cohnValiditySimpleStatistical1992
+  container-title: Water Resources Research
+  container-title-short: Water Resour. Res.
+  DOI: 10.1029/92WR01008
+  ISSN: '00431397'
+  issue: '9'
+  issued:
+    - year: 1992
+      month: 9
+  language: en
+  page: 2353-2363
+  source: DOI.org (Crossref)
+  title: >-
+    The validity of a simple statistical model for estimating fluvial
+    constituent loads: An Empirical study involving nutrient loads entering
+    Chesapeake Bay
+  title-short: >-
+    The validity of a simple statistical model for estimating fluvial
+    constituent loads
+  type: article-journal
+  URL: http://doi.wiley.com/10.1029/92WR01008
+  volume: '28'
+
+
+- id: darbyEffectsEutrophicationSalt2008
+  abstract: >-
+    The root:shoot ratio of grassland plants may be lower in high fertility
+    sites than in low fertility sites as plants modify their root, rhizome and
+    shoot morphologies (and masses) to suit prevailing nutrient availability. We
+    conducted geographically diverse and regionally specific field sampling and
+    measured above- and belowground plant biomasses in western Atlantic and Gulf
+    of Mexico salt marshes to determine whether there is a similar morphological
+    response in Spartina alterniflora, the dominant salt marsh plant. Coastal
+    nutrient addition/enrichment, which is widespread and ongoing, may lower
+    root and rhizome biomass, belowground production and organic accumulation in
+    this species. Higher soil respiration and a lower Eh (redox potential) are
+    expected additional soil property changes. The addition of P, more than of
+    N, seems to reduce root and rhizome biomass accumulation. The cumulative
+    effects of increased nutrient loadings on salt marshes may be to decrease
+    soil elevation and accelerate the conversion of emergent plant habitat to
+    open water, particularly on the lower marsh. The recommendations for
+    management practices intended to conserve coastal marshes include reducing
+    nutrient loading to coastal zones, solving water quality problems with a
+    multiple nutrient approach, and choosing monitoring metrics that are based
+    on both above- and belowground plant biomass.
+  accessed:
+    - year: 2022
+      month: 11
+      day: 11
+  author:
+    - family: Darby
+      given: Fa
+    - family: Turner
+      given: Re
+  citation-key: darbyEffectsEutrophicationSalt2008
+  container-title: Marine Ecology Progress Series
+  container-title-short: Mar. Ecol. Prog. Ser.
+  DOI: 10.3354/meps07423
+  ISSN: 0171-8630, 1616-1599
+  issued:
+    - year: 2008
+      month: 7
+      day: 15
+  language: en
+  page: 63-70
+  source: DOI.org (Crossref)
+  title: >-
+    Effects of eutrophication on salt marsh root and rhizome biomass
+    accumulation
+  type: article-journal
+  URL: http://www.int-res.com/abstracts/meps/v363/p63-70/
+  volume: '363'
+
+
+- id: heislerEutrophicationHarmfulAlgal2008
+  accessed:
+    - year: 2022
+      month: 11
+      day: 11
+  author:
+    - family: Heisler
+      given: J.
+    - family: Glibert
+      given: P.M.
+    - family: Burkholder
+      given: J.M.
+    - family: Anderson
+      given: D.M.
+    - family: Cochlan
+      given: W.
+    - family: Dennison
+      given: W.C.
+    - family: Dortch
+      given: Q.
+    - family: Gobler
+      given: C.J.
+    - family: Heil
+      given: C.A.
+    - family: Humphries
+      given: E.
+    - family: Lewitus
+      given: A.
+    - family: Magnien
+      given: R.
+    - family: Marshall
+      given: H.G.
+    - family: Sellner
+      given: K.
+    - family: Stockwell
+      given: D.A.
+    - family: Stoecker
+      given: D.K.
+    - family: Suddleson
+      given: M.
+  citation-key: heislerEutrophicationHarmfulAlgal2008
+  container-title: Harmful Algae
+  container-title-short: Harmful Algae
+  DOI: 10.1016/j.hal.2008.08.006
+  ISSN: '15689883'
+  issue: '1'
+  issued:
+    - year: 2008
+      month: 12
+  language: en
+  page: 3-13
+  source: DOI.org (Crossref)
+  title: 'Eutrophication and harmful algal blooms: A scientific consensus'
+  title-short: Eutrophication and harmful algal blooms
+  type: article-journal
+  URL: https://linkinghub.elsevier.com/retrieve/pii/S1568988308001066
+  volume: '8'
+
+
+- id: hirschWeightedRegressionsTime2010
+  abstract: >-
+    A new approach to the analysis of long-term surface water-quality data is
+    proposed and implemented. The goal of this approach is to increase the
+    amount of information that is extracted from the types of rich water-quality
+    datasets that now exist. The method is formulated to allow for maximum
+    ﬂexibility in representations of the long-term trend, seasonal components,
+    and discharge-related components of the behavior of the water-quality
+    variable of interest. It is designed to provide internally consistent
+    estimates of the actual history of concentrations and ﬂuxes as well as
+    histories that eliminate the inﬂuence of year-to-year variations in
+    streamﬂow. The method employs the use of weighted regressions of
+    concentrations on time, discharge, and season. Finally, the method is
+    designed to be useful as a diagnostic tool regarding the kinds of changes
+    that are taking place in the watershed related to point sources, groundwater
+    sources, and surface-water nonpoint sources. The method is applied to
+    datasets for the nine large tributaries of Chesapeake Bay from 1978 to 2008.
+    The results show a wide range of patterns of change in total phosphorus and
+    in dissolved nitrate plus nitrite. These results should prove useful in
+    further examination of the causes of changes, or lack of changes, and may
+    help inform decisions about future actions to reduce nutrient enrichment in
+    the Chesapeake Bay and its watershed.
+  accessed:
+    - year: 2018
+      month: 6
+      day: 22
+  author:
+    - family: Hirsch
+      given: Robert M.
+    - family: Moyer
+      given: Douglas L.
+    - family: Archfield
+      given: Stacey A.
+  citation-key: hirschWeightedRegressionsTime2010
+  container-title: JAWRA Journal of the American Water Resources Association
+  DOI: 10.1111/j.1752-1688.2010.00482.x
+  ISSN: 1093474X
+  issue: '5'
+  issued:
+    - year: 2010
+      month: 9
+      day: 7
+  language: en
+  page: 857-880
+  source: Crossref
+  title: >-
+    Weighted Regressions on Time, Discharge, and Season (WRTDS), with an
+    Application to Chesapeake Bay River Inputs1: Weighted Regressions on Time,
+    Discharge, and Season (WRTDS), With an Application to Chesapeake Bay River
+    Inputs
+  title-short: >-
+    Weighted Regressions on Time, Discharge, and Season (WRTDS), with an
+    Application to Chesapeake Bay River Inputs1
+  type: article-journal
+  URL: http://doi.wiley.com/10.1111/j.1752-1688.2010.00482.x
+  volume: '46'
+
+
+- id: montagnaAssessmentRelationshipFreshwater2020
+  author:
+    - family: Montagna
+      given: Paul A
+    - family: Cockett
+      given: Patricia M
+    - family: Kurr
+      given: Elaine M
+    - family: Trungale
+      given: Joe
+  citation-key: montagnaAssessmentRelationshipFreshwater2020
+  collection-title: Final Report to the Texas Water Development Board
+  event-place: Corpus Christi, Texas
+  issued:
+    - year: 2020
+  language: en
+  number: 'Contract # 1800012268'
+  page: '115'
+  publisher: Harte Research Institute, Texas A&M University-Corpus Christi
+  publisher-place: Corpus Christi, Texas
+  source: Zotero
+  title: >-
+    Assessment of the Relationship Between Freshwater Inflow and Biological
+    Indicators in Lavaca Bay
+  type: report
+
+
+
+- id: palmerImpactsDroughtsLow2015
+  accessed:
+    - year: 2022
+      month: 11
+      day: 11
+  author:
+    - family: Palmer
+      given: Terence A.
+    - family: Montagna
+      given: Paul A.
+  citation-key: palmerImpactsDroughtsLow2015
+  container-title: Hydrobiologia
+  container-title-short: Hydrobiologia
+  DOI: 10.1007/s10750-015-2200-x
+  ISSN: 0018-8158, 1573-5117
+  issue: '1'
+  issued:
+    - year: 2015
+      month: 7
+  language: en
+  page: 111-129
+  source: DOI.org (Crossref)
+  title: >-
+    Impacts of droughts and low flows on estuarine water quality and benthic
+    fauna
+  type: article-journal
+  URL: http://link.springer.com/10.1007/s10750-015-2200-x
+  volume: '753'
+
+
+- id: beserespollackLongtermTrendsResponse2011
+  abstract: >-
+    Long-term trends in the response of benthic macrofauna to hydrological
+    conditions were examined in the Lavaca-Colorado Estuary, Texas. Four
+    stations representing a range of salinities in the Lavaca-Colorado Estuary
+    were sampled quarterly for benthic macrofauna and hydrography from April
+    1988 to October 2008. The relationship between climate variability and local
+    salinity patterns and benthic populations was investigated using the Oceanic
+    Niño Index (ONI), North Atlantic Oscillation (NAO), and North Pacific Index
+    (NPI). Mean salinity declined during the 20 yr study period. Observed
+    changes in salinity were related to river discharge and the ONI because
+    there were more El Niño events in the first half of the study period
+    relative to the second half. Benthic macrofaunal abundance was significantly
+    correlated with salinity, the ONI and the NAO, indicating that global
+    climate variability and the resulting effects on local salinity patterns are
+    important factors shaping benthic macrofaunal communities. There was no
+    significant linear trend in temperature over time, and negative correlations
+    between individual taxa and temperature were likely due to seasonality.
+    While drivers other than physical hydrological factors can obviously affect
+    benthic macrofaunal communities, strong connections between global climate
+    signals, precipitation, and local salinity patterns provided the most
+    plausible mechanistic connection between climatic variability and benthic
+    macrofaunal response in the estuary. An increasingly unstable climate may
+    lead to potentially strong effects in estuarine ecosystems because stability
+    is known to affect diversity and productivity. The vulnerability of
+    estuarine ecosystems to the effects of climate variability will be
+    exacerbated as human population growth and water resource development
+    continues to increase the demand for and stress on coastal and marine
+    resources.
+  accessed:
+    - year: 2022
+      month: 11
+      day: 11
+  author:
+    - family: Beseres Pollack
+      given: J
+    - family: Palmer
+      given: Ta
+    - family: Montagna
+      given: Pa
+  citation-key: beserespollackLongtermTrendsResponse2011
+  container-title: Marine Ecology Progress Series
+  container-title-short: Mar. Ecol. Prog. Ser.
+  DOI: 10.3354/meps09267
+  ISSN: 0171-8630, 1616-1599
+  issued:
+    - year: 2011
+      month: 8
+      day: 31
+  language: en
+  page: 67-80
+  source: DOI.org (Crossref)
+  title: >-
+    Long-term trends in the response of benthic macrofauna to climate
+    variability in the Lavaca-Colorado Estuary, Texas
+  type: article-journal
+  URL: http://www.int-res.com/abstracts/meps/v436/p67-80/
+  volume: '436'
+
+- id: wetzExceptionallyHighOrganic2017
+  abstract: >-
+    Studies of estuarine eutrophication have tended to focus on systems with
+    continually flowing rivers, while little is known about estuaries from
+    semi-arid/arid regions. Here we report results from an assessment of water
+    quality conditions in Baffin Bay, Texas, a shallow (<2e3 m) subtropical
+    estuary located in a semi-arid region that has agriculture as the dominant
+    (44%) watershed land use. Chlorophyll a averaged 28e30 mg/l in Baffin Bay
+    from 2003 to 2013 and total Kjeldahl nitrogen (TKN) concentrations were also
+    very high (116e120 mM), with concentrations of both variables exceeding
+    those of most other Texas estuaries by 2e5 fold. More recent field sampling
+    (2013e2015) showed that dissolved organic nitrogen concentrations in Baffin
+    Bay (62 ± 14 mM) were >2 fold higher than in three other Texas estuaries. In
+    contrast, inorganic nitrogen (ammonium, nitrate) and phosphate
+    concentrations were relatively low. Statistically significant long-term
+    annual increases in chlorophyll a and salinity were observed in Baffin Bay,
+    while long-term seasonal increases were observed for water temperature and
+    TKN. Overall, Baffin Bay is displaying multiple symptoms of eutrophication,
+    namely very high organic carbon, organic nitrogen and chlorophyll
+    concentrations, as well as symptoms not quantified here such as fish kills
+    and episodic hypoxia. Much of the increase in chlorophyll in Baffin Bay, at
+    least since \~1990, have coincided with blooms of the mixotrophic
+    phytoplankton species, Aureoumbra lagunensis, which is thought to be favored
+    under high proportions of organic to inorganic nitrogen. Thus the high and
+    possibly increasing organic nitrogen concentrations, coupled with a
+    long-term annual increase in salinity and a long-term seasonal increase in
+    water temperature are likely to promote additional brown tide blooms in this
+    system in the future.
+  accessed:
+    - year: 2022
+      month: 4
+      day: 21
+  author:
+    - family: Wetz
+      given: Michael S.
+    - family: Cira
+      given: Emily K.
+    - family: Sterba-Boatwright
+      given: Blair
+    - family: Montagna
+      given: Paul A.
+    - family: Palmer
+      given: Terence A.
+    - family: Hayes
+      given: Kenneth C.
+  citation-key: wetzExceptionallyHighOrganic2017
+  container-title: Estuarine, Coastal and Shelf Science
+  container-title-short: Estuarine, Coastal and Shelf Science
+  DOI: 10.1016/j.ecss.2017.02.001
+  ISSN: '02727714'
+  issued:
+    - year: 2017
+      month: 3
+  language: en
+  page: 27-37
+  source: DOI.org (Crossref)
+  title: >-
+    Exceptionally high organic nitrogen concentrations in a semi-arid South
+    Texas estuary susceptible to brown tide blooms
+  type: article-journal
+  URL: https://linkinghub.elsevier.com/retrieve/pii/S0272771417301208
+  volume: '188'
+...
+
