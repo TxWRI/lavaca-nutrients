@@ -133,8 +133,30 @@ Underscoring this concern is the need for data that is adequate for evaluating c
 There is also a need to understand the effects of land management decisions on nutrient loading, relative to environmental drivers such as precipitation and discharge, and how it may contribute to or improve conditions related to eutrophication in Lavaca Bay. 
 This work (1) quantifies Nitrate-Nitrogen (NO~3~-N) and TP loadings in the Lavaca Bay watershed and (2) assesses the relationship of eutrophication indicators in Lavaca Bay to changes in watershed discharge and loads.
 
+
+
+# Methods
+
+## Study Area
+
+## Load Estimation
+
 Regression based approaches are commonly used to estimate constituent concentration and fluxes based on continuously measured streamflow and sparsely measured constituent concentrations.  
 Most regression-based approaches estimate daily concentration based on modeled relationships between concentration and discharge, season, and time [@cohnValiditySimpleStatistical1992; @hirschWeightedRegressionsTime2010]. 
+These approaches have recently been extended to include antecedant discharge variables to improve model performance [@zhang_improving_2017].
+We developed site-specific Generalized Additive Models (GAMs) relating NO~3~-N and TP to discharge and temporal covariates.
+GAMs are a semiparametric extension of generalized linear models where the linear predictor is represented as the sum of multiple unknown smooth functions and parametric linear predictors.
+We fit GAMs using the "mgcv" packages in R which makes available multiple types of smooth functions. Hastie and Tibshirani, 1990
+In general, we used thin-plate regression splines which are piece-wise functions that are smoothly joined at multiple breakpoints (commonly callled knots). Wood 2006
+To fit the spline function, users specify the maximum number of knots and the function is automatically estimated by minimizing the generalized cross-validation score. (wood 2006)
+
+@wangLoadEstimationUncertainties2011; @kuhnert_quantifying_2012; @robson_prediction_2015-1; @hagemannEstimatingNutrientOrganic2016; @mcdowell_implications_2021; @biagi_novel_2022 utilized variously specified GAMs to develop daily estimates of nutrient or sediment load based on temporal and flow-based variables. 
+Although the underlying parameter estimation procedure of GAMs is substantially different than popular regression based approaches such as LOADEST [@cohnValiditySimpleStatistical1992] or WRTDS [@@hirschWeightedRegressionsTime2010], the functional form and model predictions tend to be similar [@beckNumericalQualitativeContrasts2017].
+The main drivers for our selection of GAMs are the ability to model different error structures and the ease of including additional model covariates.
+@zhang_improving_2017 demonstrated improvements in WRTDS results using antecedent flow variables. Inclusion of these model terms in WRTDS and LOADEST is generally difficult compared to GAMs which are a more general regression modelling approach. 
+The generalized .
+
+
 
 
 
