@@ -647,13 +647,312 @@ list(
              ))
   ,
   
+  ### NO3 navidad
+  tar_target(daily_no3_08164390,
+             predict_daily(
+               model = no3_08164390, # target
+               data = model_data, # target
+               site_no = "usgs08164390", # quoted string
+               date = "2005-01-01", # quoted string
+               output_name = NO3_Estimate, #unquoted
+               output_upper = NO3_Upper, #unquoted
+               output_lower = NO3_Lower #unquoted
+             )),
+  ## flow-normalized NO3
+  tar_target(daily_no3_08164390_fn,
+             predict_daily(
+               model = no3_08164390, # target
+               data = flow_normalized_data, # target
+               site_no = "usgs08164390", # quoted string
+               date = "2005-01-01", # quoted string
+               output_name = NO3_Estimate, #unquoted
+               output_upper = NO3_Upper, #unquoted
+               output_lower = NO3_Lower, #unquoted
+               fn_data = TRUE
+             )),
+  ### TP navidad
+  tar_target(daily_tp_08164390,
+             predict_daily(
+               model = tp_08164390, # target
+               data = model_data, # target
+               site_no = "usgs08164390", # quoted string
+               date = "2000-01-01", # quoted string
+               output_name = TP_Estimate, #unquoted
+               output_upper = TP_Upper, #unquoted
+               output_lower = TP_Lower #unquoted
+             )),
+  ### flow-normalized TP
+  tar_target(daily_tp_08164390_fn,
+             predict_daily(
+               model = tp_08164390, # target
+               data = flow_normalized_data, # target
+               site_no = "usgs08164390", # quoted string
+               date = "2000-01-01", # quoted string
+               output_name = TP_Estimate, #unquoted
+               output_upper = TP_Upper, #unquoted
+               output_lower = TP_Lower, #unquoted
+               fn_data = TRUE
+             )),
   
-  # create loading output file (csv)
-  tar_target(write_daily, 
-             loads_to_csv(list("lav" = tar_read(daily_tp_08164000), 
-                               "tex" = tar_read(daily_tp_texana)),
+  ### NO3 sandy
+  tar_target(daily_no3_08164450,
+             predict_daily(
+               model = no3_08164450, # target
+               data = model_data, # target
+               site_no = "usgs08164450", # quoted string
+               date = "2005-01-01", # quoted string
+               output_name = NO3_Estimate, #unquoted
+               output_upper = NO3_Upper, #unquoted
+               output_lower = NO3_Lower #unquoted
+             )),
+  ## flow-normalized NO3
+  tar_target(daily_no3_08164450_fn,
+             predict_daily(
+               model = no3_08164450, # target
+               data = flow_normalized_data, # target
+               site_no = "usgs08164450", # quoted string
+               date = "2005-01-01", # quoted string
+               output_name = NO3_Estimate, #unquoted
+               output_upper = NO3_Upper, #unquoted
+               output_lower = NO3_Lower, #unquoted
+               fn_data = TRUE
+             )),
+  ### TP sandy
+  tar_target(daily_tp_08164450,
+             predict_daily(
+               model = tp_08164450, # target
+               data = model_data, # target
+               site_no = "usgs08164450", # quoted string
+               date = "2000-01-01", # quoted string
+               output_name = TP_Estimate, #unquoted
+               output_upper = TP_Upper, #unquoted
+               output_lower = TP_Lower #unquoted
+             )),
+  ### flow-normalized TP
+  tar_target(daily_tp_08164450_fn,
+             predict_daily(
+               model = tp_08164450, # target
+               data = flow_normalized_data, # target
+               site_no = "usgs08164450", # quoted string
+               date = "2000-01-01", # quoted string
+               output_name = TP_Estimate, #unquoted
+               output_upper = TP_Upper, #unquoted
+               output_lower = TP_Lower, #unquoted
+               fn_data = TRUE
+             )),
+  ### NO3 W Mustang
+  tar_target(daily_no3_08164503,
+             predict_daily(
+               model = no3_08164503, # target
+               data = model_data, # target
+               site_no = "usgs08164503", # quoted string
+               date = "2005-01-01", # quoted string
+               output_name = NO3_Estimate, #unquoted
+               output_upper = NO3_Upper, #unquoted
+               output_lower = NO3_Lower #unquoted
+             )),
+  ## flow-normalized NO3
+  tar_target(daily_no3_08164503_fn,
+             predict_daily(
+               model = no3_08164503, # target
+               data = flow_normalized_data, # target
+               site_no = "usgs08164503", # quoted string
+               date = "2005-01-01", # quoted string
+               output_name = NO3_Estimate, #unquoted
+               output_upper = NO3_Upper, #unquoted
+               output_lower = NO3_Lower, #unquoted
+               fn_data = TRUE
+             )),
+  ### TP W Mustang
+  tar_target(daily_tp_08164503,
+             predict_daily(
+               model = no3_08164503, # target
+               data = model_data, # target
+               site_no = "usgs08164503", # quoted string
+               date = "2000-01-01", # quoted string
+               output_name = TP_Estimate, #unquoted
+               output_upper = TP_Upper, #unquoted
+               output_lower = TP_Lower #unquoted
+             )),
+  ### flow-normalized TP
+  tar_target(daily_tp_08164503_fn,
+             predict_daily(
+               model = tp_08164503, # target
+               data = flow_normalized_data, # target
+               site_no = "usgs08164503", # quoted string
+               date = "2000-01-01", # quoted string
+               output_name = TP_Estimate, #unquoted
+               output_upper = TP_Upper, #unquoted
+               output_lower = TP_Lower, #unquoted
+               fn_data = TRUE
+             )),
+  ### NO3 E Mustang
+  tar_target(daily_no3_08164504,
+             predict_daily(
+               model = no3_08164504, # target
+               data = model_data, # target
+               site_no = "usgs08164504", # quoted string
+               date = "2005-01-01", # quoted string
+               output_name = NO3_Estimate, #unquoted
+               output_upper = NO3_Upper, #unquoted
+               output_lower = NO3_Lower #unquoted
+             )),
+  ## flow-normalized NO3
+  tar_target(daily_no3_08164504_fn,
+             predict_daily(
+               model = no3_08164504, # target
+               data = flow_normalized_data, # target
+               site_no = "usgs08164504", # quoted string
+               date = "2005-01-01", # quoted string
+               output_name = NO3_Estimate, #unquoted
+               output_upper = NO3_Upper, #unquoted
+               output_lower = NO3_Lower, #unquoted
+               fn_data = TRUE
+             )),
+  ### TP E Mustang
+  tar_target(daily_tp_08164504,
+             predict_daily(
+               model = tp_08164504, # target
+               data = model_data, # target
+               site_no = "usgs08164504", # quoted string
+               date = "2000-01-01", # quoted string
+               output_name = TP_Estimate, #unquoted
+               output_upper = TP_Upper, #unquoted
+               output_lower = TP_Lower #unquoted
+             )),
+  ### flow-normalized TP
+  tar_target(daily_tp_08164504_fn,
+             predict_daily(
+               model = tp_08164504, # target
+               data = flow_normalized_data, # target
+               site_no = "usgs08164504", # quoted string
+               date = "2000-01-01", # quoted string
+               output_name = TP_Estimate, #unquoted
+               output_upper = TP_Upper, #unquoted
+               output_lower = TP_Lower, #unquoted
+               fn_data = TRUE
+             )),
+  # create loading output files (csv)
+  tar_target(write_daily_tp, 
+             loads_to_csv(list("lavaca" = tar_read(daily_tp_08164000), 
+                               "texana" = tar_read(daily_tp_texana),
+                               "navidad" = tar_read(daily_tp_08164390),
+                               "sandy" = tar_read(daily_tp_08164450),
+                               "w_mustang" = tar_read(daily_tp_08164503),
+                               "e_mustang" = tar_read(daily_tp_08164504)),
                           df = "daily",
                           output = "data/Output/daily_loads/tp_daily_loads.csv"),
+             format = "file"),
+  tar_target(write_daily_tp_fn, 
+             loads_to_csv(list("lavaca" = tar_read(daily_tp_08164000_fn), 
+                               "texana" = tar_read(daily_tp_texana_fn),
+                               "navidad" = tar_read(daily_tp_08164390_fn),
+                               "sandy" = tar_read(daily_tp_08164450_fn),
+                               "w_mustang" = tar_read(daily_tp_08164503_fn),
+                               "e_mustang" = tar_read(daily_tp_08164504_fn)),
+                          df = "daily",
+                          output = "data/Output/daily_loads/tp_daily_loads_flow_normalized.csv"),
+             format = "file"),
+  tar_target(write_monthly_tp, 
+             loads_to_csv(list("lavaca" = tar_read(daily_tp_08164000), 
+                               "texana" = tar_read(daily_tp_texana),
+                               "navidad" = tar_read(daily_tp_08164390),
+                               "sandy" = tar_read(daily_tp_08164450),
+                               "w_mustang" = tar_read(daily_tp_08164503),
+                               "e_mustang" = tar_read(daily_tp_08164504)),
+                          df = "monthly",
+                          output = "data/Output/monthly_loads/tp_monthly_loads.csv"),
+             format = "file"),
+  tar_target(write_monthly_tp_fn, 
+             loads_to_csv(list("lavaca" = tar_read(daily_tp_08164000_fn), 
+                               "texana" = tar_read(daily_tp_texana_fn),
+                               "navidad" = tar_read(daily_tp_08164390_fn),
+                               "sandy" = tar_read(daily_tp_08164450_fn),
+                               "w_mustang" = tar_read(daily_tp_08164503_fn),
+                               "e_mustang" = tar_read(daily_tp_08164504_fn)),
+                          df = "monthly",
+                          output = "data/Output/monthly_loads/tp_monthly_loads_flow_normalized.csv"),
+             format = "file"),
+  tar_target(write_annual_tp, 
+             loads_to_csv(list("lavaca" = tar_read(daily_tp_08164000), 
+                               "texana" = tar_read(daily_tp_texana),
+                               "navidad" = tar_read(daily_tp_08164390),
+                               "sandy" = tar_read(daily_tp_08164450),
+                               "w_mustang" = tar_read(daily_tp_08164503),
+                               "e_mustang" = tar_read(daily_tp_08164504)),
+                          df = "annually",
+                          output = "data/Output/annual_loads/tp_annual_loads.csv"),
+             format = "file"),
+  tar_target(write_annual_tp_fn, 
+             loads_to_csv(list("lavaca" = tar_read(daily_tp_08164000_fn), 
+                               "texana" = tar_read(daily_tp_texana_fn),
+                               "navidad" = tar_read(daily_tp_08164390_fn),
+                               "sandy" = tar_read(daily_tp_08164450_fn),
+                               "w_mustang" = tar_read(daily_tp_08164503_fn),
+                               "e_mustang" = tar_read(daily_tp_08164504_fn)),
+                          df = "annually",
+                          output = "data/Output/annual_loads/tp_annual_loads_flow_normalized.csv"),
+             format = "file"),
+  
+  tar_target(write_daily_no3, 
+             loads_to_csv(list("lavaca" = tar_read(daily_no3_08164000), 
+                               "texana" = tar_read(daily_no3_texana),
+                               "navidad" = tar_read(daily_no3_08164390),
+                               "sandy" = tar_read(daily_no3_08164450),
+                               "w_mustang" = tar_read(daily_no3_08164503),
+                               "e_mustang" = tar_read(daily_no3_08164504)),
+                          df = "daily",
+                          output = "data/Output/daily_loads/no3_daily_loads.csv"),
+             format = "file"),
+  tar_target(write_daily_no3_fn, 
+             loads_to_csv(list("lavaca" = tar_read(daily_no3_08164000_fn), 
+                               "texana" = tar_read(daily_no3_texana_fn),
+                               "navidad" = tar_read(daily_no3_08164390_fn),
+                               "sandy" = tar_read(daily_no3_08164450_fn),
+                               "w_mustang" = tar_read(daily_no3_08164503_fn),
+                               "e_mustang" = tar_read(daily_no3_08164504_fn)),
+                          df = "daily",
+                          output = "data/Output/daily_loads/no3_daily_loads_flow_normalized.csv"),
+             format = "file"),
+  tar_target(write_monthly_no3, 
+             loads_to_csv(list("lavaca" = tar_read(daily_no3_08164000), 
+                               "texana" = tar_read(daily_no3_texana),
+                               "navidad" = tar_read(daily_no3_08164390),
+                               "sandy" = tar_read(daily_no3_08164450),
+                               "w_mustang" = tar_read(daily_no3_08164503),
+                               "e_mustang" = tar_read(daily_no3_08164504)),
+                          df = "monthly",
+                          output = "data/Output/monthly_loads/no3_monthly_loads.csv"),
+             format = "file"),
+  tar_target(write_monthly_no3_fn, 
+             loads_to_csv(list("lavaca" = tar_read(daily_no3_08164000_fn), 
+                               "texana" = tar_read(daily_no3_texana_fn),
+                               "navidad" = tar_read(daily_no3_08164390_fn),
+                               "sandy" = tar_read(daily_no3_08164450_fn),
+                               "w_mustang" = tar_read(daily_no3_08164503_fn),
+                               "e_mustang" = tar_read(daily_no3_08164504_fn)),
+                          df = "monthly",
+                          output = "data/Output/monthly_loads/no3_monthly_loads_flow_normalized.csv"),
+             format = "file"),
+  tar_target(write_annual_no3, 
+             loads_to_csv(list("lavaca" = tar_read(daily_no3_08164000), 
+                               "texana" = tar_read(daily_no3_texana),
+                               "navidad" = tar_read(daily_no3_08164390),
+                               "sandy" = tar_read(daily_no3_08164450),
+                               "w_mustang" = tar_read(daily_no3_08164503),
+                               "e_mustang" = tar_read(daily_no3_08164504)),
+                          df = "annually",
+                          output = "data/Output/annual_loads/no3_annual_loads.csv"),
+             format = "file"),
+  tar_target(write_annual_no3_flow_normalized, 
+             loads_to_csv(list("lavaca" = tar_read(daily_no3_08164000_fn), 
+                               "texana" = tar_read(daily_no3_texana_fn),
+                               "navidad" = tar_read(daily_no3_08164390_fn),
+                               "sandy" = tar_read(daily_no3_08164450_fn),
+                               "w_mustang" = tar_read(daily_no3_08164503_fn),
+                               "e_mustang" = tar_read(daily_no3_08164504_fn)),
+                          df = "annually",
+                          output = "data/Output/annual_loads/no3_annual_loads_flow_normalized.csv"),
              format = "file"),
   
   # loading estimates pdf

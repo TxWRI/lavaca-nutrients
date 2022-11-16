@@ -1,0 +1,13 @@
+fileName,name,contentUrl,encodingFormat
+no3_annual_loads.csv,no3_annual_loads,NA,csv
+no3_annual_loads_flow_normalized.csv,no3_annual_loads_flow_normalized,NA,csv
+tp_annual_loads.csv,tp_annual_loads,NA,csv
+tp_annual_loads_flow_normalized.csv,tp_annual_loads_flow_normalized,NA,csv
+no3_daily_loads.csv,no3_daily_loads,NA,csv
+no3_daily_loads_flow_normalized.csv,no3_daily_loads_flow_normalized,NA,csv
+tp_daily_loads.csv,tp_daily_loads,NA,csv
+tp_daily_loads_flow_normalized.csv,tp_daily_loads_flow_normalized,NA,csv
+no3_monthly_loads.csv,no3_monthly_loads,NA,csv
+no3_monthly_loads_flow_normalized.csv,no3_monthly_loads_flow_normalized,NA,csv
+tp_monthly_loads.csv,tp_monthly_loads,NA,csv
+tp_monthly_loads_flow_normalized.csv,tp_monthly_loads_flow_normalized,NA,csv

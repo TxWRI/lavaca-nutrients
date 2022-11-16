@@ -1,0 +1,266 @@
+---
+title: "Texas Coastal Nutrient Input Repository - Task 3 Report"
+author:
+  - Michael Schramm ^1^
+  - ^1^ Research Specialist, Texas Water Resources Institute, Texas A\&M AgriLife Research
+date: "December 1, 2021"
+output: 
+  officedown::rdocx_document:
+    reference_docx: format.docx
+    plots:
+      style: Normal
+      align: center
+      fig.lp: 'fig:'
+      topcaption: false
+      caption:
+        style: Image Caption
+        pre: 'Figure '
+        sep: '. '
+        tnd: 0
+        tns: '-'
+        fp_text: !expr officer::fp_text_lite(bold = FALSE)
+    tables:
+      style: Table
+      layout: autofit
+      width: 1.0
+      topcaption: true
+      tab.lp: 'tab:'
+      caption:
+        style: Table Caption
+        pre: 'Table '
+        sep: '. '
+        tnd: 0
+        tns: '-'
+        fp_text: !expr officer::fp_text_lite(bold = FALSE)
+bibliography: bibliography.yaml
+csl: council-of-science-editors-author-date.csl
+---
+
+```{r setup, include=FALSE}
+## load libraries
+library(officer)
+library(officedown)
+library(flextable)
+library(ragg)
+
+## this sets our default code chunk options
+knitr::opts_chunk$set(dev = "ragg_png",
+                      echo = FALSE,
+                      ## figure chunk options
+                      fig.cap = TRUE,
+                      fig.width = 6,
+                      dpi = 200)
+
+## some formatting options
+ft_thanks <- fp_text(font.size = 8)
+
+```
+
+
+Texas Water Resources Institute
+
+Texas A&M Agrilife
+
+College Station, TX
+
+![](combined-logo.png)
+
+
+`r ftext("This project was funded by a Texas Coastal Management Program grant approved by the Texas Land Commissioner, providing financial assistance under the Coastal Zone Management Act of 1972, as amended, awarded by the National Oceanic and Atmospheric Administration (NOAA), Oﬀice for Coastal Management, pursuant to NOAA Award No. NA21NOS4190136. The views expressed herein are those of the author(s) and do not necessarily reflect the views of NOAA, the U.S. Department of Commerce, or any of their subagencies.", ft_thanks)`
+
+
+```{r}
+## leave in, starts new word document section
+## after table of abbreviations
+block_section(prop_section(type = "nextPage"))
+```
+
+::: {custom-style="Unnumbered Heading 1"}
+
+Table of Contents
+
+:::
+
+<!---BLOCK_TOC--->
+
+::: {custom-style="Unnumbered Heading 1"}
+
+Table of Figures
+
+:::
+
+<!---BLOCK_TOC{seq_id: 'fig'}--->
+
+::: {custom-style="Unnumbered Heading 1"}
+
+Table of Tables
+
+:::
+
+<!---BLOCK_TOC{seq_id: 'tab'}--->
+
+::: {custom-style="Unnumbered Heading 1"}
+
+Abbreviations
+
+:::
+
+
+
+
+```{r}
+## leave in, ends word document section
+## after table of abbreviations
+block_section(prop_section(type = "nextPage"))
+```
+
+# Introduction
+
+A substantial proportion of coastal estuaries in the United States face excessive nutrient loading and exhibit symptoms of eutrophication [@brickerEffectsNutrientEnrichment2008]. 
+Eutrophication leads to depletion of dissolved oxygen, degradation of habitat [@darbyEffectsEutrophicationSalt2008] and increased risks of harmful algal blooms [@heislerEutrophicationHarmfulAlgal2008].
+
+There have been limited attempts at assessments of estuarine eutrophication along the Texas coastline. 
+Notably, @bugicaWaterQualityTrends2020 provided evidence of regional eutrophication hot spots attributed to increases in coastal population, urbanization, and alterations of freshwater inflows along the Texas coast and is an important starting point for targeted regional studies.
+@bugicaWaterQualityTrends2020 assessed three sites in the Lavaca Bay and identified small but significant increases in Total Phosphorus (TP) and Orthophosphate (PO~4~^-3^) at two sites, Total Kjeldahl Nitrogen (TKN) at two sites, and chlorophyll-*a* at one site. 
+Importantly, decreases in dissolved oxygen were not detected in the study. 
+While there are indications that potential drivers of eutrophication are increasing in Lavaca Bay, the immediate symptoms of degraded dissolved oxygen are not evident. 
+Significant decreases in pH at all sites assessed by @bugicaWaterQualityTrends2020 in Lavaca Bay also point to long-term decreases in freshwater inflow and a resulting increase in salinity. 
+Long-term declines in the abundance of sensitive benthic fauna in Lavaca Bay have been linked to increases in salinity and reductions in freshwater inflows [@beserespollackLongtermTrendsResponse2011; @palmerImpactsDroughtsLow2015; @montagnaAssessmentRelationshipFreshwater2020].
+
+
+The potential for negative impacts induced by eutrophication is a especially concerning given the significant declines already observed in benthic fauna abundance, biomass, and diversity within Lavaca Bay [@beserespollackLongtermTrendsResponse2011].
+Underscoring this concern is the need for data that is adequate for evaluating changes over time in watershed nutrient loading.
+There is also a need to understand the effects of land management decisions on nutrient loading, relative to environmental drivers such as precipitation and discharge, and how it may contribute to or improve conditions related to eutrophication in Lavaca Bay. 
+This work (1) quantifies Nitrate-Nitrogen (NO~3~-N) and TP loadings in the Lavaca Bay watershed and (2) assesses the relationship of eutrophication indicators in Lavaca Bay to changes in watershed discharge and loads.
+
+
+
+# Methods
+
+## Study Area
+
+## Load Estimation
+
+Regression based approaches are commonly used to estimate constituent concentration and fluxes based on continuously measured streamflow and sparsely measured constituent concentrations.  
+Most regression-based approaches estimate daily concentration based on modeled relationships between concentration and discharge, season, and time [@cohnValiditySimpleStatistical1992; @hirschWeightedRegressionsTime2010]. 
+These approaches have recently been extended to include antecedant discharge variables to improve model performance [@zhang_improving_2017].
+We developed site-specific Generalized Additive Models (GAMs) relating NO~3~-N and TP to discharge and temporal covariates.
+GAMs are a semiparametric extension of generalized linear models where the linear predictor is represented as the sum of multiple unknown smooth functions and parametric linear predictors.
+We fit GAMs using the "mgcv" packages in R which makes available multiple types of smooth functions. Hastie and Tibshirani, 1990
+In general, we used thin-plate regression splines which are piece-wise functions that are smoothly joined at multiple breakpoints (commonly callled knots). Wood 2006
+To fit the spline function, users specify the maximum number of knots and the function is automatically estimated by minimizing the generalized cross-validation score. (wood 2006)
+
+@wangLoadEstimationUncertainties2011; @kuhnert_quantifying_2012; @robson_prediction_2015-1; @hagemannEstimatingNutrientOrganic2016; @mcdowell_implications_2021; @biagi_novel_2022 utilized variously specified GAMs to develop daily estimates of nutrient or sediment load based on temporal and flow-based variables. 
+Although the underlying parameter estimation procedure of GAMs is substantially different than popular regression based approaches such as LOADEST [@cohnValiditySimpleStatistical1992] or WRTDS [@@hirschWeightedRegressionsTime2010], the functional form and model predictions tend to be similar [@beckNumericalQualitativeContrasts2017].
+The main drivers for our selection of GAMs are the ability to model different error structures and the ease of including additional model covariates.
+@zhang_improving_2017 demonstrated improvements in WRTDS results using antecedent flow variables. Inclusion of these model terms in WRTDS and LOADEST is generally difficult compared to GAMs which are a more general regression modelling approach. 
+The generalized .
+
+
+
+
+
+# Headings
+
+## Second Level Heading
+
+### Third Level Heading
+
+First, second, and third level headings are defined by `#`, `##`, and `###` respectively.
+
+
+# Tables
+
+This is an example of an unformatted table and how we cross-reference that table ([Table \@ref(tab:mtcars)](#tab:mtcars)).
+
+```{r tab.cap='this is the builtin mtcars data.', tab.id='mtcars'}
+dat <- mtcars
+head(dat, n = 10)
+```
+
+
+The [`flextable`](https://davidgohel.github.io/flextable/) package provides additional formatting flexibility when exporting to Word (Table \@ref(tab:mtcarsflex)).
+
+```{r tab.cap='flextable formatted table.', tab.id='mtcarsflex'}
+ft <- flextable(head(dat, n = 10))
+ft
+```
+
+
+# Figures
+
+We can embed and cross-reference plots (Figure \@ref(fig:pressure)).
+
+```{r pressure, fig.cap="pressure dataset", fig.alt="Alternative text for screen readers"}
+plot(pressure)
+```
+
+```{r}
+## leave in, end word document section
+## after table of abbreviations
+block_section(prop_section(type = "nextPage"))
+```
+
+<!---BLOCK_LANDSCAPE_START--->
+
+# Landscape Section
+
+```{r, echo=FALSE, fig.cap='sin function', fig.id='sinus', fig.width=6, fig.height=4, fig.align='center'}
+x <- seq(1,30, by = .1)
+plot(x, sin(x), type = "l", main = "", xlab = "", ylab = "", col = "#CC4300")
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+# Math
+
+Wrap variables or math in a single `$` to show math inline. For example, $\varepsilon \sim \mathrm{N}(0,1)$. Standalone equations are wrapped with `$$`.
+
+$$
+\left(\prod_{i=1}^{n}y_i\right)^{\frac{1}{n}} = \exp\left[\frac{1}{n}\sum_{i=1}^n\log{y_i}\right], \quad \textrm{when} \quad y_1, y_2, ..., y_n > 0
+$$
+
+If the equations need to be numbered and cross-referenced the format as:
+
+```tex
+\begin{equation}
+\left(\prod_{i=1}^{n}y_i\right)^{\frac{1}{n}} = \exp\left[\frac{1}{n}\sum_{i=1}^n\log{y_i}\right], \quad \textrm{when} \quad y_1, y_2, ..., y_n > 0
+(\#eq:gmean)
+\end{equation}
+```
+
+Which renders as (Equation \@ref(eq:gmean):
+
+\begin{equation}
+\left(\prod_{i=1}^{n}y_i\right)^{\frac{1}{n}} = \exp\left[\frac{1}{n}\sum_{i=1}^n\log{y_i}\right], \quad \textrm{when} \quad y_1, y_2, ..., y_n > 0
+(\#eq:gmean)
+\end{equation}
+
+# References
+
+In-text references and bibliography generation are handled automatically. It relies on creating a bibtex `.bib` file with your references. Software such as Zotero, Mendely, and even Google Scholar can generate the bibtex entries for you. The entries are stored in the `bibliography.bib` file inside the same directory as this `.Rmd` file. To make a in text citation, use the following syntax, `[@helsel_statistical_2002]` to generate the reference at the end of this sentence [@helsel_statistical_2002]. Use a semicolon to include multiple references `[@helsel_statistical_2002; @hirsch2010weighted]` [@helsel_statistical_2002; @hirsch2010weighted]. Or we might use `@helsel_statistical_2002` without brackets to indicate @helsel_statistical_2002 provide a fundamental overview of water quality statistics. The bibliography will populate automatically.
+
+# Styling and fonts
+
+This template uses Minion Pro for body fonts and Open Sans for headings following TWRI brand guidance and AgriLife brand guidance. I can't bundle Minion Pro in this package because of licensing, but you can download and install both fonts from AgriLife (https://agrilife.tamu.edu/wp-content/uploads/2021/03/AgriFonts.zip). I recommend downloading and installing the fonts before knitting your documents. Note that Minion Pro won't "embed" in Word documents because it is an OTF style font and currently Word only embeds TTF fonts. That means collaborators without the font installed on their system will see a different serif font on their system in Word. Once exported to pdf, both OTF and TTF fonts should be embedded correctly.
+
+
+# Bibliography {-}
+
+<div id="refs"></div>
+
+```{r}
+## leave in, ends word document section
+## after table of abbreviations
+block_section(prop_section(type = "nextPage"))
+```
+
+# Appendix A {-}
+
+You can add more info, tables, and figures here.
+
+```{r}
+## leave in, ends word document section
+## after table of abbreviations
+block_section(prop_section(type = "nextPage"))
+```
