@@ -1,0 +1,65 @@
+fileName,variableName,description,unitText
+no3_annual_loads.csv,year,Year in 4-digit format,Year
+no3_annual_loads.csv,site_no,Unique site identfier,"NA"
+no3_annual_loads.csv,NO3_Estimate,Aggregated annual nitrate load,kilograms
+no3_annual_loads.csv,NO3_Upper,Upper 95% credible interval of aggregated annual nitrate load,kilograms
+no3_annual_loads.csv,NO3_Lower,Lower 95% credible interval of aggregated annual nitrate load,kilograms
+no3_annual_loads_flow_normalized.csv,year,Year in 4-digit format,Year
+no3_annual_loads_flow_normalized.csv,site_no,Unique site identfier,"NA"
+no3_annual_loads_flow_normalized.csv,NO3_Estimate,Flow-normalized aggregated annual nitrate load,kilograms
+no3_annual_loads_flow_normalized.csv,NO3_Upper,Flow-normalized upper 95% credible interval of aggregated annual nitrate load,kilograms
+no3_annual_loads_flow_normalized.csv,NO3_Lower,Flow-normalized lower 95% credible interval of aggregated annual nitrate load,kilograms
+tp_annual_loads.csv,year,Year in 4-digit format,Year
+tp_annual_loads.csv,site_no,Unique site identfier,"NA"
+tp_annual_loads.csv,TP_Estimate,Aggregated annual total phosporus load,kilograms
+tp_annual_loads.csv,TP_Upper,Upper 95% credible interval of aggregated annual total phosphorus load,kilograms
+tp_annual_loads.csv,TP_Lower,Lower 95% credible interval of aggregated annual total phosporus load,kilograms
+tp_annual_loads_flow_normalized.csv,year,Year in 4-digit format,Year
+tp_annual_loads_flow_normalized.csv,site_no,Unique site identfier,"NA"
+tp_annual_loads_flow_normalized.csv,TP_Estimate,Flow-normalized aggregated annual total phosphorus load,kilograms
+tp_annual_loads_flow_normalized.csv,TP_Upper,Flow-normalized upper 95% credible interval of aggregated annual total phosphorus load,kilograms
+tp_annual_loads_flow_normalized.csv,TP_Lower,Flow-normalized lower 95% credible interval of aggregated annual total phosphorus load,kilograms
+no3_daily_loads.csv,Date,Date in yyyy-mm-dd format,Date
+no3_daily_loads.csv,Flow,Measured mean daily streamflow,cubic feet per second
+no3_daily_loads.csv,log1p_Flow,Log of mean daily streamflow plus 1,cubic feet per second
+no3_daily_loads.csv,site_no,Unique site identfier,"NA"
+no3_daily_loads.csv,NO3_Estimate,Estimated daily nitrate load,kilograms
+no3_daily_loads.csv,NO3_Upper,Upper 95% credible interval of estimated daily nitrate load,kilograms
+no3_daily_loads.csv,NO3_Lower,Lower 95% credible interval of estiamted dialy nitrate load,kilograms
+no3_daily_loads_flow_normalized.csv,Date,Date in yyyy-mm-dd format,Date
+no3_daily_loads_flow_normalized.csv,site_no,Unique site identfier,"NA"
+no3_daily_loads_flow_normalized.csv,NO3_Estimate,Estimated flow-normalized daily nitrate load,kilograms
+no3_daily_loads_flow_normalized.csv,NO3_Upper,Upper 95% credible interval of estimated flow-normalized daily nitrate load,kilograms
+no3_daily_loads_flow_normalized.csv,NO3_Lower,Lower 95% credible interval of estimated flow-normalized daily nitrate load,kilograms
+tp_daily_loads.csv,Date,Date in yyyy-mm-dd format,Date
+tp_daily_loads.csv,Flow,Measured mean daily streamflow,cubic feet per second
+tp_daily_loads.csv,log1p_Flow,Log of mean daily streamflow plus 1,cubic feet per second
+tp_daily_loads.csv,site_no,Unique site identfier,"NA"
+tp_daily_loads.csv,TP_Estimate,Estimated daily total phosphorus load,kilograms
+tp_daily_loads.csv,TP_Upper,Upper 95% credible interval of estimated daily phosphorus load,kilograms
+tp_daily_loads.csv,TP_Lower,Lower 95% credible interval of estiamted daily phosphorus load,kilograms
+tp_daily_loads_flow_normalized.csv,Date,Date in yyyy-mm-dd format,Date
+tp_daily_loads_flow_normalized.csv,site_no,Unique site identfier,"NA"
+tp_daily_loads_flow_normalized.csv,TP_Estimate,Estimated flow-normalized daily total phosphorus load,kilograms
+tp_daily_loads_flow_normalized.csv,TP_Upper,Upper 95% credible interval of estimated flow-normalized daily phosphorus load,kilograms
+tp_daily_loads_flow_normalized.csv,TP_Lower,Lower 95% credible interval of estiamted flow-normalized daily phosphorus load,kilograms
+no3_monthly_loads.csv,month,Month in yyyy-mm format,Month
+no3_monthly_loads.csv,site_no,Unique site identfier,"NA"
+no3_monthly_loads.csv,NO3_Estimate,Aggregated monthly nitrate load,kilograms
+no3_monthly_loads.csv,NO3_Upper,Upper 95% credible interval of aggregated monthly nitrate load,kilograms
+no3_monthly_loads.csv,NO3_Lower,Lower 95% credible interval of aggregated monthly nitrate load,kilograms
+no3_monthly_loads_flow_normalized.csv,month,Month in yyyy-mm format,month
+no3_monthly_loads_flow_normalized.csv,site_no,Unique site identfier,"NA"
+no3_monthly_loads_flow_normalized.csv,NO3_Estimate,Aggregated monthly flow-normalized nitrate load,kilograms
+no3_monthly_loads_flow_normalized.csv,NO3_Upper,Upper 95% credible interval of aggregated monthly flow-normalized nitrate load,kilograms
+no3_monthly_loads_flow_normalized.csv,NO3_Lower,Lower 95% credible interval of aggregated monthly flow-normalized nitrate load,kilograms
+tp_monthly_loads.csv,month,Month in yyyy-mm format,month
+tp_monthly_loads.csv,site_no,Unique site identfier,"NA"
+tp_monthly_loads.csv,TP_Estimate,Aggregated monthly total phosphorus load,kilograms
+tp_monthly_loads.csv,TP_Upper,Upper 95% credible interval of aggregated monthly total phosphorus load,kilograms
+tp_monthly_loads.csv,TP_Lower,Lower 95% credible interval of aggregated monthly total phosphorus load,kilograms
+tp_monthly_loads_flow_normalized.csv,month,Month in yyyy-mm format,month
+tp_monthly_loads_flow_normalized.csv,site_no,Unique site identfier,"NA"
+tp_monthly_loads_flow_normalized.csv,TP_Estimate,Aggregated monthly flow-normalized total phosphorus load,kilograms
+tp_monthly_loads_flow_normalized.csv,TP_Upper,Upper 95% credible interval of aggregated monthly flow-normalized phosphorus load,kilograms
+tp_monthly_loads_flow_normalized.csv,TP_Lower,Lower 95% credible interval of aggregated monthly flow-normalized phosphorus load,kilograms

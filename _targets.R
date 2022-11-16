@@ -941,7 +941,7 @@ list(
                                "sandy" = tar_read(daily_no3_08164450),
                                "w_mustang" = tar_read(daily_no3_08164503),
                                "e_mustang" = tar_read(daily_no3_08164504)),
-                          df = "daily",
+                          df = "annually",
                           output = "data/Output/annual_loads/no3_annual_loads.csv"),
              format = "file"),
   tar_target(write_annual_no3_flow_normalized, 
@@ -951,7 +951,7 @@ list(
                                "sandy" = tar_read(daily_no3_08164450_fn),
                                "w_mustang" = tar_read(daily_no3_08164503_fn),
                                "e_mustang" = tar_read(daily_no3_08164504_fn)),
-                          df = "daily",
+                          df = "annually",
                           output = "data/Output/annual_loads/no3_annual_loads_flow_normalized.csv"),
              format = "file"),
   

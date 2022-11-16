@@ -1,0 +1,789 @@
+<html>
+  <head>
+    <title>Data for Texas Coastal Nutrient Input Repository</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="application/ld+json">
+      {
+  "@context": "http://schema.org",
+  "type": "Dataset",
+  "name": "Data for Texas Coastal Nutrient Input Repository",
+  "creator": [
+    {
+      "type": "Person",
+      "id": "0000-0003-1876-6592",
+      "email": "michael.schramm@ag.tamu.edu",
+      "affiliation": "Texas Water Resources Institute, Texas A&M AgriLife Research",
+      "name": "Michael Schramm"
+    }
+  ],
+  "description": "Nitrate and Total Phosphorus loading data for phase 1 of the project (Lavaca Bay)",
+  "datePublished": "2022-11-16",
+  "keywords": ["nutrients", "eutrophication", "estuary", "watershed", "nitrogen", "phosphorus"],
+  "funder": "NOAA and Texas General Land Office",
+  "temporalCoverage": "2000-01-01/2020-12-31",
+  "license": null,
+  "spatialCoverage": {
+    "type": "Place",
+    "name": "Lavaca Bay",
+    "geo": {
+      "type": "GeoShape",
+      "box": "29.881154 -96.22301 28.42687 -97.374358"
+    }
+  },
+  "variableMeasured": [
+    {
+      "type": "PropertyValue",
+      "unitText": "Year",
+      "name": "year",
+      "description": "Year in 4-digit format"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": null,
+      "name": "site_no",
+      "description": "Unique site identfier"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Estimate",
+      "description": "Aggregated annual nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Upper",
+      "description": "Upper 95% credible interval of aggregated annual nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Lower",
+      "description": "Lower 95% credible interval of aggregated annual nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Estimate",
+      "description": "Flow-normalized aggregated annual nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Upper",
+      "description": "Flow-normalized upper 95% credible interval of aggregated annual nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Lower",
+      "description": "Flow-normalized lower 95% credible interval of aggregated annual nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Estimate",
+      "description": "Aggregated annual total phosporus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Upper",
+      "description": "Upper 95% credible interval of aggregated annual total phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Lower",
+      "description": "Lower 95% credible interval of aggregated annual total phosporus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Estimate",
+      "description": "Flow-normalized aggregated annual total phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Upper",
+      "description": "Flow-normalized upper 95% credible interval of aggregated annual total phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Lower",
+      "description": "Flow-normalized lower 95% credible interval of aggregated annual total phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "Date",
+      "name": "Date",
+      "description": "Date in yyyy-mm-dd format"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "cubic feet per second",
+      "name": "Flow",
+      "description": "Measured mean daily streamflow"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "cubic feet per second",
+      "name": "log1p_Flow",
+      "description": "Log of mean daily streamflow plus 1"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Estimate",
+      "description": "Estimated daily nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Upper",
+      "description": "Upper 95% credible interval of estimated daily nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Lower",
+      "description": "Lower 95% credible interval of estiamted dialy nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Estimate",
+      "description": "Estimated flow-normalized daily nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Upper",
+      "description": "Upper 95% credible interval of estimated flow-normalized daily nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Lower",
+      "description": "Lower 95% credible interval of estimated flow-normalized daily nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Estimate",
+      "description": "Estimated daily total phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Upper",
+      "description": "Upper 95% credible interval of estimated daily phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Lower",
+      "description": "Lower 95% credible interval of estiamted daily phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Estimate",
+      "description": "Estimated flow-normalized daily total phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Upper",
+      "description": "Upper 95% credible interval of estimated flow-normalized daily phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Lower",
+      "description": "Lower 95% credible interval of estiamted flow-normalized daily phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "Month",
+      "name": "month",
+      "description": "Month in yyyy-mm format"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Estimate",
+      "description": "Aggregated monthly nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Upper",
+      "description": "Upper 95% credible interval of aggregated monthly nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Lower",
+      "description": "Lower 95% credible interval of aggregated monthly nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "month",
+      "name": "month",
+      "description": "Month in yyyy-mm format"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Estimate",
+      "description": "Aggregated monthly flow-normalized nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Upper",
+      "description": "Upper 95% credible interval of aggregated monthly flow-normalized nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "NO3_Lower",
+      "description": "Lower 95% credible interval of aggregated monthly flow-normalized nitrate load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Estimate",
+      "description": "Aggregated monthly total phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Upper",
+      "description": "Upper 95% credible interval of aggregated monthly total phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Lower",
+      "description": "Lower 95% credible interval of aggregated monthly total phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Estimate",
+      "description": "Aggregated monthly flow-normalized total phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Upper",
+      "description": "Upper 95% credible interval of aggregated monthly flow-normalized phosphorus load"
+    },
+    {
+      "type": "PropertyValue",
+      "unitText": "kilograms",
+      "name": "TP_Lower",
+      "description": "Lower 95% credible interval of aggregated monthly flow-normalized phosphorus load"
+    }
+  ],
+  "distribution": [
+    {
+      "type": "DataDownload",
+      "name": "no3_annual_loads",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "no3_annual_loads_flow_normalized",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "tp_annual_loads",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "tp_annual_loads_flow_normalized",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "no3_daily_loads",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "no3_daily_loads_flow_normalized",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "tp_daily_loads",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "tp_daily_loads_flow_normalized",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "no3_monthly_loads",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "no3_monthly_loads_flow_normalized",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "tp_monthly_loads",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    },
+    {
+      "type": "DataDownload",
+      "name": "tp_monthly_loads_flow_normalized",
+      "contentUrl": null,
+      "encodingFormat": "csv"
+    }
+  ]
+}
+
+    </script>
+    <style>
+      body {
+        font-size: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        margin: 0 auto;
+        padding: 1rem;
+        max-width: 800px;
+      }
+
+      #map {
+        height: 20rem;
+      }
+
+      #attributes-wrapper,
+      #jsonld-wrapper {
+        height: 20rem;
+        overflow-y: scroll;
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+
+      th {
+        border-bottom: 1px solid black;
+      }
+
+      th, td {
+        padding: 0.25rem;
+      }
+
+      table.listing td {
+        border: 1px solid #CCC;
+      }
+
+      table.listing tr td:first-child {
+          background-color: #EEE;
+      }
+
+      table.listing ul {
+        margin: 0 0 0 1.5rem;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Data for Texas Coastal Nutrient Input Repository</h1>
+    <p><strong>Description:</strong> Nitrate and Total Phosphorus loading data for phase 1 of the project (Lavaca Bay)</p>
+
+    <h2>Bibliographic</h2>
+
+    <table class="listing">
+      <tr>
+        <td>Published</td>
+        <td>2022-11-16</td>
+      </tr>
+      <tr>
+        <td>Keywords</td>
+        <td>
+          <ul>
+            <li>nutrients</li>
+            <li>eutrophication</li>
+            <li>estuary</li>
+            <li>watershed</li>
+            <li>nitrogen</li>
+            <li>phosphorus</li>
+        </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Funder</td>
+        <td>NOAA and Texas General Land Office</td>
+      </tr>
+      <tr>
+        <td>License</td>
+        <td></td>
+      </tr>
+    </table>
+
+    <h2>Coverage</h2>
+
+    <h3>Temporal</h3>
+
+    <table class="listing">
+      <tr>
+        <td>Begin</td>
+        <td>2000-01-01</td>
+      </tr>
+      <tr>
+        <td>End</td>
+        <td>2020-12-31</td>
+      </tr>
+    </table>
+
+    <h3>Spatial</h3>
+    <pre><code></code></pre>
+    <div id="map"></div>
+
+    <h2>Attributes</h2>
+
+    <div id="attributes-wrapper">
+      <table id="attributes">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Unit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>year</code></td>
+            <td>Year in 4-digit format</td>
+            <td>Year</td>
+          </tr>
+          <tr>
+            <td><code>site_no</code></td>
+            <td>Unique site identfier</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><code>NO3_Estimate</code></td>
+            <td>Aggregated annual nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Upper</code></td>
+            <td>Upper 95% credible interval of aggregated annual nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Lower</code></td>
+            <td>Lower 95% credible interval of aggregated annual nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Estimate</code></td>
+            <td>Flow-normalized aggregated annual nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Upper</code></td>
+            <td>Flow-normalized upper 95% credible interval of aggregated annual nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Lower</code></td>
+            <td>Flow-normalized lower 95% credible interval of aggregated annual nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Estimate</code></td>
+            <td>Aggregated annual total phosporus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Upper</code></td>
+            <td>Upper 95% credible interval of aggregated annual total phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Lower</code></td>
+            <td>Lower 95% credible interval of aggregated annual total phosporus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Estimate</code></td>
+            <td>Flow-normalized aggregated annual total phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Upper</code></td>
+            <td>Flow-normalized upper 95% credible interval of aggregated annual total phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Lower</code></td>
+            <td>Flow-normalized lower 95% credible interval of aggregated annual total phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>Date</code></td>
+            <td>Date in yyyy-mm-dd format</td>
+            <td>Date</td>
+          </tr>
+          <tr>
+            <td><code>Flow</code></td>
+            <td>Measured mean daily streamflow</td>
+            <td>cubic feet per second</td>
+          </tr>
+          <tr>
+            <td><code>log1p_Flow</code></td>
+            <td>Log of mean daily streamflow plus 1</td>
+            <td>cubic feet per second</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Estimate</code></td>
+            <td>Estimated daily nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Upper</code></td>
+            <td>Upper 95% credible interval of estimated daily nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Lower</code></td>
+            <td>Lower 95% credible interval of estiamted dialy nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Estimate</code></td>
+            <td>Estimated flow-normalized daily nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Upper</code></td>
+            <td>Upper 95% credible interval of estimated flow-normalized daily nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Lower</code></td>
+            <td>Lower 95% credible interval of estimated flow-normalized daily nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Estimate</code></td>
+            <td>Estimated daily total phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Upper</code></td>
+            <td>Upper 95% credible interval of estimated daily phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Lower</code></td>
+            <td>Lower 95% credible interval of estiamted daily phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Estimate</code></td>
+            <td>Estimated flow-normalized daily total phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Upper</code></td>
+            <td>Upper 95% credible interval of estimated flow-normalized daily phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Lower</code></td>
+            <td>Lower 95% credible interval of estiamted flow-normalized daily phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>month</code></td>
+            <td>Month in yyyy-mm format</td>
+            <td>Month</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Estimate</code></td>
+            <td>Aggregated monthly nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Upper</code></td>
+            <td>Upper 95% credible interval of aggregated monthly nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Lower</code></td>
+            <td>Lower 95% credible interval of aggregated monthly nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>month</code></td>
+            <td>Month in yyyy-mm format</td>
+            <td>month</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Estimate</code></td>
+            <td>Aggregated monthly flow-normalized nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Upper</code></td>
+            <td>Upper 95% credible interval of aggregated monthly flow-normalized nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>NO3_Lower</code></td>
+            <td>Lower 95% credible interval of aggregated monthly flow-normalized nitrate load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Estimate</code></td>
+            <td>Aggregated monthly total phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Upper</code></td>
+            <td>Upper 95% credible interval of aggregated monthly total phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Lower</code></td>
+            <td>Lower 95% credible interval of aggregated monthly total phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Estimate</code></td>
+            <td>Aggregated monthly flow-normalized total phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Upper</code></td>
+            <td>Upper 95% credible interval of aggregated monthly flow-normalized phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+          <tr>
+            <td><code>TP_Lower</code></td>
+            <td>Lower 95% credible interval of aggregated monthly flow-normalized phosphorus load</td>
+            <td>kilograms</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Distribution</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Format</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>no3_annual_loads</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>no3_annual_loads_flow_normalized</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>tp_annual_loads</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>tp_annual_loads_flow_normalized</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>no3_daily_loads</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>no3_daily_loads_flow_normalized</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>tp_daily_loads</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>tp_daily_loads_flow_normalized</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>no3_monthly_loads</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>no3_monthly_loads_flow_normalized</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>tp_monthly_loads</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+        <tr>
+          <td><code>tp_monthly_loads_flow_normalized</code></td>
+          <td><code>csv</code></td>
+          <td><a href="">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+  crossorigin=""></script>
+    <script>
+      var mymap = L.map('map').setView([29.154012, -96.798684], 1);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+        maxZoom: 18,
+      }).addTo(mymap);
+
+      var polygon = L.polygon([[ 29.881154, -96.22301], [ 28.42687, -96.22301], [ 28.42687, -97.374358], [ 29.881154, -97.374358]]).addTo(mymap);
+    </script>
+  </body>
+</html>
