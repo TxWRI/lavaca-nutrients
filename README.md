@@ -2,7 +2,22 @@ Texas Coastal Nutrient Input Repository (Phase 1 - Lavaca Bay)
 ================
 Michael Schramm - Texas Water Resources Institute, Research Specialist
 
-This is a placeholder.
+This is the analysis code and data for the Texas Coastal Nutrient Input
+Repository project. This project develops estimates of actual and
+flow-normalized daily nitrate (NO<sup>3</sup>-N) and total phosphorus
+(TP) watershed loads. Reports and publications are forthcoming.
+
+Data analysis and models were developed in R using the
+[renv](https://rstudio.github.io/renv/) and
+[targets](https://docs.ropensci.org/targets/) R packages to facilitate
+reproducibility. To reproduce this analysis clone the repository to your
+local machine, ensure both renv and targets are installed and open the
+project. The analysis can be reproduced using:
+
+``` r
+renv::restore()
+targets::tar_make()
+```
 
 ## Funding
 
