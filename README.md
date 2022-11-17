@@ -3,6 +3,7 @@ Texas Coastal Nutrient Input Repository (Phase 1 - Lavaca Bay)
 
 [![License: CC BY
 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7330754.svg)](https://doi.org/10.5281/zenodo.7330754)
 
 This repository contains code and data for the Texas Coastal Nutrient
 Input Repository project. This project develops estimates of actual and
