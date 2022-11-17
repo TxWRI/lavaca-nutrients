@@ -24,3 +24,4 @@ write_spice(path = "data/Output/metadata")
 
 
 build_site("data/Output/metadata/dataspice.json")
+serve_site()
