@@ -13,10 +13,13 @@ targets::tar_option_set(packages = c("adc",
                                      "arrow", 
                                      "dataRetrieval", 
                                      "dplyr", 
+                                     "FedData",
                                      "flextable", 
                                      "fs", 
                                      "furrr", 
                                      "ggplot2", 
+                                     "ggrepel",
+                                     "ggspatial",
                                      "ggtext",
                                      "glue",
                                      "gratia", 
@@ -32,8 +35,10 @@ targets::tar_option_set(packages = c("adc",
                                      "ragg",
                                      "quarto", 
                                      "readr", 
+                                     "rcartocolor",
                                      "rsample",
                                      "scico",
+                                     "sf",
                                      "tarchetypes",
                                      "tibble",
                                      "tidyr", 
@@ -1038,6 +1043,10 @@ list(
   tar_target(tp_lavaca_prediction_data,
              estuary_prediction_data(lbay_adj_flow,
                                      estuary_tp_loads,
-                                     "2000-01-01"))
+                                     "2000-01-01")),
+  
+  ## Report Figures
+  tar_target(report_map,
+             study_area_map())
   
 )

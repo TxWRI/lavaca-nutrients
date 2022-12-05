@@ -6,6 +6,8 @@ author:
 date: "December 1, 2021"
 output: 
   officedown::rdocx_document:
+    base_format: "bookdown::word_document2"
+    number_sections: false
     reference_docx: format.docx
     plots:
       style: Normal
@@ -38,10 +40,15 @@ csl: council-of-science-editors-author-date.csl
 
 ```{r setup, include=FALSE}
 ## load libraries
+options(tidyverse.quiet=TRUE)
 library(officer)
 library(officedown)
 library(flextable)
+library(stringr)
 library(ragg)
+library(targets)
+source("../../_targets_packages.R")
+
 
 ## this sets our default code chunk options
 knitr::opts_chunk$set(dev = "ragg_png",
@@ -49,10 +56,13 @@ knitr::opts_chunk$set(dev = "ragg_png",
                       ## figure chunk options
                       fig.cap = TRUE,
                       fig.width = 6,
-                      dpi = 200)
+                      dpi = 300)
 
 ## some formatting options
 ft_thanks <- fp_text(font.size = 8)
+
+## targets
+store = "../../_targets"
 
 ```
 
@@ -116,57 +126,208 @@ block_section(prop_section(type = "nextPage"))
 
 # Introduction
 
-A substantial proportion of coastal estuaries in the United States face excessive nutrient loading and exhibit symptoms of eutrophication [@brickerEffectsNutrientEnrichment2008]. 
-Eutrophication leads to depletion of dissolved oxygen, degradation of habitat [@darbyEffectsEutrophicationSalt2008] and increased risks of harmful algal blooms [@heislerEutrophicationHarmfulAlgal2008].
+An increasing proportion of coastal estuaries are showing signs of eutrophication dues to excessive nutrient loadings [@brickerEffectsNutrientEnrichment2008]. Recent assessments along the Texas coastline highlighted regional eutrophication hotspots attributed to increased coastal populations and changes in land use and hydrology [@bugicaWaterQualityTrends2020]. Within the Lavaca Bay watershed, @bugicaWaterQualityTrends2020 identified site specific increases in Total Phosphorus (TP) and Orthophosphate (PO~4~^-3^), Total Kjeldahl Nitrogen (TKN), and chlorophyll-*a* concentrations. Changes in freshwater inflow and associated nutrients are assumed to drive changes in estuary nutrient concentrations. The purpose of this project is to provide a dataset of nutrient load estimates and measures of uncertainty that help stakeholders assess trends and changes in freshwater derived nutrients loads into Lavaca Bay.
 
-There have been limited attempts at assessments of estuarine eutrophication along the Texas coastline. 
-Notably, @bugicaWaterQualityTrends2020 provided evidence of regional eutrophication hot spots attributed to increases in coastal population, urbanization, and alterations of freshwater inflows along the Texas coast and is an important starting point for targeted regional studies.
-@bugicaWaterQualityTrends2020 assessed three sites in the Lavaca Bay and identified small but significant increases in Total Phosphorus (TP) and Orthophosphate (PO~4~^-3^) at two sites, Total Kjeldahl Nitrogen (TKN) at two sites, and chlorophyll-*a* at one site. 
-Importantly, decreases in dissolved oxygen were not detected in the study. 
-While there are indications that potential drivers of eutrophication are increasing in Lavaca Bay, the immediate symptoms of degraded dissolved oxygen are not evident. 
-Significant decreases in pH at all sites assessed by @bugicaWaterQualityTrends2020 in Lavaca Bay also point to long-term decreases in freshwater inflow and a resulting increase in salinity. 
-Long-term declines in the abundance of sensitive benthic fauna in Lavaca Bay have been linked to increases in salinity and reductions in freshwater inflows [@beserespollackLongtermTrendsResponse2011; @palmerImpactsDroughtsLow2015; @montagnaAssessmentRelationshipFreshwater2020].
+Daily nutrient loads are typically calculated as the the product of instantaneous nutrient concentration measurements and mean daily streamflow, or the sum of flow-weighted nutrient concentrations times the total daily streamflow. However, nutrient concentrations are measured infrequently while streamflow measurements can be taken near-continuously. In order to develop monthly and annual estimates of nutrient loads, in-stream nutrient concentrations must be estimated or modeled in-between sampling events. These inter-event concentrations can be estimated using one of many mechanistic models or statistical modeling procedures.
 
-
-The potential for negative impacts induced by eutrophication is a especially concerning given the significant declines already observed in benthic fauna abundance, biomass, and diversity within Lavaca Bay [@beserespollackLongtermTrendsResponse2011].
-Underscoring this concern is the need for data that is adequate for evaluating changes over time in watershed nutrient loading.
-There is also a need to understand the effects of land management decisions on nutrient loading, relative to environmental drivers such as precipitation and discharge, and how it may contribute to or improve conditions related to eutrophication in Lavaca Bay. 
-This work (1) quantifies Nitrate-Nitrogen (NO~3~-N) and TP loadings in the Lavaca Bay watershed and (2) assesses the relationship of eutrophication indicators in Lavaca Bay to changes in watershed discharge and loads.
-
-
+Mechanistic models focus on replicating underlying physical, biological, and other processes that generate streamflow and pollutant loading in a watershed by calibration of some parameter set. The Soil & Water Assessment Tool (SWAT), Hydrologic Engineering Center's River Analysis System (HEC-RAS), Water Quality Analysis Simulation Program (WASP) and others. These models are particularly suited for exploring underlying physical processes, scenario planning, or forecasting and assume a reasonable understanding of the system being modeled. Conversely, statistical or data-driven models utilize empirical observations to identify patterns or relationships in the observed data to make predictions. LOADEST and WRTDS are two popular applications of linear regression based statistical models used to make daily load predictions using instantaneous concentration measurements and continuous streamflow data (typically mean daily flow) [@cohnValiditySimpleStatistical1992; @hirschWeightedRegressionsTime2010]. LOADEST and WRTDS utilize streamflow, seasonality, and long-term trends as linear predictors with WRTDS allowing these relationships to vary temporally. This project focuses on statistical based-approaches because the goal is to develop hind-cast predictions based on empirical observations and our limited understanding of the underlying watershed (for example cropping patterns, reservoir operations, and daily wastewater discharges) required to develop a robust mechanistic model. 
 
 # Methods
 
-## Study Area
+## Study Area and Data
 
-## Load Estimation
+Lavaca Bay is a secondary bay in the Matagorda Bay system located centrally along the Texas Gulf coast, roughly halfway between the cities of Houston and Corpus Christi (Figure \@ref(fig:projectmap)).
+Lavaca Bay is 190 km^2^ with the majority of freshwater inflow provided by the Lavaca-Navidad river system. 
+The Garcitas-Arenosa, Placedo Creek, and Cox Bay watersheds provide additional freshwater inflows.
+The watershed land area for Lavaca Bay is 8,149 km^2^. 
+The Lavaca-Navidad river watershed is 5,966 km^2^, or approximately 73% of the watershed area. 
+Discharge from the Navidad River is regulated by Lake Texana which has been in operation since 1980.
+Lake Texana provides 170,000 acre-feet of water storage and discharges into the tidal section of the Navidad River which ultimately joins the tidal section of the Lavaca River 15 km upstream of the confluence with the Bay.
+
+### Hydrology
+
+Daily discharges for gaged locations within the watershed were obtained from the United States Geologic Survey (USGS) National Water Information System (NWIS) using the "dataRetrieval" R package [@deciccoDataRetrievalPackagesDiscovering2022]. 
+Gaged daily discharges from Lake Texana (USGS-0816425) and modeled daily discharges for the outlet of the Lavaca-Navidad watershed were obtained from the Texas Water Development Board (TWDB) (April 21, 2022 email from R. Neupane, TWDB).
+Modeled discharges were developed by the TWDB for ungaged coastal basins using the Texas Rainfall-Runoff (TxRR) model described in @schoenbaechlerCoastalHydrologyLavacaColorado2011.
+From 2000 through 2020, mean daily discharge from the Lavaca-Navidad watershed system was 700 (MGD) based on a combination of modeled runoff and gaged discharge. 
+Approximately 61% of the mean daily discharge comes from Lake Texana (USGS-0816425, Figure \@ref(fig:projectmap)), 30% is from the Lavaca River at Edna (USGS-08164000) and the rest is ungaged runoff below those two gaged locations. 
+
+
+```{r projectmap, fig.cap="Study area map.", fig.alt="Map of the Lavaca Bay and Lavaca Bay watershed. The map indicates the locations of the river systems and sampling sites used to estimate nutrient loading and the sites in Lavaca Bay used to relate loading to estuarine water quality parameters.", out.width="100%", fig.asp=1.25}
+tar_read(report_map, store = store)
+```
+
+
+```{r dat_summ1}
+df <- tar_read(model_data, store = store)
+
+dat <- df |>  
+  select(site_no, Flow, original_NO3, original_TP) |> 
+  pivot_longer(cols = c(Flow, original_NO3, original_TP),
+               names_to = "Parameter") |> 
+  filter(!is.na(value)) |> 
+  group_by(site_no, Parameter) |> 
+  summarise(n = n(),
+            mean = mean(value),
+            sd = sd(value),
+            .groups = "drop") |>
+  mutate(Parameter = case_when(
+    Parameter == "Flow" ~ "Mean Daily Discharge",
+    Parameter == "original_NO3" ~ "NO3-N",
+    Parameter == "original_TP" ~ "TP"
+  )) |> 
+  mutate(site_no = case_when(
+    site_no == "lktexana_g" ~ "usgs08164525",
+    site_no != "lktexana_g" ~ site_no
+  )) |> 
+  mutate(Description = case_when(
+    site_no == "usgs08164525" ~ "Lake Texana",
+    site_no == "usgs08164000" ~ "Lavaca River near Edna",
+    site_no == "usgs08164390" ~ "Navidad River at Strane Pk.",
+    site_no == "usgs08164450" ~ "Sandy Creek near Ganado",
+    site_no == "usgs08164503" ~ "West Mustang Creek near Ganado",
+    site_no == "usgs08164504" ~ "East Mustang Creek near Lousie"
+  )) |> 
+  rename(Site = site_no)
+
+dat$Site <- str_replace(dat$Site, "usgs", "USGS-")
+
+cft_1 <- tabulator(
+  x = dat,
+  rows = c("Site", "Description"),
+  columns = "Parameter",
+  "Mean (SD)" = as_paragraph(fmt_avg_dev(mean, sd, digit1 = 2, digit2 = 2)),
+  "N" = as_paragraph(as_chunk(n))
+)
+
+prop_cap <- fp_text_default(font.family = "Minion Pro",
+                            font.size = 10)
+
+ft <- as_flextable(cft_1) |> 
+  font(part = "all", fontname = "Arial") |> 
+  bold(part = "header") |> 
+  fontsize(size = 9) |> 
+  border_remove() |> 
+  hline_top(border = fp_border(color = "black", width = 0.5),
+            part = "all") |> 
+  hline(border = fp_border(color = "black", width = 0.5),
+        part = "header") |> 
+  hline_bottom(border = fp_border(color = "black", width = 0.5),
+               part = "all") |> 
+  set_table_properties(layout = "autofit") |> 
+  set_caption(as_paragraph(
+    as_chunk("Summary statistics for mean daily discharge, NO",
+             props = prop_cap),
+    as_sub(as_chunk("3", props = prop_cap)),
+    as_chunk("-N, and TP at the freshwater sites where daily nutrient loads were estimated.",
+             props = prop_cap)
+    ))
+
+
+ft
+```
+
+
+## Nutrient Load Estimation
 
 Regression based approaches are commonly used to estimate constituent concentration and fluxes based on continuously measured streamflow and sparsely measured constituent concentrations.  
 Most regression-based approaches estimate daily concentration based on modeled relationships between concentration and discharge, season, and time [@cohnValiditySimpleStatistical1992; @hirschWeightedRegressionsTime2010]. 
-These approaches have recently been extended to include antecedant discharge variables to improve model performance [@zhang_improving_2017].
+These approaches have recently been extended to include antecedent discharge variables that significantly improve model performance [@zhang_improving_2017].
 We developed site-specific Generalized Additive Models (GAMs) relating NO~3~-N and TP to discharge and temporal covariates.
-GAMs are a semiparametric extension of generalized linear models where the linear predictor is represented as the sum of multiple unknown smooth functions and parametric linear predictors.
-We fit GAMs using the "mgcv" packages in R which makes available multiple types of smooth functions. Hastie and Tibshirani, 1990
-In general, we used thin-plate regression splines which are piece-wise functions that are smoothly joined at multiple breakpoints (commonly callled knots). Wood 2006
-To fit the spline function, users specify the maximum number of knots and the function is automatically estimated by minimizing the generalized cross-validation score. (wood 2006)
+GAMs are a semiparametric version of generalized linear models where the linear predictor is represented as the sum of multiple unknown smooth functions and parametric linear predictors.
+Recent work has shown GAMs can be specified in a functionally similar manner to popular linear regression based approaches such as LOADEST [@cohnValiditySimpleStatistical1992] or WRTDS [@hirschWeightedRegressionsTime2010] and produce reliable estimates of nutrient and sediment loading [@wangLoadEstimationUncertainties2011; @kroonRiverLoadsSuspended2012; @kuhnert_quantifying_2012; @robson_prediction_2015-1; @hagemannEstimatingNutrientOrganic2016; @mcdowell_implications_2021; @biagi_novel_2022].
+Although the underlying parameter estimation procedure of GAMs is substantially different than WRTDS, both the functional form and results are demonstrated to be similar [@beckNumericalQualitativeContrasts2017].
+Importantly, in comparison to linear regression based approaches, GAMs allow (1)  simple incorporation of additional model terms into the regression equation, (2) specification of the exponential distribution family of the response, and (3) specification of a link function relating the expected value of the response to the linear predictor.
+We fit GAMs using the *mgcv* package in R which makes available multiple types of smooth functions with automatic smoothness estimation [@wood_fast_2011]. To model watershed NO~3~-N and TP loads, we fit a GAM relating constituent concentration to flow and time:
 
-@wangLoadEstimationUncertainties2011; @kuhnert_quantifying_2012; @robson_prediction_2015-1; @hagemannEstimatingNutrientOrganic2016; @mcdowell_implications_2021; @biagi_novel_2022 utilized variously specified GAMs to develop daily estimates of nutrient or sediment load based on temporal and flow-based variables. 
-Although the underlying parameter estimation procedure of GAMs is substantially different than popular regression based approaches such as LOADEST [@cohnValiditySimpleStatistical1992] or WRTDS [@@hirschWeightedRegressionsTime2010], the functional form and model predictions tend to be similar [@beckNumericalQualitativeContrasts2017].
-The main drivers for our selection of GAMs are the ability to model different error structures and the ease of including additional model covariates.
-@zhang_improving_2017 demonstrated improvements in WRTDS results using antecedent flow variables. Inclusion of these model terms in WRTDS and LOADEST is generally difficult compared to GAMs which are a more general regression modelling approach. 
-The generalized .
+\begin{equation}
+\begin{aligned}
+g(\mu) &= \alpha + f_1(ddate) + f_2(yday) + f_3(log1p(Q)) + f_4(ma) + f_5(fa)  \\
+y &\sim \Gamma(\mu,\lambda)
+\end{aligned}
+(\#eq:gam1)
+\end{equation}
+
+where μ is the conditional expected NO~3~-N or TP concentration, *g()* is the log-link, *α* is the intercept, *f~n~()* are smoothing functions. 
+*y* is the response variable (constituent concentration) modeled as Gamma distributed with mean *μ* and scale *λ*. *ddate* is the date converted to decimal notation, *yday* is numeric day of year (1-366), and *log1p(Q)* is the natural log of mean daily streamflow plus 1. 
+
+Moving average (*ma*) is an exponentially smoothed moving average that attempts to incorporate the influence of prior streamflow events on current concentration. @wangLoadEstimationUncertainties2011, @kuhnert_quantifying_2012 and @zhang_improving_2017 refer to this as averaged or smoothed discounted flow and demonstrated improvements in nutrient loading models by including the term.
+@kuhnert_quantifying_2012 expresses MA as
 
 
+\begin{equation}
+ma(\delta) = d{\kappa_{i-1}}+(1-\delta)\hat{q}_{i-1}\quad\text{and}\quad \kappa_{i}=\sum_{m=1}^{i}\hat{Q}_m 
+(\#eq:ma)
+\end{equation}
 
+where *δ* is the discount factor (here, set equal to 0.95), *κ~i~* is the cumulative flow (*Q*) up to the *i*th day.
 
+Flow anomaly (*fa*) is a unitless term that represents how wet or dry the current time period is from a previous time period [@vecchia_trends_2009; @zhang_improving_2017]. 
+Long-term flow anomaly (*ltfa*) is the streamflow over the previous year relative to the entire period and calculated as described by @zhang_improving_2017:
 
-# Headings
+\begin{equation}
+ltfa(t) = \bar{x}_{1\,year}(t) - \bar{x}_{entire\,period} 
+(\#eq:ltfa)
+\end{equation}
 
-## Second Level Heading
+and the short-term flow anomaly (*stfa*) calculated as the current day flow compared to the preceding 1-month streamflow:
 
-### Third Level Heading
+\begin{equation}
+stfa(t) = x_{current\,day}(t) - \bar{x}_{1\,month}(t) 
+(\#eq:stfa)
+\end{equation}
 
-First, second, and third level headings are defined by `#`, `##`, and `###` respectively.
+where *x* are the averages of log-transformed streamflow over the the antecedent period (*1-year*, *1-month*, etc.) for time *t*.  
+We used *ltfa* in NO~3~-N models and *stfa* in TP models based on results from @zhang_improving_2017 demonstrating major improvements in NO~x~ regression models that incorporated *ltfa* and moderate improvements in TP regression models that incorporated *stfa*.
+
+Daily loads were calculated from the discrete daily concentration and the corresponding mean daily streamflow value. 
+The model structure was slight altered for the Palmetto Bend dam site where daily loads are not a function of natural stream flow processes, but of dam operation procedures and nutrient concentration at the discharge point of the lake. At this location, nutrient concentrations were modeled as a function of total inflow for gaged tributaries. 
+The *ma* and *fa* terms were also calculated based on total gaged inflow. Daily loads at the dam were calculated from the discrete daily concentration at the discharge point of the lake and corresponding reported daily discharge from the dam.
+
+Thin-plate regression splines with used for *ddate*, *log1p(Q)*, *fa*, and *ma*. 
+A cyclic cubic regression spline was used for *yday* to ensure the ends of the spline match (day 1 and day 366 are expect to match). 
+First order penalties were applied to the smooths of flow-based variables which penalize departures from a flat function to help constrain extrapolations for high flow measurements. 
+Basis dimensions smooths were adjusted after using the *gam.check* function to ensure models were not oversmoothed. 
+Model residuals were inspected for distributional assumptions using the *gratia* package [@simpsonGratiaGracefulGraceful2022].
+
+Left-censored data were not uncommon in this dataset. 
+Several methods are available to account for censored data. 
+We transformed left-censored nutrient concentrations to one-half the detection limit.
+Although this simple approach can introduce bias [@hornungEstimationAverageConcentration1990],  we deemed it acceptable based on the fact that high concentrations and loadings are associated with high-flow events and low-flow/low-concentration events will account for a small proportion of total loadings [@mcdowell_implications_2021].
+Initial exploration using the *cenGAM* R package [@fangCenGAMCensoredRegression2017], which provides the Tobit I family for censored Gaussian data fit using *mgcv*, as well as censored Gamma models fit with the *brms* R package [@burknerBrmsPackageBayesian2017], resulted in models that substantially overestimated nutrient concentrations relative to *mgcv* models fit with the Gamma family. 
+Similar results have been observed in other water quality studies [@bergbuschUnexpectedShiftPhytoplankton2021].
+
+Split-sample tests are often used to fit and validate models against some presumed independent data. 
+Given the relatively small sample sizes and in an effort to retain model robustness, nutrient load models were fit to the entire dataset [@shenTimeUpdateSplit2022]. 
+The modeling approach was assessed using repeated 5-fold cross validation [@burmanComparativeStudyOrdinary1989] and summarized Nash-Sutcliffe Efficiency (NSE), R^2^, and percent bias (PBIAS) performance metrics across folds for each model.
+These metrics were compared to values suggested by [@moriasiHydrologicWaterQuality2015] as an assessment of model performance to independent data.
+
+## Linking Watershed Loads to Estuary Water Quality
+
+We explored relationships between watershed nutrient loads and nutrient concentrations at three monitoring sites in Lavaca Bay. We fit three different GAM models at each site for each parameter of interest.
+
+\begin{equation}
+g(\mu) = \alpha + f_1(ddate) + f_2(yday) + f_3(ddate,\,yday)
+(\#eq:estgam1)
+\end{equation}
+
+\begin{equation}
+g(\mu) = \alpha + f_1(ddate) + f_2(yday) + f_3(ddate,\,yday) + f_4(Q)
+(\#eq:estgam2)
+\end{equation}
+
+\begin{equation}
+g(\mu) = \alpha + f_1(ddate) + f_2(yday) + f_3(ddate,\,yday) + f_4(Q) + f_5(Load)
+(\#eq:estgam3)
+\end{equation}
+
+where *f~1~(ddate)* is decimal date smoothed with a thin-plate regression spline, *f~2~(yday)* is the numeric day of year smoothed with a cyclic cubic regression spline and *f~3~(ddate, yday)* is a tensor product smooth of the two variables. 
+*f~4~(Q)* is total daily watershed discharge and *f~5~(Load)* is total NO~3~-N or TP watershed load obtained from Equation \@ref(eq:gam1).
+By comparing the model fits between the three GAMs,  we evaluated if variance in Lavaca Bay nutrient concentrations are well explained by only temporal parameters (Equation \@ref(eq:estgam1)) or if the freshwater flow (Equation \@ref(eq:estgam2)) and nutrient loading (Equation \@ref(eq:estgam3)) can be used to explain additional variation. 
+The relatively large impact of flow variability on nutrient loading creates a challenge for disentangling the impacts of flow and load [@murphyNutrientImprovementsChesapeake2022]. 
+Instead of using raw freshwater flow and nutrient loading values, these values were replaced by seasonally adjusted flow and flow-adjusted nutrient loads as described by @murphyNutrientImprovementsChesapeake2022. 
+In short, a seasonal GAM was fit to daily flow values and the model residuals were used in *f~4~(Q)* and a GAM for nutrient loads was fit to daily streamflows with the model residuals used in *f~5~(Load)*.
+
 
 
 # Tables

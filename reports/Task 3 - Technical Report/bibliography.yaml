@@ -1,31 +1,6 @@
 ---
 references:
 - id: beckNumericalQualitativeContrasts2017
-  abstract: >-
-    Two statistical approaches, weighted regression on time, discharge, and
-    season and generalized additive models, have recently been used to evaluate
-    water quality trends in estuaries. Both models have been used in similar
-    contexts despite differences in statistical foundations and products. This
-    study provided an empirical and qualitative comparison of both models using
-    29 years of data for two discrete time series of chlorophyll-a (chl-a) in
-    the Patuxent River estuary. Empirical descriptions of each model were based
-    on predictive performance against the observed data, ability to reproduce
-    ﬂow-normalized trends with simulated data, and comparisons of performance
-    with validation datasets. Between-model differences were apparent but minor
-    and both models had comparable abilities to remove ﬂow effects from
-    simulated time series. Both models similarly predicted observations for
-    missing data with different characteristics. Trends from each model revealed
-    distinct mainstem inﬂuences of the Chesapeake Bay with both models
-    predicting a roughly 65% increase in chl-a over time in the lower estuary,
-    whereas ﬂow-normalized predictions for the upper estuary showed a more
-    dynamic pattern, with a nearly 100% increase in chl-a in the last 10 years.
-    Qualitative comparisons highlighted important differences in the statistical
-    structure, available products, and characteristics of the data and desired
-    analysis.
-  accessed:
-    - year: 2018
-      month: 6
-      day: 22
   author:
     - family: Beck
       given: Marcus W.
@@ -34,50 +9,74 @@ references:
   citation-key: beckNumericalQualitativeContrasts2017
   container-title: JAWRA Journal of the American Water Resources Association
   DOI: 10.1111/1752-1688.12489
-  ISSN: 1093474X
   issue: '1'
   issued:
     - year: 2017
       month: 2
   language: en
   page: 197-219
-  source: Crossref
   title: >-
     Numerical and qualitative contrasts of two statistical models for water
     quality change in tidal waters
   type: article-journal
-  URL: http://doi.wiley.com/10.1111/1752-1688.12489
   volume: '53'
 
 
+- id: bergbuschUnexpectedShiftPhytoplankton2021
+  author:
+    - family: Bergbusch
+      given: Nathanael T.
+    - family: Hayes
+      given: Nicole M.
+    - family: Simpson
+      given: Gavin L.
+    - family: Leavitt
+      given: Peter R.
+  citation-key: bergbuschUnexpectedShiftPhytoplankton2021
+  container-title: Limnology and Oceanography
+  container-title-short: Limnol Oceanogr
+  DOI: 10.1002/lno.11786
+  issue: '7'
+  issued:
+    - year: 2021
+      month: 7
+  language: en
+  page: 2745-2761
+  source: DOI.org (Crossref)
+  title: >-
+    Unexpected shift from phytoplankton to periphyton in eutrophic streams due
+    to wastewater influx
+  type: article-journal
+  volume: '66'
+
+- id: beserespollackLongtermTrendsResponse2011
+  author:
+    - family: Beseres Pollack
+      given: J
+    - family: Palmer
+      given: Ta
+    - family: Montagna
+      given: Pa
+  citation-key: beserespollackLongtermTrendsResponse2011
+  container-title: Marine Ecology Progress Series
+  container-title-short: Mar. Ecol. Prog. Ser.
+  DOI: 10.3354/meps09267
+  ISSN: 0171-8630, 1616-1599
+  issued:
+    - year: 2011
+      month: 8
+      day: 31
+  language: en
+  page: 67-80
+  source: DOI.org (Crossref)
+  title: >-
+    Long-term trends in the response of benthic macrofauna to climate
+    variability in the Lavaca-Colorado Estuary, Texas
+  type: article-journal
+  volume: '436'
+
+
 - id: biagi_novel_2022
-  abstract: >-
-    Eutrophication has re-emerged in the lower Great Lakes basin resulting in
-    critical water quality issues. Models that accurately predict nutrient
-    loading from streams are needed to inform appropriate nutrient management
-    decisions. Generalized additive models (GAMs) that use surrogate data from
-    sensors to predict nutrient loads offer an alternative to commonly applied
-    linear regression and may better handle relationship non-linearities and
-    skewed water quality data. Five years (2015–2020) of water quantity and
-    quality data from 11 agricultural watersheds in southern Ontario were used
-    to develop GAMs to predict total phosphorus (TP) and nitrate (NO3−) loads.
-    This study aimed to 1) use GAMs to predict nutrient loads using both common
-    and novel predictors and 2) quantify and examine the variability in seasonal
-    and annual nutrient loads. Along with routine surrogate model predictors
-    (i.e., ﬂow, turbidity, and seasonality), the addition of the baseﬂow
-    proportion and the hydrograph position of ﬂow observations improved model
-    performance. Conversely, including the antecedent precipitation index
-    minimally affected model performance, regardless of constituent. Seasonal
-    and annual patterns in TP and NO3− load predictions mirrored that of the
-    hydrologic regime. This study showed that parsimonious GAMs featuring novel
-    model predictors can be used to predict nutrient loads while accounting for
-    the partitioning of surface and subsurface ﬂow paths and hysteresis between
-    streamﬂow and water quality parameters that are frequently observed in a
-    wide range of environments.
-  accessed:
-    - year: 2022
-      month: 4
-      day: 5
   author:
     - family: Biagi
       given: K.M.
@@ -95,7 +94,6 @@ references:
   container-title: Science of The Total Environment
   container-title-short: Science of The Total Environment
   DOI: 10.1016/j.scitotenv.2022.154023
-  ISSN: '00489697'
   issued:
     - year: 2022
       month: 6
@@ -109,15 +107,10 @@ references:
     Novel predictors related to hysteresis and baseflow improve predictions of
     watershed nutrient loads
   type: article-journal
-  URL: https://linkinghub.elsevier.com/retrieve/pii/S0048969722011159
   volume: '826'
 
 
 - id: brickerEffectsNutrientEnrichment2008
-  accessed:
-    - year: 2022
-      month: 4
-      day: 5
   author:
     - family: Bricker
       given: S.B.
@@ -148,31 +141,10 @@ references:
   title: 'Effects of nutrient enrichment in the nation''s estuaries: A decade of change'
   title-short: Effects of nutrient enrichment in the nation's estuaries
   type: article-journal
-  URL: https://linkinghub.elsevier.com/retrieve/pii/S1568988308001182
   volume: '8'
 
 
 - id: bugicaWaterQualityTrends2020
-  abstract: >-
-    Coastal watersheds in Texas have experienced signiﬁcant human population
-    growth over the past several decades, yet there have been no comprehensive
-    assessments of water quality trends in Texas estuaries. Here, analysis of
-    historical estuarine water quality data indicates regional “hot spots” of
-    change. Galveston Bay and Oso Bay, which have highly urbanized watersheds,
-    currently exhibit symptoms of eutrophication. Symptoms of eutrophication
-    were also found in the Baﬃn Bay-Upper Laguna Madre complex, which has a
-    sparsely populated but agriculturally-intensive watershed. Increasing
-    salinity was observed in estuaries of the central Texas coast and are
-    attributed to long-term decreases in freshwater inﬂow. Another artifact of
-    decreasing freshwater inﬂow is a reduction in the delivery of carbonate
-    minerals to estuaries, which manifests as decreases in pH. With ﬁndings from
-    this study, targeted studies can now be directed at the estuaries that are
-    experiencing water quality degradation in order to guide future management
-    eﬀorts.
-  accessed:
-    - year: 2020
-      month: 4
-      day: 8
   author:
     - family: Bugica
       given: Kalman
@@ -192,15 +164,49 @@ references:
   source: Crossref
   title: Water quality trends in Texas estuaries
   type: article-journal
-  URL: https://linkinghub.elsevier.com/retrieve/pii/S0025326X20300217
   volume: '152'
 
 
+- id: burknerBrmsPackageBayesian2017
+  author:
+    - family: Bürkner
+      given: Paul-Christian
+  citation-key: burknerBrmsPackageBayesian2017
+  container-title: Journal of Statistical Software
+  container-title-short: J. Stat. Soft.
+  DOI: 10.18637/jss.v080.i01
+  issue: '1'
+  issued:
+    - year: 2017
+  language: en
+  source: DOI.org (Crossref)
+  title: '**brms** : An *R* Package for Bayesian Multilevel Models Using *Stan*'
+  title-short: '**brms**'
+  type: article-journal
+  volume: '80'
+
+
+- id: burmanComparativeStudyOrdinary1989
+  author:
+    - family: Burman
+      given: Prabir
+  citation-key: burmanComparativeStudyOrdinary1989
+  container-title: Biometrika
+  DOI: 10.1093/biomet/76.3.503
+  issue: '3'
+  issued:
+    - year: 1989
+  language: en
+  page: 503-514
+  title: >-
+    A comparative study of ordinary cross-validation, v-fold cross-validation
+    and the repeated learning-testing methods
+  type: article-journal
+  volume: '76'
+
+
+
 - id: cohnValiditySimpleStatistical1992
-  accessed:
-    - year: 2022
-      month: 4
-      day: 26
   author:
     - family: Cohn
       given: Timothy A.
@@ -232,35 +238,10 @@ references:
     The validity of a simple statistical model for estimating fluvial
     constituent loads
   type: article-journal
-  URL: http://doi.wiley.com/10.1029/92WR01008
   volume: '28'
 
 
 - id: darbyEffectsEutrophicationSalt2008
-  abstract: >-
-    The root:shoot ratio of grassland plants may be lower in high fertility
-    sites than in low fertility sites as plants modify their root, rhizome and
-    shoot morphologies (and masses) to suit prevailing nutrient availability. We
-    conducted geographically diverse and regionally specific field sampling and
-    measured above- and belowground plant biomasses in western Atlantic and Gulf
-    of Mexico salt marshes to determine whether there is a similar morphological
-    response in Spartina alterniflora, the dominant salt marsh plant. Coastal
-    nutrient addition/enrichment, which is widespread and ongoing, may lower
-    root and rhizome biomass, belowground production and organic accumulation in
-    this species. Higher soil respiration and a lower Eh (redox potential) are
-    expected additional soil property changes. The addition of P, more than of
-    N, seems to reduce root and rhizome biomass accumulation. The cumulative
-    effects of increased nutrient loadings on salt marshes may be to decrease
-    soil elevation and accelerate the conversion of emergent plant habitat to
-    open water, particularly on the lower marsh. The recommendations for
-    management practices intended to conserve coastal marshes include reducing
-    nutrient loading to coastal zones, solving water quality problems with a
-    multiple nutrient approach, and choosing monitoring metrics that are based
-    on both above- and belowground plant biomass.
-  accessed:
-    - year: 2022
-      month: 11
-      day: 11
   author:
     - family: Darby
       given: Fa
@@ -282,34 +263,51 @@ references:
     Effects of eutrophication on salt marsh root and rhizome biomass
     accumulation
   type: article-journal
-  URL: http://www.int-res.com/abstracts/meps/v363/p63-70/
   volume: '363'
+
+
+- id: deciccoDataRetrievalPackagesDiscovering2022
+  author:
+    - family: De Cicco
+      given: Laura A.
+    - family: Hirsch
+      given: Robert M
+    - family: Lorenz
+      given: David L.
+    - family: Watkins
+      given: W.D.
+    - family: Johnson
+      given: Mike
+  citation-key: deciccoDataRetrievalPackagesDiscovering2022
+  event-place: Reston, VA
+  issued:
+    - year: 2022
+  publisher: U.S. Geological Survey
+  publisher-place: Reston, VA
+  title: >-
+    dataRetrieval: R packages for discovering and retrieving water data
+    available from Federal hydrologic web services
+  type: software
+  URL: https://code.usgs.gov/water/dataRetrieval
+  version: 2.7.11
+  DOI: 10.5066/P9X4L3GE
+  
+  
+- id: fangCenGAMCensoredRegression2017
+  author:
+    - family: Fang
+      given: Zhou
+  citation-key: fangCenGAMCensoredRegression2017
+  issued:
+    - year: 2017
+  title: 'cenGAM: Censored Regression with Smooth Terms'
+  type: software
+  URL: https://CRAN.R-project.org/package=cenGAM
+  version: R package version 0.5.3
 
 
 
 - id: hagemannEstimatingNutrientOrganic2016
-  abstract: >-
-    This study investigated the impact of model form and flexibility on
-    estimates of constituent loads to a water-supply reservoir. A series of
-    load-estimation regression models were calibrated and used to predict
-    nutrient (nitrate-nitrogen and total phosphorus) and organic carbon loads
-    from three major tributaries of a water-supply reservoir. These models
-    included traditional linear models (LMs) as well as semiparametric
-    generalized additive models (GAMs). The relative performance of each model
-    was determined using cross-validation. GAMs, which employ more flexible
-    model structures, outperformed LMs in most cases, explaining an additional
-    2% of load variance and 5% of concentration variance in validation data on
-    average. Resulting point load estimates from the 1.5-year study period were
-    similar between the two modeling approaches, yielding overlapping 95%
-    confidence intervals in all nine cases modeled. A novel graphical method was
-    developed to present relative agreement between the two model types as a
-    function of the time interval over which the load is estimated. This
-    revealed relative differences between the two modeling approaches in excess
-    of 100% depending on the time interval of the load estimate. The
-    timedependent disagreement between similarly well-performing models
-    highlights an aspect of model uncertainty not visible in more structurally
-    restrictive modeling approaches. DOI: 10.1061/(ASCE)EE.1943-7870.0001077. ©
-    2016 American Society of Civil Engineers.
   author:
     - family: Hagemann
       given: Mark
@@ -319,29 +317,22 @@ references:
       given: Daeyoung
     - family: Park
       given: Mi Hyun
-    - family: Asce
-      given: A M
-    - family: Student
-      given: Ph D
   citation-key: hagemannEstimatingNutrientOrganic2016
   container-title: J. Environ. Eng.
+  DOI: 10.1061/(ASCE)EE.1943-7870.0001077
   issued:
     - year: 2016
   language: en
   page: '9'
   source: Zotero
   title: >-
-    Estimating Nutrient and Organic Carbon Loads to Water-Supply Reservoir Using
-    Semiparametric Models
+    Estimating nutrient and organic carbon loads to water-supply reservoir using
+    semiparametric models
   type: article-journal
 
 
 
 - id: heislerEutrophicationHarmfulAlgal2008
-  accessed:
-    - year: 2022
-      month: 11
-      day: 11
   author:
     - family: Heisler
       given: J.
@@ -392,36 +383,10 @@ references:
   title: 'Eutrophication and harmful algal blooms: A scientific consensus'
   title-short: Eutrophication and harmful algal blooms
   type: article-journal
-  URL: https://linkinghub.elsevier.com/retrieve/pii/S1568988308001066
   volume: '8'
 
 
 - id: hirschWeightedRegressionsTime2010
-  abstract: >-
-    A new approach to the analysis of long-term surface water-quality data is
-    proposed and implemented. The goal of this approach is to increase the
-    amount of information that is extracted from the types of rich water-quality
-    datasets that now exist. The method is formulated to allow for maximum
-    ﬂexibility in representations of the long-term trend, seasonal components,
-    and discharge-related components of the behavior of the water-quality
-    variable of interest. It is designed to provide internally consistent
-    estimates of the actual history of concentrations and ﬂuxes as well as
-    histories that eliminate the inﬂuence of year-to-year variations in
-    streamﬂow. The method employs the use of weighted regressions of
-    concentrations on time, discharge, and season. Finally, the method is
-    designed to be useful as a diagnostic tool regarding the kinds of changes
-    that are taking place in the watershed related to point sources, groundwater
-    sources, and surface-water nonpoint sources. The method is applied to
-    datasets for the nine large tributaries of Chesapeake Bay from 1978 to 2008.
-    The results show a wide range of patterns of change in total phosphorus and
-    in dissolved nitrate plus nitrite. These results should prove useful in
-    further examination of the causes of changes, or lack of changes, and may
-    help inform decisions about future actions to reduce nutrient enrichment in
-    the Chesapeake Bay and its watershed.
-  accessed:
-    - year: 2018
-      month: 6
-      day: 22
   author:
     - family: Hirsch
       given: Robert M.
@@ -443,22 +408,71 @@ references:
   source: Crossref
   title: >-
     Weighted Regressions on Time, Discharge, and Season (WRTDS), with an
-    Application to Chesapeake Bay River Inputs1: Weighted Regressions on Time,
-    Discharge, and Season (WRTDS), With an Application to Chesapeake Bay River
-    Inputs
-  title-short: >-
-    Weighted Regressions on Time, Discharge, and Season (WRTDS), with an
-    Application to Chesapeake Bay River Inputs1
+    application to Chesapeake Bay river inputs
   type: article-journal
-  URL: http://doi.wiley.com/10.1111/j.1752-1688.2010.00482.x
   volume: '46'
 
 
+- id: hornungEstimationAverageConcentration1990
+  author:
+    - family: Hornung
+      given: Richard W.
+    - family: Reed
+      given: Laurence D.
+  citation-key: hornungEstimationAverageConcentration1990
+  container-title: Applied Occupational and Environmental Hygiene
+  container-title-short: Applied Occupational and Environmental Hygiene
+  DOI: 10.1080/1047322X.1990.10389587
+  ISSN: 1047-322X, 1521-0898
+  issue: '1'
+  issued:
+    - year: 1990
+      month: 1
+  language: en
+  page: 46-51
+  source: DOI.org (Crossref)
+  title: Estimation of average concentration in the presence of nondetectable values
+  type: article-journal
+  volume: '5'
+
+
+- id: kroonRiverLoadsSuspended2012
+  author:
+    - family: Kroon
+      given: Frederieke J.
+    - family: Kuhnert
+      given: Petra M.
+    - family: Henderson
+      given: Brent L.
+    - family: Wilkinson
+      given: Scott N.
+    - family: Kinsey-Henderson
+      given: Anne
+    - family: Abbott
+      given: Brett
+    - family: Brodie
+      given: Jon E.
+    - family: Turner
+      given: Ryan D.R.
+  citation-key: kroonRiverLoadsSuspended2012
+  container-title: Marine Pollution Bulletin
+  container-title-short: Marine Pollution Bulletin
+  DOI: 10.1016/j.marpolbul.2011.10.018
+  ISSN: 0025326X
+  issue: 4-9
+  issued:
+    - year: 2012
+  language: en
+  page: 167-181
+  source: DOI.org (Crossref)
+  title: >-
+    River loads of suspended solids, nitrogen, phosphorus and herbicides
+    delivered to the Great Barrier Reef lagoon
+  type: article-journal
+  volume: '65'
+
+
 - id: kuhnert_quantifying_2012
-  accessed:
-    - year: 2022
-      month: 6
-      day: 13
   author:
     - family: Kuhnert
       given: Petra M.
@@ -485,22 +499,16 @@ references:
   source: DOI.org (Crossref)
   title: >-
     Quantifying total suspended sediment export from the Burdekin River
-    catchment using the loads regression estimator tool: REGRESSION ESTIMATOR
-    TOOL FOR POLLUTANT LOADS
+    catchment using the loads regression estimator tool: Regression Estimator
+    Tool for Pollutant Loads
   title-short: >-
     Quantifying total suspended sediment export from the Burdekin River
     catchment using the loads regression estimator tool
   type: article-journal
-  URL: http://doi.wiley.com/10.1029/2011WR011080
   volume: '48'
 
 
 - id: mcdowell_implications_2021
-  abstract: "Abstract\n            Understanding the lag time between land management and impacts on riverine nitrate–nitrogen (N) loads is critical to understand when action to mitigate nitrate–N leaching losses from the soil profile may start improving water quality. These lags occur due to leaching of nitrate–N through the subsurface (soil and groundwater). Actions to mitigate nitrate–N losses have been mandated in New Zealand policy to start showing improvements in water quality within five years. We estimated annual rates of nitrate–N leaching and annual nitrate–N loads for 77 river catchments from 1990 to 2018. Lag times between these losses and riverine loads\_were determined for 34 catchments but could not be determined in other catchments because they exhibited little change in nitrate–N leaching losses or loads. Lag times varied from 1 to 12\_years according to factors like catchment size (Strahler stream order and altitude) and slope. For eight catchments where additional\_isotope and modelling data were available, the mean transit time for surface water at baseflow to pass through the catchment was on average 2.1\_years less than, and never greater than, the mean lag time for nitrate–N, inferring our lag time estimates were robust. The median lag time for nitrate–N across the 34 catchments was 4.5\_years, meaning that nearly half of these catchments wouldn’t exhibit decreases in nitrate–N because of practice change within the five years outlined in policy."
-  accessed:
-    - year: 2022
-      month: 4
-      day: 20
   author:
     - family: McDowell
       given: R. W.
@@ -528,9 +536,74 @@ references:
     The implications of lag times between nitrate leaching losses and riverine
     loads for water quality policy
   type: article-journal
-  URL: https://www.nature.com/articles/s41598-021-95302-1
   volume: '11'
 
+
+- id: moriasiHydrologicWaterQuality2015
+  author:
+    - family: Moriasi
+      given: D. N.
+    - family: Gitau
+      given: M. W.
+    - family: Pai
+      given: N.
+    - family: Daggupati
+      given: P.
+  citation-key: moriasiHydrologicWaterQuality2015
+  container-title: Transactions of the ASABE
+  container-title-short: Trans. ASABE
+  DOI: 10.13031/trans.58.10715
+  ISSN: 21510032, 21510040
+  issue: '6'
+  issued:
+    - year: 2015
+      month: 12
+      day: 30
+  language: en
+  page: 1763-1785
+  source: DOI.org (Crossref)
+  title: >-
+    Hydrologic and water quality models: Performance measures and evaluation
+    criteria
+  type: article-journal
+  volume: '58'
+
+
+- id: murphyNutrientImprovementsChesapeake2022
+  author:
+    - family: Murphy
+      given: Rebecca R.
+    - family: Keisman
+      given: Jennifer
+    - family: Harcum
+      given: Jon
+    - family: Karrh
+      given: Renee R.
+    - family: Lane
+      given: Mike
+    - family: Perry
+      given: Elgin S.
+    - family: Zhang
+      given: Qian
+  citation-key: murphyNutrientImprovementsChesapeake2022
+  container-title: Environmental Science & Technology
+  container-title-short: Environ. Sci. Technol.
+  DOI: 10.1021/acs.est.1c05388
+  ISSN: 0013-936X, 1520-5851
+  issue: '1'
+  issued:
+    - year: 2022
+      month: 1
+      day: 4
+  language: en
+  page: 260-270
+  source: DOI.org (Crossref)
+  title: >-
+    Nutrient improvements in Chesapeake Bay: Direct effect of load reductions
+    and implications for coastal management
+  title-short: Nutrient Improvements in Chesapeake Bay
+  type: article-journal
+  volume: '56'
 
 
 - id: montagnaAssessmentRelationshipFreshwater2020
@@ -562,10 +635,6 @@ references:
 
 
 - id: palmerImpactsDroughtsLow2015
-  accessed:
-    - year: 2022
-      month: 11
-      day: 11
   author:
     - family: Palmer
       given: Terence A.
@@ -587,97 +656,10 @@ references:
     Impacts of droughts and low flows on estuarine water quality and benthic
     fauna
   type: article-journal
-  URL: http://link.springer.com/10.1007/s10750-015-2200-x
   volume: '753'
 
 
-- id: beserespollackLongtermTrendsResponse2011
-  abstract: >-
-    Long-term trends in the response of benthic macrofauna to hydrological
-    conditions were examined in the Lavaca-Colorado Estuary, Texas. Four
-    stations representing a range of salinities in the Lavaca-Colorado Estuary
-    were sampled quarterly for benthic macrofauna and hydrography from April
-    1988 to October 2008. The relationship between climate variability and local
-    salinity patterns and benthic populations was investigated using the Oceanic
-    Niño Index (ONI), North Atlantic Oscillation (NAO), and North Pacific Index
-    (NPI). Mean salinity declined during the 20 yr study period. Observed
-    changes in salinity were related to river discharge and the ONI because
-    there were more El Niño events in the first half of the study period
-    relative to the second half. Benthic macrofaunal abundance was significantly
-    correlated with salinity, the ONI and the NAO, indicating that global
-    climate variability and the resulting effects on local salinity patterns are
-    important factors shaping benthic macrofaunal communities. There was no
-    significant linear trend in temperature over time, and negative correlations
-    between individual taxa and temperature were likely due to seasonality.
-    While drivers other than physical hydrological factors can obviously affect
-    benthic macrofaunal communities, strong connections between global climate
-    signals, precipitation, and local salinity patterns provided the most
-    plausible mechanistic connection between climatic variability and benthic
-    macrofaunal response in the estuary. An increasingly unstable climate may
-    lead to potentially strong effects in estuarine ecosystems because stability
-    is known to affect diversity and productivity. The vulnerability of
-    estuarine ecosystems to the effects of climate variability will be
-    exacerbated as human population growth and water resource development
-    continues to increase the demand for and stress on coastal and marine
-    resources.
-  accessed:
-    - year: 2022
-      month: 11
-      day: 11
-  author:
-    - family: Beseres Pollack
-      given: J
-    - family: Palmer
-      given: Ta
-    - family: Montagna
-      given: Pa
-  citation-key: beserespollackLongtermTrendsResponse2011
-  container-title: Marine Ecology Progress Series
-  container-title-short: Mar. Ecol. Prog. Ser.
-  DOI: 10.3354/meps09267
-  ISSN: 0171-8630, 1616-1599
-  issued:
-    - year: 2011
-      month: 8
-      day: 31
-  language: en
-  page: 67-80
-  source: DOI.org (Crossref)
-  title: >-
-    Long-term trends in the response of benthic macrofauna to climate
-    variability in the Lavaca-Colorado Estuary, Texas
-  type: article-journal
-  URL: http://www.int-res.com/abstracts/meps/v436/p67-80/
-  volume: '436'
-
-
 - id: robson_prediction_2015-1
-  abstract: >-
-    A Generalised Additive Modelling (GAM) approach is applied to prediction of
-    both particulate and dissolved nutrient concentrations in a wet-tropical
-    river (the Fitzroy River, Queensland, Australia). In addition to covariant
-    terms considered in previous work (i.e. ﬂow, discounted ﬂow and a
-    rising-falling limb term), we considered several new potential covariates:
-    meteorological and hydrological variables that are routinely monitored,
-    available in near-real time, and were considered to have potential
-    predictive power. Of the additional terms considered, only ﬂows from three
-    tributaries of the Fitzroy River (namely, the Nogoa, Comet and Isaac Rivers)
-    were found to signiﬁcantly improve the model. Inclusion of one or more of
-    these additional ﬂow terms greatly improved results for dissolved nitrogen
-    and dissolved phosphorus concentrations, which were not otherwise amenable
-    to prediction. In particular, the Nogoa sub-catchment, dominated by pasture
-    for cattle, was found to be important in determining dissolved inorganic
-    nitrogen and phosphorus concentrations reaching the river mouth. This
-    insight may direct further research, including future reﬁnement of
-    processed-based catchment models. The GAMs described here are used to
-    provide near real-time river boundary conditions for a complex coupled
-    hydrodynamic and biogeochemical model of the Great Barrier Reef Lagoon, and
-    can be coupled with a forecasting hydrological model to allow integrated
-    forecasting simulations of the catchment to coast system.
-  accessed:
-    - year: 2022
-      month: 4
-      day: 5
   author:
     - family: Robson
       given: Barbara J.
@@ -699,49 +681,100 @@ references:
     concentrations in a dry tropical river to provide input to a mechanistic
     coastal water quality model
   type: article-journal
-  URL: https://linkinghub.elsevier.com/retrieve/pii/S1364815214002333
   volume: '63'
 
 
-- id: wangLoadEstimationUncertainties2011
-  abstract: >-
-    We consider estimating the total load from frequent ﬂow data but less
-    frequent concentration data. There are numerous load estimation methods
-    available, some of which are captured in various online tools. However, most
-    estimators are subject to large biases statistically, and their associated
-    uncertainties are often not reported. This makes interpretation difﬁcult and
-    the estimation of trends or determination of optimal sampling regimes
-    impossible to assess. In this paper, we ﬁrst propose two indices for
-    measuring the extent of sampling bias, and then provide steps for obtaining
-    reliable load estimates that minimizes the biases and makes use of
-    informative predictive variables. The key step to this approach is in the
-    development of an appropriate predictive model for concentration. This is
-    achieved using a generalized rating-curve approach with additional
-    predictors that capture unique features in the ﬂow data, such as the concept
-    of the ﬁrst ﬂush, the location of the event on the hydrograph (e.g. rise or
-    fall) and the discounted ﬂow. The latter may be thought of as a measure of
-    constituent exhaustion occurring during ﬂood events. Forming this additional
-    information can signiﬁcantly improve the predictability of concentration,
-    and ultimately the precision with which the pollutant load is estimated. We
-    also provide a measure of the standard error of the load estimate which
-    incorporates model, spatial and/or temporal errors. This method also has the
-    capacity to incorporate measurement error incurred through the sampling of
-    ﬂow. We illustrate this approach for two rivers delivering to the Great
-    Barrier Reef, Queensland, Australia. One is a data set from the Burdekin
-    River, and consists of the total suspended sediment (TSS) and nitrogen oxide
-    (NOx) and gauged ﬂow for 1997. The other dataset is from the Tully River,
-    for the period of July 2000 to June 2008. For NOx Burdekin, the new
-    estimates are very similar to the ratio estimates even when there is no
-    relationship between the concentration and the ﬂow. However, for the Tully
-    dataset, by incorporating the additional predictive variables namely the
-    discounted ﬂow and ﬂow phases (rising or recessing), we substantially
-    improved the model ﬁt, and thus the certainty with which the load is
-    estimated. Crown Copyright Ó 2010 Published by Elsevier B.V. All rights
-    reserved.
-  accessed:
+- id: schoenbaechlerCoastalHydrologyLavacaColorado2011
+  author:
+    - family: Schoenbaechler
+      given: Caimee
+    - family: Guthrie
+      given: Carla
+    - family: Lu
+      given: Qingguang
+  citation-key: schoenbaechlerCoastalHydrologyLavacaColorado2011
+  event-place: Austin, TX
+  issued:
+    - year: 2011
+  publisher: Texas Water Development Board
+  publisher-place: Austin, TX
+  title: Coastal Hydrology for the Lavaca-Colorado Estuary
+  type: report
+  URL: >-
+    https://www.twdb.texas.gov/surfacewater/bays/coastal_hydrology/doc/TWDB_Matagorda_Hydrology_20110211.pdf
+
+- id: shenTimeUpdateSplit2022
+  author:
+    - family: Shen
+      given: Hongren
+    - family: Tolson
+      given: Bryan A.
+    - family: Mai
+      given: Juliane
+  citation-key: shenTimeUpdateSplit2022
+  container-title: Water Resources Research
+  container-title-short: Water Resources Research
+  DOI: 10.1029/2021WR031523
+  ISSN: 0043-1397, 1944-7973
+  issue: '3'
+  issued:
     - year: 2022
-      month: 9
-      day: 21
+      month: 3
+  language: en
+  source: DOI.org (Crossref)
+  title: Time to update the split‐sample approach in hydrological model calibration
+  type: article-journal
+  volume: '58'
+
+
+- id: simpsonGratiaGracefulGraceful2022
+  author:
+    - family: Simpson
+      given: Gavin L.
+  citation-key: simpsonGratiaGracefulGraceful2022
+  issued:
+    - year: 2022
+  title: >-
+    <span class="nocase">gratia</span>: Graceful Graceful <span
+    class="nocase">ggplot</span>-Based Graphics and Other Functions  for GAMs
+    Fitted using <span class="nocase">mgcv</span>
+  type: software
+  URL: https://gavinsimpson.github.io/gratia/
+  version: R package version 0.7.3.22
+
+- id: vecchia_trends_2009
+  author:
+    - family: Vecchia
+      given: Aldo V.
+    - family: Gilliom
+      given: Robert J.
+    - family: Sullivan
+      given: Daniel J.
+    - family: Lorenz
+      given: David L.
+    - family: Martin
+      given: Jeffrey D.
+  citation-key: vecchia_trends_2009
+  container-title: Environmental Science & Technology
+  container-title-short: Environ. Sci. Technol.
+  DOI: 10.1021/es902122j
+  ISSN: 0013-936X, 1520-5851
+  issue: '24'
+  issued:
+    - year: 2009
+      month: 12
+      day: 15
+  language: en
+  page: 9096-9102
+  source: DOI.org (Crossref)
+  title: >-
+    Trends in concentrations and use of agricultural herbicides for Corn Belt
+    Rivers, 1996−2006
+  type: article-journal
+  volume: '43'
+
+
+- id: wangLoadEstimationUncertainties2011
   author:
     - family: Wang
       given: You-Gan
@@ -765,42 +798,10 @@ references:
     Load estimation with uncertainties from opportunistic sampling data – A
     semiparametric approach
   type: article-journal
-  URL: https://linkinghub.elsevier.com/retrieve/pii/S0022169410006773
   volume: '396'
 
 
 - id: wetzExceptionallyHighOrganic2017
-  abstract: >-
-    Studies of estuarine eutrophication have tended to focus on systems with
-    continually flowing rivers, while little is known about estuaries from
-    semi-arid/arid regions. Here we report results from an assessment of water
-    quality conditions in Baffin Bay, Texas, a shallow (<2e3 m) subtropical
-    estuary located in a semi-arid region that has agriculture as the dominant
-    (44%) watershed land use. Chlorophyll a averaged 28e30 mg/l in Baffin Bay
-    from 2003 to 2013 and total Kjeldahl nitrogen (TKN) concentrations were also
-    very high (116e120 mM), with concentrations of both variables exceeding
-    those of most other Texas estuaries by 2e5 fold. More recent field sampling
-    (2013e2015) showed that dissolved organic nitrogen concentrations in Baffin
-    Bay (62 ± 14 mM) were >2 fold higher than in three other Texas estuaries. In
-    contrast, inorganic nitrogen (ammonium, nitrate) and phosphate
-    concentrations were relatively low. Statistically significant long-term
-    annual increases in chlorophyll a and salinity were observed in Baffin Bay,
-    while long-term seasonal increases were observed for water temperature and
-    TKN. Overall, Baffin Bay is displaying multiple symptoms of eutrophication,
-    namely very high organic carbon, organic nitrogen and chlorophyll
-    concentrations, as well as symptoms not quantified here such as fish kills
-    and episodic hypoxia. Much of the increase in chlorophyll in Baffin Bay, at
-    least since \~1990, have coincided with blooms of the mixotrophic
-    phytoplankton species, Aureoumbra lagunensis, which is thought to be favored
-    under high proportions of organic to inorganic nitrogen. Thus the high and
-    possibly increasing organic nitrogen concentrations, coupled with a
-    long-term annual increase in salinity and a long-term seasonal increase in
-    water temperature are likely to promote additional brown tide blooms in this
-    system in the future.
-  accessed:
-    - year: 2022
-      month: 4
-      day: 21
   author:
     - family: Wetz
       given: Michael S.
@@ -829,52 +830,37 @@ references:
     Exceptionally high organic nitrogen concentrations in a semi-arid South
     Texas estuary susceptible to brown tide blooms
   type: article-journal
-  URL: https://linkinghub.elsevier.com/retrieve/pii/S0272771417301208
   volume: '188'
   
 
+- id: wood_fast_2011
+  author:
+    - family: Wood
+      given: Simon N.
+  citation-key: wood_fast_2011
+  container-title: 'Journal of the Royal Statistical Society: Series B (Statistical Methodology)'
+  DOI: 10.1111/j.1467-9868.2010.00749.x
+  ISSN: '13697412'
+  issue: '1'
+  issued:
+    - year: 2011
+      month: 1
+  language: en
+  page: 3-36
+  source: Crossref
+  title: >-
+    Fast stable restricted maximum likelihood and marginal likelihood estimation
+    of semiparametric generalized linear models: Estimation of Semiparametric
+    Generalized Linear Models
+  title-short: >-
+    Fast stable restricted maximum likelihood and marginal likelihood estimation
+    of semiparametric generalized linear models
+  type: article-journal
+  volume: '73'
+
+
+
 - id: zhang_improving_2017
-  abstract: >-
-    Regression-based approaches are often employed to estimate riverine
-    constituent concentrations and ﬂuxes based on typically sparse concentration
-    observations. One such approach is the recently developed WRTDS (‘‘Weighted
-    Regressions on Time, Discharge, and Season”) method, which has been shown to
-    provide more accurate estimates than prior approaches in a wide range of
-    applications. Centered on WRTDS, this work was aimed at developing improved
-    models for constituent concentration and ﬂux estimation by accounting for
-    antecedent discharge conditions. Twelve modiﬁed models were developed and
-    tested, each of which contains one additional ﬂow variable to represent
-    antecedent conditions and which can be directly derived from the daily
-    discharge record. High-resolution ($daily) data at nine diverse monitoring
-    sites were used to evaluate the relative merits of the models for estimation
-    of six constituents – chloride (Cl), nitrate-plus-nitrite (NOx), total
-    Kjeldahl nitrogen (TKN), total phosphorus (TP), soluble reactive phosphorus
-    (SRP), and suspended sediment (SS). For each site-constituent combination,
-    30 concentration subsets were generated from the original data through Monte
-    Carlo subsampling and then used to evaluate model performance. For the
-    subsampling, three sampling strategies were adopted: (A) 1 random sample
-    each month (12/year), (B) 12 random monthly samples plus additional 8 random
-    samples per year (20/ year), and (C) ﬂow-stratiﬁed sampling with 12 regular
-    (non-storm) and 8 storm samples per year (20/ year). Results reveal that
-    estimation performance varies with both model choice and sampling strategy.
-    In terms of model choice, the modiﬁed models show general improvement over
-    the original model under all three sampling strategies. Major improvements
-    were achieved for NOx by the long-term ﬂow-anomaly model and for Cl by the
-    ADF (average discounted ﬂow) model and the short-term ﬂow-anomaly model.
-    Moderate improvements were achieved for SS, TP, and TKN by the ADF model. By
-    contrast, no such achievement was achieved for SRP by any proposed model. In
-    terms of sampling strategy, performance of all models (including the
-    original) was generally best using strategy C and worst using strategy A,
-    and especially so for SS, TP, and SRP, conﬁrming the value of routinely
-    collecting stormﬂow samples. Overall, this work provides a comprehensive set
-    of statistical evidence for supporting the incorporation of antecedent
-    discharge conditions into the WRTDS model for estimation of constituent
-    concentration and ﬂux, thereby combining the advantages of two recent
-    developments in water quality modeling.
-  accessed:
-    - year: 2022
-      month: 6
-      day: 22
   author:
     - family: Zhang
       given: Qian
@@ -895,6 +881,5 @@ references:
     Improving riverine constituent concentration and flux estimation by
     accounting for antecedent discharge conditions
   type: article-journal
-  URL: https://linkinghub.elsevier.com/retrieve/pii/S0022169416308502
   volume: '547'
 ...
