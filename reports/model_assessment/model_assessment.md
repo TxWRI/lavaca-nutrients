@@ -117,9 +117,9 @@ A. parametric coefficients & (Intercept) & -1.950 & 0.146 & -13.335 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** |   **Median (IQR)**   |
 |:--------------------------|:--------------------:|
-|NSE                        | 0.758 (0.714, 0.765) |
-|R^2^                       | 0.761 (0.728, 0.771) |
-|Percent Bias               | -7.80 (-9.02, -4.15) |
+|NSE                        |  0.56 (0.25, 0.83)   |
+|R^2^                       |  0.76 (0.53, 0.92)   |
+|Percent Bias               | 1.25 (-26.40, 23.18) |
 :::
 :::
 
@@ -196,9 +196,9 @@ A. parametric coefficients & (Intercept) & -1.611 & 0.045 & -35.811 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** |   **Median (IQR)**   |
 |:--------------------------|:--------------------:|
-|NSE                        |  0.77 (0.71, 0.81)   |
-|R^2^                       |  0.77 (0.72, 0.82)   |
-|Percent Bias               | -7.45 (-9.10, -6.35) |
+|NSE                        |  0.80 (0.71, 0.86)   |
+|R^2^                       |  0.94 (0.83, 0.98)   |
+|Percent Bias               | -8.70 (-20.65, 7.45) |
 :::
 :::
 
@@ -274,11 +274,11 @@ A. parametric coefficients & (Intercept) & -2.037 & 0.102 & -20.057 &  &  &  & 0
 
 ::: {#tbl-NO308164390-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N concentration GAM at Navidad River at Strane Pk nr Edna,, USGS-NO308164390.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** |   **Median (IQR)**   |
-|:--------------------------|:--------------------:|
-|NSE                        |  0.59 (0.53, 0.70)   |
-|R^2^                       |  0.69 (0.59, 0.78)   |
-|Percent Bias               | -15.9 (-20.9, -13.0) |
+|**Goodness of Fit Metric** |   **Median (IQR)**    |
+|:--------------------------|:---------------------:|
+|NSE                        |   0.54 (0.23, 0.78)   |
+|R^2^                       |   0.83 (0.74, 0.97)   |
+|Percent Bias               | -3.55 (-26.55, 36.45) |
 :::
 :::
 
@@ -350,11 +350,11 @@ A. parametric coefficients & (Intercept) & -1.597 & 0.038 & -42.298 &  &  &  & 0
 
 ::: {#tbl-TP08164390-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at Navidad River at Strane Pk nr Edna, USGS-08164390.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** |   **Median (IQR)**    |
-|:--------------------------|:---------------------:|
-|NSE                        | 0.951 (0.944, 0.960)  |
-|R^2^                       | 0.982 (0.973, 0.984)  |
-|Percent Bias               | -9.10 (-10.10, -8.27) |
+|**Goodness of Fit Metric** |   **Median (IQR)**   |
+|:--------------------------|:--------------------:|
+|NSE                        |  0.93 (0.90, 0.95)   |
+|R^2^                       |  0.98 (0.92, 0.99)   |
+|Percent Bias               | -9.35 (-15.17, 2.90) |
 :::
 :::
 
@@ -429,11 +429,11 @@ A. parametric coefficients & (Intercept) & -1.946 & 0.080 & -24.212 &  &  &  & 0
 
 ::: {#tbl-NO308164450-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N concentration GAM at Sandy Creek nr Ganado, USGS-08164450.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** | **Median (IQR)**  |
-|:--------------------------|:-----------------:|
-|NSE                        | 0.45 (0.24, 0.49) |
-|R^2^                       | 0.46 (0.33, 0.56) |
-|Percent Bias               |   -16 (-21, -8)   |
+|**Goodness of Fit Metric** |   **Median (IQR)**    |
+|:--------------------------|:---------------------:|
+|NSE                        |   0.40 (0.03, 0.57)   |
+|R^2^                       |   0.67 (0.46, 0.90)   |
+|Percent Bias               | -0.35 (-31.05, 21.47) |
 :::
 :::
 
@@ -505,11 +505,11 @@ A. parametric coefficients & (Intercept) & -1.729 & 0.067 & -25.973 &  &  &  & 0
 
 ::: {#tbl-TP08164450-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at Sandy Creek nr Ganado, USGS-08164450.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** | **Median (IQR)**  |
-|:--------------------------|:-----------------:|
-|NSE                        | 0.78 (0.56, 0.81) |
-|R^2^                       | 0.81 (0.67, 0.86) |
-|Percent Bias               |    -6 (-9, -3)    |
+|**Goodness of Fit Metric** |   **Median (IQR)**    |
+|:--------------------------|:---------------------:|
+|NSE                        |   0.62 (0.45, 0.86)   |
+|R^2^                       |   0.87 (0.66, 0.97)   |
+|Percent Bias               | -1.35 (-24.92, 13.50) |
 :::
 :::
 
@@ -584,11 +584,11 @@ A. parametric coefficients & (Intercept) & -0.481 & 0.159 & -3.028 &  &  &  & 0.
 
 ::: {#tbl-NO308164504-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N load GAM at E Mustang Creek nr Louise, USGS-08164504.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** | **Median (IQR)**  |
-|:--------------------------|:-----------------:|
-|NSE                        | 0.38 (0.25, 0.41) |
-|R^2^                       | 0.54 (0.45, 0.58) |
-|Percent Bias               |  -46 (-54, -44)   |
+|**Goodness of Fit Metric** |   **Median (IQR)**    |
+|:--------------------------|:---------------------:|
+|NSE                        |  0.15 (-0.68, 0.60)   |
+|R^2^                       |   0.86 (0.66, 0.97)   |
+|Percent Bias               | -6.75 (-55.98, 68.28) |
 :::
 :::
 
@@ -661,11 +661,11 @@ A. parametric coefficients & (Intercept) & -1.001 & 0.081 & -12.331 &  &  &  & 0
 
 ::: {#tbl-TP08164504-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at E Mustang Creek nr Louise, USGS-08164504.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** |   **Median (IQR)**   |
-|:--------------------------|:--------------------:|
-|NSE                        | 0.851 (0.812, 0.855) |
-|R^2^                       | 0.854 (0.839, 0.859) |
-|Percent Bias               |  -9.2 (-12.7, -7.5)  |
+|**Goodness of Fit Metric** |   **Median (IQR)**    |
+|:--------------------------|:---------------------:|
+|NSE                        |   0.71 (0.57, 0.88)   |
+|R^2^                       |   0.88 (0.77, 0.97)   |
+|Percent Bias               | -0.10 (-29.03, 13.05) |
 :::
 :::
 
@@ -740,11 +740,11 @@ A. parametric coefficients & (Intercept) & -1.244 & 0.085 & -14.678 &  &  &  & 0
 
 ::: {#tbl-NO08164503-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N load GAM at W Mustang Creek nr Ganado, USGS-08164503.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** | **Median (IQR)**  |
-|:--------------------------|:-----------------:|
-|NSE                        | 0.41 (0.28, 0.67) |
-|R^2^                       | 0.49 (0.41, 0.70) |
-|Percent Bias               |   -13 (-18, -5)   |
+|**Goodness of Fit Metric** |    **Median (IQR)**    |
+|:--------------------------|:----------------------:|
+|NSE                        |   0.43 (-0.58, 0.65)   |
+|R^2^                       |   0.90 (0.53, 0.98)    |
+|Percent Bias               | -10.65 (-43.88, 74.47) |
 :::
 :::
 
@@ -817,11 +817,11 @@ A. parametric coefficients & (Intercept) & -1.150 & 0.063 & -18.148 &  &  &  & 0
 
 ::: {#tbl-TP08164503-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of TP load GAM at W Mustang Creek nr Ganado, USGS-08164503.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** |   **Median (IQR)**   |
-|:--------------------------|:--------------------:|
-|NSE                        | 0.864 (0.838, 0.882) |
-|R^2^                       | 0.890 (0.887, 0.896) |
-|Percent Bias               | -6.50 (-9.12, -4.70) |
+|**Goodness of Fit Metric** |   **Median (IQR)**    |
+|:--------------------------|:---------------------:|
+|NSE                        |   0.86 (0.72, 0.89)   |
+|R^2^                       |   0.91 (0.75, 0.95)   |
+|Percent Bias               | -5.75 (-15.43, 10.45) |
 :::
 :::
 
@@ -899,11 +899,11 @@ A. parametric coefficients & (Intercept) & -1.450 & 0.087 & -16.634 &  &  &  & 0
 
 ::: {#tbl-NO3PalmettoBend-CV .cell tbl-cap='Summary of goodness-of-fit metrics for 5-fold cross-validation of NO~3~-N load GAM at Palmetto Bend Dam.'}
 ::: {.cell-output-display}
-|**Goodness of Fit Metric** | **Median (IQR)**  |
-|:--------------------------|:-----------------:|
-|NSE                        | 0.42 (0.34, 0.46) |
-|R^2^                       | 0.60 (0.52, 0.66) |
-|Percent Bias               |  -43 (-47, -38)   |
+|**Goodness of Fit Metric** |   **Median (IQR)**    |
+|:--------------------------|:---------------------:|
+|NSE                        |  0.47 (-0.17, 0.70)   |
+|R^2^                       |   0.90 (0.76, 0.98)   |
+|Percent Bias               | 15.75 (-22.45, 56.75) |
 :::
 :::
 
@@ -979,9 +979,9 @@ A. parametric coefficients & (Intercept) & -1.624 & 0.037 & -44.377 &  &  &  & 0
 ::: {.cell-output-display}
 |**Goodness of Fit Metric** |   **Median (IQR)**   |
 |:--------------------------|:--------------------:|
-|NSE                        | 0.877 (0.862, 0.911) |
-|R^2^                       | 0.961 (0.956, 0.975) |
-|Percent Bias               | -17.6 (-21.1, -12.7) |
+|NSE                        |  0.91 (0.87, 0.97)   |
+|R^2^                       |  1.00 (0.93, 1.00)   |
+|Percent Bias               | -3.75 (-16.17, 4.80) |
 :::
 :::
 

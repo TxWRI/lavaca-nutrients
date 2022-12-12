@@ -110,12 +110,13 @@ tar_read(summary_no3_08164000)
 
 tar_read(cv_no3_08164000) |> 
   ungroup() |> 
-  dplyr::select(-c(data, id)) |> 
+  dplyr::select(-c(data, id, id2)) |> 
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |> 
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |> 
@@ -213,12 +214,13 @@ tar_read(summary_tp_08164000)
 
 tar_read(cv_tp_08164000) |> 
   ungroup() |> 
-  dplyr::select(-c(data, id)) |> 
+  dplyr::select(-c(data, id, id2)) |> 
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |> 
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |> 
@@ -316,12 +318,13 @@ tar_read(summary_no3_08164390)
 
 tar_read(cv_no3_08164390) |>
   ungroup() |>
-  dplyr::select(-c(data, id)) |>
+  dplyr::select(-c(data, id, id2)) |>
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |>
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |>
@@ -419,12 +422,13 @@ tar_read(summary_tp_08164390)
 
 tar_read(cv_tp_08164390) |> 
   ungroup() |> 
-  dplyr::select(-c(data, id)) |> 
+  dplyr::select(-c(data, id, id2)) |> 
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |> 
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |> 
@@ -522,12 +526,13 @@ tar_read(summary_no3_08164450)
 
 tar_read(cv_no3_08164450) |> 
   ungroup() |> 
-  dplyr::select(-c(data, id)) |> 
+  dplyr::select(-c(data, id, id2)) |> 
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |> 
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |> 
@@ -626,12 +631,13 @@ tar_read(summary_tp_08164450)
 
 tar_read(cv_tp_08164450) |> 
   ungroup() |> 
-  dplyr::select(-c(data, id)) |> 
+  dplyr::select(-c(data, id, id2)) |> 
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |> 
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |> 
@@ -728,12 +734,13 @@ tar_read(summary_no3_08164504)
 
 tar_read(cv_no3_08164504) |> 
   ungroup() |> 
-  dplyr::select(-c(data, id)) |> 
+  dplyr::select(-c(data, id, id2)) |> 
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |> 
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |> 
@@ -832,12 +839,13 @@ tar_read(summary_tp_08164504)
 
 tar_read(cv_tp_08164504) |> 
   ungroup() |> 
-  dplyr::select(-c(data, id)) |> 
+  dplyr::select(-c(data, id, id2)) |> 
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |> 
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |> 
@@ -936,12 +944,13 @@ tar_read(summary_no3_08164503)
 
 tar_read(cv_no3_08164503) |> 
   ungroup() |> 
-  dplyr::select(-c(data, id)) |> 
+  dplyr::select(-c(data, id, id2)) |> 
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |> 
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |> 
@@ -1038,12 +1047,13 @@ tar_read(summary_tp_08164503)
 
 tar_read(cv_tp_08164503) |> 
   ungroup() |> 
-  dplyr::select(-c(data, id)) |> 
+  dplyr::select(-c(data, id, id2)) |> 
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |> 
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |> 
@@ -1142,12 +1152,13 @@ tar_read(summary_no3_texana)
 
 tar_read(cv_no3_texana) |> 
   ungroup() |> 
-  dplyr::select(-c(data, id)) |> 
+  dplyr::select(-c(data, id, id2)) |> 
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |> 
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |> 
@@ -1274,12 +1285,13 @@ tar_read(summary_tp_texana)
 
 tar_read(cv_tp_texana) |> 
   ungroup() |> 
-  dplyr::select(-c(data, id)) |> 
+  dplyr::select(-c(data, id, id2)) |> 
   gtsummary::tbl_summary(
     label = list(NSE ~ "NSE",
                  r2 ~ "R^2^",
                  pbias ~ "Percent Bias"),
-    type = list(pbias ~ "continuous")
+    type = list(pbias ~ "continuous"),
+    digits = c(NSE, r2, pbias) ~ 2
   ) |> 
   gtsummary::modify_header(label = "**Goodness of Fit Metric**",
                            gtsummary::all_stat_cols() ~ "**Median (IQR)**") |> 
