@@ -292,6 +292,26 @@ references:
   version: 2.7.11
   DOI: 10.5066/P9X4L3GE
   
+- id: dunnTrendsNutrientInflows1996
+  author:
+    - family: Dunn
+      given: David
+  citation-key: dunnTrendsNutrientInflows1996
+  DOI: 10.3133/wri964113
+  event-place: Austin, Texas
+  genre: Water-Resources Investigations Report
+  issued:
+    - year: 1996
+  language: en
+  number: 96-4113
+  publisher: USGS
+  publisher-place: Austin, Texas
+  source: DOI.org (Crossref)
+  title: >-
+    Trends in nutrient inflows to the Gulf of Mexico from streams draining the
+    conterminous United States, 1972-93
+  type: report
+  URL: http://pubs.er.usgs.gov/publication/wri964113
   
 - id: fangCenGAMCensoredRegression2017
   author:
@@ -386,6 +406,31 @@ references:
   volume: '8'
 
 
+- id: helselFabricatingDataHow2006
+  author:
+    - family: Helsel
+      given: Dennis R.
+  citation-key: helselFabricatingDataHow2006
+  container-title: Chemosphere
+  container-title-short: Chemosphere
+  DOI: 10.1016/j.chemosphere.2006.04.051
+  ISSN: '00456535'
+  issue: '11'
+  issued:
+    - year: 2006
+      month: 12
+  language: en
+  page: 2434-2439
+  source: DOI.org (Crossref)
+  title: >-
+    Fabricating data: How substituting values for nondetects can ruin results,
+    and what can be done about it
+  title-short: Fabricating data
+  type: article-journal
+  volume: '65'
+
+
+
 - id: hirschWeightedRegressionsTime2010
   author:
     - family: Hirsch
@@ -435,6 +480,28 @@ references:
   type: article-journal
   volume: '5'
 
+- id: horowitzEvaluationSedimentRating2003
+  author:
+    - family: Horowitz
+      given: Arthur J.
+  citation-key: horowitzEvaluationSedimentRating2003
+  container-title: Hydrological Processes
+  container-title-short: Hydrol. Process.
+  DOI: 10.1002/hyp.1299
+  ISSN: 0885-6087, 1099-1085
+  issue: '17'
+  issued:
+    - year: 2003
+      month: 12
+      day: 15
+  language: en
+  page: 3387-3409
+  source: DOI.org (Crossref)
+  title: >-
+    An evaluation of sediment rating curves for estimating suspended sediment
+    concentrations for subsequent flux calculations
+  type: article-journal
+  volume: '17'
 
 - id: kroonRiverLoadsSuspended2012
   author:
@@ -506,6 +573,32 @@ references:
     catchment using the loads regression estimator tool
   type: article-journal
   volume: '48'
+  
+- id: marraCoveragePropertiesConfidence2012
+  author:
+    - family: Marra
+      given: Giampiero
+    - family: Wood
+      given: Simon N.
+  citation-key: marraCoveragePropertiesConfidence2012
+  container-title: Scandinavian Journal of Statistics
+  DOI: 10.1111/j.1467-9469.2011.00760.x
+  ISSN: '03036898'
+  issue: '1'
+  issued:
+    - year: 2012
+      month: 3
+  language: en
+  page: 53-74
+  source: DOI.org (Crossref)
+  title: >-
+    Coverage Properties of Confidence Intervals for Generalized Additive Model
+    Components: Coverage properties of GAM intervals
+  title-short: >-
+    Coverage Properties of Confidence Intervals for Generalized Additive Model
+    Components
+  type: article-journal
+  volume: '39'
 
 
 - id: mcdowell_implications_2021
@@ -632,6 +725,28 @@ references:
     Indicators in Lavaca Bay
   type: report
 
+- id: omaniEstimationSedimentNutrient2014
+  author:
+    - family: Omani
+      given: N.
+    - family: Srinivasan
+      given: R.
+    - family: Lee
+      given: T.
+  citation-key: omaniEstimationSedimentNutrient2014
+  container-title: Applied Engineering in Agriculture
+  container-title-short: Appl. Eng. Agric.
+  DOI: 10.13031/aea.30.10162
+  ISSN: 08838542, 19437838
+  issued:
+    - year: 2014
+  language: en
+  page: 869-887
+  source: DOI.org (Crossref)
+  title: >-
+    Estimation of Sediment and Nutrient Loads to Bays from Gauged and Ungauged
+    Watersheds
+  type: article-journal
 
 
 - id: palmerImpactsDroughtsLow2015
@@ -658,6 +773,36 @@ references:
   type: article-journal
   volume: '753'
 
+- id: rebichSourcesDeliveryNutrients2011
+  author:
+    - family: Rebich
+      given: Richard A.
+    - family: Houston
+      given: Natalie A.
+    - family: Mize
+      given: Scott V.
+    - family: Pearson
+      given: Daniel K.
+    - family: Ging
+      given: Patricia B.
+    - family: Evan Hornig
+      given: C.
+  citation-key: rebichSourcesDeliveryNutrients2011
+  container-title: JAWRA Journal of the American Water Resources Association
+  DOI: 10.1111/j.1752-1688.2011.00583.x
+  ISSN: 1093474X
+  issue: '5'
+  issued:
+    - year: 2011
+      month: 10
+  language: en
+  page: 1061-1086
+  source: DOI.org (Crossref)
+  title: >-
+    Sources and delivery of nutrients to the Northwestern Gulf of Mexico from
+    streams in the South-Central United States
+  type: article-journal
+  volume: '47'
 
 - id: robson_prediction_2015-1
   author:
@@ -741,6 +886,32 @@ references:
   type: software
   URL: https://gavinsimpson.github.io/gratia/
   version: R package version 0.7.3.22
+  
+- id: snelderEstimationCatchmentNutrient2017
+  author:
+    - family: Snelder
+      given: T.H.
+    - family: McDowell
+      given: R.W.
+    - family: Fraser
+      given: C.E.
+  citation-key: snelderEstimationCatchmentNutrient2017
+  container-title: JAWRA Journal of the American Water Resources Association
+  container-title-short: J Am Water Resour Assoc
+  DOI: 10.1111/1752-1688.12492
+  ISSN: 1093474X
+  issue: '1'
+  issued:
+    - year: 2017
+      month: 2
+  language: en
+  page: 158-178
+  source: DOI.org (Crossref)
+  title: >-
+    Estimation of catchment nutrient loads in New Zealand using monthly water
+    quality monitoring data
+  type: article-journal
+  volume: '53'
 
 - id: vecchia_trends_2009
   author:
@@ -773,6 +944,27 @@ references:
   type: article-journal
   volume: '43'
 
+- id: vieuxNutrientLoadingAssessment2003
+  author:
+    - family: Vieux
+      given: Baxter E.
+    - family: Moreda
+      given: Fekadu G.
+  citation-key: vieuxNutrientLoadingAssessment2003
+  container-title: Journal of the American Water Resources Association
+  container-title-short: J Am Water Resources Assoc
+  DOI: 10.1111/j.1752-1688.2003.tb04403.x
+  ISSN: 1093-474X, 1752-1688
+  issue: '4'
+  issued:
+    - year: 2003
+      month: 8
+  language: en
+  page: 757-769
+  source: DOI.org (Crossref)
+  title: Nutrient loading assessment in the Illinois River using a synthetic approach
+  type: article-journal
+  volume: '39'
 
 - id: wangLoadEstimationUncertainties2011
   author:
@@ -831,6 +1023,53 @@ references:
     Texas estuary susceptible to brown tide blooms
   type: article-journal
   volume: '188'
+  
+- id: wiseSpatiallyReferencedModels2019
+  author:
+    - family: Wise
+      given: D. R.
+    - family: Anning
+      given: D. W.
+    - family: Miller
+      given: O. W.
+  citation-key: wiseSpatiallyReferencedModels2019
+  event-place: Reston, Virginia
+  genre: Scientific Investigations Report
+  issued:
+    - year: 2019
+  language: en
+  number: 2019-5106
+  page: '66'
+  publisher: U.S. Geological Survey
+  publisher-place: Reston, Virginia
+  source: DOI.org (Crossref)
+  title: >-
+    Spatially referenced models of streamflow and nitrogen, phosphorus, and
+    suspended-sediment transport in streams of the southwestern United States
+  type: report
+  URL: https://doi.org/10.3133/sir20195106
+  
+- id: woodCONFIDENCEINTERVALSGENERALIZED2006
+  author:
+    - family: Wood
+      given: Simon N.
+  citation-key: woodCONFIDENCEINTERVALSGENERALIZED2006
+  container-title: Australian & New Zealand Journal of Statistics
+  container-title-short: Aust N Z J Stat
+  DOI: 10.1111/j.1467-842X.2006.00450.x
+  ISSN: 1369-1473, 1467-842X
+  issue: '4'
+  issued:
+    - year: 2006
+      month: 12
+  language: en
+  page: 445-464
+  source: DOI.org (Crossref)
+  title: >-
+    On confidence intervals for generalized additive models based on penalized
+    regression splines
+  type: article-journal
+  volume: '48'
   
 
 - id: wood_fast_2011

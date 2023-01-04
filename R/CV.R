@@ -8,7 +8,7 @@ cross_validate <- function(model,
   
   # create splits via leave one out cv
   set.seed(seed = 1972) 
-  data <- vfold_cv(data, v = 5, repeats = 10, strata = {{ strata }}, pool = 0.50)
+  data <- vfold_cv(data, v = 5, repeats = 25, strata = {{ strata }}, pool = 0.1)
   
   out <- data |>
     # mutate from tidymodels splits to dataframes
