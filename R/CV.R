@@ -8,7 +8,7 @@ cross_validate <- function(model,
   
   # create splits via leave one out cv
   set.seed(seed = 1972) 
-  data <- vfold_cv(data, v = 5, repeats = 10, strata = {{ strata }}, pool = 0.50)
+  data <- vfold_cv(data, v = 5, repeats = 25, strata = {{ strata }}, pool = 0.1)
   
   out <- data |>
     # mutate from tidymodels splits to dataframes
@@ -27,7 +27,6 @@ cross_validate <- function(model,
     mutate(preds = map2(assessment, model,
                         ~predict(.y, newdata = .x,
                                  type = "response"))) |>
-    dplyr::group_by(id) |>
     tidyr::unnest(c(assessment,preds)) 
   
   
@@ -40,10 +39,11 @@ cross_validate <- function(model,
              preds = set_units(preds, "kg/day"),
              Flow = set_units(Flow, "ft^3/s"),
              Flow = drop_units(Flow),
-             preds = drop_units(preds))
+             preds = drop_units(preds)) |> 
+    group_by(id, id2)
 
     out <- out |>
-      dplyr::select(id, {{ constituent }}, preds) |>
+      dplyr::select(id, id2, {{ constituent }}, preds) |>
       tidyr::nest(data = c( {{ constituent }}, preds)) |>
       dplyr::mutate(
         NSE = map(data,

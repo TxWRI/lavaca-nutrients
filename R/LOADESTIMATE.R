@@ -48,8 +48,8 @@ predict_daily <- function(model, # target
       mutate(Flow = set_units(Flow, "ft^3/s")) |> 
       mutate(fitted = drop_units(fitted)) |> 
       group_by(row) |>
-      summarise(lower.ci = quantile(fitted, probs = 0.025, type = 8, na.rm = TRUE),
-                upper.ci = quantile(fitted, probs = 0.975, type = 8, na.rm = TRUE))
+      summarise(lower.ci = quantile(fitted, probs = 0.05, type = 8, na.rm = TRUE),
+                upper.ci = quantile(fitted, probs = 0.95, type = 8, na.rm = TRUE))
     
     ## convert concentration to flux
     daily <- out |>
@@ -90,8 +90,8 @@ predict_daily <- function(model, # target
     ## grouped by date/row to combine with fn fits
     sims <- sims |> 
       group_by(Date, row) |> 
-      summarise(lower.ci = quantile(fitted, probs = 0.025, type = 8, na.rm = TRUE),
-                upper.ci = quantile(fitted, probs = 0.975, type = 8, na.rm = TRUE))
+      summarise(lower.ci = quantile(fitted, probs = 0.05, type = 8, na.rm = TRUE),
+                upper.ci = quantile(fitted, probs = 0.95, type = 8, na.rm = TRUE))
     
     out <- out |> 
       mutate({{output_upper}} := sims$upper.ci,

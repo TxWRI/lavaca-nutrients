@@ -1,11 +1,13 @@
 ---
-title: "Texas Coastal Nutrient Input Repository - Task 3 Report"
+title: "Texas Coastal Nutrient Input Repository - Task 3 Report \n Lavaca Bay Water Quality Responses to Nutrient Loading"
 author:
   - Michael Schramm ^1^
   - ^1^ Research Specialist, Texas Water Resources Institute, Texas A\&M AgriLife Research
 date: "December 1, 2021"
 output: 
   officedown::rdocx_document:
+    base_format: "bookdown::word_document2"
+    number_sections: false
     reference_docx: format.docx
     plots:
       style: Normal
@@ -38,10 +40,15 @@ csl: council-of-science-editors-author-date.csl
 
 ```{r setup, include=FALSE}
 ## load libraries
+options(tidyverse.quiet=TRUE)
 library(officer)
 library(officedown)
 library(flextable)
+library(stringr)
 library(ragg)
+library(targets)
+source("../../_targets_packages.R")
+
 
 ## this sets our default code chunk options
 knitr::opts_chunk$set(dev = "ragg_png",
@@ -49,10 +56,13 @@ knitr::opts_chunk$set(dev = "ragg_png",
                       ## figure chunk options
                       fig.cap = TRUE,
                       fig.width = 6,
-                      dpi = 200)
+                      dpi = 300)
 
 ## some formatting options
 ft_thanks <- fp_text(font.size = 8)
+
+## targets
+store = "../../_targets"
 
 ```
 
@@ -115,7 +125,6 @@ block_section(prop_section(type = "nextPage"))
 ```
 
 # Introduction
-
 A substantial proportion of coastal estuaries in the United States face excessive nutrient loading and exhibit symptoms of eutrophication [@brickerEffectsNutrientEnrichment2008]. 
 Eutrophication leads to depletion of dissolved oxygen, degradation of habitat [@darbyEffectsEutrophicationSalt2008] and increased risks of harmful algal blooms [@heislerEutrophicationHarmfulAlgal2008].
 
@@ -133,40 +142,130 @@ Underscoring this concern is the need for data that is adequate for evaluating c
 There is also a need to understand the effects of land management decisions on nutrient loading, relative to environmental drivers such as precipitation and discharge, and how it may contribute to or improve conditions related to eutrophication in Lavaca Bay. 
 This work (1) quantifies Nitrate-Nitrogen (NO~3~-N) and TP loadings in the Lavaca Bay watershed and (2) assesses the relationship of eutrophication indicators in Lavaca Bay to changes in watershed discharge and loads.
 
-
-
 # Methods
 
-## Study Area
+## Study Area and Data
 
-## Load Estimation
+Lavaca Bay is a secondary bay in the Matagorda Bay system located centrally along the Texas Gulf coast, roughly halfway between the cities of Houston and Corpus Christi (Figure \@ref(fig:projectmap)).
+Lavaca Bay is 190 km^2^ with the majority of freshwater inflow provided by the Lavaca-Navidad river system. 
+The Garcitas-Arenosa, Placedo Creek, and Cox Bay watersheds provide additional freshwater inflows.
+The watershed land area for Lavaca Bay is 8,149 km^2^. 
+The Lavaca-Navidad river watershed is 5,966 km^2^, or approximately 73% of the watershed area. 
+Discharge from the Navidad River is regulated by Lake Texana which has been in operation since 1980.
+Lake Texana provides 170,000 acre-feet of water storage and discharges into the tidal section of the Navidad River which ultimately joins the tidal section of the Lavaca River 15 km upstream of the confluence with the Bay.
 
-Regression based approaches are commonly used to estimate constituent concentration and fluxes based on continuously measured streamflow and sparsely measured constituent concentrations.  
-Most regression-based approaches estimate daily concentration based on modeled relationships between concentration and discharge, season, and time [@cohnValiditySimpleStatistical1992; @hirschWeightedRegressionsTime2010]. 
-These approaches have recently been extended to include antecedant discharge variables to improve model performance [@zhang_improving_2017].
-We developed site-specific Generalized Additive Models (GAMs) relating NO~3~-N and TP to discharge and temporal covariates.
-GAMs are a semiparametric extension of generalized linear models where the linear predictor is represented as the sum of multiple unknown smooth functions and parametric linear predictors.
-We fit GAMs using the "mgcv" packages in R which makes available multiple types of smooth functions. Hastie and Tibshirani, 1990
-In general, we used thin-plate regression splines which are piece-wise functions that are smoothly joined at multiple breakpoints (commonly callled knots). Wood 2006
-To fit the spline function, users specify the maximum number of knots and the function is automatically estimated by minimizing the generalized cross-validation score. (wood 2006)
+### Hydrology
 
-@wangLoadEstimationUncertainties2011; @kuhnert_quantifying_2012; @robson_prediction_2015-1; @hagemannEstimatingNutrientOrganic2016; @mcdowell_implications_2021; @biagi_novel_2022 utilized variously specified GAMs to develop daily estimates of nutrient or sediment load based on temporal and flow-based variables. 
-Although the underlying parameter estimation procedure of GAMs is substantially different than popular regression based approaches such as LOADEST [@cohnValiditySimpleStatistical1992] or WRTDS [@@hirschWeightedRegressionsTime2010], the functional form and model predictions tend to be similar [@beckNumericalQualitativeContrasts2017].
-The main drivers for our selection of GAMs are the ability to model different error structures and the ease of including additional model covariates.
-@zhang_improving_2017 demonstrated improvements in WRTDS results using antecedent flow variables. Inclusion of these model terms in WRTDS and LOADEST is generally difficult compared to GAMs which are a more general regression modelling approach. 
-The generalized .
-
+Daily discharges for gaged locations within the watershed were obtained from the United States Geologic Survey (USGS) National Water Information System (NWIS) using the "dataRetrieval" R package [@deciccoDataRetrievalPackagesDiscovering2022]. 
+Gaged daily discharges from Lake Texana (USGS-0816425) and modeled daily discharges for the outlet of the Lavaca-Navidad watershed were obtained from the Texas Water Development Board (TWDB) (April 21, 2022 email from R. Neupane, TWDB).
+Modeled discharges were developed by the TWDB for ungaged coastal basins using the Texas Rainfall-Runoff (TxRR) model described in @schoenbaechlerCoastalHydrologyLavacaColorado2011.
+From 2000 through 2020, mean daily discharge from the Lavaca-Navidad watershed system was 700 (MGD) based on a combination of modeled runoff and gaged discharge. 
+Approximately 61% of the mean daily discharge comes from Lake Texana (USGS-0816425, Figure \@ref(fig:projectmap)), 30% is from the Lavaca River at Edna (USGS-08164000) and the rest is ungaged runoff below those two gaged locations. 
 
 
+```{r projectmap, fig.cap="Study area map.", fig.alt="Map of the Lavaca Bay and Lavaca Bay watershed. The map indicates the locations of the river systems and sampling sites used to estimate nutrient loading and the sites in Lavaca Bay used to relate loading to estuarine water quality parameters.", out.width="100%", fig.asp=1.25}
+tar_read(report_map, store = store)
+```
 
 
-# Headings
+```{r dat_summ1}
+df <- tar_read(model_data, store = store)
 
-## Second Level Heading
+dat <- df |>  
+  select(site_no, Flow, original_NO3, original_TP) |> 
+  pivot_longer(cols = c(Flow, original_NO3, original_TP),
+               names_to = "Parameter") |> 
+  filter(!is.na(value)) |> 
+  group_by(site_no, Parameter) |> 
+  summarise(n = n(),
+            mean = mean(value),
+            sd = sd(value),
+            .groups = "drop") |>
+  mutate(Parameter = case_when(
+    Parameter == "Flow" ~ "Mean Daily Discharge",
+    Parameter == "original_NO3" ~ "NO3-N",
+    Parameter == "original_TP" ~ "TP"
+  )) |> 
+  mutate(site_no = case_when(
+    site_no == "lktexana_g" ~ "usgs08164525",
+    site_no != "lktexana_g" ~ site_no
+  )) |> 
+  mutate(Description = case_when(
+    site_no == "usgs08164525" ~ "Lake Texana",
+    site_no == "usgs08164000" ~ "Lavaca River near Edna",
+    site_no == "usgs08164390" ~ "Navidad River at Strane Pk.",
+    site_no == "usgs08164450" ~ "Sandy Creek near Ganado",
+    site_no == "usgs08164503" ~ "West Mustang Creek near Ganado",
+    site_no == "usgs08164504" ~ "East Mustang Creek near Lousie"
+  )) |> 
+  rename(Site = site_no)
 
-### Third Level Heading
+dat$Site <- str_replace(dat$Site, "usgs", "USGS-")
 
-First, second, and third level headings are defined by `#`, `##`, and `###` respectively.
+cft_1 <- tabulator(
+  x = dat,
+  rows = c("Site", "Description"),
+  columns = "Parameter",
+  "Mean (SD)" = as_paragraph(fmt_avg_dev(mean, sd, digit1 = 2, digit2 = 2)),
+  "N" = as_paragraph(as_chunk(n))
+)
+
+prop_cap <- fp_text_default(font.family = "Minion Pro",
+                            font.size = 10)
+
+ft <- as_flextable(cft_1) |> 
+  font(part = "all", fontname = "Arial") |> 
+  bold(part = "header") |> 
+  fontsize(size = 9) |> 
+  border_remove() |> 
+  hline_top(border = fp_border(color = "black", width = 0.5),
+            part = "all") |> 
+  hline(border = fp_border(color = "black", width = 0.5),
+        part = "header") |> 
+  hline_bottom(border = fp_border(color = "black", width = 0.5),
+               part = "all") |> 
+  set_table_properties(layout = "autofit") |> 
+  set_caption(as_paragraph(
+    as_chunk("Summary statistics for mean daily discharge, NO",
+             props = prop_cap),
+    as_sub(as_chunk("3", props = prop_cap)),
+    as_chunk("-N, and TP at the freshwater sites where daily nutrient loads were estimated.",
+             props = prop_cap)
+    ))
+
+
+ft
+```
+
+
+
+
+## Linking Watershed Loads to Estuary Water Quality
+
+We explored relationships between watershed nutrient loads and nutrient concentrations at three monitoring sites in Lavaca Bay. We fit three different GAM models at each site for each parameter of interest.
+
+\begin{equation}
+g(\mu) = \alpha + f_1(ddate) + f_2(yday) + f_3(ddate,\,yday)
+(\#eq:estgam1)
+\end{equation}
+
+\begin{equation}
+g(\mu) = \alpha + f_1(ddate) + f_2(yday) + f_3(ddate,\,yday) + f_4(Q)
+(\#eq:estgam2)
+\end{equation}
+
+\begin{equation}
+g(\mu) = \alpha + f_1(ddate) + f_2(yday) + f_3(ddate,\,yday) + f_4(Q) + f_5(Load)
+(\#eq:estgam3)
+\end{equation}
+
+where *f~1~(ddate)* is decimal date smoothed with a thin-plate regression spline, *f~2~(yday)* is the numeric day of year smoothed with a cyclic cubic regression spline and *f~3~(ddate, yday)* is a tensor product smooth of the two variables. 
+*f~4~(Q)* is total daily watershed discharge and *f~5~(Load)* is total NO~3~-N or TP watershed load obtained from Equation \@ref(eq:gam1).
+By comparing the model fits between the three GAMs,  we evaluated if variance in Lavaca Bay nutrient concentrations are well explained by only temporal parameters (Equation \@ref(eq:estgam1)) or if the freshwater flow (Equation \@ref(eq:estgam2)) and nutrient loading (Equation \@ref(eq:estgam3)) can be used to explain additional variation. 
+The relatively large impact of flow variability on nutrient loading creates a challenge for disentangling the impacts of flow and load [@murphyNutrientImprovementsChesapeake2022]. 
+Instead of using raw freshwater flow and nutrient loading values, these values were replaced by seasonally adjusted flow and flow-adjusted nutrient loads as described by @murphyNutrientImprovementsChesapeake2022. 
+In short, a seasonal GAM was fit to daily flow values and the model residuals were used in *f~4~(Q)* and a GAM for nutrient loads was fit to daily streamflows with the model residuals used in *f~5~(Load)*.
+
 
 
 # Tables

@@ -13,10 +13,13 @@ targets::tar_option_set(packages = c("adc",
                                      "arrow", 
                                      "dataRetrieval", 
                                      "dplyr", 
+                                     "FedData",
                                      "flextable", 
                                      "fs", 
                                      "furrr", 
                                      "ggplot2", 
+                                     "ggrepel",
+                                     "ggspatial",
                                      "ggtext",
                                      "glue",
                                      "gratia", 
@@ -32,8 +35,10 @@ targets::tar_option_set(packages = c("adc",
                                      "ragg",
                                      "quarto", 
                                      "readr", 
+                                     "rcartocolor",
                                      "rsample",
                                      "scico",
+                                     "sf",
                                      "tarchetypes",
                                      "tibble",
                                      "tidyr", 
@@ -80,7 +85,7 @@ list(
                   s(ma, k = 10, bs = "tp", m = 1) +
                   s(ltfa, k = 10, bs = "tp", m = 1),
                 data = df,
-                family = Gamma(link = "log")
+                family = gaussian(link = "log")
                 )
       }
     ),
@@ -106,7 +111,7 @@ list(
                              s(ma, k = 6, bs = "tp", m = 1) +
                              s(stfa, k = 5, bs = "tp", m = 1),
                            data = model_data |> filter(site_no == "usgs08164000"),
-                           family = Gamma(link = "log"))
+                           family = gaussian(link = "log"))
   ),
 
   #### TP CV
@@ -135,7 +140,7 @@ list(
                               s(ma, k = 6, bs = "tp", m = 1) +
                               s(ltfa, k = 10, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164504"),
-                            family = Gamma(link = "log"))
+                            family = gaussian(link = "log"))
   ),
 
   #### CV NO3 ----
@@ -160,7 +165,7 @@ list(
                              s(ma, k = 6, bs = "tp", m = 1) +
                              s(stfa, k = 5, bs = "tp", m = 1),
                            data = model_data |> filter(site_no == "usgs08164504"),
-                           family = Gamma(link = "log"))
+                           family = gaussian(link = "log"))
   ),
 
   #### CV TP ----
@@ -187,7 +192,7 @@ list(
                               s(ma, k = 6, bs = "tp", m = 1) +
                               s(ltfa, k = 10, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164503"),
-                            family = Gamma(link = "log"))
+                            family = gaussian(link = "log"))
   ),
 
   #### CV NO3 ----
@@ -212,7 +217,7 @@ list(
                              s(stfa, k = 6, bs = "tp", m = 1) +
                              s(ma, k = 6, bs = "tp", m = 1),
                            data = model_data |> filter(site_no == "usgs08164503"),
-                           family = Gamma(link = "log"))
+                           family = gaussian(link = "log"))
   ),
   #### CV TP ----
   tar_target(
@@ -238,7 +243,7 @@ list(
                               s(ma, k = 6, bs = "tp", m = 1) +
                               s(ltfa, k = 6, bs = "tp", m = 1),
                             data = model_data |> filter(site_no == "usgs08164450"),
-                            family = Gamma(link = "log"))
+                            family = gaussian(link = "log"))
   ),
   #### CV NO3 ----
   tar_target(
@@ -313,7 +318,7 @@ list(
                              s(stfa, k = 6, bs = "tp") +
                              s(ma, k = 6, bs = "tp"),
                            data = model_data |> filter(site_no == "usgs08164390"),
-                           family = Gamma(link = "log"))
+                           family = gaussian(link = "log"))
   ),
 
   #### CV TP ----
@@ -1038,6 +1043,13 @@ list(
   tar_target(tp_lavaca_prediction_data,
              estuary_prediction_data(lbay_adj_flow,
                                      estuary_tp_loads,
-                                     "2000-01-01"))
+                                     "2000-01-01")),
+  
+  ## Report Figures
+  tar_target(report_map,
+             study_area_map()),
+  
+  tar_target(fw_site_map,
+             fw_study_area_map())
   
 )
