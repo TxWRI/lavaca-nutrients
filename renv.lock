@@ -884,6 +884,29 @@
       "Hash": "7c89603d81793f0d5486d91ab1fc6f1d",
       "Requirements": []
     },
+    "ftExtra": {
+      "Package": "ftExtra",
+      "Version": "0.4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5562a54640dcf6671b8007e6e291a6f7",
+      "Requirements": [
+        "dplyr",
+        "flextable",
+        "jsonlite",
+        "magrittr",
+        "purrr",
+        "rlang",
+        "rmarkdown",
+        "stringr",
+        "tibble",
+        "tidyr",
+        "tidyselect",
+        "vctrs",
+        "xfun",
+        "yaml"
+      ]
+    },
     "furrr": {
       "Package": "furrr",
       "Version": "0.3.1",
@@ -979,6 +1002,18 @@
         "ggplot2",
         "rlang",
         "scales"
+      ]
+    },
+    "ggridges": {
+      "Package": "ggridges",
+      "Version": "0.5.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c76ee8fe60939384b9726128e38caea0",
+      "Requirements": [
+        "ggplot2",
+        "scales",
+        "withr"
       ]
     },
     "ggspatial": {

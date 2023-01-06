@@ -50,6 +50,7 @@ library(targets)
 library(ggridges)
 library(rcartocolor)
 library(colorspace)
+library(patchwork)
 source("../../_targets_packages.R")
 
 
@@ -72,7 +73,7 @@ store = "../../_targets"
 
 Texas Water Resources Institute
 
-Texas A&M Agrilife
+Texas A&M AgriLife
 
 College Station, TX
 
@@ -87,7 +88,16 @@ College Station, TX
 ```{r}
 ## leave in, starts new word document section
 ## after table of abbreviations
-block_section(prop_section(type = "nextPage"))
+block_section(prop_section(type = "nextPage",
+                           page_margins = page_mar(bottom = 1,
+                                                   top = 1,
+                                                   right = 1,
+                                                   left = 1,
+                                                   header = 0.5,
+                                                   footer = 0.5,
+                                                   gutter = 0.5
+                                                   )))
+
 ```
 
 ::: {custom-style="Unnumbered Heading 1"}
@@ -127,9 +137,11 @@ Abbreviations
 |NSE       |Nash-Sutcliffe Efficency |
 |PBIAS     |Percent Bias |
 |QAPP      |Quality Assurance Project Plan |
+|SD        |Standard Deviation |
 |SWAT      |Soil & Water Assessment Tool  |
 |TCEQ      |Texas Commission on Environmental Quality |
 |TKN       |Total Kjeldahl Nitrogen |
+|TN        |Total Nitrogen |
 |TP        |Total Phosphorus    |
 |TWDB      |Texas Water Development Board |
 |TxRR      |Texas Rainfall-Runoff Model |
@@ -139,29 +151,49 @@ Abbreviations
 
 
 ```{r}
-## leave in, ends word document section
+## leave in, starts new word document section
 ## after table of abbreviations
-block_section(prop_section(type = "nextPage"))
+block_section(prop_section(type = "nextPage",
+                           page_margins = page_mar(bottom = 1,
+                                                   top = 1,
+                                                   right = 1,
+                                                   left = 1,
+                                                   header = 0.5,
+                                                   footer = 0.5,
+                                                   gutter = 0.5
+                                                   )))
+
 ```
 
 # Summary
 
-lorem ipsum
+We quantified daily, monthly, and annual nutrient loading from freshwater segments in the Lavaca Bay watershed using a statistical modeling approach relating time and discharge to nutrient concentrations. Total combined annual nitrate loads ranged from 12,574 kg in 2011 to 794,510 kg in 2007 with a mean annual load of 205,405 kg per year from 2005 through 2020. Total combined annual total phosphorus loads ranges from 7,839 kg in 2011 to 916,908 kg in 2004 with a mean annual load of 241,681 kg per year from 2000 through 2020. Model validation indicated the approach performed well for predicting nutrient loads at the two most downstream sites in the watershed (Lavaca River near Edna, USGS-08164000 and Lake Texana at Palmetto Bend Dam, USGS-0816425). Additional flow-biased monitoring would improve model performance and validation during important high flow events that are the primary drivers of loading to Lavaca Bay. Model performance suffered at upstream sites to due higher variance in the measured data and insufficient sampling.
 
 ```{r}
-## leave in, ends word document section
+## leave in, starts new word document section
 ## after table of abbreviations
-block_section(prop_section(type = "nextPage"))
+block_section(prop_section(type = "nextPage",
+                           page_margins = page_mar(bottom = 1,
+                                                   top = 1,
+                                                   right = 1,
+                                                   left = 1,
+                                                   header = 0.5,
+                                                   footer = 0.5,
+                                                   gutter = 0.5
+                                                   )))
+
 ```
 
 # Introduction
 
-An increasing proportion of coastal estuaries are showing signs of eutrophication dues to excessive nutrient loadings [@brickerEffectsNutrientEnrichment2008]. Recent assessments along the Texas coastline highlighted regional eutrophication hotspots attributed to increased coastal populations and changes in land use and hydrology [@bugicaWaterQualityTrends2020]. Within the Lavaca Bay watershed, @bugicaWaterQualityTrends2020 identified site specific increases in Total Phosphorus (TP) and Orthophosphate (PO~4~^-3^), Total Kjeldahl Nitrogen (TKN), and chlorophyll-*a* concentrations. Changes in freshwater inflow and associated nutrients are assumed to drive changes in estuary nutrient concentrations. The purpose of this project is to provide a dataset of nutrient load estimates and measures of uncertainty that help stakeholders assess trends and changes in freshwater derived nutrients loads into Lavaca Bay.
+Excessive nutrient loading is driving eutrophication in a continually increasing proportion of coastal estuaries [@brickerEffectsNutrientEnrichment2008]. @bugicaWaterQualityTrends2020 identified several eutrophication hotspots along the Texas coastline largely attributed to patterns of increased coastal populations and changes in land use and hydrology. Within the Lavaca Bay watershed, @bugicaWaterQualityTrends2020 found site specific increases in Total Phosphorus (TP) and Orthophosphate (PO~4~^-3^), Total Kjeldahl Nitrogen (TKN), and chlorophyll-*a* concentrations. Changes in freshwater inflow and associated nutrients are assumed to drive changes in estuary nutrient concentrations. The purpose of this project is to provide a dataset of nutrient load estimates and measures of uncertainty that help stakeholders assess trends and changes in freshwater derived nutrients loads into Lavaca Bay.
 
-Daily nutrient loads are typically calculated as the product of instantaneous nutrient concentration measurements and mean daily streamflow, or the sum of flow-weighted nutrient concentrations times the total daily streamflow. However, nutrient concentrations are measured infrequently while streamflow measurements can be taken near-continuously. In order to develop monthly and annual estimates of nutrient loads, in-stream nutrient concentrations must be estimated or modeled in-between sampling events. These inter-event concentrations can be estimated using one of many mechanistic models or statistical modeling procedures.
+Daily nutrient loads are calculated as the product of instantaneous nutrient concentration measurements and mean daily streamflow, or the sum of flow-weighted nutrient concentrations times the total daily streamflow. However, nutrient concentrations are measured infrequently while streamflow measurements are taken near-continuously. In order to develop monthly and annual estimates of nutrient loads, in-stream nutrient concentrations must be estimated or modeled in-between sampling events. These inter-event concentrations are estimated using one of many mechanistic models or statistical modeling procedures.
 
-Mechanistic models focus on replicating underlying physical, biological, and other processes that generate streamflow and pollutant loading in a watershed by calibration of some set of parameters. The Soil & Water Assessment Tool (SWAT), Hydrologic Engineering Center's River Analysis System (HEC-RAS), Water Quality Analysis Simulation Program (WASP) and others. 
-These models are particularly suited for exploring underlying physical processes, scenario planning, or forecasting and assume a reasonable understanding of the system being modeled. Conversely, statistical or data-driven models utilize empirical observations to identify patterns or relationships in the observed data to make predictions. 
+Mechanistic models focus on replicating underlying physical, biological, and other processes that generate streamflow and pollutant loading in a watershed by calibration of some set of parameters. 
+Examples of some popular mechanistic water quality models include Soil & Water Assessment Tool (SWAT), Hydrologic Engineering Center's River Analysis System (HEC-RAS), and Water Quality Analysis Simulation Program (WASP). 
+These models are particularly suited for exploring underlying physical processes, scenario planning, or forecasting and assume a reasonable understanding of the system being modeled. 
+Conversely, statistical or data-driven models utilize empirical observations to identify patterns or relationships in the observed data to make predictions. 
 LOADEST and Weighted Regression on Time Discharge and Season (WRTDS) are two popular applications of linear regression based statistical models used to make daily load predictions using instantaneous concentration measurements and continuous streamflow data (typically mean daily flow) [@cohnValiditySimpleStatistical1992; @hirschWeightedRegressionsTime2010]. 
 LOADEST and WRTDS utilize streamflow, seasonality, and long-term trends as linear predictors with WRTDS allowing these relationships to vary temporally. 
 Due to our goal of developing hind-cast predictions based on readily available empirical observations and a limited understandings of underlying processes (for example cropping patterns, reservoir operations, and daily wastewater discharges) required to develop robust mechanistic models, we chose to use statistical based approaches for model development.
@@ -193,19 +225,22 @@ Lake Texana provides 170,000 acre-feet of water storage and discharges into the 
 
 ### Hydrology
 
-Daily discharges for gaged locations within the watershed were obtained from the United States Geologic Survey (USGS) National Water Information System (NWIS) using the *dataRetrieval* R package [@deciccoDataRetrievalPackagesDiscovering2022]. 
+Daily discharges for gaged locations (Figure \@ref(fig:projectmap), Table \@ref(tab:dat-summ1)) within the watershed were obtained from the United States Geologic Survey (USGS) National Water Information System (NWIS) using the *dataRetrieval* R package [@deciccoDataRetrievalPackagesDiscovering2022]. 
 Gaged daily discharges from Lake Texana (USGS-0816425) and modeled daily discharges for the outlet of the Lavaca-Navidad watershed were obtained from the Texas Water Development Board (TWDB) (April 21, 2022 email from R. Neupane, TWDB).
 Modeled discharges were developed by the TWDB for ungauged coastal basins using the Texas Rainfall-Runoff (TxRR) model described in @schoenbaechlerCoastalHydrologyLavacaColorado2011.
 From 2000 through 2020, mean daily discharge from the Lavaca-Navidad watershed system was 700 (MGD) based on a combination of modeled runoff and gauged discharge. 
 Approximately 61% of the mean daily discharge comes from Lake Texana (USGS-0816425, Figure \@ref(fig:projectmap)), 30% is from the Lavaca River at Edna (USGS-08164000) and the rest is ungauged runoff below those two gauged locations. 
 
 
-```{r projectmap, fig.cap="Study area map.", fig.alt="Map of the Lavaca Bay and Lavaca Bay watershed. The map indicates the locations of the river systems and sampling sites used to estimate nutrient loading and the sites in Lavaca Bay used to relate loading to estuarine water quality parameters.", out.width="100%", fig.asp=1.25}
-tar_read(report_map, store = store)
+```{r projectmap, fig.cap="Study area map.", fig.alt="Map of the Lavaca Bay and Lavaca Bay watershed. The map indicates the locations of the river systems and sampling sites used to estimate nutrient loading and the sites in Lavaca Bay used to relate loading to estuarine water quality parameters.", out.width="110%", fig.asp=1.15}
+p1 <- tar_read(fw_site_map, store = store)
+p1 + theme(plot.margin = margin(0,0,0,0, unit = "pt"))
 ```
 
+\newpage
 
-```{r dat_summ1}
+
+```{r dat-summ1}
 df <- tar_read(model_data, store = store)
 
 dat <- df |>  
@@ -219,9 +254,9 @@ dat <- df |>
             sd = sd(value),
             .groups = "drop") |>
   mutate(Parameter = case_when(
-    Parameter == "Flow" ~ "Mean Daily Discharge",
-    Parameter == "original_NO3" ~ "NO3-N",
-    Parameter == "original_TP" ~ "TP"
+    Parameter == "Flow" ~ "Mean Daily Discharge (cfs)",
+    Parameter == "original_NO3" ~ "NO~3~-N (mg/L)",
+    Parameter == "original_TP" ~ "TP (mg/L)"
   )) |> 
   mutate(site_no = case_when(
     site_no == "lktexana_g" ~ "usgs08164525",
@@ -252,8 +287,9 @@ prop_cap <- fp_text_default(font.family = "Minion Pro",
 
 ft <- as_flextable(cft_1) |> 
   font(part = "all", fontname = "Arial") |> 
+  ftExtra::colformat_md(part = "all") |> 
   bold(part = "header") |> 
-  fontsize(size = 9) |> 
+  fontsize(size = 9, part = "all") |> 
   border_remove() |> 
   hline_top(border = fp_border(color = "black", width = 0.5),
             part = "all") |> 
@@ -277,11 +313,11 @@ ft
 
 ### Water Quality Data
 
-Water quality sample data was obtained from the Texas Commission on Environmental Quality (TCEQ) Surface Water Quality Monitoring Information System (https://www80.tceq.texas.gov/SwqmisWeb/public/crpweb.faces). 
+Water quality sample data were obtained from the Texas Commission on Environmental Quality (TCEQ) Surface Water Quality Monitoring Information System (https://www80.tceq.texas.gov/SwqmisWeb/public/crpweb.faces). 
 Water quality data submitted through the Surface Water Quality Monitoring Information System are required to be collected under projects with an approved Quality Assurance Project Plan (QAPP) and under sample collection and lab method procedures outlined by TCEQ's procedures manuals (https://www.tceq.texas.gov/waterquality/monitoring/swqm_guides.html). 
 The QAPP and procedures manuals ensure consistent collection and analytical methods are applied between samples collected among different entities and different projects.
 
-Sample results for nitrite (NO~2~-N), NO~3~-N, TKN, and TP were downloaded for each stream sampling site. 
+Sample results for nitrite (NO~2~-N), NO~3~-N, TKN, Total Nitrogen (TN), and TP were downloaded for each stream sampling site. 
 The temporal coverage and number of samples varied for each parameter at each site.
 All nutrient samples were collected under routine sampling strategies (typically quarterly monitoring with some monthly sampling at main stem sites). 
 Under ideal situations, accurate estimation of nutrient loads would include a mix of flow-biased and random samples. However, no samples were collected under flow-biased sampling strategies.
@@ -289,8 +325,8 @@ There is no absolute threshold for determining the number of samples required fo
 In general, under random sampling approaches, shorter modeled time periods require higher sampling resolution compared to longer time periods [@horowitzEvaluationSedimentRating2003]. 
 For example, a 5-year modeling period may require monthly or bi-weekly sampling to achieve adequate performance while a 20-year modeling period may only require monthly or quarterly sampling.
 Although sampling error and constituent concentration-flow relationships vary by site, we assumed at minimum, monthly to bi-monthly sampling strategies would be required for accurate load estimation for periods between 5 to 10 years with lower frequency required at the load estimation period increases [@horowitzEvaluationSedimentRating2003; @snelderEstimationCatchmentNutrient2017].
-Based on this criteria, we limited modeling to site-parameter combinations with at least 10 years of data and 50 samples collected after January 1, 2000.
-This limited load estimation to NO~3~-N and TP parameters at the five sampling sites in the watershed. 
+Based on these criteria, we limited modeling to site-parameter combinations with at least 10 years of data and 50 samples collected after January 1, 2000.
+This limited load estimation to NO~3~-N and TP parameters at the five sampling sites in the watershed. Summary statistics of water quality data used in the analysis are show in Table \@ref(tab:dat-summ1).
 
 
 
@@ -311,7 +347,7 @@ y &\sim \mathcal{N}(\mu,\,\sigma^{2})
 where μ is the conditional expected NO~3~-N or TP concentration, *g()* is the log-link, *α* is the intercept, *f~n~()* are smoothing functions. 
 *y* is the response variable (constituent concentration) modeled as normally distributed with mean *μ* and standard deviation *σ*. *ddate* is the date converted to decimal notation, *yday* is numeric day of year (1-366), and *log1p(Q)* is the natural log of mean daily streamflow plus 1. 
 
-Moving average (*ma*) is an exponentially smoothed moving average that attempts to incorporate the influence of prior streamflow events on concnetration at the current time period. @wangLoadEstimationUncertainties2011, @kuhnert_quantifying_2012 and @zhang_improving_2017 refer to this as averaged or smoothed discounted flow and demonstrated improvements in nutrient loading models by including the term.
+Moving average (*ma*) is an exponentially smoothed moving average that attempts to incorporate the influence of prior streamflow events on concentration at the current time period. @wangLoadEstimationUncertainties2011, @kuhnert_quantifying_2012 and @zhang_improving_2017 refer to this as averaged or smoothed discounted flow and demonstrated improvements in nutrient loading models by including the term.
 @kuhnert_quantifying_2012 expresses MA as
 
 
@@ -340,13 +376,13 @@ stfa(t) = x_{current\,day}(t) - \bar{x}_{1\,month}(t)
 where *x* are the averages of log-transformed streamflow over the antecedent period (*1-year*, *1-month*, etc.) for time *t*.  
 We used *ltfa* in NO~3~-N models and *stfa* in TP models based on results from @zhang_improving_2017 demonstrating major improvements in NO~x~ regression models that incorporated *ltfa* and moderate improvements in TP regression models that incorporated *stfa*.
 
-The model structure was slightly altered for the Palmetto Bend dam site where daily loads are not a function of natural stream flow processes, but of dam operation procedures and nutrient concentration at the discharge point of the lake. At this location, nutrient concentrations were modeled as a function of total inflow for gaged tributaries. 
+The model structure was slightly altered for the Palmetto Bend Dam/Lake Texana site where daily loads are not a function of natural stream flow processes, but of dam operation procedures and nutrient concentration at the discharge point of the lake. At this location, nutrient concentrations were modeled as a function of total inflow for gaged tributaries. 
 The *ma* and *fa* terms were also calculated based on total gaged inflow. Daily loads at the dam were calculated from the discrete daily concentration at the discharge point of the lake and corresponding reported daily discharge from the dam.
 
-Thin-plate regression splines with used for *ddate*, *log1p(Q)*, *fa*, and *ma*. 
-A cyclic cubic regression spline was used for/ *yday* to ensure the ends of the spline match (day 1 and day 366 are expected to match). 
+Thin-plate regression splines were used for *ddate*, *log1p(Q)*, *fa*, and *ma*. 
+A cyclic cubic regression spline was used for *yday* to ensure the ends of the spline match (day 1 and day 366 are expected to match). 
 First order penalties were applied to the smooths of flow-based variables which penalize departures from a flat function to help constrain extrapolations for high flow measurements. 
-Basis dimensions smooths were adjusted after using the *gam.check* function to ensure models were not oversmoothed. 
+Basis dimensions smooths were adjusted after using the *gam.check* function to ensure models were not undersmoothed. 
 Model residuals were inspected for distributional assumptions using the *gratia* package [@simpsonGratiaGracefulGraceful2022].
 
 Left-censored data were not uncommon in this dataset. 
@@ -381,17 +417,15 @@ These metrics were compared to values suggested by [@moriasiHydrologicWaterQuali
 
 ## Model Assessment
 
-Individual models were generated for each site and parameter combination. Nutrient concentration model summaries (model coefficients, model metrics, and cross validation results) for each of those models are provided as tables in Appendix A. GAM models generally exhibited strong explanatory ability for NO~3~-N concentrations with adjusted r^2^ values ranging from 0.717 to 0.965 and deviance explained values ranging from 0.767 to 0.977 (Figure \@ref(fig:gamfit)). GAMs performed less well for explaining TP concentration with adjusted r^2^ values ranging from 0.260 to 0.757 and deviance explained values between 0.323 and 0.824.  
+Individual models were generated for each site and parameter combination. 
+Nutrient concentration model summaries (model coefficients, model metrics, and cross validation results) for each of those models are provided as tables in Appendix A. 
+GAM models generally exhibited strong explanatory ability for NO~3~-N concentrations with adjusted r^2^ values ranging from 0.717 to 0.965 and deviance explained values ranging from 0.767 to 0.977 (Figure \@ref(fig:gamfit)). 
+GAMs performed less well for explaining TP concentration with adjusted r^2^ values ranging from 0.260 to 0.757 and deviance explained values between 0.323 and 0.824.  
 
-Plots of predicted and observed NO~3~-N concentrations indicate high residual variance at low concentrations but very low variance at high concentrations (Figure \@ref(fig:NO3-fitted-obs)). The low variance at elevated NO~3~-N concentrations explains the high adjusted r^2^ and deviance explained scores which might be overly weighted by predictions at high NO~3~-N concentrations. In comparison, residual variance is more homogeneous with the TP models with consistent negative bias for some of the sites (Figure \@ref(fig:TP-fitted-obs)).
+Plots of predicted and observed NO~3~-N concentrations indicate high residual variance at low concentrations but very low variance at high concentrations (Figure \@ref(fig:NO3-fitted-obs)). 
+The low variance at elevated NO~3~-N concentrations explains the high adjusted r^2^ and deviance explained scores which might be overly weighted by predictions at high NO~3~-N concentrations. 
+In comparison, residual variance is more homogeneous with the TP models with consistent negative bias for some of the sites (Figure \@ref(fig:TP-fitted-obs)).
 
-- NO3 models indicate negative prediction bias at low values but no bias at higher values.
-
-- TP models in general show less residual variance (good) but some sites show consistent positive prediction bias throughout.
-
-- In general TP models perform very well, likely well correlated with streamflow/runoff processes. NO3 shows more variance and residuals show more heterogenity across predictors, in particular at the tributaries to Lake Texana. 
-
-- smaller streams have been shown more difficult to predict. Two of the streams have permitted wastewater discharges which may have influence on instream values. Only quarterly reported average discharge concentrations were available and did not reveal any correlation with measured concentrations.
 
 ```{r gamfit, message=FALSE, error=FALSE, fig.cap="GAM model metrics (r^2^ and deviance explained) across each site and parameter."}
 
@@ -604,7 +638,16 @@ ggplot(df, aes(x = fitted, y = observed, color = label)) +
         axis.title.y = element_markdown())
 ```
 
-Repeated 5-fold cross validation showed that GAM performance ranged from "satisfactory" to "very good" for predicating NO~3~-N and TP loads at the two most downstream sites (Lavaca River and Palmetto Bend Dam/Lake Texana) based evaluation criteria provided in @moriasiHydrologicWaterQuality2015. Tables of model metric median and interquartile ranges are provided for every model in Appendix A. The distribution and tail probability of metric scores based on repeated 5-fold cross validation scores are shown in Figure \@ref(fig:cvplot). Among the site upstream of Lake Texans, cross-validation scores showed high variance, in particular for NO~3~-N loads. Performance of NO~3~N load vross validation ranged from non acceptable to very good. NO~3~-N load predictions at East Mustang Creek and Sandy Creek are notable with NSE metrics of -0.02 and 0.23 which fall in the non acceptable range. Cross validation indicated total phosphorus load predictions performed between acceptable and very good at all sites. The relatively high performance in predicting TP loads relative to predicting TP concentrations suggests that changes in flows dominate the observed variation in TP loads at sites in the watershed. Changes in NO~3~-N concentration probably contribute a relatively larger amount to the variance in NO~3~-N loads, in particular at the smaller stream sites resulting in less drastic differences in load and concentration prediction performance.
+Repeated 5-fold cross validation showed that GAM performance ranged from "satisfactory" to "very good" for predicating NO~3~-N and TP loads at the two most downstream sites (Lavaca River and Palmetto Bend Dam/Lake Texana) based evaluation criteria provided in @moriasiHydrologicWaterQuality2015. 
+Tables of model metric median and interquartile ranges are provided for every model in Appendix A. 
+The distribution and tail probability of metric scores based on repeated 5-fold cross validation scores are sown in Figure \@ref(fig:cvplot). 
+Among the site upstream of Lake Texans, cross-validation scores showed high variance, in particular for NO~3~-N loads. 
+Performance of NO~3~-N load cross validation ranged from non-acceptable to very good. 
+NO~3~-N load predictions at East Mustang Creek and Sandy Creek are notable with NSE metrics of -0.02 and 0.23 which fall in the non-acceptable range. 
+Cross validation showed TP load predictions performed between acceptable and very good at all sites. 
+The relatively high performance in predicting TP loads relative to predicting TP concentrations provides some evidence that changes in flows are responsible for a greater amount of variance in TP loads relative to NO~3~-N loads.
+Evidenced by the higher standard deviation (SD) in NO~3~-N concentrations, changes in NO~3~-N concentration contribute to a relatively larger amount of load variation compared to TP.
+This is especially apparent at Sandy Creek and East Mustang Creek (Tables \@ref(tab:summaryno3sandy), \@ref(tab:cvno3sandy), \@ref(tab:summarytpsandy), \@ref(tab:cvtpsandy), \@ref(tab:summaryno3emustang), \@ref(tab:cvno3emustang), \@ref(tab:summarytpemustang), \@ref(tab:cvtpemustang)).
 
 
 ```{r cvplot, message=FALSE, warning=FALSE, fig.height=6.5, fig.width=6.5, fig.cap="Density plots of goodness-of-fit metric results from repeated 5-fold cross-validation. Color indicates the tail probability calculated from the empirical cumulative distribution of the goodness-of-fit metrics."}
@@ -834,11 +877,6 @@ p1 / p2 / p3 / guide_area() + plot_layout(guides = 'collect',
 
 ## Nutrient Loads
 
-Appendix B includes plots of daily, monthly, and annual loads and flow normalized loads for each site and parameter. Figure \@ref(fig:annualloads) shows annual and flow-normalized annual loads with 95% credible intervals at USGS-08164000 (Lavaca River) and USGS-08164525 (Lake Texana). For both nutrient parameters, high variations in annual loads coincide with variations in annual discharge. The lowest nutrients loads were estimated in 2006, 2011, and 2013 coinciding with drought conditions in the area. Conversely, high loadings occurred in 2007, 2015, 2016, and 2017. The flow-normalized estimates of TP loads show no or small annual variation. These results are consistent with model metric results suggesting variation in flow is responsible for much of the observed variation in TP loads. Flow-normalized loads at Lavaca River indicate higher amounts of annual variation suggesting something other than flow is responsible for year to year changes in Lavaca River NO~3~-N loads. Flow normalized NO~3~-N loads at Lake Texana do not show any year to year variation. This may be due to lake processes that attenuate NO~3~-N concentrations and the relatively large variations observed in Lake Texana discharges that ultimately dominate the estimated NO~3~-N loadings.
-
-Figures \@ref(fig:totalno3loads) and \@ref(fig:totaltploads) show the combined NO~3~-N and TP loadings to Lavaca Bay as modeled at the Lavaca River and Lake Texana sites. These figures (and daily loading figures in Appendix B) show high variability in loadings that are driven by flow events. Total annual NO~3~-N loads ranged from 12,574 kg (95% credible intervals = 7,450 kg - 21,422 kg) in 2011 to 794,510 kg (503,865 kg - 1,284,070 kg) in 2007. The mean annual NO~3~-N loading from 2005 through 2020 was 205,405 kg (126,867 kg - 341,569 kg). Total annual TP loads ranged from 7,839 kg (6,780 kg - 9,083 kg) in 2011 to 916,908 kg (776,637 kg - 1,082,196 kg) in 2004. Mean annual TP loading from 2000 through 2020 was 241,681 kg (202,284 kg - 289,386 kg). On average, discharge at Lake Texana is responsible for about 74% of NO~3~-N loading and 60% of TP loading. However, during drought years the Lavaca River becomes the predominate source of flow and nutrient loadings to Lavaca Bay.
-
-
 
 ```{r annualloads, error=FALSE, message=FALSE, fig.height=6.5, fig.width=6.5, fig.cap="Aggregated estimated annual and flow-normalized annual NO~3~-N and TP loads for Lavaca River (USGS-08164000) and Lake Texana at Palmetto Bend Dam (USGS-08164525)"}
 
@@ -856,16 +894,16 @@ a <- ggplot() +
   geom_linerange(data = load$annually, aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper,
                                        color = "Total Annual Load + 95% Credible Interval")) +
   geom_point(data = fn_load$annually, aes(year, NO3_Estimate,
-                                 color = "Flow Normalized Annual Load + 95% Credible Interval",
-                                 shape = "Flow Normalized Annual Load + 95% Credible Interval")) +
+                                 color = "Flow-Normalized Annual Load + 95% Credible Interval",
+                                 shape = "Flow-Normalized Annual Load + 95% Credible Interval")) +
   geom_line(data = fn_load$annually,
             aes(x = year, y = NO3_Estimate,
-                color = "Flow Normalized Annual Load + 95% Credible Interval",
-                linetype = "Flow Normalized Annual Load + 95% Credible Interval"),
+                color = "Flow-Normalized Annual Load + 95% Credible Interval",
+                linetype = "Flow-Normalized Annual Load + 95% Credible Interval"),
             alpha = 0.5) +
   geom_linerange(data = fn_load$annually,
                  aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper,
-                     color = "Flow Normalized Annual Load + 95% Credible Interval")) +
+                     color = "Flow-Normalized Annual Load + 95% Credible Interval")) +
   labs(x = "", y = "Annual NO<sub>3</sub>-N Load [kg]", subtitle = "USGS-08164000, Lavaca River") +
   scale_shape_manual(name = "values",
                      values = c(21, 19)) +
@@ -899,16 +937,16 @@ b <- ggplot() +
   geom_linerange(data = load$annually, aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper,
                                        color = "Total Annual Load + 95% Credible Interval")) +
   geom_point(data = fn_load$annually, aes(year, NO3_Estimate,
-                                 color = "Flow Normalized Annual Load + 95% Credible Interval",
-                                 shape = "Flow Normalized Annual Load + 95% Credible Interval")) +
+                                 color = "Flow-Normalized Annual Load + 95% Credible Interval",
+                                 shape = "Flow-Normalized Annual Load + 95% Credible Interval")) +
   geom_line(data = fn_load$annually,
             aes(x = year, y = NO3_Estimate,
-                color = "Flow Normalized Annual Load + 95% Credible Interval",
-                linetype = "Flow Normalized Annual Load + 95% Credible Interval"),
+                color = "Flow-Normalized Annual Load + 95% Credible Interval",
+                linetype = "Flow-Normalized Annual Load + 95% Credible Interval"),
             alpha = 0.5) +
   geom_linerange(data = fn_load$annually,
                  aes(x = year, ymin = NO3_Lower, ymax = NO3_Upper,
-                     color = "Flow Normalized Annual Load + 95% Credible Interval")) +
+                     color = "Flow-Normalized Annual Load + 95% Credible Interval")) +
   labs(x = "", y = "Annual NO<sub>3</sub>-N Load [kg]", subtitle = "USGS-08164525, Lake Texana/Navidad River") +
   scale_shape_manual(name = "values",
                      values = c(21, 19)) +
@@ -940,16 +978,16 @@ c <- ggplot() +
   geom_linerange(data = load$annually, aes(x = year, ymin = TP_Lower, ymax = TP_Upper,
                                        color = "Total Annual Load + 95% Credible Interval")) +
   geom_point(data = fn_load$annually, aes(year, TP_Estimate,
-                                 color = "Flow Normalized Annual Load + 95% Credible Interval",
-                                 shape = "Flow Normalized Annual Load + 95% Credible Interval")) +
+                                 color = "Flow-Normalized Annual Load + 95% Credible Interval",
+                                 shape = "Flow-Normalized Annual Load + 95% Credible Interval")) +
   geom_line(data = fn_load$annually,
             aes(x = year, y = TP_Estimate,
-                color = "Flow Normalized Annual Load + 95% Credible Interval",
-                linetype = "Flow Normalized Annual Load + 95% Credible Interval"),
+                color = "Flow-Normalized Annual Load + 95% Credible Interval",
+                linetype = "Flow-Normalized Annual Load + 95% Credible Interval"),
             alpha = 0.5) +
   geom_linerange(data = fn_load$annually,
                  aes(x = year, ymin = TP_Lower, ymax = TP_Upper,
-                     color = "Flow Normalized Annual Load + 95% Credible Interval")) +
+                     color = "Flow-Normalized Annual Load + 95% Credible Interval")) +
   labs(x = "", y = "Annual TP Load [kg]", subtitle = "USGS-08164000, Lavaca River") +
   scale_shape_manual(name = "values",
                      values = c(21, 19)) +
@@ -982,16 +1020,16 @@ d <- ggplot() +
   geom_linerange(data = load$annually, aes(x = year, ymin = TP_Lower, ymax = TP_Upper,
                                        color = "Total Annual Load + 95% Credible Interval")) +
   geom_point(data = fn_load$annually, aes(year, TP_Estimate,
-                                 color = "Flow Normalized Annual Load + 95% Credible Interval",
-                                 shape = "Flow Normalized Annual Load + 95% Credible Interval")) +
+                                 color = "Flow-Normalized Annual Load + 95% Credible Interval",
+                                 shape = "Flow-Normalized Annual Load + 95% Credible Interval")) +
   geom_line(data = fn_load$annually,
             aes(x = year, y = TP_Estimate,
-                color = "Flow Normalized Annual Load + 95% Credible Interval",
-                linetype = "Flow Normalized Annual Load + 95% Credible Interval"),
+                color = "Flow-Normalized Annual Load + 95% Credible Interval",
+                linetype = "Flow-Normalized Annual Load + 95% Credible Interval"),
             alpha = 0.5) +
   geom_linerange(data = fn_load$annually,
                  aes(x = year, ymin = TP_Lower, ymax = TP_Upper,
-                     color = "Flow Normalized Annual Load + 95% Credible Interval")) +
+                     color = "Flow-Normalized Annual Load + 95% Credible Interval")) +
   labs(x = "", y = "Annual TP Load [kg]", subtitle = "USGS-08164525, Lake Texana/Navidad River") +
   scale_shape_manual(name = "values",
                      values = c(21, 19)) +
@@ -1024,6 +1062,181 @@ layout <- "
 a + b + c + d + guide_area() + plot_layout(guides = 'collect', design = layout)
 ```
 
+Appendix B includes plots of daily, monthly, and annual loads and flow-normalized loads for each site and parameter. 
+Figure \@ref(fig:annualloads) shows annual and flow-normalized annual loads with 95% credible intervals at USGS-08164000 (Lavaca River) and USGS-08164525 (Lake Texana). 
+For both nutrient parameters, high variations in annual loads coincide with variations in annual discharge. 
+The lowest nutrients loads were estimated in 2006, 2011, and 2013 coinciding with drought conditions in the area. 
+Conversely, high loadings occurred in 2007, 2015, 2016, and 2017. 
+The flow-normalized estimates of TP loads show no or small annual variation. 
+These results are consistent with model metric results suggesting variation in flow is responsible for much of the observed variation in TP loads. 
+Flow-normalized loads at Lavaca River indicate higher amounts of annual variation suggesting something other than flow is responsible for year-to-year changes in Lavaca River NO~3~-N loads. 
+flow-normalized NO~3~-N loads at Lake Texana do not show any year-to-year variation. 
+This may be due to lake processes that attenuate NO~3~-N concentrations and the relatively large variations observed in Lake Texana discharges that ultimately dominate the estimated NO~3~-N loadings.
+
+
+Figures \@ref(fig:fntrend-lav) and \@ref(fig:fntrend-nav) show the deviation of flow-normalized nutrient estimates from the mean. 
+The vertical lines indicate the 95% credible intervals of the flow-normalized estimates, and we can infer that years where the credible intervals do not overlap zero are significantly different than average. 
+Lavaca River annual flow-normalized NO~3~-N loads were higher than average in 2008 and 2009 and lower than average 2017 through 2020. 
+Overall, a 59% reduction in flow-normalized NO~3~-N loads were estimated from 2005 through 2020 in the Lavaca River. Conversely, no significant changes in annual flow-normalized TP loads were estimated in the Lavaca River.
+No significant changes were detected for annual flow-normalized NO~3~-N loads at Lake Texana.
+Annual flow-normalized TP loads at Lake Texana were significantly higher than the mean from 2000 through 2003 and we estimated a 23% reduction in flow-normalized TP loads from Lake Texana from 2000 through 2020. 
+
+
+```{r fntrend-lav, fig.height=3.5, fig.width=6.5, fig.cap="Deviation of annual log flow-normalized (a) NO~3~-N and (b) TP loads from the mean at Lavaca River."}
+fn_load <- tar_read(daily_no3_08164000_fn, store = store)
+a <- fn_load$annually[fn_load$annually$year == 2005,]$NO3_Estimate
+b <- fn_load$annually[fn_load$annually$year == 2020,]$NO3_Estimate
+
+
+percent_change <- round((b-a)/a,2) * 100
+prefix <- if (percent_change < 0) {"-"} else {"+"}
+percent_change <- abs(percent_change)
+
+df <- fn_load$annually
+NO3_u <- mean(df$NO3_Estimate)
+
+p1 <- ggplot(df) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             alpha = 0.7) +
+  geom_point(aes(year, log(NO3_Estimate) - log(NO3_u)),
+             color = "#1A3399") +
+  geom_linerange(aes(year, ymin = log(NO3_Lower)-log(NO3_u), ymax = log(NO3_Upper)-log(NO3_u)),
+                 color = "#1A3399") +
+  ggrepel::geom_text_repel(data = df |> filter(year == 2020),
+                            aes(year, log(NO3_Estimate) - log(NO3_u)),
+                            label = paste0(prefix, percent_change, "% \n compared to 2005"),
+                           direction = "y", hjust = "left",
+                           nudge_x = 1,
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
+  scale_y_continuous(expand = expansion(mult = 0.5)) +
+  labs(x = "", y = expression(paste("Centered ", log(hat(y))))) +
+  theme_TWRI_print() +
+  theme(plot.subtitle = element_markdown())
+
+
+fn_load <- tar_read(daily_tp_08164000_fn, store = store)
+
+
+a <- fn_load$annually[fn_load$annually$year == 2000,]$TP_Estimate
+b <- fn_load$annually[fn_load$annually$year == 2020,]$TP_Estimate
+
+
+percent_change <- round((b-a)/a,2) * 100
+prefix <- if (percent_change < 0) {"-"} else {"+"}
+percent_change <- abs(percent_change)
+
+df <- fn_load$annually
+TP_u <- mean(df$TP_Estimate)
+
+p2 <- ggplot(df) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             alpha = 0.7) +
+  geom_point(aes(year, log(TP_Estimate) - log(TP_u)),
+             color = "#1A3399") +
+  geom_linerange(aes(year, ymin = log(TP_Lower)-log(TP_u), ymax = log(TP_Upper)-log(TP_u)),
+                 color = "#1A3399") +
+  ggrepel::geom_text_repel(data = df |> filter(year == 2020),
+                           aes(year, log(TP_Estimate) - log(TP_u)),
+                           label = paste0(prefix, percent_change, "% \n compared to 2000"),
+                           direction = "y", hjust = "left",
+                           nudge_x = 1, nudge_y = .25,
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
+  scale_y_continuous(expand = expansion(mult = 0.5)) +
+  labs(x = "", y = expression(paste("Centered ", log(hat(y))))) +
+  theme_TWRI_print() +
+  theme(plot.subtitle = element_markdown())
+
+p1 / p2 + plot_annotation(tag_levels = 'a')
+
+```
+
+
+```{r fntrend-nav, fig.height=3.5, fig.width=6.5, fig.cap="Deviation of annual log flow-normalized (a) NO~3~-N and (b) TP loads from the mean at Lake Texana."}
+
+fn_load <- tar_read(daily_no3_texana_fn, store = store)
+a <- fn_load$annually[fn_load$annually$year == 2005,]$NO3_Estimate
+b <- fn_load$annually[fn_load$annually$year == 2020,]$NO3_Estimate
+
+percent_change <- round((b-a)/a,2) * 100
+prefix <- if (percent_change < 0) {"-"} else {"+"}
+percent_change <- abs(percent_change)
+
+df <- fn_load$annually
+NO3_u <- mean(df$NO3_Estimate)
+
+p1 <- ggplot(df) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             alpha = 0.7) +
+  geom_point(aes(year, log(NO3_Estimate) - log(NO3_u)),
+             color = "#1A3399") +
+  geom_linerange(aes(year, ymin = log(NO3_Lower)-log(NO3_u), ymax = log(NO3_Upper)-log(NO3_u)),
+                 color = "#1A3399") +
+  ggrepel::geom_text_repel(data = df |> filter(year == 2020),
+                           aes(year, log(NO3_Estimate) - log(NO3_u)),
+                            label = paste0(prefix, percent_change, "% \n compared to 2005"),
+                           direction = "y", hjust = "left",
+                           nudge_x = 1,
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
+  scale_y_continuous(expand = expansion(mult = 0.5)) +
+  labs(x = "", y = expression(paste("Centered ", log(hat(y))))) +
+  theme_TWRI_print() +
+  theme(plot.subtitle = element_markdown())
+ 
+fn_load <- tar_read(daily_tp_texana_fn, store = store)
+
+
+a <- fn_load$annually[fn_load$annually$year == 2000,]$TP_Estimate
+b <- fn_load$annually[fn_load$annually$year == 2020,]$TP_Estimate
+
+
+percent_change <- round((b-a)/a,2) * 100
+prefix <- if (percent_change < 0) {"-"} else {"+"}
+percent_change <- abs(percent_change)
+
+df <- fn_load$annually
+TP_u <- mean(df$TP_Estimate)
+
+p2 <- ggplot(df) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             alpha = 0.7) +
+  geom_point(aes(year, log(TP_Estimate) - log(TP_u)),
+             color = "#1A3399") +
+  geom_linerange(aes(year, ymin = log(TP_Lower)-log(TP_u), ymax = log(TP_Upper)-log(TP_u)),
+                 color = "#1A3399") +
+  ggrepel::geom_text_repel(data = df |> filter(year == 2020),
+                           aes(year, log(TP_Estimate) - log(TP_u)),
+                           label = paste0(prefix, percent_change, "% \n compared to 2000"),
+                           direction = "y", hjust = "left",
+                           nudge_x = 1, nudge_y = -0.25,
+                           family = "OpenSansCondensed_TWRI",
+                           size = 3) +
+  scale_x_continuous(expand = expansion(mult = c(0.05, 0.30))) +
+  scale_y_continuous(expand = expansion(mult = 0.5)) +
+  labs(x = "", y = expression(paste("Centered ", log(hat(y))))) +
+  theme_TWRI_print() +
+  theme(plot.subtitle = element_markdown())
+
+p1 / p2 + plot_annotation(tag_levels = 'a')
+```
+
+Figures \@ref(fig:totalno3loads) and \@ref(fig:totaltploads) show the combined NO~3~-N and TP loadings to Lavaca Bay as modeled at the Lavaca River and Lake Texana sites. 
+These figures (and daily loading figures in Appendix B) show high variability in loadings that are driven by flow events. 
+Total annual NO~3~-N loads ranged from 12,574 kg (95% credible intervals = 7,450 kg - 21,422 kg) in 2011 to 794,510 kg (503,865 kg - 1,284,070 kg) in 2007. 
+The mean annual NO~3~-N loading from 2005 through 2020 was 205,405 kg (126,867 kg - 341,569 kg). 
+Total annual TP loads ranged from 7,839 kg (6,780 kg - 9,083 kg) in 2011 to 916,908 kg (776,637 kg - 1,082,196 kg) in 2004. 
+Mean annual TP loading from 2000 through 2020 was 241,681 kg (202,284 kg - 289,386 kg). 
+On average, discharge at Lake Texana is responsible for about 74% of NO~3~-N loading and 60% of TP loading.
+However, during drought years the Lavaca River becomes the predominate source of flow and nutrient loadings to Lavaca Bay.
 
 
 ```{r totalno3loads, error=FALSE, message=FALSE, warning=FALSE, fig.height=7, fig.width=6.5, fig.cap="Summary of monthly and annual total delivered NO~3~-N loads."}
@@ -1320,12 +1533,12 @@ E
 
 
 
-## Discussion
+# Discussion
 
 
 This study faced two primary challenges for developing reliable estimates of nutrient loads; (1) relatively sparse nutrient concentration data collected approximately quarterly, and (2) application of statistical modelling approaches at a dam discharge site. Cross validation indicated GAMs performed well for predicting observed data at the mainstem Lavaca River and Lake Texana site. In comparison to annual average yields calculated in other studies, we found our results for TP yields across the entire watershed comparable to recent studies (Table \@ref(tab:tpcomp)). @wiseSpatiallyReferencedModels2019 and @omaniEstimationSedimentNutrient2014 use a hybrid statistical model and mechanistic approach respectively and provde very similar results that increase the confidence in the reliability of the results in the current study. 
 
-Lower model performance at sites above Lake Texana suggest that higher resolution nutrient concentration data is needed to develop reliable estimates of nutrient loads. Under some conditions the log-linear relationship between streamflow and nutrient load, that is the underlying basis of the applied statistical approach, fail in these watersheds (East Mustang Creek and Sandy Creek in particular). East Mustang Creek has two upstream wastewater discharges (although no available daily nutrient discharge data) that might elevate insteam nutrient concentrations under lower flow conditions, although not obvious relationships were discovered between quarterly reported discharges and measured instream concentration data. Compared to the Lavaca and Navidad Rivers, both East Mustang Creek and Sandy Creek watersheds are dominated by cropped agricultural fields with little riparian buffer. Timing of fertilizer applications and precipitation may also have an unaccounted influence on instream nutrient concentrations. Finally, in these smaller streams, gro/undwater influence at low streamflows may have another unaccounted contribution to nutrient concentrations. 
+Lower model performance at sites above Lake Texana suggest that higher resolution nutrient concentration data is needed to develop reliable estimates of nutrient loads. Under some conditions the log-linear relationship between streamflow and nutrient load, that is the underlying basis of the applied statistical approach, fail in these watersheds (East Mustang Creek and Sandy Creek in particular). East Mustang Creek has two upstream wastewater discharges (although no available daily nutrient discharge data) that might elevate insteam nutrient concentrations under lower flow conditions, although not obvious relationships were discovered between quarterly reported discharges and measured instream concentration data. Compared to the Lavaca and Navidad Rivers, both East Mustang Creek and Sandy Creek watersheds are dominated by cropped agricultural fields with little riparian buffer. Timing of fertilizer applications and precipitation may also have an unaccounted influence on instream nutrient concentrations. Finally, in these smaller streams, groundwater influence at low streamflows may have another unaccounted contribution to nutrient concentrations. 
 
 
 ```{r tpcomp}
@@ -1372,11 +1585,11 @@ ft
 The flexibility of the GAM approach allowed us to easily incorporate inflow based covariates at the Lake Texana site and antecedent discharge conditions at all sites. Model summaries (Appendix A) indicate many of these covariates provide explanatory information. Another advantage of the GAM approach is the ability to use different exponential families for the conditional response. We used the Gaussian distribution with a log link in this study based on exploratory work that found that Tobit I and censored Gamma families did not perform as well. However, due to the prevalence of left-censored data future work should investigate the use of families that accommodate censored responses not only to improve predictive ability, but to better align with best practices when utilizing censored data [@helselFabricatingDataHow2006].
 
 
-### Lavaca Bay Nutrient Loading
+## Lavaca Bay Nutrient Loading
 
 Both NO~3~-N and TP loadings show high annual, monthly, and daily variability driven by the amount of freshwater discharge in the system. Discharge as measured at the Lavaca River USGS gauge is largely unmodified and representative a fairly natural system with minimal withdrawls, wastewater contributions, or dams. Conversely, the Palmetto Bend Dam forming Lake Texana on the Navidad River is representative of a managed highly regulated system. On average, the Navidad River/Lake Texana dishcharge contribute 74% of NO~3~-N and 60% of TP loadings to Lavaca Bay from the Lavaca River/Navidad river system. The Lavaca and Navidad watersheds account for approximately 73% of the Lavaca Bay watershed land area. Additional nutrient contributions to Lavaca Bay from the Garcitas Creek, Placedo Creek, and Cox Bay watersheds are not accounted for due to lack of measured nutrient concentration data in those watersheds. 
 
-### Data Gaps
+## Data Gaps
 
 
 ```{r bias, message=FALSE, error=FALSE, warning=FALSE, fig.height=3, fig.width=6.5, fig.cap="Comparisons of (a) in-sample and out-of-sample mean daily discharge and (b) predicted daily TP fluxes (for both sampled and non-sampled days) and measured daily TP fluxes at Lavaca River (USGS-08164000)."}
@@ -1388,16 +1601,44 @@ The additional 5-years of TP data result in much smaller credible intervals for 
 
 High flow conditions are responsible for most of total nutrient loadings in watersheds. In order to develop accurate estimates of high flow loadings using regression-based approaches, supplemental flow-biased nutrient concentration data should be collected to supplement existing data. Figure \@ref(fig:bias)-b shows the distribution of predicted daily TP flux and observed flux at Lavaca River (USGS-08164000). The distribution of observed daily fluxes shows that there are no measured observations of extreme nutrient loading events (greater than 1.5 times the 75 percentile). This makes it impossible to confirm the accuracy of important high load events. The importance of including flow-biased or storm sampling in regression-based load estimates has been confirmed by @vieuxNutrientLoadingAssessment2003; @snelderEstimationCatchmentNutrient2017; and @zhang_improving_2017.
 
-NO~3~-N represents an inorganic highly soluble form of nitrogen often associated with agricultural runoff. However, it is not the only form of nitrogen that should be considered. Total Nitrogen (TN) which quantifies organic and inorganic nitrogen forms as well as TKN which quantifies forms of organic nitrogen are not included in the current study because of insufficient data. Recent monitoring efforts in the watershed now include a full suite of nutrient parameters to better estimate sources, but developing load estimates from these measurements is still several years away. 
+NO~3~-N represents an inorganic highly soluble form of nitrogen often associated with agricultural runoff. However, it is not the only form of nitrogen that should be considered. TN which quantifies organic and inorganic nitrogen forms as well as TKN which quantifies forms of organic nitrogen are not included in the current study because of insufficient data. Recent monitoring efforts in the watershed now include a full suite of nutrient parameters to better estimate sources, but developing load estimates from these measurements is still several years away. Developing long-term load estimates of these different forms of nitrogen will be important to linking water quality changes in Lavaca Bay to upstream land use.
+
+# Conclusion
+
+This project used GAMs, a statistical regression-based approach, to model nutrient concentration and streamflow relationships. The flexible nature of the approach proved useful for modeling non-linear relationships and incorporation of additional covariates that are more difficult to add using commonly available models. Using GAMs, estimates of daily, monthly, and annual NO~3~-N and TP loads were developed along with flow-normalized estimates that provide evidence of changes in nutrient loading normalized for changes in streamflow. Cross-validation methods were used to evaluate the performance of these models and indicate that the two main sites (Lavaca River near Edna and Lake Texana at Palmetto Bend Dam) performed well. However, performance at some of the upstream sites (East Mustang Creek and Sandy Creek in particular) was inconsistent and occasionally unacceptable for some paramter-site combinations. To develop reliable loadings estimates at smaller watersheds increased sampling frequency is required. For all sites, additional flow-biased monitoring is needed to properly characterize and evalute high-flow loading events which are responsible to the majority of loading in smaller coastal watersheds. While on-going work in these watersheds is filling gaps related to missing nutrient parameters (TN and TKN in particular) additional efforts at filling in data gaps along the range of flow conditions needs to be pursued. 
+
+```{r}
+## leave in, starts new word document section
+## after table of abbreviations
+block_section(prop_section(type = "nextPage",
+                           page_margins = page_mar(bottom = 1,
+                                                   top = 1,
+                                                   right = 1,
+                                                   left = 1,
+                                                   header = 0.5,
+                                                   footer = 0.5,
+                                                   gutter = 0.5
+                                                   )))
+
+```
 
 # Bibliography {-}
 
 <div id="refs"></div>
 
 ```{r}
-## leave in, ends word document section
+## leave in, starts new word document section
 ## after table of abbreviations
-block_section(prop_section(type = "nextPage"))
+block_section(prop_section(type = "nextPage",
+                           page_margins = page_mar(bottom = 1,
+                                                   top = 1,
+                                                   right = 1,
+                                                   left = 1,
+                                                   header = 0.5,
+                                                   footer = 0.5,
+                                                   gutter = 0.5
+                                                   )))
+
 ```
 
 # Appendix A: Model Assessment Results {- #appA}

@@ -1047,6 +1047,9 @@ list(
   
   ## Report Figures
   tar_target(report_map,
-             study_area_map())
+             study_area_map()),
+  
+  tar_target(fw_site_map,
+             fw_study_area_map())
   
 )
