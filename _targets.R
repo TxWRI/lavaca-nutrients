@@ -8,6 +8,7 @@ source("R/FIGURES.R")
 source("R/LOADESTIMATE.R")
 source("R/prediction_gams.R")
 source("R/write_files.R")
+source("R/spatial_outputs.R")
 options(tidyverse.quiet = TRUE)
 targets::tar_option_set(packages = c("adc", 
                                      "arrow", 
@@ -1050,6 +1051,10 @@ list(
              study_area_map()),
   
   tar_target(fw_site_map,
-             fw_study_area_map())
+             fw_study_area_map()),
+  
+  ## spatial outputfiles
+  tar_target(arc_outputs,
+             generate_geopackage() )
   
 )
