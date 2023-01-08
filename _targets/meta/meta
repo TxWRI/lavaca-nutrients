@@ -1,5 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|d0331c46369f163b|||||||||||||||
+.Random.seed|object|90642925e5c4a353|||||||||||||||
 adjust_lbay_inflow|function|61bff3e41cf72381|||||||||||||||
 aggregate_no3_08164000|stem|2a0194757c72a0c9|092ac21a21804b44|aae8575af4be4ffe|1197344138||t19269.5943668149s|f1a7c7dfc13860de|5753|rds|local|vector|||2.46||
 aggregate_no3_08164000_fn|stem|9947fbf606b5161b|872f19fb8c30cbda|60ee806239609bff|1575889202||t19269.8563011101s|c2d292eb6cbc57a8|662|rds|local|vector|||40.79||
@@ -8,7 +8,8 @@ aggregate_no3_texana_fn|stem|e306a6a6d27582ee|5aaa9934b39e576c|0ee96981647f06e5|
 aggregate_tp_08164000|stem|887d32c6206e98e4|6508a4d11e560f20|9f1a5f8d156bd929|1340307491||t19269.5945034901s|87f781d26e3e3a6c|7433|rds|local|vector|||2.47||
 aggregate_tp_08164000_fn|stem|a2864a0d440a797f|857d96549dd6401c|088540c5eda480b6|547910472||t19269.8865305197s|5804f0d9761a796e|792|rds|local|vector|||51.51||
 aggregate_tp_texana|stem|12d5075ddf0d49b0|0b3ee813834492d5|d8b8e4454c24713f|-1672247710||t19270.6508679449s|8a2093c15570fd6a|7474|rds|local|vector|||4.01||
-assess_gams|stem|6e9f6bc77976826c|ce581e80f35d9266|0c71511873f0f82b|1747001805|reports/model_assessment/model_assessment.pdf*reports/model_assessment/model_assessment.qmd|t19339.9255681958s|e66cd97b77bf4f35|5241640|file|local|vector|||98.18||
+arc_outputs|stem|794be3614d98cc38|050adb2bcadee117|13e7e3b7163381aa|1878525480||t19364.8210489004s||44|rds|local|vector|||6.01|package FedData was built under R version 4.2.2. package flextable was built under R version 4.2.2. package ggspatial was built under R version 4.2.2. package rcartocolor was built under R version 4.2.2|Dataset already exists.
+assess_gams|stem|6e9f6bc77976826c|ce581e80f35d9266|0c71511873f0f82b|1747001805|reports/model_assessment/model_assessment.pdf*reports/model_assessment/model_assessment.qmd|t19364.7886374216s|e66cd97b77bf4f35|5241640|file|local|vector|||98.18||
 bias_plot_no3_08164000|stem|a643974fa6057859|00e4d4a757c8c8dd|dcbd53cf57d02bb5|482313316||t19339.8977572758s|4ba9e9dc6544b9e1|5916262|rds|local|vector|||0.12||
 bias_plot_no3_08164390|stem|3ce2f3e63c2cc4ac|e5e0f3d07ef2a530|855e95b9d6bb605f|834680645||t19297.8549168915s|063510f5ae5a609d|5850426|rds|local|vector|||0.09||
 bias_plot_no3_08164450|stem|27aa1f7b923cef64|2a54726502f931ae|7425ea0a37bcaf84|885703178||t19339.914950835s|b38d246845cce2a9|5892230|rds|local|vector|||0.06||
@@ -91,14 +92,15 @@ fw_site_map|stem|d719095cb24e31cd|a4090be3c370e17f|a7b066048c0c1701|-1624331245|
 fw_study_area_map|function|00b9a202b9a0d879|||||||||||||||
 gam_b_texana|function|0f78d4a5f9b3c1a4|||||||||||||||
 gam_gt|function|6242730db0008a59|||||||||||||||
+generate_geopackage|function|37031fafe0f2ba5b|||||||||||||||
 glance_gam|function|9095294fc6f2837c|||||||||||||||
 lbay_adj_flow|stem|c7856fa451216c08|6bef2daae72444f9|929f1133d6c02067|956242332||t19297.8519785869s|2906638d22c1a37d|347771|rds|local|vector|||0.93||
 lbay_inflow|stem|3518d0378a6a7d7c|2eca8e387167f11e|f1cc99c02ab41781|1642059168||t19297.8519636696s|f851b6351be831b0|129266|rds|local|vector|||6.28||
 lbay_wq_data|stem|e11d1249b5cb79d2|a790ba851c2f6cdb|b01ef8c6368ddf31|766578060||t19297.851966805s|899d81b0b2d808f9|13572|rds|local|vector|||0.2||
 load_est_wq_data|function|ccc2049e06ca1b35|||||||||||||||
 load_lb_inflow|function|7278b8118bf16086|||||||||||||||
-loading_estimates|stem|c9b81a7b82b765f2|752c21967dca6877|5a0ab0ead4242f37|517997492|reports/load_estimates/load_estimates.pdf*reports/load_estimates/load_estimates.qmd|t19340.7566597033s|de10d89a5c94757a|690118|file|local|vector|||29.12||
-loads_to_csv|function|fec750e45cc4b2a9|||||||||||||||
+loading_estimates|stem|c9b81a7b82b765f2|752c21967dca6877|5a0ab0ead4242f37|517997492|reports/load_estimates/load_estimates.pdf*reports/load_estimates/load_estimates.qmd|t19364.7886365472s|de10d89a5c94757a|690118|file|local|vector|||29.12||
+loads_to_csv|function|a307a5d560b531a5|||||||||||||||
 model_assessment|stem|0793ae30842f93a4|1881fa312ed576b6|6f2031f3d7d098c9|-1812040338||t19249.5920617242s|feb37e835b5de44c|2129|rds|local|vector|||5.15||
 model_censored|function|fd906887ee99a78c|||||||||||||||
 model_data|stem|96aa0e80fab2699f|452f2495861757a3|ec3e33480e4c687a|-495503059||t19284.8286753582s|78c6647d7a00fe71|1956033|rds|local|vector|||15.67||
@@ -177,16 +179,16 @@ tp_lavaca_13563_time|stem|68c0873efeaeebdb|d3570ed7dc9ac110|633762be8947197c|111
 tp_lavaca_prediction_data|stem|55d5ad4329065f85|3dbc5bcfd9c570bf|c9d51b2d8ad5b017|-336535745||t19339.9053807331s|4a9b6da088a4a54c|253854|rds|local|vector|||0.03||
 tp_texana|stem|5efab5a31d3a7dd9|3e7539d9701f5ea5|78f60f9244d80bc6|380152123||t19284.8287880095s|6c82d571d77b5347|2065259|rds|local|vector|||1.33||
 wqpdata|stem|5d59fc4d1e4dde01|6efa7de142df38dd|5859807407b5ed6f|-910500034||t19284.8284915772s|a5228c2f07dc2025|14057|rds|local|vector|||4.1||
-write_annual_no3|stem|f0b509fc1fc9d78d|ea9c66cc5e63f1cb|3c302c875dfc8f02|-1738329536|data/Output/annual_loads/no3_annual_loads.csv|t19340.7562754165s|d615d14021313735|7231|file|local|vector|||4.05||
-write_annual_no3_flow_normalized|stem|b54bb0e294726c4a|7c4c326ebdc1a21c|ff3e262bb3c22c0e|484507969|data/Output/annual_loads/no3_annual_loads_flow_normalized.csv|t19340.7566832358s|a60cede9c01bd648|7254|file|local|vector|||0.59||
-write_annual_tp|stem|1fe4c20f6c995b64|821fe8f137d79884|0d52fe0bfb4fe5de|-403313373|data/Output/annual_loads/tp_annual_loads.csv|t19340.7560481548s|e4d778d88ebc55a3|9473|file|local|vector|||4.32||
-write_annual_tp_fn|stem|4a3d7bb4768cfbe1|7ecdbc0f4633e589|5f46b6fb92501861|-118309477|data/Output/annual_loads/tp_annual_loads_flow_normalized.csv|t19340.7561580854s|9258632ca86d254a|9470|file|local|vector|||0.64||
+write_annual_no3|stem|f53c6f5f663ad287|ea9c66cc5e63f1cb|7c76941211ebcf23|-1738329536|data/Output/annual_loads/no3_annual_loads.csv|t19364.8014429274s|df4004796a20c6a3|7263|file|local|vector|||4.51||
+write_annual_no3_flow_normalized|stem|23c2a6b35158f190|7c4c326ebdc1a21c|8c46b57d6864a872|484507969|data/Output/annual_loads/no3_annual_loads_flow_normalized.csv|t19364.8015525311s|202d09a57861d38f|7286|file|local|vector|||0.56||
+write_annual_tp|stem|779cc56bb5f42938|821fe8f137d79884|72a23fb1a505bcc8|-403313373|data/Output/annual_loads/tp_annual_loads.csv|t19364.8012373808s|8d270651b35ee95a|9515|file|local|vector|||4.97||
+write_annual_tp_fn|stem|30e92437bc6d6dfc|7ecdbc0f4633e589|0f7e8d6e26f5dc5c|-118309477|data/Output/annual_loads/tp_annual_loads_flow_normalized.csv|t19364.8011055341s|c7af22425d061fff|9512|file|local|vector|||0.6||
 write_daily|stem|e1b552e5dee995bc|c057522275cd3b6e|fb7e3895d27c0a2b|-1685729964|data/Output/daily_loads/tp_daily_loads.csv|t19300.6320112998s||1744442|file|local|vector|||3.49||31mtarget daily_tp_08164543 not found39m
-write_daily_no3|stem|a5c50899a9089fe0|7fce1fe3b5876542|3c302c875dfc8f02|-1596802348|data/Output/daily_loads/no3_daily_loads.csv|t19340.7562278906s|8b9d1a724a2265c5|3931735|file|local|vector|||3.97||
-write_daily_no3_fn|stem|d5293c1ec2d68c13|2fc8eabf4c75c240|ff3e262bb3c22c0e|1326845230|data/Output/daily_loads/no3_daily_loads_flow_normalized.csv|t19340.7566685896s|107fca42390e56c0|2833463|file|local|vector|||0.64||
-write_daily_tp|stem|b8ac89516e426744|29f80748caeb56a6|0d52fe0bfb4fe5de|1769517055|data/Output/daily_loads/tp_daily_loads.csv|t19340.7561493591s|e4b19867d9d6dbfa|5135590|file|local|vector|||4.19||
-write_daily_tp_fn|stem|7d8e32ed25043535|785e5bc8c531d545|5f46b6fb92501861|1373431699|data/Output/daily_loads/tp_daily_loads_flow_normalized.csv|t19340.7561660155s|b067975a9c6ddaf9|3717886|file|local|vector|||0.64||
-write_monthly_no3|stem|2787a58fea5cfb76|7774728bcdcfa5d3|3c302c875dfc8f02|1630010425|data/Output/monthly_loads/no3_monthly_loads.csv|t19340.7563223203s|63cd0d1056816228|92282|file|local|vector|||4.03||
-write_monthly_no3_fn|stem|71ce82bc007a7ed3|2064443ab95479b5|ff3e262bb3c22c0e|606819677|data/Output/monthly_loads/no3_monthly_loads_flow_normalized.csv|t19340.7566761599s|3c931467b89ad41b|91945|file|local|vector|||0.61||
-write_monthly_tp|stem|143755510d34c290|f951dbe4ce6646a1|0d52fe0bfb4fe5de|1076444833|data/Output/monthly_loads/tp_monthly_loads.csv|t19340.756097716s|a7364402ee87f72a|120919|file|local|vector|||4.25||
-write_monthly_tp_fn|stem|c7eacf8c3134a039|322780d727da2dd3|5f46b6fb92501861|-1110926690|data/Output/monthly_loads/tp_monthly_loads_flow_normalized.csv|t19340.7561744837s|3e5175578f331e1a|120414|file|local|vector|||0.67||
+write_daily_no3|stem|f724a70996ab1a6b|7fce1fe3b5876542|7c76941211ebcf23|-1596802348|data/Output/daily_loads/no3_daily_loads.csv|t19364.8014922209s|c69a522f4210ea21|3943423|file|local|vector|||4.23||
+write_daily_no3_fn|stem|0575c2753ab6aabc|2fc8eabf4c75c240|8c46b57d6864a872|1326845230|data/Output/daily_loads/no3_daily_loads_flow_normalized.csv|t19364.8015740174s|b1d67304b404b0d4|2845151|file|local|vector|||1.2||
+write_daily_tp|stem|e7ca6be166b36d5f|29f80748caeb56a6|72a23fb1a505bcc8|1769517055|data/Output/daily_loads/tp_daily_loads.csv|t19364.8013426939s|53244da32e3fda88|5150932|file|local|vector|||4.51||
+write_daily_tp_fn|stem|8f5d9900dee4c052|785e5bc8c531d545|0f7e8d6e26f5dc5c|1373431699|data/Output/daily_loads/tp_daily_loads_flow_normalized.csv|t19364.8010981366s|b3b5c658ebdf4e45|3733228|file|local|vector|||1.71||
+write_monthly_no3|stem|c62f36a64c626508|7774728bcdcfa5d3|7c76941211ebcf23|1630010425|data/Output/monthly_loads/no3_monthly_loads.csv|t19364.8015396578s|eb21bde3c9aaa4aa|92666|file|local|vector|||4.06||
+write_monthly_no3_fn|stem|955d8fe19154500e|2064443ab95479b5|8c46b57d6864a872|606819677|data/Output/monthly_loads/no3_monthly_loads_flow_normalized.csv|t19364.8015597665s|41e1be13b6e2ee95|92329|file|local|vector|||0.6||
+write_monthly_tp|stem|1c4b7c09f56f604e|f951dbe4ce6646a1|72a23fb1a505bcc8|1076444833|data/Output/monthly_loads/tp_monthly_loads.csv|t19364.801290101s|4e5a562e02b04697|121423|file|local|vector|||4.53||
+write_monthly_tp_fn|stem|b1529164b916f40f|322780d727da2dd3|0f7e8d6e26f5dc5c|-1110926690|data/Output/monthly_loads/tp_monthly_loads_flow_normalized.csv|t19364.8010780742s|690ba88db2fc65bb|120918|file|local|vector|||0.89||
