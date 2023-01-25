@@ -112,25 +112,24 @@ estuary_gam <- function(formula,
                         model_data,
                         loads,
                         response_parameter,
-                        predictor_parameter = TP_resid,
                         date,
-                        station) {
+                        station,
+                        family = Gamma(link = "log")) {
   
   data <- estuary_gam_data(model_data,
                            loads,
                            response_parameter,
-                           predictor_parameter = TP_resid,
                            date,
                            station)
   
   estuary_gam_model(formula = formula,
-                    data = data)
+                    data = data,
+                    family = family)
 }
 
 estuary_gam_data <- function(model_data,
                              loads,
                              response_parameter,
-                             predictor_parameter = TP_resid,
                              date,
                              station) {
   data <- model_data |> 
@@ -139,16 +138,16 @@ estuary_gam_data <- function(model_data,
     filter(parameter_code == {{response_parameter}}) |> 
     filter(station_id == {{station}}) |> 
     filter(end_date >= as.Date(date)) |> 
-    left_join(loads |> select(Date, {{predictor_parameter}}), 
+    left_join(loads |> select(-c(Discharge)), 
               by = c("end_date" = "Date"))
   data
 }
 
-estuary_gam_model <- function(formula, data) {
+estuary_gam_model <- function(formula, data, family) {
   gam(formula,
       data = data,
       knots = list(day = c(1,366)),
       method = "REML",
       select = TRUE,
-      family = Gamma(link = "log"))
+      family = family)
 }

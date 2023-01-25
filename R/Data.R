@@ -296,7 +296,7 @@ adjust_lbay_inflow <- function(flow) {
   m_flow <- gam(log1p(Discharge) ~ s(day, bs = "cc"),
                 data = flow_out,
                 method = "REML")
-  flow$flw_res <- residuals(m_flow)
+  flow$flw_res <- residuals(m_flow, type = "response")
   
   return(flow)
 }
@@ -314,6 +314,21 @@ load_est_wq_data <- function() {
                                                                                `Composite Type` = col_skip(), Comments = col_skip()), 
                           trim_ws = TRUE) |> 
     janitor::clean_names()
+  
+  df_do <- readr::read_delim("data/SWQM-LavacaBay/SWQM-DO-LavacaBay.txt", 
+                             delim = "|", escape_double = FALSE, col_types = cols(Segment = col_character(), 
+                                                                                  `Station ID` = col_character(), `End Date` = col_date(format = "%m/%d/%Y"), 
+                                                                                  `End Time` = col_skip(), `End Depth` = col_skip(), 
+                                                                                  `Start Date` = col_skip(), `Start Time` = col_skip(), 
+                                                                                  `Start Depth` = col_skip(), `Composite Category` = col_skip(), 
+                                                                                  `Composite Type` = col_skip(), Comments = col_skip()), 
+                             trim_ws = TRUE) |> 
+    janitor::clean_names() |> 
+    group_by(end_date, station_id, station_description, parameter_code, parameter_description) |> 
+    summarize(value = mean(value)) |> 
+    ungroup()
+  df <- dplyr::bind_rows(df, df_do) |> 
+    select(end_date, station_id, station_description, parameter_code, parameter_description, value)
   df
 }
 

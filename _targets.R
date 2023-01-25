@@ -3,7 +3,7 @@ library(targets)
 source("R/Data.R")
 source("R/Models.R")
 source("R/CV.R")
-source("R/gt_functions.R")
+source("R/TABLES.R")
 source("R/FIGURES.R")
 source("R/LOADESTIMATE.R")
 source("R/prediction_gams.R")
@@ -31,6 +31,7 @@ targets::tar_option_set(packages = c("adc",
                                      "kableExtra",
                                      "mgcv",
                                      "modelsummary",
+                                     "MuMIn",
                                      "patchwork", 
                                      "purrr", 
                                      "ragg",
@@ -997,54 +998,555 @@ list(
   ## fit gams
 
   ### TP
-  ## temporal model
+  #### temporal model
   tar_target(tp_lavaca_13563_temporal,
              estuary_gam(formula = value ~
                            s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate) + # trend,
-                           ti(day, ddate, k = c(5,8), bs = c("cc", "tp")),
+                           s(ddate, k = 20), # trend
                          model_data = estuary_model_data,
                          loads = estuary_tp_loads,
                          response_parameter = "00665",
-                         predictor_parameter = TP_resid,
-                         date = "2000-01-02",
+                         date = "2005-01-01",
                          station = "13563")),
 
-    
-  ## flow model
+  tar_target(tp_lavaca_13383_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads,
+                         response_parameter = "00665",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+
+  tar_target(tp_lavaca_13384_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads,
+                         response_parameter = "00665",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+
+
+  ### flow model
   tar_target(tp_lavaca_13563_flow,
              estuary_gam(formula = value ~
-                           s(flw_res) + # explanatory variable
+                           s(flw_res, k = 8) + # explanatory variable
                            s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate) + # trend,
-                           ti(day, ddate, k = c(5,8), bs = c("cc", "tp")),
+                           s(ddate, k = 20), # trend
                          model_data = estuary_model_data,
                          loads = estuary_tp_loads,
                          response_parameter = "00665",
-                         predictor_parameter = TP_resid,
-                         date = "2000-01-02",
-                         station = "13563")),
-  
-  ## full model
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+
+  tar_target(tp_lavaca_13383_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads,
+                         response_parameter = "00665",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+
+  tar_target(tp_lavaca_13384_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads,
+                         response_parameter = "00665",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+
+  ### full model
   tar_target(tp_lavaca_13563_full,
              estuary_gam(formula = value ~
-                           s(flw_res) + # explanatory variable
-                           s(TP_resid) + #explanatory variable
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(TP_resid, k = 8) + #explanatory variable
                            s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate) + # trend,
-                           ti(day, ddate, k = c(5,8), bs = c("cc", "tp")),
+                           s(ddate, k = 20), # trend,
                          model_data = estuary_model_data,
                          loads = estuary_tp_loads,
                          response_parameter = "00665",
-                         predictor_parameter = TP_resid,
-                         date = "2000-01-02",
-                         station = "13563")),
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+
+  tar_target(tp_lavaca_13383_full,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(TP_resid, k = 8) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads,
+                         response_parameter = "00665",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+
+  tar_target(tp_lavaca_13384_full,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(TP_resid, k = 8) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20),  # trend
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads,
+                         response_parameter = "00665",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+
+
+  ### NO3
+  ### notes: we uses nitrate + nitrite as response value because very few nitrate
+  ### measurements in lavaca bay
+  #### temporal model
+  tar_target(no3_lavaca_13563_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20),  # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_no3_loads,
+                         response_parameter = "00630",
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+
+  tar_target(no3_lavaca_13383_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20),  # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_no3_loads,
+                         response_parameter = "00630",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+
+  tar_target(no3_lavaca_13384_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_no3_loads,
+                         response_parameter = "00630",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+
+
+  ### flow model
+  tar_target(no3_lavaca_13563_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_no3_loads,
+                         response_parameter = "00630",
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+
+  tar_target(no3_lavaca_13383_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend
+                         model_data = estuary_model_data,
+                         loads = estuary_no3_loads,
+                         response_parameter = "00630",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+
+  tar_target(no3_lavaca_13384_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_no3_loads,
+                         response_parameter = "00630",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+
+  ### full model
+  tar_target(no3_lavaca_13563_full,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(NO3_resid, k = 8) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_no3_loads,
+                         response_parameter = "00630",
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+
+  tar_target(no3_lavaca_13383_full,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(NO3_resid, k = 8) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_no3_loads,
+                         response_parameter = "00630",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+
+  tar_target(no3_lavaca_13384_full,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(NO3_resid, k = 8) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_no3_loads,
+                         response_parameter = "00630",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+
+  
+  ### chl-a
+  ### measurements in lavaca bay
+  #### temporal model
+  tar_target(chla_lavaca_13563_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "70953",
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+
+  tar_target(chla_lavaca_13383_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "70953",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+
+  tar_target(chla_lavaca_13384_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "70953",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+
+
+  ### flow model
+  tar_target(chla_lavaca_13563_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "70953",
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+
+  tar_target(chla_lavaca_13383_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "70953",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+
+  tar_target(chla_lavaca_13384_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "70953",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+
+  ### full model
+  tar_target(chla_lavaca_13563_full,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(NO3_resid, k = 8) + #explanatory variable
+                           s(TP_resid, k = 8) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20),  # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "70953",
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+
+  tar_target(chla_lavaca_13383_full,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(NO3_resid, k = 8) + #explanatory variable
+                           s(TP_resid, k = 8) + #explanatory variables
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20),  # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "70953",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+
+  tar_target(chla_lavaca_13384_full,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(NO3_resid, k = 8) + #explanatory variable
+                           s(TP_resid, k = 8) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "70953",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+
+  
+  ### DO
+  ### measurements in lavaca bay
+  #### temporal model
+  tar_target(do_lavaca_13563_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00300",
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+  
+  tar_target(do_lavaca_13383_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00300",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+  
+  tar_target(do_lavaca_13384_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00300",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+  
+  
+  ### flow model
+  tar_target(do_lavaca_13563_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00300",
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+  
+  tar_target(do_lavaca_13383_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00300",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+  
+  tar_target(do_lavaca_13384_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00300",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+  
+  ### full model
+  tar_target(do_lavaca_13563_full,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(NO3_resid, k = 8) + #explanatory variable
+                           s(TP_resid, k = 8) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20),  # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00300",
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+  
+  tar_target(do_lavaca_13383_full,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(NO3_resid, k = 8) + #explanatory variable
+                           s(TP_resid, k = 8) + #explanatory variables
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20),  # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00300",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+  
+  tar_target(do_lavaca_13384_full,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(NO3_resid, k = 8) + #explanatory variable
+                           s(TP_resid, k = 8) + #explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00300",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+  
+
+  ### TKN
+  ### measurements in lavaca bay
+  #### temporal model
+  tar_target(tkn_lavaca_13563_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00625",
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+  
+  tar_target(tkn_lavaca_13383_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00625",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+  
+  tar_target(tkn_lavaca_13384_temporal,
+             estuary_gam(formula = value ~
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00625",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+  
+  ### flow model
+  tar_target(tkn_lavaca_13563_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00625",
+                         date = "2005-01-01",
+                         station = "13563",
+                         family = Gamma(link = "log"))),
+  
+  tar_target(tkn_lavaca_13383_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00625",
+                         date = "2005-01-01",
+                         station = "13383",
+                         family = Gamma(link = "log"))),
+  
+  tar_target(tkn_lavaca_13384_flow,
+             estuary_gam(formula = value ~
+                           s(flw_res, k = 8) + # explanatory variable
+                           s(day, k = 5,  bs = "cc") + # seasonal
+                           s(ddate, k = 20), # trend,
+                         model_data = estuary_model_data,
+                         loads = estuary_tp_loads |>  left_join(estuary_no3_loads),
+                         response_parameter = "00625",
+                         date = "2005-01-01",
+                         station = "13384",
+                         family = Gamma(link = "log"))),
+  
+    
   
   ## data for predictions with gams
   tar_target(tp_lavaca_prediction_data,
              estuary_prediction_data(lbay_adj_flow,
                                      estuary_tp_loads,
                                      "2000-01-01")),
+  
+  tar_target(no3_lavaca_prediction_data,
+             estuary_prediction_data(lbay_adj_flow,
+                                     estuary_no3_loads,
+                                     "2005-01-01")),
   
   ## Report Figures
   tar_target(report_map,
@@ -1053,8 +1555,110 @@ list(
   tar_target(fw_site_map,
              fw_study_area_map()),
   
+  tar_target(est_site_map,
+             est_study_area_map()),
+  
+  ## Report tables
+  tar_target(tp_13563,
+             est_model_fits(tp_lavaca_13563_temporal,
+                            tp_lavaca_13563_flow, 
+                            tp_lavaca_13563_full,
+                            site = "TCEQ-13563",
+                            param = "TP")),
+  tar_target(tp_13383,
+             est_model_fits(tp_lavaca_13383_temporal,
+                            tp_lavaca_13383_flow, 
+                            tp_lavaca_13383_full,
+                            site = "TCEQ-13383",
+                            param = "TP")),
+  tar_target(tp_13384,
+             est_model_fits(tp_lavaca_13384_temporal,
+                            tp_lavaca_13384_flow, 
+                            tp_lavaca_13384_full,
+                            site = "TCEQ-13384",
+                            param = "TP")),
+  tar_target(no3_13563,
+             est_model_fits(no3_lavaca_13563_temporal,
+                            no3_lavaca_13563_flow, 
+                            no3_lavaca_13563_full,
+                            site = "TCEQ-13563",
+                            param = "Nitrite+Nitrate")),
+  tar_target(no3_13383,
+             est_model_fits(no3_lavaca_13383_temporal,
+                            no3_lavaca_13383_flow, 
+                            no3_lavaca_13383_full,
+                            site = "TCEQ-13383",
+                            param = "Nitrite+Nitrate")),
+  tar_target(no3_13384,
+             est_model_fits(no3_lavaca_13384_temporal,
+                            no3_lavaca_13384_flow, 
+                            no3_lavaca_13384_full,
+                            site = "TCEQ-13384",
+                            param = "Nitrite+Nitrate")),
+  tar_target(chla_13563,
+             est_model_fits(chla_lavaca_13563_temporal,
+                            chla_lavaca_13563_flow, 
+                            chla_lavaca_13563_full,
+                            site = "TCEQ-13563",
+                            param = "Chlorophyll-a")),
+  tar_target(chla_13383,
+             est_model_fits(chla_lavaca_13383_temporal,
+                            chla_lavaca_13383_flow, 
+                            chla_lavaca_13383_full,
+                            site = "TCEQ-13383",
+                            param = "Chlorophyll-a")),
+  tar_target(chla_13384,
+             est_model_fits(chla_lavaca_13384_temporal,
+                            chla_lavaca_13384_flow, 
+                            chla_lavaca_13384_full,
+                            site = "TCEQ-13384",
+                            param = "Chlorophyll-a")),
+  
+  tar_target(do_13563,
+             est_model_fits(do_lavaca_13563_temporal,
+                            do_lavaca_13563_flow, 
+                            do_lavaca_13563_full,
+                            site = "TCEQ-13563",
+                            param = "DO")),
+  tar_target(do_13383,
+             est_model_fits(do_lavaca_13383_temporal,
+                            do_lavaca_13383_flow, 
+                            do_lavaca_13383_full,
+                            site = "TCEQ-13383",
+                            param = "DO")),
+  tar_target(do_13384,
+             est_model_fits(do_lavaca_13384_temporal,
+                            do_lavaca_13384_flow, 
+                            do_lavaca_13384_full,
+                            site = "TCEQ-13384",
+                            param = "DO")),
+  tar_target(tkn_13563,
+             est_model_fits(tkn_lavaca_13563_temporal,
+                            tkn_lavaca_13563_flow,
+                            NULL,
+                            site = "TCEQ-13563",
+                            param = "TKN")),
+  tar_target(tkn_13383,
+             est_model_fits(tkn_lavaca_13383_temporal,
+                            tkn_lavaca_13383_flow,
+                            NULL,
+                            site = "TCEQ-13383",
+                            param = "TKN")),
+  tar_target(tkn_13384,
+             est_model_fits(tkn_lavaca_13384_temporal,
+                            tkn_lavaca_13384_flow,
+                            NULL,
+                            site = "TCEQ-13384",
+                            param = "TKN")),
+  
   ## spatial outputfiles
-  tar_target(arc_outputs,
-             generate_geopackage() )
+  tar_target(arc_path,
+             command = "data/Output/spatial/loading.gpkg",
+             format = "file")
+  # ,
+  
+  # tar_target(arc_outputs,
+  #            generate_geopackage(arc_path = arc_path),
+  #            format = "file")
   
 )
