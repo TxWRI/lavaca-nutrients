@@ -1007,7 +1007,8 @@ list(
                          loads = estuary_tp_loads,
                          response_parameter = "00665",
                          date = "2005-01-01",
-                         station = "13563")),
+                         station = "13563",
+                         family = Gamma(link = "log"))),
 
   tar_target(tp_lavaca_13383_temporal,
              estuary_gam(formula = value ~
@@ -1114,10 +1115,11 @@ list(
   ### notes: we uses nitrate + nitrite as response value because very few nitrate
   ### measurements in lavaca bay
   #### temporal model
+  
   tar_target(no3_lavaca_13563_temporal,
              estuary_gam(formula = value ~
-                           s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate, k = 20),  # trend,
+                           s(day, k = 6,  bs = "cc") + # seasonal
+                           s(ddate, k = 9, bs = "ts"),
                          model_data = estuary_model_data,
                          loads = estuary_no3_loads,
                          response_parameter = "00630",
@@ -1127,8 +1129,8 @@ list(
 
   tar_target(no3_lavaca_13383_temporal,
              estuary_gam(formula = value ~
-                           s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate, k = 20),  # trend,
+                           s(day, k = 6,  bs = "cc") + # seasonal
+                           s(ddate, k = 9, bs = "ts"),
                          model_data = estuary_model_data,
                          loads = estuary_no3_loads,
                          response_parameter = "00630",
@@ -1138,8 +1140,8 @@ list(
 
   tar_target(no3_lavaca_13384_temporal,
              estuary_gam(formula = value ~
-                           s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate, k = 20), # trend,
+                           s(day, k = 6,  bs = "cc") + # seasonal
+                           s(ddate, k = 9, bs = "ts"),
                          model_data = estuary_model_data,
                          loads = estuary_no3_loads,
                          response_parameter = "00630",
@@ -1151,9 +1153,9 @@ list(
   ### flow model
   tar_target(no3_lavaca_13563_flow,
              estuary_gam(formula = value ~
-                           s(flw_res, k = 8) + # explanatory variable
-                           s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate, k = 20), # trend,
+                           s(flw_res, k = 7, bs = "ts") + # explanatory variable
+                           s(day, k = 6,  bs = "cc") + # seasonal
+                           s(ddate, k = 9, bs = "ts"),  # trend
                          model_data = estuary_model_data,
                          loads = estuary_no3_loads,
                          response_parameter = "00630",
@@ -1163,9 +1165,9 @@ list(
 
   tar_target(no3_lavaca_13383_flow,
              estuary_gam(formula = value ~
-                           s(flw_res, k = 8) + # explanatory variable
-                           s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate, k = 20), # trend
+                           s(flw_res, k = 7, bs = "ts") + # explanatory variable
+                           s(day, k = 6,  bs = "cc") + # seasonal
+                           s(ddate, k = 9, bs = "ts"),  # trend
                          model_data = estuary_model_data,
                          loads = estuary_no3_loads,
                          response_parameter = "00630",
@@ -1175,9 +1177,9 @@ list(
 
   tar_target(no3_lavaca_13384_flow,
              estuary_gam(formula = value ~
-                           s(flw_res, k = 8) + # explanatory variable
-                           s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate, k = 20), # trend,
+                           s(flw_res, k = 7, bs = "ts") + # explanatory variable
+                           s(day, k = 6,  bs = "cc") + # seasonal
+                           s(ddate, k = 9, bs = "ts"),  # trend
                          model_data = estuary_model_data,
                          loads = estuary_no3_loads,
                          response_parameter = "00630",
@@ -1188,10 +1190,10 @@ list(
   ### full model
   tar_target(no3_lavaca_13563_full,
              estuary_gam(formula = value ~
-                           s(flw_res, k = 8) + # explanatory variable
-                           s(NO3_resid, k = 8) + #explanatory variable
-                           s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate, k = 20), # trend,
+                           s(flw_res, k = 7, bs = "ts") + # explanatory variable
+                           s(NO3_resid, k = 8, bs = "ts") + #explanatory variable
+                           s(day, k = 6,  bs = "cc") + # seasonal
+                           s(ddate, k = 9, bs = "ts"),  # trend
                          model_data = estuary_model_data,
                          loads = estuary_no3_loads,
                          response_parameter = "00630",
@@ -1201,10 +1203,10 @@ list(
 
   tar_target(no3_lavaca_13383_full,
              estuary_gam(formula = value ~
-                           s(flw_res, k = 8) + # explanatory variable
-                           s(NO3_resid, k = 8) + #explanatory variable
-                           s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate, k = 20), # trend,
+                           s(flw_res, k = 7, bs = "ts") + # explanatory variable
+                           s(NO3_resid, k = 8, bs = "ts") + #explanatory variable
+                           s(day, k = 6,  bs = "cc") + # seasonal
+                           s(ddate, k = 9, bs = "ts"),  # trend
                          model_data = estuary_model_data,
                          loads = estuary_no3_loads,
                          response_parameter = "00630",
@@ -1214,10 +1216,10 @@ list(
 
   tar_target(no3_lavaca_13384_full,
              estuary_gam(formula = value ~
-                           s(flw_res, k = 8) + # explanatory variable
-                           s(NO3_resid, k = 8) + #explanatory variable
-                           s(day, k = 5,  bs = "cc") + # seasonal
-                           s(ddate, k = 20), # trend,
+                           s(flw_res, k = 7, bs = "ts") + # explanatory variable
+                           s(NO3_resid, k = 8, bs = "ts") + #explanatory variable
+                           s(day, k = 6,  bs = "cc") + # seasonal
+                           s(ddate, k = 9, bs = "ts"),  # trend
                          model_data = estuary_model_data,
                          loads = estuary_no3_loads,
                          response_parameter = "00630",

@@ -328,7 +328,7 @@ load_est_wq_data <- function() {
     summarize(value = mean(value)) |> 
     ungroup()
   df <- dplyr::bind_rows(df, df_do) |> 
-    select(end_date, station_id, station_description, parameter_code, parameter_description, value)
+    select(end_date, station_id, station_description, parameter_code, parameter_description, value, greater_than_less_than)
   df
 }
 

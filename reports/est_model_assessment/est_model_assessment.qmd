@@ -48,6 +48,13 @@ tar_read(tp_lavaca_13563_temporal, store = store)  |>
   gratia::appraise()
 ```
 
+```{r}
+#| echo: false
+#| fig-cap: "Estimated effects temporal TP model TCEQ-13563."
+tar_read(tp_lavaca_13563_temporal, store = store)  |> 
+  gratia::draw()
+```
+
 
 ```{r}
 #| echo: false
@@ -64,6 +71,14 @@ tar_read(tp_lavaca_13563_flow, store = store) |>
 #| fig-cap: "Resdidual diagnostics flow TP model TCEQ-13563."
 tar_read(tp_lavaca_13563_flow, store = store)  |> 
   gratia::appraise()
+```
+
+
+```{r}
+#| echo: false
+#| fig-cap: "Estiamted effects flow TP model TCEQ-13563."
+tar_read(tp_lavaca_13563_flow, store = store)  |> 
+  gratia::draw()
 ```
 
 ```{r}
@@ -683,40 +698,3 @@ tar_read(do_lavaca_13384_full, store = store) |>
 tar_read(do_lavaca_13384_full, store = store)  |> 
   gratia::appraise()
 ```
-
-# Model comparison
-
-Compare the AIC scores.
-
-```{r}
-#| echo: false
-
-flextable::flextable(
-  dplyr::bind_rows(
-    tar_read(tp_13563, store = store), 
-    tar_read(tp_13383, store = store),
-    tar_read(tp_13384, store = store),
-    tar_read(no3_13563, store = store), 
-    tar_read(no3_13383, store = store),
-    tar_read(no3_13384, store = store),
-    tar_read(chla_13563, store = store), 
-    tar_read(chla_13383, store = store),
-    tar_read(chla_13384, store = store),
-    tar_read(do_13563, store = store), 
-    tar_read(do_13383, store = store),
-    tar_read(do_13384, store = store)
-    )) |> 
-  flextable::hline(i = c(3,6,9)) |> 
-  flextable::merge_v(j = 1) |> 
-  flextable::footnote(i = c(1:12),
-                      j = c(5, 5, 4,
-                            5, 4, 4,
-                            4, 3, 3,
-                            4, 3, 3),
-                      value = as_paragraph(
-                        "Selected model"),
-                      ref_symbols = "*")
-```
-
-
-## 

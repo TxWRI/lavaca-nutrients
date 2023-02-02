@@ -76,9 +76,9 @@ fn_estuary_tp_loads <- function(lavaca_loads,
   
   tp_flow <- gam(log(TP) ~ log1p(Discharge),
                  data = loads,
-                 family = gaussian())
+                 family = gaussian)
   
-  loads$TP_resid <- residuals(tp_flow, type = "response")
+  loads$TP_resid <- residuals(tp_flow, type = "deviance")
   
   loads
   
@@ -99,9 +99,9 @@ fn_estuary_no3_loads <- function(lavaca_loads,
   
   no3_flow <- gam(log(NO3) ~ log1p(Discharge),
                  data = loads,
-                 family = gaussian())
+                 family = gaussian)
   
-  loads$NO3_resid <- residuals(no3_flow, type = "response")
+  loads$NO3_resid <- residuals(no3_flow, type = "deviance")
   
   loads
   
@@ -139,7 +139,11 @@ estuary_gam_data <- function(model_data,
     filter(station_id == {{station}}) |> 
     filter(end_date >= as.Date(date)) |> 
     left_join(loads |> select(-c(Discharge)), 
-              by = c("end_date" = "Date"))
+              by = c("end_date" = "Date")) |> 
+    mutate(value = case_when(
+      greater_than_less_than == "<" ~ value/2,
+      is.na(greater_than_less_than) ~ value
+    ))
   data
 }
 
