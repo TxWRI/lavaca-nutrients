@@ -1,10 +1,10 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-  - family-names: Michael
-    given-names: Schramm
-    orcid: https://orcid.org/0000-0003-1876-6592
-title: TxWRI/lavaca-nutrients: Texas Coastal Nutrient Input Repository - Lavaca Bay
+  - family-names: "Michael"
+    given-names: "Schramm"
+    orcid: "https://orcid.org/0000-0003-1876-6592"
+title: "TxWRI/lavaca-nutrients: Texas Coastal Nutrient Input Repository - Lavaca Bay"
 version: v1.2
 doi: 10.5281/zenodo.7330754
 date-released: 2023-02-10
