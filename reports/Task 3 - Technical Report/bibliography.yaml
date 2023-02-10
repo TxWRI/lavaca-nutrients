@@ -1,54 +1,29 @@
 ---
 references:
-- id: beckNumericalQualitativeContrasts2017
-  author:
-    - family: Beck
-      given: Marcus W.
-    - family: Murphy
-      given: Rebecca R.
-  citation-key: beckNumericalQualitativeContrasts2017
-  container-title: JAWRA Journal of the American Water Resources Association
-  DOI: 10.1111/1752-1688.12489
-  issue: '1'
-  issued:
-    - year: 2017
-      month: 2
-  language: en
-  page: 197-219
-  title: >-
-    Numerical and qualitative contrasts of two statistical models for water
-    quality change in tidal waters
-  type: article-journal
-  volume: '53'
 
 
-- id: bergbuschUnexpectedShiftPhytoplankton2021
+
+- id: bertholdDirectMailingEducation2021
   author:
-    - family: Bergbusch
-      given: Nathanael T.
-    - family: Hayes
-      given: Nicole M.
-    - family: Simpson
-      given: Gavin L.
-    - family: Leavitt
-      given: Peter R.
-  citation-key: bergbuschUnexpectedShiftPhytoplankton2021
-  container-title: Limnology and Oceanography
-  container-title-short: Limnol Oceanogr
-  DOI: 10.1002/lno.11786
-  issue: '7'
+    - family: Berthold
+      given: T. A.
+    - family: Olsovsky
+      given: Taylor
+    - family: Schramm
+      given: Michael P.
+  citation-key: bertholdDirectMailingEducation2021
+  container-title: Journal of Contemporary Water Research & Education
+  DOI: 10.1111/j.1936-704X.2021.3360.x
+  issue: '174'
   issued:
     - year: 2021
-      month: 7
-  language: en
-  page: 2745-2761
-  source: DOI.org (Crossref)
+  page: 45-60
   title: >-
-    Unexpected shift from phytoplankton to periphyton in eutrophic streams due
-    to wastewater influx
+    Direct mailing education campaign impacts on the adoption of grazing
+    management practices
   type: article-journal
-  volume: '66'
-
+  
+  
 - id: beserespollackLongtermTrendsResponse2011
   author:
     - family: Beseres Pollack
@@ -76,73 +51,6 @@ references:
   volume: '436'
 
 
-- id: biagi_novel_2022
-  author:
-    - family: Biagi
-      given: K.M.
-    - family: Ross
-      given: C.A.
-    - family: Oswald
-      given: C.J.
-    - family: Sorichetti
-      given: R.J.
-    - family: Thomas
-      given: J.L.
-    - family: Wellen
-      given: C.C.
-  citation-key: biagi_novel_2022
-  container-title: Science of The Total Environment
-  container-title-short: Science of The Total Environment
-  DOI: 10.1016/j.scitotenv.2022.154023
-  issued:
-    - year: 2022
-      month: 6
-  language: en
-  page: '154023'
-  source: DOI.org (Crossref)
-  title: >-
-    Novel predictors related to hysteresis and baseflow improve predictions of
-    watershed nutrient loads: An example from Ontario's lower Great Lakes basin
-  title-short: >-
-    Novel predictors related to hysteresis and baseflow improve predictions of
-    watershed nutrient loads
-  type: article-journal
-  volume: '826'
-
-
-- id: brickerEffectsNutrientEnrichment2008
-  author:
-    - family: Bricker
-      given: S.B.
-    - family: Longstaff
-      given: B.
-    - family: Dennison
-      given: W.
-    - family: Jones
-      given: A.
-    - family: Boicourt
-      given: K.
-    - family: Wicks
-      given: C.
-    - family: Woerner
-      given: J.
-  citation-key: brickerEffectsNutrientEnrichment2008
-  container-title: Harmful Algae
-  container-title-short: Harmful Algae
-  DOI: 10.1016/j.hal.2008.08.028
-  ISSN: '15689883'
-  issue: '1'
-  issued:
-    - year: 2008
-      month: 12
-  language: en
-  page: 21-32
-  source: DOI.org (Crossref)
-  title: 'Effects of nutrient enrichment in the nation''s estuaries: A decade of change'
-  title-short: Effects of nutrient enrichment in the nation's estuaries
-  type: article-journal
-  volume: '8'
-
 
 - id: bugicaWaterQualityTrends2020
   author:
@@ -167,103 +75,166 @@ references:
   volume: '152'
 
 
-- id: burknerBrmsPackageBayesian2017
+- id: bukaveckas_influence_2020
   author:
-    - family: Bürkner
-      given: Paul-Christian
-  citation-key: burknerBrmsPackageBayesian2017
-  container-title: Journal of Statistical Software
-  container-title-short: J. Stat. Soft.
-  DOI: 10.18637/jss.v080.i01
+    - family: Bukaveckas
+      given: P. A.
+    - family: Tassone
+      given: S.
+    - family: Lee
+      given: W.
+    - family: Franklin
+      given: R. B.
+  citation-key: bukaveckas_influence_2020
+  container-title: Estuaries and Coasts
+  container-title-short: Estuaries and Coasts
+  DOI: 10.1007/s12237-020-00819-9
+  ISSN: 1559-2723, 1559-2731
+  issue: '7'
+  issued:
+    - year: 2020
+      month: 11
+  language: en
+  page: 1585-1602
+  source: DOI.org (Crossref)
+  title: >-
+    The influence of storm events on metabolism and water quality of riverine
+    and estuarine segments of the James, Mattaponi, and Pamunkey Rivers
+  type: article-journal
+  volume: '43'
+
+- id: burnhamAICModelSelection2011
+  author:
+    - family: Burnham
+      given: Kenneth P.
+    - family: Anderson
+      given: David R.
+    - family: Huyvaert
+      given: Kathryn P.
+  citation-key: burnhamAICModelSelection2011
+  container-title: Behavioral Ecology and Sociobiology
+  container-title-short: Behav Ecol Sociobiol
+  DOI: 10.1007/s00265-010-1029-6
+  ISSN: 0340-5443, 1432-0762
   issue: '1'
   issued:
-    - year: 2017
+    - year: 2011
+      month: 1
   language: en
+  page: 23-35
   source: DOI.org (Crossref)
-  title: '**brms** : An *R* Package for Bayesian Multilevel Models Using *Stan*'
-  title-short: '**brms**'
-  type: article-journal
-  volume: '80'
-
-
-- id: burmanComparativeStudyOrdinary1989
-  author:
-    - family: Burman
-      given: Prabir
-  citation-key: burmanComparativeStudyOrdinary1989
-  container-title: Biometrika
-  DOI: 10.1093/biomet/76.3.503
-  issue: '3'
-  issued:
-    - year: 1989
-  language: en
-  page: 503-514
   title: >-
-    A comparative study of ordinary cross-validation, v-fold cross-validation
-    and the repeated learning-testing methods
+    AIC model selection and multimodel inference in behavioral ecology: some
+    background, observations, and comparisons
+  title-short: AIC model selection and multimodel inference in behavioral ecology
   type: article-journal
-  volume: '76'
+  volume: '65'
 
 
-
-- id: cohnValiditySimpleStatistical1992
+- id: caffreyFactorsControllingNet2004
   author:
-    - family: Cohn
-      given: Timothy A.
-    - family: Caulder
-      given: Dana L.
-    - family: Gilroy
-      given: Edward J.
-    - family: Zynjuk
-      given: Linda D.
-    - family: Summers
-      given: Robert M.
-  citation-key: cohnValiditySimpleStatistical1992
-  container-title: Water Resources Research
-  container-title-short: Water Resour. Res.
-  DOI: 10.1029/92WR01008
-  ISSN: '00431397'
+    - family: Caffrey
+      given: Jane M.
+  citation-key: caffreyFactorsControllingNet2004
+  container-title: Estuaries
+  container-title-short: Estuaries
+  DOI: 10.1007/BF02803563
+  ISSN: 0160-8347
+  issue: '1'
+  issued:
+    - year: 2004
+      month: 2
+  language: en
+  page: 90-101
+  source: DOI.org (Crossref)
+  title: Factors controlling net ecosystem metabolism in U.S. estuaries
+  type: article-journal
+  volume: '27'
+
+- id: caffreyHighNutrientPulses2007
+  author:
+    - family: Caffrey
+      given: Jane M.
+    - family: Chapin
+      given: Thomas P.
+    - family: Jannasch
+      given: Hans W.
+    - family: Haskins
+      given: John C.
+  citation-key: caffreyHighNutrientPulses2007
+  container-title: Estuarine, Coastal and Shelf Science
+  container-title-short: Estuarine, Coastal and Shelf Science
+  DOI: 10.1016/j.ecss.2006.08.015
+  ISSN: '02727714'
+  issue: 3-4
+  issued:
+    - year: 2007
+      month: 2
+  language: en
+  page: 368-380
+  source: DOI.org (Crossref)
+  title: >-
+    High nutrient pulses, tidal mixing and biological response in a small
+    California estuary: Variability in nutrient concentrations from decadal to
+    hourly time scales
+  title-short: >-
+    High nutrient pulses, tidal mixing and biological response in a small
+    California estuary
+  type: article-journal
+  volume: '71'
+
+
+- id: ciraPhytoplanktonDynamicsLowInflow2021
+  author:
+    - family: Cira
+      given: Emily K.
+    - family: Palmer
+      given: Terence A.
+    - family: Wetz
+      given: Michael S.
+  citation-key: ciraPhytoplanktonDynamicsLowInflow2021
+  container-title: Estuaries and Coasts
+  container-title-short: Estuaries and Coasts
+  DOI: 10.1007/s12237-021-00904-7
+  ISSN: 1559-2723, 1559-2731
+  issue: '7'
+  issued:
+    - year: 2021
+      month: 11
+  language: en
+  page: 1752-1764
+  source: DOI.org (Crossref)
+  title: >-
+    Phytoplankton dynamics in a low-inflow estuary (Baffin Bay, TX) during
+    drought and high-rainfall conditions associated with an El Niño event
+  type: article-journal
+  volume: '44'
+
+
+- id: cloernPhytoplanktonPrimaryProduction2014
+  author:
+    - family: Cloern
+      given: J. E.
+    - family: Foster
+      given: S. Q.
+    - family: Kleckner
+      given: A. E.
+  citation-key: cloernPhytoplanktonPrimaryProduction2014
+  container-title: Biogeosciences
+  container-title-short: Biogeosciences
+  DOI: 10.5194/bg-11-2477-2014
+  ISSN: 1726-4189
   issue: '9'
   issued:
-    - year: 1992
-      month: 9
+    - year: 2014
+      month: 5
+      day: 7
   language: en
-  page: 2353-2363
+  page: 2477-2501
   source: DOI.org (Crossref)
-  title: >-
-    The validity of a simple statistical model for estimating fluvial
-    constituent loads: An Empirical study involving nutrient loads entering
-    Chesapeake Bay
-  title-short: >-
-    The validity of a simple statistical model for estimating fluvial
-    constituent loads
+  title: Phytoplankton primary production in the world's estuarine-coastal ecosystems
   type: article-journal
-  volume: '28'
-
-
-- id: darbyEffectsEutrophicationSalt2008
-  author:
-    - family: Darby
-      given: Fa
-    - family: Turner
-      given: Re
-  citation-key: darbyEffectsEutrophicationSalt2008
-  container-title: Marine Ecology Progress Series
-  container-title-short: Mar. Ecol. Prog. Ser.
-  DOI: 10.3354/meps07423
-  ISSN: 0171-8630, 1616-1599
-  issued:
-    - year: 2008
-      month: 7
-      day: 15
-  language: en
-  page: 63-70
-  source: DOI.org (Crossref)
-  title: >-
-    Effects of eutrophication on salt marsh root and rhizome biomass
-    accumulation
-  type: article-journal
-  volume: '363'
+  volume: '11'
 
 
 - id: deciccoDataRetrievalPackagesDiscovering2022
@@ -292,183 +263,169 @@ references:
   version: 2.7.11
   DOI: 10.5066/P9X4L3GE
   
-  
-- id: fangCenGAMCensoredRegression2017
+
+- id: doradoUnderstandingInteractionsFreshwater2015
   author:
-    - family: Fang
-      given: Zhou
-  citation-key: fangCenGAMCensoredRegression2017
+    - family: Dorado
+      given: Samuel
+    - family: Booe
+      given: Tyra
+    - family: Steichen
+      given: Jamie
+    - family: McInnes
+      given: Allison S.
+    - family: Windham
+      given: Rachel
+    - family: Shepard
+      given: Alicia
+    - family: Lucchese
+      given: Allyson E. B.
+    - family: Preischel
+      given: Hannah
+    - family: Pinckney
+      given: James L.
+    - family: Davis
+      given: Stephen E.
+    - family: Roelke
+      given: Daniel L.
+    - family: Quigg
+      given: Antonietta
+  citation-key: doradoUnderstandingInteractionsFreshwater2015
+  container-title: PLOS ONE
+  container-title-short: PLoS ONE
+  DOI: 10.1371/journal.pone.0130931
+  ISSN: 1932-6203
+  issue: '7'
   issued:
-    - year: 2017
-  title: 'cenGAM: Censored Regression with Smooth Terms'
-  type: software
-  URL: https://CRAN.R-project.org/package=cenGAM
-  version: R package version 0.5.3
-
-
-
-- id: hagemannEstimatingNutrientOrganic2016
-  author:
-    - family: Hagemann
-      given: Mark
-    - family: Asce
-      given: S M
-    - family: Kim
-      given: Daeyoung
-    - family: Park
-      given: Mi Hyun
-  citation-key: hagemannEstimatingNutrientOrganic2016
-  container-title: J. Environ. Eng.
-  DOI: 10.1061/(ASCE)EE.1943-7870.0001077
-  issued:
-    - year: 2016
+    - year: 2015
+      month: 7
+      day: 2
   language: en
-  page: '9'
-  source: Zotero
-  title: >-
-    Estimating nutrient and organic carbon loads to water-supply reservoir using
-    semiparametric models
-  type: article-journal
-
-
-
-- id: heislerEutrophicationHarmfulAlgal2008
-  author:
-    - family: Heisler
-      given: J.
-    - family: Glibert
-      given: P.M.
-    - family: Burkholder
-      given: J.M.
-    - family: Anderson
-      given: D.M.
-    - family: Cochlan
-      given: W.
-    - family: Dennison
-      given: W.C.
-    - family: Dortch
-      given: Q.
-    - family: Gobler
-      given: C.J.
-    - family: Heil
-      given: C.A.
-    - family: Humphries
-      given: E.
-    - family: Lewitus
-      given: A.
-    - family: Magnien
-      given: R.
-    - family: Marshall
-      given: H.G.
-    - family: Sellner
-      given: K.
-    - family: Stockwell
-      given: D.A.
-    - family: Stoecker
-      given: D.K.
-    - family: Suddleson
-      given: M.
-  citation-key: heislerEutrophicationHarmfulAlgal2008
-  container-title: Harmful Algae
-  container-title-short: Harmful Algae
-  DOI: 10.1016/j.hal.2008.08.006
-  ISSN: '15689883'
-  issue: '1'
-  issued:
-    - year: 2008
-      month: 12
-  language: en
-  page: 3-13
+  page: e0130931
   source: DOI.org (Crossref)
-  title: 'Eutrophication and harmful algal blooms: A scientific consensus'
-  title-short: Eutrophication and harmful algal blooms
-  type: article-journal
-  volume: '8'
-
-
-- id: hirschWeightedRegressionsTime2010
-  author:
-    - family: Hirsch
-      given: Robert M.
-    - family: Moyer
-      given: Douglas L.
-    - family: Archfield
-      given: Stacey A.
-  citation-key: hirschWeightedRegressionsTime2010
-  container-title: JAWRA Journal of the American Water Resources Association
-  DOI: 10.1111/j.1752-1688.2010.00482.x
-  ISSN: 1093474X
-  issue: '5'
-  issued:
-    - year: 2010
-      month: 9
-      day: 7
-  language: en
-  page: 857-880
-  source: Crossref
   title: >-
-    Weighted Regressions on Time, Discharge, and Season (WRTDS), with an
-    application to Chesapeake Bay river inputs
+    Towards an understanding of the interactions between freshwater inflows and
+    phytoplankton communities in a subtropical estuary in the Gulf of Mexico
   type: article-journal
-  volume: '46'
+  volume: '10'
 
 
-- id: hornungEstimationAverageConcentration1990
+
+
+- id: gardnerNitrogenFixationDissimilatory2006
   author:
-    - family: Hornung
-      given: Richard W.
-    - family: Reed
-      given: Laurence D.
-  citation-key: hornungEstimationAverageConcentration1990
-  container-title: Applied Occupational and Environmental Hygiene
-  container-title-short: Applied Occupational and Environmental Hygiene
-  DOI: 10.1080/1047322X.1990.10389587
-  ISSN: 1047-322X, 1521-0898
-  issue: '1'
+    - family: Gardner
+      given: Wayne S.
+    - family: McCarthy
+      given: Mark J.
+    - family: An
+      given: Soonmo
+    - family: Sobolev
+      given: Dmitri
+    - family: Sell
+      given: Karen S.
+    - family: Brock
+      given: David
+  citation-key: gardnerNitrogenFixationDissimilatory2006
+  container-title: Limnology and Oceanography
+  container-title-short: Limnol. Oceanogr.
+  DOI: 10.4319/lo.2006.51.1_part_2.0558
+  ISSN: 0024-3590, 1939-5590
+  issue: 1part2
   issued:
-    - year: 1990
+    - year: 2006
       month: 1
   language: en
-  page: 46-51
-  source: DOI.org (Crossref)
-  title: Estimation of average concentration in the presence of nondetectable values
-  type: article-journal
-  volume: '5'
-
-- id: kroonRiverLoadsSuspended2012
-  author:
-    - family: Kroon
-      given: Frederieke J.
-    - family: Kuhnert
-      given: Petra M.
-    - family: Henderson
-      given: Brent L.
-    - family: Wilkinson
-      given: Scott N.
-    - family: Kinsey-Henderson
-      given: Anne
-    - family: Abbott
-      given: Brett
-    - family: Brodie
-      given: Jon E.
-    - family: Turner
-      given: Ryan D.R.
-  citation-key: kroonRiverLoadsSuspended2012
-  container-title: Marine Pollution Bulletin
-  container-title-short: Marine Pollution Bulletin
-  DOI: 10.1016/j.marpolbul.2011.10.018
-  ISSN: 0025326X
-  issue: 4-9
-  issued:
-    - year: 2012
-  language: en
-  page: 167-181
+  page: 558-568
   source: DOI.org (Crossref)
   title: >-
-    River loads of suspended solids, nitrogen, phosphorus and herbicides
-    delivered to the Great Barrier Reef lagoon
+    Nitrogen fixation and dissimilatory nitrate reduction to ammonium (DNRA)
+    support nitrogen dynamics in Texas estuaries
   type: article-journal
-  volume: '65'
+  volume: '51'
+
+
+- id: hardingLongTermTrendsNutrients2016
+  author:
+    - family: Harding
+      given: L. W.
+    - family: Gallegos
+      given: C. L.
+    - family: Perry
+      given: E. S.
+    - family: Miller
+      given: W. D.
+    - family: Adolf
+      given: J. E.
+    - family: Mallonee
+      given: M. E.
+    - family: Paerl
+      given: H. W.
+  citation-key: hardingLongTermTrendsNutrients2016
+  container-title: Estuaries and Coasts
+  container-title-short: Estuaries and Coasts
+  DOI: 10.1007/s12237-015-0023-7
+  ISSN: 1559-2723, 1559-2731
+  issue: '3'
+  issued:
+    - year: 2016
+      month: 5
+  language: en
+  page: 664-681
+  source: DOI.org (Crossref)
+  title: Long-term trends of nutrients and phytoplankton in Chesapeake Bay
+  type: article-journal
+  volume: '39'
+
+- id: houTransformationFateNitrate2012
+  author:
+    - family: Hou
+      given: Lijun
+    - family: Liu
+      given: Min
+    - family: Carini
+      given: Stephen A.
+    - family: Gardner
+      given: Wayne S.
+  citation-key: houTransformationFateNitrate2012
+  container-title: Continental Shelf Research
+  container-title-short: Continental Shelf Research
+  DOI: 10.1016/j.csr.2012.01.004
+  ISSN: '02784343'
+  issued:
+    - year: 2012
+      month: 3
+  language: en
+  page: 86-94
+  source: DOI.org (Crossref)
+  title: >-
+    Transformation and fate of nitrate near the sediment–water interface of
+    Copano Bay
+  type: article-journal
+  volume: '35'
+
+- id: jainTechnicalSupportDocument2018
+  author:
+    - family: Jain
+      given: Shubham
+    - family: Ruff
+      given: Stephanie
+    - family: Schramm
+      given: Michael P.
+  citation-key: jainTechnicalSupportDocument2018
+  event-place: Austin, TX
+  genre: Technical Report
+  issued:
+    - year: 2018
+  number: AS-203
+  publisher: Texas Commission on Environmental Quality
+  publisher-place: Austin, TX
+  title: >-
+    Technical Support Document for One Total Maximum Daily Load for Indicator
+    Bacteria in Arenosa Creek
+  type: report
+  URL: >-
+    https://www.tceq.texas.gov/downloads/water-quality/tmdl/arenosa-creek-recreational-108/108-arenosa-creek-tsd-final-10-02-20.pdf
 
 
 - id: kuhnert_quantifying_2012
@@ -498,100 +455,183 @@ references:
   source: DOI.org (Crossref)
   title: >-
     Quantifying total suspended sediment export from the Burdekin River
-    catchment using the loads regression estimator tool: Regression Estimator
-    Tool for Pollutant Loads
+    catchment using the loads regression estimator tool
   title-short: >-
     Quantifying total suspended sediment export from the Burdekin River
     catchment using the loads regression estimator tool
   type: article-journal
   volume: '48'
 
-- id: marraCoveragePropertiesConfidence2012
+- id: liuFactorsInfluencingFarmers2018
   author:
-    - family: Marra
-      given: Giampiero
-    - family: Wood
-      given: Simon N.
-  citation-key: marraCoveragePropertiesConfidence2012
-  container-title: Scandinavian Journal of Statistics
-  DOI: 10.1111/j.1467-9469.2011.00760.x
-  ISSN: '03036898'
-  issue: '1'
+    - family: Liu
+      given: Tingting
+    - family: Bruins
+      given: Randall
+    - family: Heberling
+      given: Matthew
+  citation-key: liuFactorsInfluencingFarmers2018
+  container-title: Sustainability
+  container-title-short: Sustainability
+  DOI: 10.3390/su10020432
+  ISSN: 2071-1050
+  issue: '2'
   issued:
-    - year: 2012
-      month: 3
+    - year: 2018
+      month: 2
+      day: 7
   language: en
-  page: 53-74
+  page: '432'
   source: DOI.org (Crossref)
   title: >-
-    Coverage Properties of Confidence Intervals for Generalized Additive Model
-    Components: Coverage properties of GAM intervals
-  title-short: >-
-    Coverage Properties of Confidence Intervals for Generalized Additive Model
-    Components
+    Factors influencing farmers’ adoption of best management practices: A review
+    and synthesis
+  title-short: Factors Influencing Farmers’ Adoption of Best Management Practices
+  type: article-journal
+  volume: '10'
+
+
+
+- id: liuComprehensiveWaterQuality2020
+  author:
+    - family: Liu
+      given: Lili
+    - family: Dong
+      given: Yongcheng
+    - family: Kong
+      given: Ming
+    - family: Zhou
+      given: Jian
+    - family: Zhao
+      given: Hanbin
+    - family: Wang
+      given: Yupeng
+    - family: Zhang
+      given: Meng
+    - family: Wang
+      given: Zhiping
+  citation-key: liuComprehensiveWaterQuality2020
+  container-title: Science of The Total Environment
+  container-title-short: Science of The Total Environment
+  DOI: 10.1016/j.scitotenv.2019.135993
+  ISSN: '00489697'
+  issued:
+    - year: 2020
+      month: 2
+  language: en
+  page: '135993'
+  source: DOI.org (Crossref)
+  title: >-
+    Towards the comprehensive water quality control in Lake Taihu: Correlating
+    chlorophyll a and water quality parameters with generalized additive model
+  title-short: Towards the comprehensive water quality control in Lake Taihu
+  type: article-journal
+  volume: '705'
+
+
+- id: lloydMethodsDetectingChange2014
+  author:
+    - family: Lloyd
+      given: C.E.M.
+    - family: Freer
+      given: J.E.
+    - family: Collins
+      given: A.L.
+    - family: Johnes
+      given: P.J.
+    - family: Jones
+      given: J.I.
+  citation-key: lloydMethodsDetectingChange2014
+  container-title: Journal of Hydrology
+  container-title-short: Journal of Hydrology
+  DOI: 10.1016/j.jhydrol.2014.04.036
+  ISSN: '00221694'
+  issued:
+    - year: 2014
+      month: 6
+  language: en
+  page: 297-312
+  source: DOI.org (Crossref)
+  title: >-
+    Methods for detecting change in hydrochemical time series in response to
+    targeted pollutant mitigation in river catchments
+  type: article-journal
+  volume: '514'
+
+
+- id: meals_lag_2010
+  author:
+    - family: Meals
+      given: Donald W.
+    - family: Dressing
+      given: Steven A.
+    - family: Davenport
+      given: Thomas E.
+  citation-key: meals_lag_2010
+  container-title: Journal of Environment Quality
+  DOI: 10.2134/jeq2009.0108
+  issue: '1'
+  issued:
+    - year: 2010
+  language: en
+  page: '85'
+  title: 'Lag time in water quality response to best management practices: A review'
   type: article-journal
   volume: '39'
 
-- id: mcdowell_implications_2021
-  author:
-    - family: McDowell
-      given: R. W.
-    - family: Simpson
-      given: Z. P.
-    - family: Ausseil
-      given: A. G.
-    - family: Etheridge
-      given: Z.
-    - family: Law
-      given: R.
-  citation-key: mcdowell_implications_2021
-  container-title: Scientific Reports
-  container-title-short: Sci Rep
-  DOI: 10.1038/s41598-021-95302-1
-  ISSN: 2045-2322
-  issue: '1'
-  issued:
-    - year: 2021
-      month: 12
-  language: en
-  page: '16450'
-  source: DOI.org (Crossref)
-  title: >-
-    The implications of lag times between nitrate leaching losses and riverine
-    loads for water quality policy
-  type: article-journal
-  volume: '11'
 
-
-- id: moriasiHydrologicWaterQuality2015
+- id: mooneyWatershedExportEvents2012
   author:
-    - family: Moriasi
-      given: D. N.
-    - family: Gitau
-      given: M. W.
-    - family: Pai
-      given: N.
-    - family: Daggupati
-      given: P.
-  citation-key: moriasiHydrologicWaterQuality2015
-  container-title: Transactions of the ASABE
-  container-title-short: Trans. ASABE
-  DOI: 10.13031/trans.58.10715
-  ISSN: 21510032, 21510040
+    - family: Mooney
+      given: Rae F.
+    - family: McClelland
+      given: James W.
+  citation-key: mooneyWatershedExportEvents2012
+  container-title: Estuaries and Coasts
+  container-title-short: Estuaries and Coasts
+  DOI: 10.1007/s12237-012-9537-4
+  ISSN: 1559-2723, 1559-2731
   issue: '6'
   issued:
-    - year: 2015
-      month: 12
-      day: 30
+    - year: 2012
+      month: 11
   language: en
-  page: 1763-1785
+  page: 1468-1485
   source: DOI.org (Crossref)
   title: >-
-    Hydrologic and water quality models: Performance measures and evaluation
-    criteria
+    Watershed export events and ecosystem responses in the Mission–Aransas
+    National Estuarine Research Reserve, South Texas
   type: article-journal
-  volume: '58'
+  volume: '35'
 
+
+
+- id: murphy_generalized_2019
+  author:
+    - family: Murphy
+      given: Rebecca R.
+    - family: Perry
+      given: Elgin
+    - family: Harcum
+      given: Jon
+    - family: Keisman
+      given: Jennifer
+  citation-key: murphy_generalized_2019
+  container-title: Environmental Modelling & Software
+  DOI: 10.1016/j.envsoft.2019.03.027
+  ISSN: '13648152'
+  issued:
+    - year: 2019
+      month: 8
+  language: en
+  page: 1-13
+  source: Crossref
+  title: >-
+    A Generalized Additive Model approach to evaluating water quality:
+    Chesapeake Bay case study
+  title-short: A Generalized Additive Model approach to evaluating water quality
+  type: article-journal
+  volume: '118'
 
 - id: murphyNutrientImprovementsChesapeake2022
   author:
@@ -657,6 +697,58 @@ references:
   type: report
 
 
+- id: ornolfsdottirNutrientPulsingRegulator2004
+  author:
+    - family: Örnólfsdóttir
+      given: Erla B.
+    - family: Lumsden
+      given: S.Elizabeth
+    - family: Pinckney
+      given: James L.
+  citation-key: ornolfsdottirNutrientPulsingRegulator2004
+  container-title: Journal of Experimental Marine Biology and Ecology
+  container-title-short: Journal of Experimental Marine Biology and Ecology
+  DOI: 10.1016/j.jembe.2003.11.016
+  ISSN: '00220981'
+  issue: '2'
+  issued:
+    - year: 2004
+      month: 6
+  language: en
+  page: 197-220
+  source: DOI.org (Crossref)
+  title: >-
+    Nutrient pulsing as a regulator of phytoplankton abundance and community
+    composition in Galveston Bay, Texas
+  type: article-journal
+  volume: '303'
+
+
+- id: paudelRelationshipSuspendedSolids2019
+  author:
+    - family: Paudel
+      given: Bhanu
+    - family: Montagna
+      given: Paul A.
+    - family: Adams
+      given: Leslie
+  citation-key: paudelRelationshipSuspendedSolids2019
+  container-title: Regional Studies in Marine Science
+  container-title-short: Regional Studies in Marine Science
+  DOI: 10.1016/j.rsma.2019.100657
+  ISSN: '23524855'
+  issued:
+    - year: 2019
+      month: 5
+  language: en
+  page: '100657'
+  source: DOI.org (Crossref)
+  title: >-
+    The relationship between suspended solids and nutrients with variable
+    hydrologic flow regimes
+  type: article-journal
+  volume: '29'
+
 
 - id: palmerImpactsDroughtsLow2015
   author:
@@ -683,29 +775,189 @@ references:
   volume: '753'
 
 
-- id: robson_prediction_2015-1
+- id: pedersenHierarchicalGeneralizedAdditive2019
   author:
-    - family: Robson
-      given: Barbara J.
-    - family: Dourdet
-      given: Vincent
-  citation-key: robson_prediction_2015-1
-  container-title: Environmental Modelling & Software
-  container-title-short: Environmental Modelling & Software
-  DOI: 10.1016/j.envsoft.2014.08.009
-  ISSN: '13648152'
+    - family: Pedersen
+      given: Eric J.
+    - family: Miller
+      given: David L.
+    - family: Simpson
+      given: Gavin L.
+    - family: Ross
+      given: Noam
+  citation-key: pedersenHierarchicalGeneralizedAdditive2019
+  container-title: PeerJ
+  DOI: 10.7717/peerj.6876
+  ISSN: 2167-8359
   issued:
-    - year: 2015
-      month: 1
+    - year: 2019
+      month: 5
+      day: 27
   language: en
-  page: 97-108
+  page: e6876
   source: DOI.org (Crossref)
   title: >-
-    Prediction of sediment, particulate nutrient and dissolved nutrient
-    concentrations in a dry tropical river to provide input to a mechanistic
-    coastal water quality model
+    Hierarchical generalized additive models in ecology: an introduction with
+    mgcv
+  title-short: Hierarchical generalized additive models in ecology
   type: article-journal
-  volume: '63'
+  volume: '7'
+
+- id: paerlAssessingEffectsNutrient2006
+  author:
+    - family: Paerl
+      given: Hans W.
+    - family: Valdes
+      given: Lexia M.
+    - family: Piehler
+      given: Michael F.
+    - family: Stow
+      given: Craig A.
+  citation-key: paerlAssessingEffectsNutrient2006
+  container-title: Environmental Management
+  container-title-short: Environmental Management
+  DOI: 10.1007/s00267-004-0034-9
+  ISSN: 0364-152X, 1432-1009
+  issue: '3'
+  issued:
+    - year: 2006
+      month: 3
+  language: en
+  page: 422-436
+  source: DOI.org (Crossref)
+  title: >-
+    Assessing the effects of nutrient management in an estuary experiencing
+    climatic change: The Neuse River Estuary, North Carolina
+  title-short: >-
+    Assessing the Effects of Nutrient Management in an Estuary Experiencing
+    Climatic Change
+  type: article-journal
+  volume: '37'
+
+- id: peierlsNonmonotonicResponsesPhytoplankton2012
+  author:
+    - family: Peierls
+      given: Benjamin L.
+    - family: Hall
+      given: Nathan S.
+    - family: Paerl
+      given: Hans W.
+  citation-key: peierlsNonmonotonicResponsesPhytoplankton2012
+  container-title: Estuaries and Coasts
+  container-title-short: Estuaries and Coasts
+  DOI: 10.1007/s12237-012-9547-2
+  ISSN: 1559-2723, 1559-2731
+  issue: '6'
+  issued:
+    - year: 2012
+      month: 11
+  language: en
+  page: 1376-1392
+  source: DOI.org (Crossref)
+  title: >-
+    Non-monotonic responses of phytoplankton biomass accumulation to hydrologic
+    variability: A comparison of two coastal plain North Carolina Estuaries
+  title-short: >-
+    Non-monotonic Responses of Phytoplankton Biomass Accumulation to Hydrologic
+    Variability
+  type: article-journal
+  volume: '35'
+  
+- id: russell_effect_2006
+  author:
+    - family: Russell
+      given: Marc J.
+    - family: Montagna
+      given: Paul A.
+    - family: Kalke
+      given: Richard D.
+  citation-key: russell_effect_2006
+  container-title: Estuarine, Coastal and Shelf Science
+  container-title-short: Estuarine, Coastal and Shelf Science
+  DOI: 10.1016/j.ecss.2006.02.005
+  ISSN: '02727714'
+  issue: 1-2
+  issued:
+    - year: 2006
+      month: 6
+  language: en
+  page: 231-244
+  source: DOI.org (Crossref)
+  title: >-
+    The effect of freshwater inflow on net ecosystem metabolism in Lavaca Bay,
+    Texas
+  type: article-journal
+  volume: '68'
+
+
+- id: schramm_lavaca_2018
+  author:
+    - family: Schramm
+      given: Michael P.
+    - family: Berthold
+      given: Allen
+    - family: Entwistle
+      given: Clare
+    - family: Peddicord
+      given: Kirby
+  citation-key: schramm_lavaca_2018
+  event-place: College Station, Texas
+  genre: Technical Report
+  issued:
+    - year: 2018
+  number: TR-507
+  publisher: Texas Water Resources Institute
+  publisher-place: College Station, Texas
+  title: Lavaca River Watershed Protection Plan
+  type: report
+  URL: https://twri.tamu.edu/media/1456/tr-507.pdf
+
+- id: schrammTotalMaximumDaily2022
+  author:
+    - family: Schramm
+      given: Michael P.
+    - family: Gitter
+      given: Anna
+    - family: Gregory
+      given: Lucas
+  citation-key: schrammTotalMaximumDaily2022
+  container-title: Journal of Contemporary Water Research & Education
+  DOI: 10.1111/j.1936-704X.2022.3374.x
+  issue: '176'
+  issued:
+    - year: 2022
+  page: 36-49
+  title: >-
+    Total Maximum Daily Loads and *Escherichia coli* trends in Texas freshwater
+    streams
+  type: article-journal
+
+
+- id: sharpley_evaluating_2009
+  author:
+    - family: Sharpley
+      given: Andrew N.
+    - family: Kleinman
+      given: Peter J.A.
+    - family: Jordan
+      given: Philip
+    - family: Bergström
+      given: Lars
+    - family: Allen
+      given: Arthur L.
+  citation-key: sharpley_evaluating_2009
+  container-title: Journal of Environment Quality
+  DOI: 10.2134/jeq2008.0056
+  ISSN: 1537-2537
+  issue: '5'
+  issued:
+    - year: 2009
+  language: en
+  page: '1981'
+  source: Crossref
+  title: Evaluating the success of phosphorus management from field to watershed
+  type: article-journal
+  volume: '38'
 
 
 - id: schoenbaechlerCoastalHydrologyLavacaColorado2011
@@ -727,28 +979,6 @@ references:
   URL: >-
     https://www.twdb.texas.gov/surfacewater/bays/coastal_hydrology/doc/TWDB_Matagorda_Hydrology_20110211.pdf
 
-- id: shenTimeUpdateSplit2022
-  author:
-    - family: Shen
-      given: Hongren
-    - family: Tolson
-      given: Bryan A.
-    - family: Mai
-      given: Juliane
-  citation-key: shenTimeUpdateSplit2022
-  container-title: Water Resources Research
-  container-title-short: Water Resources Research
-  DOI: 10.1029/2021WR031523
-  ISSN: 0043-1397, 1944-7973
-  issue: '3'
-  issued:
-    - year: 2022
-      month: 3
-  language: en
-  source: DOI.org (Crossref)
-  title: Time to update the split‐sample approach in hydrological model calibration
-  type: article-journal
-  volume: '58'
 
 
 - id: simpsonGratiaGracefulGraceful2022
@@ -766,32 +996,26 @@ references:
   URL: https://gavinsimpson.github.io/gratia/
   version: R package version 0.7.3.22
 
-- id: snelderEstimationCatchmentNutrient2017
+
+- id: tominackVariabilityPhytoplanktonBiomass2022
   author:
-    - family: Snelder
-      given: T.H.
-    - family: McDowell
-      given: R.W.
-    - family: Fraser
-      given: C.E.
-  citation-key: snelderEstimationCatchmentNutrient2017
-  container-title: JAWRA Journal of the American Water Resources Association
-  container-title-short: J Am Water Resour Assoc
-  DOI: 10.1111/1752-1688.12492
-  ISSN: 1093474X
-  issue: '1'
+    - family: Tominack
+      given: Sarah A.
+    - family: Wetz
+      given: Michael S.
+  citation-key: tominackVariabilityPhytoplanktonBiomass2022
+  container-title: Estuaries and Coasts
+  container-title-short: Estuaries and Coasts
+  DOI: 10.1007/s12237-022-01137-y
+  ISSN: 1559-2723, 1559-2731
   issued:
-    - year: 2017
-      month: 2
+    - year: 2022
   language: en
-  page: 158-178
   source: DOI.org (Crossref)
   title: >-
-    Estimation of catchment nutrient loads in New Zealand using monthly water
-    quality monitoring data
+    Variability in phytoplankton biomass and community composition in Corpus
+    Christi Bay, Texas
   type: article-journal
-  volume: '53'
-...
 
 - id: vecchia_trends_2009
   author:
@@ -825,32 +1049,122 @@ references:
   volume: '43'
 
 
-- id: wangLoadEstimationUncertainties2011
+- id: walkerTimescalesMagnitudeWater2021
   author:
-    - family: Wang
-      given: You-Gan
-    - family: Kuhnert
-      given: Petra
-    - family: Henderson
-      given: Brent
-  citation-key: wangLoadEstimationUncertainties2011
-  container-title: Journal of Hydrology
-  container-title-short: Journal of Hydrology
-  DOI: 10.1016/j.jhydrol.2010.11.003
-  ISSN: '00221694'
-  issue: 1-2
+    - family: Walker
+      given: Lily M.
+    - family: Montagna
+      given: Paul A.
+    - family: Hu
+      given: Xinping
+    - family: Wetz
+      given: Michael S.
+  citation-key: walkerTimescalesMagnitudeWater2021
+  container-title: Estuaries and Coasts
+  container-title-short: Estuaries and Coasts
+  DOI: 10.1007/s12237-020-00846-6
+  ISSN: 1559-2723, 1559-2731
+  issue: '4'
   issued:
-    - year: 2011
-      month: 1
+    - year: 2021
+      month: 6
   language: en
-  page: 148-157
+  page: 960-971
   source: DOI.org (Crossref)
   title: >-
-    Load estimation with uncertainties from opportunistic sampling data – A
-    semiparametric approach
+    Timescales and magnitude of water quality change in three Texas estuaries
+    induced by passage of Hurricane Harvey
   type: article-journal
-  volume: '396'
+  volume: '44'
 
+
+
+
+- id: wazniakLinkingWaterQuality2007
+  author:
+    - family: Wazniak
+      given: Catherine E.
+    - family: Hall
+      given: Matthew R.
+    - family: Carruthers
+      given: Tim J. B.
+    - family: Sturgis
+      given: Brian
+    - family: Dennison
+      given: William C.
+    - family: Orth
+      given: Robert J.
+  citation-key: wazniakLinkingWaterQuality2007
+  container-title: Ecological Applications
+  container-title-short: Ecological Applications
+  DOI: 10.1890/05-1554.1
+  ISSN: 1051-0761
+  issue: sp5
+  issued:
+    - year: 2007
+      month: 7
+  language: en
+  page: S64-S78
+  source: DOI.org (Crossref)
+  title: >-
+    Linking water quality to living resources in a Mid-Atlantic lagoon system,
+    USA
+  type: article-journal
+  volume: '17'
+
+
+- id: wetzExtremeFutureEstuaries2013
+  author:
+    - family: Wetz
+      given: Michael S.
+    - family: Yoskowitz
+      given: David W.
+  citation-key: wetzExtremeFutureEstuaries2013
+  container-title: Marine Pollution Bulletin
+  container-title-short: Marine Pollution Bulletin
+  DOI: 10.1016/j.marpolbul.2013.01.020
+  ISSN: 0025326X
+  issue: 1-2
+  issued:
+    - year: 2013
+      month: 4
+  language: en
+  page: 7-18
+  source: DOI.org (Crossref)
+  title: >-
+    An ‘extreme’ future for estuaries? Effects of extreme climatic events on
+    estuarine water quality and ecology
+  title-short: An ‘extreme’ future for estuaries?
+  type: article-journal
+  volume: '69'
+
+- id: wetzWaterQualityDynamics2016
+  author:
+    - family: Wetz
+      given: Michael S.
+    - family: Hayes
+      given: Kenneth C.
+    - family: Fisher
+      given: Kelsey V.B.
+    - family: Price
+      given: Lynn
+    - family: Sterba-Boatwright
+      given: Blair
+  citation-key: wetzWaterQualityDynamics2016
+  container-title: Marine Pollution Bulletin
+  container-title-short: Marine Pollution Bulletin
+  DOI: 10.1016/j.marpolbul.2016.02.013
+  ISSN: 0025326X
+  issue: 1-2
+  issued:
+    - year: 2016
+      month: 3
+  language: en
+  page: 44-53
+  source: DOI.org (Crossref)
+  title: Water quality dynamics in an urbanizing subtropical estuary (Oso Bay, Texas)
+  type: article-journal
+  volume: '104'
 
 - id: wetzExceptionallyHighOrganic2017
   author:
@@ -883,27 +1197,6 @@ references:
   type: article-journal
   volume: '188'
   
-- id: woodCONFIDENCEINTERVALSGENERALIZED2006
-  author:
-    - family: Wood
-      given: Simon N.
-  citation-key: woodCONFIDENCEINTERVALSGENERALIZED2006
-  container-title: Australian & New Zealand Journal of Statistics
-  container-title-short: Aust N Z J Stat
-  DOI: 10.1111/j.1467-842X.2006.00450.x
-  ISSN: 1369-1473, 1467-842X
-  issue: '4'
-  issued:
-    - year: 2006
-      month: 12
-  language: en
-  page: 445-464
-  source: DOI.org (Crossref)
-  title: >-
-    ON CONFIDENCE INTERVALS FOR GENERALIZED ADDITIVE MODELS BASED ON PENALIZED
-    REGRESSION SPLINES
-  type: article-journal
-  volume: '48'
 
 - id: wood_fast_2011
   author:
@@ -930,28 +1223,4 @@ references:
   type: article-journal
   volume: '73'
 
-
-
-- id: zhang_improving_2017
-  author:
-    - family: Zhang
-      given: Qian
-    - family: Ball
-      given: William P.
-  citation-key: zhang_improving_2017
-  container-title: Journal of Hydrology
-  container-title-short: Journal of Hydrology
-  DOI: 10.1016/j.jhydrol.2016.12.052
-  ISSN: '00221694'
-  issued:
-    - year: 2017
-      month: 4
-  language: en
-  page: 387-402
-  source: DOI.org (Crossref)
-  title: >-
-    Improving riverine constituent concentration and flux estimation by
-    accounting for antecedent discharge conditions
-  type: article-journal
-  volume: '547'
 ...

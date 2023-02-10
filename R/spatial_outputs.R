@@ -6,7 +6,7 @@ library(dataRetrieval)
 ## create geopacakge outputs to put in arcgis dashboard
 
 
-generate_geopackage <- function() {
+generate_geopackage <- function(arc_path = arc_path) {
 
   ## usgs sites spatial locations
   df_sites <- download_usgs_sites()
@@ -45,12 +45,12 @@ generate_geopackage <- function() {
     select(site_no, station_nm, Date, Flow, NO3_Estimate, NO3_Upper, NO3_Lower, TP_Estimate, TP_Upper, TP_Lower)
   
   ## write data
-  dsn <- "data/Output/spatial/loading.gpkg"
-  st_write(df_sites, dsn = dsn, layer = "sites")
-  st_write(loading, dsn = dsn, layer = "sites")
-  st_write(lavaca_ws, dsn = dsn, layer = "lavaca_watershed")
-  st_write(navidad_ws, dsn = dsn, layer = "navidad_watershed")
-  st_write(ds_ws, dsn = dsn, layer = "downstream_watersheds")
-  st_write(rivers, dsn = dsn, layer = "rivers")
-  return(NULL)
+  dsn <- arc_path
+  st_write(df_sites, dsn = dsn, layer = "sites", append = FALSE)
+  st_write(loading, dsn = dsn, layer = "loads", append = FALSE)
+  st_write(lavaca_ws, dsn = dsn, layer = "lavaca_watershed", append = FALSE)
+  st_write(navidad_ws, dsn = dsn, layer = "navidad_watershed", append = FALSE)
+  st_write(ds_ws, dsn = dsn, layer = "downstream_watersheds", append = FALSE)
+  st_write(rivers, dsn = dsn, layer = "rivers", append = FALSE)
+  return(dsn)
 }

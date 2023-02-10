@@ -47,6 +47,7 @@ library(flextable)
 library(stringr)
 library(ragg)
 library(targets)
+library(forcats)
 source("../../_targets_packages.R")
 
 
@@ -69,7 +70,7 @@ store = "../../_targets"
 
 Texas Water Resources Institute
 
-Texas A&M Agrilife
+Texas A&M AgriLife
 
 College Station, TX
 
@@ -82,7 +83,16 @@ College Station, TX
 ```{r}
 ## leave in, starts new word document section
 ## after table of abbreviations
-block_section(prop_section(type = "nextPage"))
+block_section(prop_section(type = "nextPage",
+                           page_margins = page_mar(bottom = 1,
+                                                   top = 1,
+                                                   right = 1,
+                                                   left = 1,
+                                                   header = 0.5,
+                                                   footer = 0.5,
+                                                   gutter = 0.5
+                                                   )))
+
 ```
 
 ::: {custom-style="Unnumbered Heading 1"}
@@ -115,233 +125,689 @@ Abbreviations
 
 :::
 
+|Acronym   |Meaning |
+|----------|-----------|
+|DO        |Dissolved Oxygen |
+|GAM       |Generalized Additive Model |
+|NO~*x*~   |Nitrite+Nitrate |
+|NO~3~-N   |Nitrate-Nitrogen    |
+|QAPP      |Quality Assurance Project Plan |
+|SWQMIS    |Surface Water Quality Monitoring Information System |
+|TCEQ      |Texas Commission on Environmental Quality |
+|TKN       |Total Kjeldahl Nitrogen |
+|TP        |Total Phosphorus    |
+|TWDB      |Texas Water Development Board |
+|USGS      |United States Geological Survey |
 
 
 
 ```{r}
-## leave in, ends word document section
+## leave in, starts new word document section
 ## after table of abbreviations
-block_section(prop_section(type = "nextPage"))
+block_section(prop_section(type = "nextPage",
+                           page_margins = page_mar(bottom = 1,
+                                                   top = 1,
+                                                   right = 1,
+                                                   left = 1,
+                                                   header = 0.5,
+                                                   footer = 0.5,
+                                                   gutter = 0.5
+                                                   )))
+
 ```
 
+# Summary
+
+Links between freshwater inflows, watershed nutrient loads and water quality in Lavaca Bay were explored using generalized additive models. This approach allowed exploration of nonlinear relationships between upstream inputs and water quality responses while accounting for changes in water quality due to natural variations in precipitation and streamflow. Results show increasing concentrations of inorganic and organic nitrogen at select sites in Lavaca Bay, but no evidence of significant changes in chlorophyll-*a* or DO concentrations in recent years. Changes in freshwater inflow and, to a smaller extent, changes in watershed nutrient loading explain the variability in observed in total phosphorus and nitrite+nitrate concentrations. Limited data and complex responses of chlorophyll-*a*, Total Kjeldahl Nitrogen, and dissolved oxygen to freshwater inflow and loadings point to a need for continued data collection and model development. Overall, the study provides a baseline assessment linkage between upstream efforts that are addressing nonpoint source pollutants and water quality within Lavaca Bay.
+
+```{r}
+## leave in, starts new word document section
+## after table of abbreviations
+block_section(prop_section(type = "nextPage",
+                           page_margins = page_mar(bottom = 1,
+                                                   top = 1,
+                                                   right = 1,
+                                                   left = 1,
+                                                   header = 0.5,
+                                                   footer = 0.5,
+                                                   gutter = 0.5
+                                                   )))
+
+```
+
+
 # Introduction
-A substantial proportion of coastal estuaries in the United States face excessive nutrient loading and exhibit symptoms of eutrophication [@brickerEffectsNutrientEnrichment2008]. 
-Eutrophication leads to depletion of dissolved oxygen, degradation of habitat [@darbyEffectsEutrophicationSalt2008] and increased risks of harmful algal blooms [@heislerEutrophicationHarmfulAlgal2008].
 
-There have been limited attempts at assessments of estuarine eutrophication along the Texas coastline. 
-Notably, @bugicaWaterQualityTrends2020 provided evidence of regional eutrophication hot spots attributed to increases in coastal population, urbanization, and alterations of freshwater inflows along the Texas coast and is an important starting point for targeted regional studies.
-@bugicaWaterQualityTrends2020 assessed three sites in the Lavaca Bay and identified small but significant increases in Total Phosphorus (TP) and Orthophosphate (PO~4~^-3^) at two sites, Total Kjeldahl Nitrogen (TKN) at two sites, and chlorophyll-*a* at one site. 
-Importantly, decreases in dissolved oxygen were not detected in the study. 
-While there are indications that potential drivers of eutrophication are increasing in Lavaca Bay, the immediate symptoms of degraded dissolved oxygen are not evident. 
+Lavaca Bay is a secondary bay in the Matagorda Bay system located on the Texas Gulf coast, roughly halfway between the cities of Houston and Corpus Christi (Figure \@ref(fig:projectmap)). 
+Although Lavaca Bay faces substantial challenges associated with legacy contaminants, general water quality such as dissolved oxygen (DO), nutrients, and biological parameters indicates that ambient conditions in Lavaca Bay meet state water quality standards. 
+The potential of degrading biological and physical conditions is an identified concern of local stakeholders.
+Significant long-term declines in benthic fauna abundance, biomass, and diversity in Lavaca Bay are linked to reductions in freshwater inflows and increases in estuary salinity [@beserespollackLongtermTrendsResponse2011; @palmerImpactsDroughtsLow2015; @montagnaAssessmentRelationshipFreshwater2020].
+More recently, @bugicaWaterQualityTrends2020 identified long-term monotonic increasing trends in Total Phosphorus (TP), Orthophosphate (PO~4~^-3^), Total Kjeldahl Nitrogen (TKN), and chlorophyll-*a* concentrations at sites within Lavaca Bay. 
 Significant decreases in pH at all sites assessed by @bugicaWaterQualityTrends2020 in Lavaca Bay also point to long-term decreases in freshwater inflow and a resulting increase in salinity. 
-Long-term declines in the abundance of sensitive benthic fauna in Lavaca Bay have been linked to increases in salinity and reductions in freshwater inflows [@beserespollackLongtermTrendsResponse2011; @palmerImpactsDroughtsLow2015; @montagnaAssessmentRelationshipFreshwater2020].
+Although no long-term changes in DO concentrations were identified, the trends in nutrient concentrations remain a concern. Nitrogen has been identified as a limiting factor for primary production in many Texas estuaries [@gardnerNitrogenFixationDissimilatory2006; @houTransformationFateNitrate2012; @doradoUnderstandingInteractionsFreshwater2015; @paudelRelationshipSuspendedSolids2019; @wetzExceptionallyHighOrganic2017] and substantial changes in nitrogen loading could have ramifications for productivity and eutrophication in Lavaca Bay.
 
 
-The potential for negative impacts induced by eutrophication is a especially concerning given the significant declines already observed in benthic fauna abundance, biomass, and diversity within Lavaca Bay [@beserespollackLongtermTrendsResponse2011].
-Underscoring this concern is the need for data that is adequate for evaluating changes over time in watershed nutrient loading.
-There is also a need to understand the effects of land management decisions on nutrient loading, relative to environmental drivers such as precipitation and discharge, and how it may contribute to or improve conditions related to eutrophication in Lavaca Bay. 
-This work (1) quantifies Nitrate-Nitrogen (NO~3~-N) and TP loadings in the Lavaca Bay watershed and (2) assesses the relationship of eutrophication indicators in Lavaca Bay to changes in watershed discharge and loads.
+There are ongoing efforts between local entities and state and federal agencies to address water quality impairments and concerns in the freshwater portions of the Lavaca Bay watershed [@jainTechnicalSupportDocument2018; @schramm_lavaca_2018; @bertholdDirectMailingEducation2021].
+On a statewide scale these types of approaches have not resulted in desired successes and emphasizes a need to improve efforts at assessing and linking water quality improvements with management actions  [@schrammTotalMaximumDaily2022]. 
+Therefore, there is a need to provide robust analysis of water quality responses where these efforts are taking place to identify approaches that are working or need improvement.
+Changes and trends in estuary water quality are non-linear and confounded by short and long-term changes in precipitation and runoff that hinder traditional data driven analytic methods [@wazniakLinkingWaterQuality2007; @lloydMethodsDetectingChange2014]. 
+Water quality conditions should be evaluated relative to changes in environmental drivers such as precipitation and discharge to understand the effects of land use management and changes in nutrient loading on in-estuary water quality.
+This report presents methodology and results for assessing nonlinear linkages between selected water quality parameters in Lavaca Bay and freshwater inflows and nutrient loadings from the Lavaca Bay watershed. 
+
+```{r projectmap, fig.cap="Study area map.", fig.alt="Map of the Lavaca Bay and Lavaca Bay watershed. The map indicates the locations of the river systems and sampling sites used to estimate nutrient loading and the sites in Lavaca Bay used to relate loading to estuarine water quality parameters.", out.width="100%", fig.asp=1.25}
+
+## make a report specfic map with just two load sites and 3 estuary sites
+tar_read(est_site_map, store = store)
+```
 
 # Methods
 
 ## Study Area and Data
 
-Lavaca Bay is a secondary bay in the Matagorda Bay system located centrally along the Texas Gulf coast, roughly halfway between the cities of Houston and Corpus Christi (Figure \@ref(fig:projectmap)).
-Lavaca Bay is 190 km^2^ with the majority of freshwater inflow provided by the Lavaca-Navidad river system. 
+Lavaca Bay is 190 km^2^ with the majority of freshwater inflow provided by the Lavaca-Navidad river system (Figure \@ref(fig:projectmap)). 
 The Garcitas-Arenosa, Placedo Creek, and Cox Bay watersheds provide additional freshwater inflows.
 The watershed land area for Lavaca Bay is 8,149 km^2^. 
 The Lavaca-Navidad river watershed is 5,966 km^2^, or approximately 73% of the watershed area. 
 Discharge from the Navidad River is regulated by Lake Texana which has been in operation since 1980.
 Lake Texana provides 170,000 acre-feet of water storage and discharges into the tidal section of the Navidad River which ultimately joins the tidal section of the Lavaca River 15 km upstream of the confluence with the Bay.
 
-### Hydrology
-
-Daily discharges for gaged locations within the watershed were obtained from the United States Geologic Survey (USGS) National Water Information System (NWIS) using the "dataRetrieval" R package [@deciccoDataRetrievalPackagesDiscovering2022]. 
-Gaged daily discharges from Lake Texana (USGS-0816425) and modeled daily discharges for the outlet of the Lavaca-Navidad watershed were obtained from the Texas Water Development Board (TWDB) (April 21, 2022 email from R. Neupane, TWDB).
-Modeled discharges were developed by the TWDB for ungaged coastal basins using the Texas Rainfall-Runoff (TxRR) model described in @schoenbaechlerCoastalHydrologyLavacaColorado2011.
-From 2000 through 2020, mean daily discharge from the Lavaca-Navidad watershed system was 700 (MGD) based on a combination of modeled runoff and gaged discharge. 
-Approximately 61% of the mean daily discharge comes from Lake Texana (USGS-0816425, Figure \@ref(fig:projectmap)), 30% is from the Lavaca River at Edna (USGS-08164000) and the rest is ungaged runoff below those two gaged locations. 
-
-
-```{r projectmap, fig.cap="Study area map.", fig.alt="Map of the Lavaca Bay and Lavaca Bay watershed. The map indicates the locations of the river systems and sampling sites used to estimate nutrient loading and the sites in Lavaca Bay used to relate loading to estuarine water quality parameters.", out.width="100%", fig.asp=1.25}
-tar_read(report_map, store = store)
-```
+Daily inflow to Lavaca Bay was estimated by combining mean daily discharge from USGS-08164000 (Lavaca River) and USGS-08164525 (Lake Texana). 
+Mean daily discharges from USGS-08164000 were obtained from the United States Geologic Survey (USGS) National Water Information System using the *dataRetrieval* R package [@deciccoDataRetrievalPackagesDiscovering2022]. 
+Mean daily discharges for USGS-0816425 were obtained from the Texas Water Development Board (TWDB) (April 21, 2022 email from R. Neupane, TWDB).
+Daily nutrient loads were modeled at USGS-08164000 and USGS-08164525 using a Generalized Additive Model (GAM) relating time, season, and discharge to nutrient concentrations.
+The development of daily loads is described in **INSERT REPORT.**
+Water quality data collected between January 2005 and December 2020 was obtained for three sites (TCEQ-13563, TCEQ-13383, TCEQ-13384) in Lavaca Bay from the Texas Commission on Environmental Quality's (TCEQ) Surface Water Quality Monitoring Information System (SWQMIS; https://www80.tceq.texas.gov/SwqmisWeb/public/crpweb.faces).
+Data housed in SWQMIS are collected under projects with an approved Quality Assurance Project Plan (QAPP) and under sample collection and lab methods procedures outlined by TCEQ's procedures manuals (https://www.tceq.texas.gov/waterquality/monitoring/swqm_guides.html). 
+The QAPP and procedures manuals ensure consistent collection and analytical methods are applied between samples collected among different entities and different projects.
 
 
-```{r dat_summ1}
-df <- tar_read(model_data, store = store)
 
-dat <- df |>  
-  select(site_no, Flow, original_NO3, original_TP) |> 
-  pivot_longer(cols = c(Flow, original_NO3, original_TP),
-               names_to = "Parameter") |> 
-  filter(!is.na(value)) |> 
-  group_by(site_no, Parameter) |> 
-  summarise(n = n(),
-            mean = mean(value),
-            sd = sd(value),
-            .groups = "drop") |>
-  mutate(Parameter = case_when(
-    Parameter == "Flow" ~ "Mean Daily Discharge",
-    Parameter == "original_NO3" ~ "NO3-N",
-    Parameter == "original_TP" ~ "TP"
-  )) |> 
-  mutate(site_no = case_when(
-    site_no == "lktexana_g" ~ "usgs08164525",
-    site_no != "lktexana_g" ~ site_no
-  )) |> 
-  mutate(Description = case_when(
-    site_no == "usgs08164525" ~ "Lake Texana",
-    site_no == "usgs08164000" ~ "Lavaca River near Edna",
-    site_no == "usgs08164390" ~ "Navidad River at Strane Pk.",
-    site_no == "usgs08164450" ~ "Sandy Creek near Ganado",
-    site_no == "usgs08164503" ~ "West Mustang Creek near Ganado",
-    site_no == "usgs08164504" ~ "East Mustang Creek near Lousie"
-  )) |> 
-  rename(Site = site_no)
-
-dat$Site <- str_replace(dat$Site, "usgs", "USGS-")
-
-cft_1 <- tabulator(
-  x = dat,
-  rows = c("Site", "Description"),
-  columns = "Parameter",
-  "Mean (SD)" = as_paragraph(fmt_avg_dev(mean, sd, digit1 = 2, digit2 = 2)),
-  "N" = as_paragraph(as_chunk(n))
-)
+```{r datsum}
 
 prop_cap <- fp_text_default(font.family = "Minion Pro",
                             font.size = 10)
 
-ft <- as_flextable(cft_1) |> 
+df <- tar_read(estuary_model_data, store = store)
+
+df <- df |> 
+  filter(station_id == "13384" |
+         station_id == "13383" |
+         station_id == "13563") |>
+  filter(parameter_code == "00630" |
+           parameter_code == "00625" |
+           parameter_code =="00665" |
+           parameter_code == "70953" |
+           parameter_code == "00300") |> 
+  filter(end_date >= as.Date("2005-01-01")) |> 
+  select(station_id, station_description, parameter_description, parameter_code, value) |> 
+  mutate(parameter_description =
+           case_when(
+             parameter_code == "70953" ~ "Chlorophyll-*a* (µg/L)",
+             parameter_code == "00625" ~ "Total Kjeldahl Nitrogen (mg/L)",
+             parameter_code == "00630" ~ "Nitrite+Nitrate (mg/L)",
+             parameter_code == "00665" ~ "Total Phosphorus (mg/L)",
+             parameter_code == "00300" ~ "Dissolved Oxygen (mg/L)"
+           )) |> 
+  group_by(station_id, station_description, parameter_description) |> 
+  summarise(n = n(),
+            mean = mean(value),
+            sd = sd(value),
+            .groups = "drop")
+
+cft_1 <- tabulator(
+  x = df,
+  rows = c("station_id", "station_description"),
+  columns = "parameter_description",
+  "Mean (SD)" = as_paragraph(fmt_avg_dev(mean, sd, digit1 = 2, digit2 = 2)),
+  "N" = as_paragraph(as_chunk(n))
+)
+
+as_flextable(cft_1) |> 
+  mk_par(i = 1, j = 1, as_paragraph("Station ID"), part = "header") |>
+  mk_par(i = 1, j = 2, as_paragraph("Station Description"), part = "header") |>
+  prepend_chunks(i = c(1:3), j = 1, as_chunk("TCEQ-"), part = "body") |> 
   font(part = "all", fontname = "Arial") |> 
   bold(part = "header") |> 
-  fontsize(size = 9) |> 
-  border_remove() |> 
-  hline_top(border = fp_border(color = "black", width = 0.5),
-            part = "all") |> 
-  hline(border = fp_border(color = "black", width = 0.5),
-        part = "header") |> 
-  hline_bottom(border = fp_border(color = "black", width = 0.5),
-               part = "all") |> 
-  set_table_properties(layout = "autofit") |> 
+  fontsize(size = 8, part = "all") |> 
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |> 
   set_caption(as_paragraph(
-    as_chunk("Summary statistics for mean daily discharge, NO",
-             props = prop_cap),
-    as_sub(as_chunk("3", props = prop_cap)),
-    as_chunk("-N, and TP at the freshwater sites where daily nutrient loads were estimated.",
+    as_chunk("Summary statistics of water quality parameters at Lavaca Bay sites.",
              props = prop_cap)
-    ))
+    )) |> 
+  ftExtra::colformat_md(part = "header")
 
-
-ft
 ```
-
 
 
 
 ## Linking Watershed Loads to Estuary Water Quality
 
-We explored relationships between watershed nutrient loads and nutrient concentrations at three monitoring sites in Lavaca Bay. We fit three different GAM models at each site for each parameter of interest.
+We explored relationships between freshwater inflow, watershed nutrient loads and estuary water quality concentrations at each of the three monitoring sites in Lavaca Bay. 
+The models used in this study were specified as GAM regression models.
+GAMs are a semiparametric version of generalized linear models where the linear predictor is represented as the sum of multiple unknown smooth functions and parametric linear predictors [@wood_fast_2011].
+We fit GAMs using the *mgcv* package in R which makes available multiple types of smooth functions with automatic smoothness selection [@wood_fast_2011]. 
+By using a GAM regression approach, the models used in this study can incorporate expected non-linear relationships, specify the exponential distribution family of the response, and specify a link function that relate the expected response to the predictors.
+The general forms of the three GAM models were:
 
 \begin{equation}
-g(\mu) = \alpha + f_1(ddate) + f_2(yday) + f_3(ddate,\,yday)
+g(\mu) = \alpha + f_1(ddate) + f_2(yday)
 (\#eq:estgam1)
 \end{equation}
 
 \begin{equation}
-g(\mu) = \alpha + f_1(ddate) + f_2(yday) + f_3(ddate,\,yday) + f_4(Q)
+g(\mu) = \alpha + f_1(ddate) + f_2(yday) + f_3(Q)
 (\#eq:estgam2)
 \end{equation}
 
 \begin{equation}
-g(\mu) = \alpha + f_1(ddate) + f_2(yday) + f_3(ddate,\,yday) + f_4(Q) + f_5(Load)
+g(\mu) = \alpha + f_1(ddate) + f_2(yday) + f_3(Q) + f_4(Load)
 (\#eq:estgam3)
 \end{equation}
 
-where *f~1~(ddate)* is decimal date smoothed with a thin-plate regression spline, *f~2~(yday)* is the numeric day of year smoothed with a cyclic cubic regression spline and *f~3~(ddate, yday)* is a tensor product smooth of the two variables. 
-*f~4~(Q)* is total daily watershed discharge and *f~5~(Load)* is total NO~3~-N or TP watershed load obtained from Equation \@ref(eq:gam1).
-By comparing the model fits between the three GAMs,  we evaluated if variance in Lavaca Bay nutrient concentrations are well explained by only temporal parameters (Equation \@ref(eq:estgam1)) or if the freshwater flow (Equation \@ref(eq:estgam2)) and nutrient loading (Equation \@ref(eq:estgam3)) can be used to explain additional variation. 
-The relatively large impact of flow variability on nutrient loading creates a challenge for disentangling the impacts of flow and load [@murphyNutrientImprovementsChesapeake2022]. 
-Instead of using raw freshwater flow and nutrient loading values, these values were replaced by seasonally adjusted flow and flow-adjusted nutrient loads as described by @murphyNutrientImprovementsChesapeake2022. 
-In short, a seasonal GAM was fit to daily flow values and the model residuals were used in *f~4~(Q)* and a GAM for nutrient loads was fit to daily streamflows with the model residuals used in *f~5~(Load)*.
+where *μ* is the conditional expected response (nutrient concentration), *g()* is the log link, *α* is the intercept, and *f~n~()* represents unknown smoothing functions. 
+The response variable was modeled as Gamma distributed with mean *μ* and scale *λ*.
+*f~1~(ddate)* is decimal date smoothed with a thin-plate regression spline, *f~2~(yday)* is the numeric day of year smoothed with a cyclic cubic regression spline, *f~3~(Q)* is mean daily inflow (as measured at Lavaca River and Lake Texana) and *f~4~(Load)* is total NO~3~-N or TP watershed load. 
+Basis dimensions smooths were checked using the *gam.check* function to ensure models were not oversmoothed. 
+Model residuals were inspected for distributional assumptions using the *gratia* package [@simpsonGratiaGracefulGraceful2022].
 
 
-
-# Tables
-
-This is an example of an unformatted table and how we cross-reference that table ([Table \@ref(tab:mtcars)](#tab:mtcars)).
-
-```{r tab.cap='this is the builtin mtcars data.', tab.id='mtcars'}
-dat <- mtcars
-head(dat, n = 10)
-```
-
-
-The [`flextable`](https://davidgohel.github.io/flextable/) package provides additional formatting flexibility when exporting to Word (Table \@ref(tab:mtcarsflex)).
-
-```{r tab.cap='flextable formatted table.', tab.id='mtcarsflex'}
-ft <- flextable(head(dat, n = 10))
-ft
-```
-
-
-# Figures
-
-We can embed and cross-reference plots (Figure \@ref(fig:pressure)).
-
-```{r pressure, fig.cap="pressure dataset", fig.alt="Alternative text for screen readers"}
-plot(pressure)
-```
-
-```{r}
-## leave in, end word document section
-## after table of abbreviations
-block_section(prop_section(type = "nextPage"))
-```
-
-<!---BLOCK_LANDSCAPE_START--->
-
-# Landscape Section
-
-```{r, echo=FALSE, fig.cap='sin function', fig.id='sinus', fig.width=6, fig.height=4, fig.align='center'}
-x <- seq(1,30, by = .1)
-plot(x, sin(x), type = "l", main = "", xlab = "", ylab = "", col = "#CC4300")
-```
-
-<!---BLOCK_LANDSCAPE_STOP--->
-
-# Math
-
-Wrap variables or math in a single `$` to show math inline. For example, $\varepsilon \sim \mathrm{N}(0,1)$. Standalone equations are wrapped with `$$`.
-
-$$
-\left(\prod_{i=1}^{n}y_i\right)^{\frac{1}{n}} = \exp\left[\frac{1}{n}\sum_{i=1}^n\log{y_i}\right], \quad \textrm{when} \quad y_1, y_2, ..., y_n > 0
-$$
-
-If the equations need to be numbered and cross-referenced the format as:
-
-```tex
-\begin{equation}
-\left(\prod_{i=1}^{n}y_i\right)^{\frac{1}{n}} = \exp\left[\frac{1}{n}\sum_{i=1}^n\log{y_i}\right], \quad \textrm{when} \quad y_1, y_2, ..., y_n > 0
-(\#eq:gmean)
-\end{equation}
-```
-
-Which renders as (Equation \@ref(eq:gmean):
+The relatively large impact of flow variability on nutrient loading creates a challenge for disentangling the impacts of inflow and load [@murphyNutrientImprovementsChesapeake2022]. 
+Instead of using raw freshwater inflow and nutrient loading values, these values were replaced by seasonally adjusted inflow and flow-adjusted nutrient loads as proposed by @murphyNutrientImprovementsChesapeake2022. 
+To implement this approach, we fit a GAM relating season (day of the year) to log transformed daily inflow values:
 
 \begin{equation}
-\left(\prod_{i=1}^{n}y_i\right)^{\frac{1}{n}} = \exp\left[\frac{1}{n}\sum_{i=1}^n\log{y_i}\right], \quad \textrm{when} \quad y_1, y_2, ..., y_n > 0
-(\#eq:gmean)
+g(\mu) = \alpha + f_1(yday)
+(\#eq:flowgam)
 \end{equation}
 
-# References
+and a GAM relating log transformed NO~3~-N or TP loads to log transformed daily streamflow:
 
-In-text references and bibliography generation are handled automatically. It relies on creating a bibtex `.bib` file with your references. Software such as Zotero, Mendely, and even Google Scholar can generate the bibtex entries for you. The entries are stored in the `bibliography.bib` file inside the same directory as this `.Rmd` file. To make a in text citation, use the following syntax, `[@helsel_statistical_2002]` to generate the reference at the end of this sentence [@helsel_statistical_2002]. Use a semicolon to include multiple references `[@helsel_statistical_2002; @hirsch2010weighted]` [@helsel_statistical_2002; @hirsch2010weighted]. Or we might use `@helsel_statistical_2002` without brackets to indicate @helsel_statistical_2002 provide a fundamental overview of water quality statistics. The bibliography will populate automatically.
+\begin{equation}
+g(\mu) = \alpha + f_1(Q)
+(\#eq:nutresgam)
+\end{equation}
 
-# Styling and fonts
+where the response variables were modeled as normally distributed with an identity link function. Response residuals from the respective GAM models were used as *Q* and *Load* in Equation \@ref(eq:estgam2) and Equation \@ref(eq:estgam3).
 
-This template uses Minion Pro for body fonts and Open Sans for headings following TWRI brand guidance and AgriLife brand guidance. I can't bundle Minion Pro in this package because of licensing, but you can download and install both fonts from AgriLife (https://agrilife.tamu.edu/wp-content/uploads/2021/03/AgriFonts.zip). I recommend downloading and installing the fonts before knitting your documents. Note that Minion Pro won't "embed" in Word documents because it is an OTF style font and currently Word only embeds TTF fonts. That means collaborators without the font installed on their system will see a different serif font on their system in Word. Once exported to pdf, both OTF and TTF fonts should be embedded correctly.
+
+By comparing the model fits between the three GAMs, we evaluated if variances in Lavaca Bay water quality parameters are well explained by only temporal predictors, Equation \@ref(eq:estgam1), or if freshwater inflow, Equation \@ref(eq:estgam2)), and nutrient loading, Equation \@ref(eq:estgam3), explain additional water quality parameter variation. 
+To compare models, we used an information theoretic approach utilizing corrected Akaike information criterion (AIC~C~) to calculate model probabilities as a measure of strength of evidence [@burnhamAICModelSelection2011].
+
+A summary of models used for each parameter is shown in Table \@ref(tab:gammodels). Daily NO~3~-N loading was used as a predictor for Nitrite+Nitrate (NO~*x*~) concentrations, daily TP loading was used as a predictor for TP concentration, both NO~3~-N and TP loads were used for DO and chlorophyll-*a* concentrations. 
+TKN models were restricted to temporal and inflow terms because neither total nitrogen or TKN loadings were available.
+Currently, insufficient data is available to estimate organic nitrogen loadings in the watershed but with ongoing monitoring projects incorporating a full suite of nutrient parameters, we anticipate the development of these loads in future years.
+
+```{r gammodels}
+df <- tibble(
+  `Water Quality Response Parameter` = c(rep("TP", 3), rep("NO~*x*~", 3),
+               rep("Chlorophyll-*a*", 3), rep("Dissolved Oxygen", 3),
+               rep("TKN", 2)),
+  Model = c("Temporal", "Flow", "Flow+Load",
+            "Temporal", "Flow", "Flow+Load",
+            "Temporal", "Flow", "Flow+Load",
+            "Temporal", "Flow", "Flow+Load",
+            "Temporal", "Flow"),
+  `Model Structure` = c("TP ~ s(ddate) + s(yday)",
+                    "TP ~ s(ddate) + s(yday) + s(Q)",
+                    "TP ~ s(ddate) + s(yday) + s(Q) + s(TP Load)",
+                    "NO~*x*~ ~ s(ddate) + s(yday)",
+                    "NO~*x*~ ~ s(ddate) + s(yday) + s(Q)",
+                    "NO~*x*~ ~ s(ddate) + s(yday) + s(Q) + s(NO~3~-N Load)",
+                    "Chlorophyll-*a* ~ s(ddate) + s(yday)",
+                    "Chlorophyll-*a* ~ s(ddate) + s(yday) + s(Q)",
+                    "Chlorophyll-*a* ~ s(ddate) + s(yday) + s(Q) + s(TP Load) + s(NO~3~-N Load)",
+                    "DO ~ s(ddate) + s(yday)",
+                    "DO ~ s(ddate) + s(yday) + s(Q)",
+                    "DO ~ s(ddate) + s(yday) + s(Q) + s(TP Load) + s(NO~3~-N Load)",
+                    "TKN ~ s(ddate) + s(yday)",
+                    "TKN ~ s(ddate) + s(yday) + s(Q)")
+)
+
+flextable(df) |> 
+  font(part = "all", fontname = "Arial") |> 
+  bold(part = "header") |> 
+  fontsize(size = 9, part = "all") |> 
+    set_table_properties(layout = "autofit",                         
+                         opts_word = list("split" = FALSE,
+                                          "keep_with_next" = TRUE)) |> 
+  set_caption(as_paragraph(
+    as_chunk("Specification of GAM model structure.",
+             props = prop_cap)
+    )) |> 
+  ftExtra::colformat_md(part = "body")
+```
+
+# Results
+
+
+## Temporal Trends
+
+```{r long-smooths, message=FALSE, warning=FALSE, fig.height=6, fig.width=6, fig.cap="Smoothed long-term trend component from each water quality parameter and station GAM."}
+draw_smoothed_years <- function(model1, model2, model3,
+                                ylab, subtitle) {
+  
+  `TCEQ-13563` <- model1
+  `TCEQ-13383` <- model2
+  `TCEQ-13384` <- model3
+
+  comp <- gratia::compare_smooths(
+    `TCEQ-13563`,
+    `TCEQ-13383`,
+    `TCEQ-13384`,
+    smooths = "s(ddate)") 
+
+  crit <- gratia:::coverage_normal(0.90)
+
+  comp |> 
+    unnest(data) |> 
+    mutate(lower_ci = est + (crit * se),
+           upper_ci = est - (crit * se),
+           label = if_else(ddate == max(ddate),
+                           as.character(model),
+                           NA_character_)) |> 
+    ggplot(aes(x = ddate, y = est, group = model)) +
+    geom_ribbon(aes(ymin = lower_ci,
+                    ymax = upper_ci,
+                    fill = model),
+                alpha = 0.15) +
+    geom_line(aes(color = model)) +
+    geom_hline(yintercept = 0, linetype = 2, alpha = 0.5) +
+    geom_text_repel(aes(label = label,
+                        color = model), 
+                    nudge_x = 5,
+                    hjust = "left",
+                    size = 2) +
+    scale_x_continuous(breaks = c(2005, 2010, 2015, 2020),
+                       expand = expansion(mult = c(0.05,0.5))) +
+    colorspace::scale_fill_discrete_qualitative() +
+    colorspace::scale_color_discrete_qualitative() +
+    labs(x = "Year", y = ylab,
+         subtitle = subtitle) +
+    theme_TWRI_print() +
+    theme(axis.title.y = element_markdown(size = 8),
+          axis.title.x = element_markdown(size = 8),
+          plot.subtitle = element_markdown(),
+          legend.position = "none")
+  
+  
+} 
+
+
+p_tp <- draw_smoothed_years(tar_read(tp_lavaca_13563_temporal, store = store),
+                            tar_read(tp_lavaca_13383_temporal, store = store),
+                            tar_read(tp_lavaca_13384_temporal, store = store),
+                            ylab = "TP\nSmooth Estimate (mg/L)", subtitle = "TP Trend")
+
+p_no3 <- draw_smoothed_years(tar_read(no3_lavaca_13563_temporal, store = store),
+                             tar_read(no3_lavaca_13383_temporal, store = store),
+                             tar_read(no3_lavaca_13384_temporal, store = store),
+                             ylab = "NO*<sub>x</sub>*\nSmooth Estimate (mg/L)", subtitle = "NO*<sub>x</sub>* Trend")
+
+p_tkn <- draw_smoothed_years(tar_read(tkn_lavaca_13563_temporal, store = store),
+                             tar_read(tkn_lavaca_13383_temporal, store = store),
+                             tar_read(tkn_lavaca_13384_temporal, store = store),
+                             ylab = "TKN\nSmooth Estimate (mg/L)", subtitle = "TKN Trend")
+
+p_chla <- draw_smoothed_years(tar_read(chla_lavaca_13563_temporal, store = store),
+                             tar_read(chla_lavaca_13383_temporal, store = store),
+                             tar_read(chla_lavaca_13384_temporal, store = store),
+                             ylab = "Chlorophyll-*a*\nSmooth Estimate (µg/L)", subtitle = "Chlorophyll-*a* Trend")
+
+p_do <- draw_smoothed_years(tar_read(do_lavaca_13563_temporal, store = store),
+                             tar_read(do_lavaca_13383_temporal, store = store),
+                             tar_read(do_lavaca_13384_temporal, store = store),
+                             ylab = "DO\nSmooth Estimate (mg/L)", subtitle = "DO Trend")
+
+design <- "
+1122
+3344
+55##
+"
+
+#(p_tp + p_no3) / (p_chla + p_tkn) / (p_do)
+p_tp + p_no3 + p_chla + p_tkn + p_do + plot_layout(design = design)
+
+
+```
+
+
+The long-term water quality concentration trends for each temporal GAM model are shown in Figure \@ref(fig:long-smooths) and model summaries are included in Appendix A.
+No significant trends in TP were observed at any stations. 
+Significant trends in NO~*x*~ concentrations were observed at TCEQ-13383 and TCEQ-13563.
+NO~*x*~ concentrations at TCEQ-13383 displayed a periodic pattern with changes in concentration generally following observed wet and dry period patterns in the watershed.
+In comparison, a linear increase in NO~*x*~ concentration was observed at TCEQ-13563.
+Significant trends in chlorophyll-*a* concentrations were observed at one site. 
+The observed trend indicates a large decrease in chlorophyll-*a* from 2005-2015 with a more recent increase in concentration towards the long-term mean.
+Long-term trends in TKN were observed at one site. 
+TCEQ-13383 shows a slight initial decrease in TKN below the mean concentration, followed by increases in TKN from 2010 through 2020. 
+Although the other sites did not indicate statistical significance, the predicted shape of the trends followed closely to TCEQ-13383.
+No significant trends in DO were observed between 2005 and 2020.
+
+
+## Estuarine Water Quality Explained by Freshwater Inflow and Load Variability
+
+Inflow and/or nutrient load terms were significant for TP and NO~*x*~ models at all three Lavaca Bay sites (Table \@ref(tab:aic)). 
+Chlorophyll-*a* models were improved by the inclusion of freshwater inflow at two sites. TKN and DO models were improved by the inclusion of freshwater inflow at one site. 
+Inclusion of TP and NO~3~-N loads did not improve Chlorophyll-*a* or DO models at any of the sites.
+
+```{r aic}
+fmt_AIC <- function(AICc, weight, digit1 = 1, digit2 = 2) {
+    z1 <- character(length(AICc))
+    z2 <- character(length(AICc))
+    z1[!is.na(AICc)] <- sprintf(paste0("%.", digit1, "f"), AICc[!is.na(AICc)])
+    z2[!is.na(weight)] <- sprintf(paste0(" (%.", digit2, "f)"), 
+        weight[!is.na(weight)])
+    paste0(z1, z2)
+}
+
+dplyr::bind_rows(
+    tar_read(tp_13563, store = store), 
+    tar_read(tp_13383, store = store),
+    tar_read(tp_13384, store = store),
+    tar_read(no3_13563, store = store), 
+    tar_read(no3_13383, store = store),
+    tar_read(no3_13384, store = store),
+    tar_read(chla_13563, store = store), 
+    tar_read(chla_13383, store = store),
+    tar_read(chla_13384, store = store),
+    tar_read(do_13563, store = store), 
+    tar_read(do_13383, store = store),
+    tar_read(do_13384, store = store),
+    tar_read(tkn_13563, store = store),
+    tar_read(tkn_13383, store = store),
+    tar_read(tkn_13384, store = store)
+    ) |> 
+  mutate(Parameter = case_when(
+    Parameter == "Nitrite+Nitrate" ~ "NO~*x*~",
+    Parameter == "Chlorophyll-a" ~ "Chlorophyll-*a*",
+    TRUE ~ as.character(Parameter)
+  )) |> 
+  mutate(Parameter = fct_relevel(Parameter, "TP", "NO~*x*~", "Chlorophyll-*a*","TKN", "DO"),
+         Model = fct_relevel(Model, "Temporal", "Flow", "Flow + Load")) |>
+  tidyr::complete(Site, Model, nesting(Parameter)) |> 
+  tabulator(
+    rows = c("Parameter", "Site"),
+    columns = "Model",
+    "AIC~c~ (Probability)" = as_paragraph(fmt_AIC(AICc, weight))) |>
+  as_flextable() |> 
+  bold(part = "header") |>
+  set_table_properties(layout = "autofit",
+                       opts_word = list("split" = FALSE,
+                                        "keep_with_next" = TRUE)) |>
+  style(i = 1, j = 8, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 2, j = 6, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 3, j = 8, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 4, j = 6, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 5, j = 8, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 6, j = 6, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 7, j = 6, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 8, j = 4, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 9, j = 6, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 10, j = 4, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 11, j = 4, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 12, j = 6, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 13, j = 4, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 14, j = 4, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  style(i = 15, j = 6, pr_t = fp_text_default(bold = TRUE, italic = TRUE), part = "body") |>
+  append_chunks(i = c(10, 11, 12), j = 8, as_chunk("NA")) |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+  flextable::hline(i = c(3,6,9,12)) |>
+  set_caption(as_paragraph(
+    as_chunk("Model AIC",
+             props = prop_cap),
+    as_sub(as_chunk("C", props = prop_cap)),
+    as_chunk(" values and associated model probabilities (in parenthesis). Models with the highest probability for each site and water quality parameter combination are bolded and italicized for emphasis.",
+             props = prop_cap)
+    ))  |>
+  ftExtra::colformat_md(j = "Parameter", part="body")
+```
+
+
+The estimated effects of freshwater inflow and nutrient loads are shown in Figure \@ref(fig:flow-smooths) and Figure \@ref(fig:loads-smooths). 
+All three sites displayed a similar non-linear effect of adjusted inflow on TP and NO~*x*~ concentration, with concentrations falling below the mean at lower flows and plateauing at higher inflow values.  
+A linear increase in chlorophyll-*a* was observed with freshwater inflow at TCEQ-13383. The increase in chlorophyll-*a* at TCEQ-13563 levels off and decreases at the highest inflow values.
+TCEQ-13563 was the only site where inflow had a significant effect on TKN concentration.
+The effect of streamflow on DO concentrations was only significant at TCEQ-13563 which displayed decreasing concentrations at both high and low inflows. The effect size of inflow on DO concentration at TCEQ-13563 was relatively small (approximately 0.1 mg/L) and may not be biologically relevant even if statistically significant.
+
+
+
+```{r flow-smooths, message=FALSE, warning=FALSE, fig.height=6, fig.width=6, fig.cap="Estimated effects of seasonally adjusted mean daily inflow (response residuals from streamflow and season GAM model) on TP, NO~*x*~, chlorophyll-*a*, TKN, and DO concentrations in Lavaca Bay."}
+draw_smoothed_surface <- function(comp,
+                                  x = flw_res,
+                                  xlab,
+                                  ylab, 
+                                  subtitle) {
+
+  crit <- gratia:::coverage_normal(0.90)
+
+  comp |>
+    unnest(data) |>
+    mutate(lower_ci = est + (crit * se),
+           upper_ci = est - (crit * se)) |>
+    group_by(model) |> 
+    mutate(label = if_else(
+      {{ x }} == max( {{ x }} ),
+      as.character(model),
+      NA_character_)) |> 
+    ggplot(aes(x = {{ x }}, y = est, group = model)) +
+    geom_ribbon(aes(ymin = lower_ci,
+                    ymax = upper_ci,
+                    fill = model),
+                alpha = 0.15) +
+    geom_line(aes(color = model)) +
+    geom_hline(yintercept = 0, linetype = 2, alpha = 0.5) +
+    geom_text_repel(aes(label = label,
+                        color = model),
+                    nudge_x = 5,
+                    hjust = "left",
+                    size = 2) +
+    scale_x_continuous(expand = expansion(mult = c(0.05,0.5))) +
+    colorspace::scale_fill_discrete_qualitative() +
+    colorspace::scale_color_discrete_qualitative() +
+    labs(x = xlab, y = ylab,
+         subtitle = subtitle) +
+    theme_TWRI_print() +
+    theme(axis.title.y = element_markdown(size = 8),
+          axis.title.x = element_markdown(size = 8),
+          plot.subtitle = element_markdown(),
+          legend.position = "none")
+  
+}
+
+`TCEQ-13383` <- tar_read(tp_lavaca_13383_flow, store = store)
+
+comp <- compare_smooths(model = `TCEQ-13383`,
+                      `TCEQ-13384` = tar_read(tp_lavaca_13384_flow, store = store),
+                      `TCEQ-13563` = tar_read(tp_lavaca_13563_flow, store = store),
+                      smooths = c("s(flw_res)"))
+p_tp <- draw_smoothed_surface(comp,
+                      x = flw_res,
+                      xlab = "Seasonally Adjusted Mean Daily log(Inflow) [cfs]",
+                      ylab = "TP [mg/L]",
+                      subtitle = "TP")
+
+`TCEQ-13383` <- tar_read(no3_lavaca_13383_flow, store = store)
+
+comp <- compare_smooths(model = `TCEQ-13383`,
+                      `TCEQ-13384` = tar_read(no3_lavaca_13384_flow, store = store),
+                      `TCEQ-13563` = tar_read(no3_lavaca_13563_flow, store = store),
+                      smooths = c("s(flw_res)"))
+p_no3 <- draw_smoothed_surface(comp,
+                      x = flw_res,
+                      xlab = "Seasonally Adjusted Mean Daily log(Inflow) [cfs]",
+                      ylab = "NO*<sub>x</sub>* [mg/L]",
+                      subtitle = "NO*<sub>x</sub>*")
+
+`TCEQ-13383` <- tar_read(chla_lavaca_13383_flow, store = store)
+
+comp <- compare_smooths(model = `TCEQ-13383`,
+                      `TCEQ-13384` = tar_read(chla_lavaca_13384_flow, store = store),
+                      `TCEQ-13563` = tar_read(chla_lavaca_13563_flow, store = store),
+                      smooths = c("s(flw_res)"))
+p_chla <- draw_smoothed_surface(comp,
+                      x = flw_res,
+                      xlab = "Seasonally Adjusted Mean Daily log(Inflow) [cfs]",
+                      ylab = "Chlorophyll-*a*\nSmooth Estimate [µg/L]",
+                      subtitle = "Chlorophyll-*a*")
+
+
+`TCEQ-13383` <- tar_read(tkn_lavaca_13383_flow, store = store)
+
+comp <- compare_smooths(model = `TCEQ-13383`,
+                      `TCEQ-13384` = tar_read(tkn_lavaca_13384_flow, store = store),
+                      `TCEQ-13563` = tar_read(tkn_lavaca_13563_flow, store = store),
+                      smooths = c("s(flw_res)"))
+p_tkn <- draw_smoothed_surface(comp,
+                      x = flw_res,
+                      xlab = "Seasonally Adjusted Mean Daily log(Inflow) [cfs]",
+                      ylab = "TKN Smooth Estimate [mg/L]",
+                      subtitle = "TKN")
+
+`TCEQ-13383` <- tar_read(do_lavaca_13383_flow, store = store)
+
+comp <- compare_smooths(model = `TCEQ-13383`,
+                      `TCEQ-13384` = tar_read(do_lavaca_13384_flow, store = store),
+                      `TCEQ-13563` = tar_read(do_lavaca_13563_flow, store = store),
+                      smooths = c("s(flw_res)"))
+p_do <- draw_smoothed_surface(comp,
+                      x = flw_res,
+                      xlab = "Seasonally Adjusted Mean Daily log(Inflow) [cfs]",
+                      ylab = "DO Smooth Estimate [mg/L]",
+                      subtitle = "DO")
+
+design <- "
+1122
+3344
+55##
+"
+
+p_tp + p_no3 + p_chla + p_tkn + p_do + plot_layout(design = design)
+
+
+```
+
+
+Flow adjusted TP loads showed a positive linear effect on TP concentrations at TCEQ-13383 and TCEQ-13563 (Figure \@ref(fig:flow-smooths)). Flow adjusted NO~3~-N loads only had significant positive effects on concentration at TCEQ-13384. The relative effect sizes of nutrient loading was smaller than the effect of freshwater inflow at sites with significant effects (Table \@ref(tab:aic)).  
+
+
+```{r loads-smooths, message=FALSE, warning=FALSE, fig.height=2.75, fig.width=6, fig.cap="Estimated effects of flow adjusted nutrient loads (response residuals from nutrient load and flow GAM model) on TP and NO~*x*~ concentrations in Lavaca Bay."}
+
+`TCEQ-13383` <- tar_read(tp_lavaca_13383_full, store = store)
+
+comp <- compare_smooths(model = `TCEQ-13383`,
+                      `TCEQ-13384` = tar_read(tp_lavaca_13384_full, store = store),
+                      `TCEQ-13563` = tar_read(tp_lavaca_13563_full, store = store),
+                      smooths = c("s(TP_resid)"))
+p_tp <- draw_smoothed_surface(comp,
+                      x = TP_resid,
+                      xlab = "Flow Adjusted Daily TP Load [kg]",
+                      ylab = "TP [mg/L]",
+                      subtitle = "TP")
+
+`TCEQ-13383` <- tar_read(no3_lavaca_13383_full, store = store)
+
+comp <- compare_smooths(model = `TCEQ-13383`,
+                      `TCEQ-13384` = tar_read(no3_lavaca_13384_full, store = store),
+                      `TCEQ-13563` = tar_read(no3_lavaca_13563_full, store = store),
+                      smooths = c("s(NO3_resid)"))
+p_no3 <- draw_smoothed_surface(comp,
+                      x = NO3_resid,
+                      xlab = "Flow Adjusted Daily NO~3~-N Load [kg]",
+                      ylab = "*NO<sub>x</sub>* [mg/L]",
+                      subtitle = "*NO<sub>x</sub>*")
+
+design <- "
+1122
+"
+
+p_tp + p_no3 + plot_layout(design = design)
+
+
+```
+
+# Discussion
+
+
+The observed mix of non-linear water quality trends from 2005 through 2020 differs slightly from the trends identified by @bugicaWaterQualityTrends2020 for Lavaca Bay from 2009 through 2016, which is not unexpected considering the different time period and methodology. 
+In comparison to estuaries on the Texas coast that are experiencing heavy development pressures, larger demands for freshwater diversions, increasing amounts of wastewater discharges, or more intense agricultural production [@wetzWaterQualityDynamics2016; @bugicaWaterQualityTrends2020] the long-term responses of DO and chlorophyll-*a* concentrations in Lavaca Bay appear generally stable.
+Due to low observed organic nitrogen and inorganic nitrogen concentrations in Lavaca Bay (Table \@ref(tab:datsum)) and nitrogen limitations observed in Texas coastal estuaries [@gardnerNitrogenFixationDissimilatory2006; @houTransformationFateNitrate2012; @doradoUnderstandingInteractionsFreshwater2015; @paudelRelationshipSuspendedSolids2019; @wetzExceptionallyHighOrganic2017], the most concerning trends are the increasing concentrations of NO~*x*~ at the upper Lavaca Bay TCEQ-13563 station and more recent increases in TKN concentrations at the mid-Bay TCEQ-13383 site.
+
+
+The strong positive effect of freshwater inflow on NO~*x*~, TKN, and TP  are consistent with other studies relating runoff with nutrient concentrations in Lavaca Bay and other estuaries [@russell_effect_2006; @caffreyHighNutrientPulses2007; @peierlsNonmonotonicResponsesPhytoplankton2012; @palmerImpactsDroughtsLow2015; @ciraPhytoplanktonDynamicsLowInflow2021]. 
+The positive relationship between both NO~*x*~ and TP with freshwater inflow suggests nonpoint watershed sources of inorganic nitrogen and TP at all three sites. 
+Inflow has a non-linear relationship with TKN at the two upstream sites, with TKN increasing as freshwater inflow transitions from low to moderate levels. 
+At higher freshwater inflows, the effect is attenuated, possibly indicating a flushing effect at higher freshwater inflow. No relationship between TKN and freshwater inflow were observed at TCEQ-13384 located in the lower reach of Lavaca Bay. 
+Tidal flushing from Matagorda Bay might be responsible for decreasing TKN concentrations and limiting the effects of freshwater inflow in lower reaches of Lavaca Bay.
+@russell_effect_2006 suggested the processing of organic loads in the upper portions of Lavaca Bay reduces the transport of nutrients into the lower reaches of the Bay.
+
+
+
+
+Freshwater inflow has a strong positive effect on chlorophyll-*a* at the two stations closer to the mouth of the Lavaca River. 
+The upper Bay site, TCEQ-13563 showed a decrease in chlorophyll-*a* concentrations at highest freshwater inflow volumes. 
+These effects are observed in many riverine estuaries where nutrient limitations at low flows limit primary production and flushing effects or increasing turbidity reduce production at high flows [@peierlsNonmonotonicResponsesPhytoplankton2012; @cloernPhytoplanktonPrimaryProduction2014]. 
+We did not observe a relationship between inorganic nitrogen or TP with chlorophyll-*a*. 
+Due to the lack of TKN loading data, we are unable to ascertain potential relationships between chlorophyll-*a* and organic nitrogen loadings in Lavaca Bay.
+Although other studies have identified complex relationships between estuary nutrient concentrations, nutrient loading and chlorophyll-*a* concentrations in Texas estuaries [@ornolfsdottirNutrientPulsingRegulator2004; @doradoUnderstandingInteractionsFreshwater2015; @ciraPhytoplanktonDynamicsLowInflow2021; @tominackVariabilityPhytoplanktonBiomass2022], this study specifically used flow adjusted freshwater derived nutrient loads to parse out contributions from changes in nutrient loadings while accounting for variations in load due to flow. 
+One explanation for the lack of observed significant effects of nutrient loading on various water quality parameters (nutrients, chlorophyll-*a* and DO) is the relatively small variation in flow-normalized loads within the Lavaca river watershed.
+The time-period in this study is relatively short and recent, any variation in flow-adjusted nutrient concentrations would rely on changes in must be attributed to non-point source changes or changes in nutrient retention at Lake Texana.
+Water quality management in the watershed has focused largely on voluntary adoption of agricultural best management practices [@schramm_lavaca_2018; @bertholdDirectMailingEducation2021].
+The challenges with adoption of practices and scaling field/site water quality improvements to watershed level water quality improvements are well documented [@sharpley_evaluating_2009; @meals_lag_2010; @liuFactorsInfluencingFarmers2018].
+As a result, the relative reductions of non-point sources of nutrients are arguably more challenging to achieve and may result in smaller reductions relative to reductions achieved through point source reductions.
+In other watersheds with longer periods of data, the largest reductions in nutrients have been attributed to point-source reductions associated with elimination of phosphorus contents in detergents and upgrades to wastewater facilities in the 1980s [@paerlAssessingEffectsNutrient2006; @hardingLongTermTrendsNutrients2016] which resulted in large load reductions regardless of natural variation in streamflows.
+In comparison, the temporal changes of flow normalized TP loads in this study were not significant at either of the downstream freshwater sites in the watershed (**CITE REPORT**). 
+Significant increases in flow-normalized NO~3~-N loads were observed in the Lavaca River from 2008 through 2009, followed by significant decreases after 2017. 
+These variations in NO~3~-N loads from the Lavaca River may be masked, especially during wet periods, by the discharges from Lake Texana which accounts for approximately 74% of watershed NO~3~-N loads annually.
+
+
+For all the sites, season explained most of the variation in DO concentrations (see DO GAM Model Summaries in Appendix A). 
+Freshwater inflow and nutrient loadings did not have a significant effect on DO concentrations.
+Responses of estuary metabolic processes and resulting DO concentrations can be quite complicated and often locally specific [@caffreyFactorsControllingNet2004].
+While the lack of total nitrogen or TKN loading data hinders interpretation, the large seasonal effect on DO suggests physical factors play an important role and should be included in future models.
+Russell suggested that Lavaca Bay may not be limited by nutrients alone, with high turbidity or processing of organic loads in upper portions of the Bay limiting production. 
+Additionally, inflows and nutrient loads from point and nonpoint sources along the bay, and the Placedo and Garcitas Creeks watershed may be important influences on metabolic responses that hinder the ability to detect signals in the GAM models.
+
+
+
+## Study Limitations
+
+The clearest limitation of this study is the lack of data informing organic nitrogen loading into Lavaca Bay.
+Monitoring programs in the freshwater sections of the watershed are now including Total Nitrogen and TKN in their laboratory analysis under TCEQ procedures.
+To date, less than five years of data is available and several more years of routine data (and preferably flow-biased sampling) is needed to develop reliable estimates of TKN and Total Nitrogen loadings.
+Future efforts will look to build these datasets and assessments.
+
+Estuary water quality assessments following storms and large discharge events show that flow disturbances can have lagged effects lasting days to as long as months [@mooneyWatershedExportEvents2012; @wetzExtremeFutureEstuaries2013; @bukaveckas_influence_2020; @walkerTimescalesMagnitudeWater2021].
+The approach used in this study only accounts for day of discharges and nutrient loads and do not account for pulses of nutrient or freshwater that may have occurred in prior days that are likely to have long lasting water quality impacts.
+Extending the GAM analysis with antecedent discharge terms such as flow anomalies [@vecchia_trends_2009] or exponentially discounted flow [@kuhnert_quantifying_2012] and associated antecedent load terms could provide additional insight into the lagged effects associated with freshwater inflows and nutrient loads on estuary water quality.
+
+
+
+This study utilized separate GAM models to describe relationships between response variables and potential covariates at each site. 
+A formal comparison of models between sites is not appropriate because the models assume independence between observations.
+A logical next step to this work is to assess how water quality responses change across sites.
+A spatiotemporal GAM model (see @liuComprehensiveWaterQuality2020 for an example) across that Bay would incorporate all observations and model concentration as a function of space (latitude and longitude) and time.
+However, this approach would provide limited information with only three water quality sites in Lavaca Bay and would require substantially more data to identify significant effects.
+Hierarchical GAMs provide an approach to incorporate observations from all sites within a model while allowing smoothers to vary by site. This approach provides a statistically valid approach for assessing how relationships between water quality and covariates vary between sites and across sites [@pedersenHierarchicalGeneralizedAdditive2019].
+Although we do not expect substantial differences in identified effects, the Hierarchical GAM is a natural follow-up to this study to better describe differences between sites. 
+This would be of particular value in similar estuary studies where changes in watershed nutrient loading are expected to result in a response in estuary water quality.
+
+
+
+
+
+# Conclusion
+
+Consistent with other studies along the Texas coast, this study provides evidence that variation in freshwater inflow has a strong effect on nutrient and chlorophyll-*a* concentrations. 
+However, we did not find strong effects of freshwater flow on DO concentrations which were dominated by seasonal variation.
+Inference about the effect of flow-adjusted nutrient loading on estuary water quality was limited by the relatively small observed variance in flow-adjusted nutrient loads from the Lavaca River watershed. 
+Increases in TP loading had small linear effects on TP concentration at the upper and middle Lavaca Bay sites and no effect at the lower site. 
+Increases in NO~3~-N loads did not have a significant effect at any of the Lavaca Bay sites. 
+We also failed to find strong evidence for direct effects of flow-adjusted NO~3~-N and TP loading with chlorophyll-*a* and DO concentrations.
+Although we did not identify strong effects from flow-adjusted nutrient loading, the results are valuable for providing a baseline assessment of how management activities in the watershed that are aimed at reducing nonpoint source pollutants are linked with water quality in Lavaca Bay to date.
+The complex nature of estuary metabolic and hydrologic processes suggests the relationship between nutrient loading and estuary water quality is not direct.
+In order to continue assessing the linkages between upstream management activities and estuary water quality, more comprehensive models can be developed but will require increased efforts in data collection and analysis.
+Some of these efforts are already underway or being pursued and will provide valueable information for local stakeholders and resource managers.
 
 
 # Bibliography {-}
@@ -349,14 +815,727 @@ This template uses Minion Pro for body fonts and Open Sans for headings followin
 <div id="refs"></div>
 
 ```{r}
-## leave in, ends word document section
+## leave in, starts new word document section
 ## after table of abbreviations
-block_section(prop_section(type = "nextPage"))
+block_section(prop_section(type = "nextPage",
+                           page_margins = page_mar(bottom = 1,
+                                                   top = 1,
+                                                   right = 1,
+                                                   left = 1,
+                                                   header = 0.5,
+                                                   footer = 0.5,
+                                                   gutter = 0.5
+                                                   )))
+
 ```
 
-# Appendix A {-}
+# Appendix A - GAM Model Summaries{-}
 
-You can add more info, tables, and figures here.
+```{r}
+## leave in, starts new word document section
+## after table of abbreviations
+block_section(prop_section(type = "nextPage",
+                           page_margins = page_mar(bottom = 1,
+                                                   top = 1,
+                                                   right = 1,
+                                                   left = 1,
+                                                   header = 0.5,
+                                                   footer = 0.5,
+                                                   gutter = 0.5
+                                                   )))
+
+```
+
+## Total Phosphorus GAM Model Summaries
+
+### TCEQ-13563
+
+```{r}
+tar_read(tp_lavaca_13563_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+  set_table_properties(layout = "autofit", 
+                       opts_word = list("split" = FALSE,                          
+                                        "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for TP concentration at TCEQ-13563.",
+             props = prop_cap)))
+```
+
+
+
+`r officer::run_linebreak()`
+
+
+
+```{r}
+tar_read(tp_lavaca_13563_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+  set_table_properties(layout = "autofit",                         
+                       opts_word = list("split" = FALSE,
+                                        "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for TP concentration at TCEQ-13563.", 
+             props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+```{r}
+tar_read(tp_lavaca_13563_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(TP load)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plus load GAM summary for TP concentration at TCEQ-13563.",
+             props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+### TCEQ-13383
+
+```{r}
+tar_read(tp_lavaca_13383_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for TP concentration at TCEQ-13383.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+```{r}
+tar_read(tp_lavaca_13383_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for TP concentration at TCEQ-13383.",
+             props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+```{r}
+tar_read(tp_lavaca_13383_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(TP load)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plus load GAM summary for TP concentration at TCEQ-13383.",
+             props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+### TCEQ-13384
+
+```{r}
+tar_read(tp_lavaca_13384_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for TP concentration at TCEQ-13384.", 
+             props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+```{r}
+tar_read(tp_lavaca_13384_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for TP concentration at TCEQ-13384.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_pagebreak()`
+
+```{r}
+tar_read(tp_lavaca_13384_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(TP load)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plus load GAM summary for TP concentration at TCEQ-13384.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_pagebreak()`
+
+## Nitrite+Nitrate GAM Model Summaries
+
+### TCEQ-13563
+
+```{r}
+tar_read(no3_lavaca_13563_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for NO~*x*~ concentraton at TCEQ-13563.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+```{r}
+tar_read(no3_lavaca_13563_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for NO~*x*~ concentration at TCEQ-13563.",
+             props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+```{r}
+tar_read(no3_lavaca_13563_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(NO~3~-N load)"), part = "body") |>
+  ftExtra::colformat_md() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plus load GAM summary for NO~*x*~ concentration at TCEQ-13563.",
+             props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+### TCEQ-13383
+
+```{r}
+tar_read(no3_lavaca_13383_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for NO~*x*~ concentration at TCEQ-13383.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+
+```{r}
+tar_read(no3_lavaca_13383_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for NO~*x*~ concentration at TCEQ-13383.",
+             props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+```{r}
+tar_read(no3_lavaca_13383_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(NO~3~-N load)"), part = "body") |>
+  ftExtra::colformat_md() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plus load GAM summary for NO~*x*~ concentration at TCEQ-13383.",
+             props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+### TCEQ-13384
+
+```{r}
+tar_read(no3_lavaca_13384_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for NO~*x*~ concentration at TCEQ-13384.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+
+```{r}
+tar_read(no3_lavaca_13384_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for NO~*x*~ concentration at TCEQ-13384.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_pagebreak()`
+
+```{r}
+tar_read(no3_lavaca_13384_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(NO~3~-N load)"), part = "body") |>
+  ftExtra::colformat_md() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plot load GAM summary for NO~*x*~ concentration at TCEQ-13384.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_pagebreak()`
+
+## Chlorophyll-*a* GAM Model Summaries
+
+### TCEQ-13563
+
+```{r}
+tar_read(chla_lavaca_13563_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for chlorophyll-",props = prop_cap),
+    as_i(as_chunk("a",props = prop_cap)),
+    as_chunk(" concentration at TCEQ-13563",props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+
+```{r}
+tar_read(chla_lavaca_13563_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for chlorophyll-",props = prop_cap),
+    as_i(as_chunk("a",props = prop_cap)),
+    as_chunk(" concentration at TCEQ-13563",props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+```{r}
+tar_read(chla_lavaca_13563_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(NO~3~-N load)"), part = "body") |>
+  mk_par(i = 5, j = 2, as_paragraph("s(TP load)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+  ftExtra::colformat_md() |> 
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plus load GAM summary for chlorophyll-",props = prop_cap),
+    as_i(as_chunk("a",props = prop_cap)),
+    as_chunk(" concentration at TCEQ-13563",props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+### TCEQ-13383
+
+```{r}
+tar_read(chla_lavaca_13383_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for chlorophyll-",props = prop_cap),
+    as_i(as_chunk("a",props = prop_cap)),
+    as_chunk(" concentration at TCEQ-13383",props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+
+```{r}
+tar_read(chla_lavaca_13383_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for chlorophyll-",props = prop_cap),
+    as_i(as_chunk("a",props = prop_cap)),
+    as_chunk(" concentration at TCEQ-13383",props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+
+```{r}
+tar_read(chla_lavaca_13383_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(NO~3~-N load)"), part = "body") |>
+  mk_par(i = 5, j = 2, as_paragraph("s(TP load)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+  ftExtra::colformat_md() |> 
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plus load GAM summary for chlorophyll-",props = prop_cap),
+    as_i(as_chunk("a",props = prop_cap)),
+    as_chunk(" concentration at TCEQ-13383",props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+### TCEQ-13384
+
+```{r}
+tar_read(chla_lavaca_13384_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for chlorophyll-",props = prop_cap),
+    as_i(as_chunk("a",props = prop_cap)),
+    as_chunk(" concentration at TCEQ-13384",props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+
+```{r}
+tar_read(chla_lavaca_13384_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for chlorophyll-",props = prop_cap),
+    as_i(as_chunk("a",props = prop_cap)),
+    as_chunk(" concentration at TCEQ-13384",props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+
+```{r}
+tar_read(chla_lavaca_13384_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(NO~3~-N load)"), part = "body") |>
+  mk_par(i = 5, j = 2, as_paragraph("s(TP load)"), part = "body") |>
+  ftExtra::colformat_md() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plus load GAM summary for chlorophyll-",props = prop_cap),
+    as_i(as_chunk("a",props = prop_cap)),
+    as_chunk(" concentration at TCEQ-13384",props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+## TKN GAM Model Summaries
+
+### TCEQ-13563
+
+```{r}
+tar_read(tkn_lavaca_13563_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for TKN concentraton at TCEQ-13563.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+
+```{r}
+tar_read(tkn_lavaca_13563_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for TKN concentration at TCEQ-13563.",
+             props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+
+### TCEQ-13383
+
+```{r}
+tar_read(tkn_lavaca_13383_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for TKN concentration at TCEQ-13383.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+```{r}
+tar_read(tkn_lavaca_13383_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for TKN concentration at TCEQ-13383.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_pagebreak()`
+
+### TCEQ-13384
+
+```{r}
+tar_read(tkn_lavaca_13384_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for TKN concentration at TCEQ-13384.",
+             props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+```{r}
+tar_read(tkn_lavaca_13384_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for TKN concentration at TCEQ-13384.",
+             props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+## Dissolved Oxygen GAM Model Summaries
+
+### TCEQ-13563
+
+```{r}
+tar_read(do_lavaca_13563_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for DO concentration at TCEQ-13563",props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+```{r}
+tar_read(do_lavaca_13563_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for DO concentration at TCEQ-13563",props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+```{r}
+tar_read(do_lavaca_13563_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(NO~3~-N load)"), part = "body") |>
+  mk_par(i = 5, j = 2, as_paragraph("s(TP load)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+  ftExtra::colformat_md() |> 
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plus load GAM summary for DO concentration at TCEQ-13563",props = prop_cap)))
+```
+
+
+`r officer::run_pagebreak()`
+
+### TCEQ-13383
+
+```{r}
+tar_read(do_lavaca_13383_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for DO concentration at TCEQ-13383",props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+```{r}
+tar_read(do_lavaca_13383_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for DO concentration at TCEQ-13383",props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+```{r}
+tar_read(do_lavaca_13383_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(NO~3~-N load)"), part = "body") |>
+  mk_par(i = 5, j = 2, as_paragraph("s(TP load)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+  ftExtra::colformat_md() |> 
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plus load GAM summary for DO concentration at TCEQ-13383",props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+### TCEQ-13384
+
+```{r}
+tar_read(do_lavaca_13384_temporal, store = store) |> 
+  as_flextable() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Temporal GAM summary for DO concentration at TCEQ-13384",props = prop_cap)))
+```
+
+
+`r officer::run_linebreak()`
+
+
+```{r}
+tar_read(do_lavaca_13384_flow, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow GAM summary for DO concentration at TCEQ-13384",props = prop_cap)))
+```
+
+`r officer::run_pagebreak()`
+
+```{r}
+tar_read(do_lavaca_13384_full, store = store) |> 
+  as_flextable() |> 
+  mk_par(i = 3, j = 2, as_paragraph("s(inflow)"), part = "body") |>
+  mk_par(i = 4, j = 2, as_paragraph("s(NO~3~-N load)"), part = "body") |>
+  mk_par(i = 5, j = 2, as_paragraph("s(TP load)"), part = "body") |>
+  ftExtra::colformat_md() |> 
+  font(part = "all", fontname = "Arial") |>
+  fontsize(size = 9, part = "all") |>
+    set_table_properties(layout = "autofit",                         opts_word = list("split" = FALSE,                                                                   "keep_with_next" = TRUE)) |>
+  flextable::set_caption(as_paragraph(
+    as_chunk("Inflow plus load GAM summary for DO concentration at TCEQ-13384",props = prop_cap)))
+```
+
+
 
 ```{r}
 ## leave in, ends word document section

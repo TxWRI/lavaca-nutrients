@@ -76,6 +76,27 @@ references:
   volume: '436'
 
 
+- id: bertholdDirectMailingEducation2021
+  author:
+    - family: Berthold
+      given: T. A.
+    - family: Olsovsky
+      given: Taylor
+    - family: Schramm
+      given: Michael P.
+  citation-key: bertholdDirectMailingEducation2021
+  container-title: Journal of Contemporary Water Research & Education
+  DOI: 10.1111/j.1936-704X.2021.3360.x
+  issue: '174'
+  issued:
+    - year: 2021
+  page: 45-60
+  title: >-
+    Direct mailing education campaign impacts on the adoption of grazing
+    management practices
+  type: article-journal
+
+
 - id: biagi_novel_2022
   author:
     - family: Biagi
@@ -203,7 +224,6 @@ references:
     and the repeated learning-testing methods
   type: article-journal
   volume: '76'
-
 
 
 - id: cohnValiditySimpleStatistical1992
@@ -503,6 +523,30 @@ references:
   type: article-journal
   volume: '17'
 
+- id: jainTechnicalSupportDocument2018
+  author:
+    - family: Jain
+      given: Shubham
+    - family: Ruff
+      given: Stephanie
+    - family: Schramm
+      given: Michael P.
+  citation-key: jainTechnicalSupportDocument2018
+  event-place: Austin, TX
+  genre: Technical Report
+  issued:
+    - year: 2018
+  number: AS-203
+  publisher: Texas Commission on Environmental Quality
+  publisher-place: Austin, TX
+  title: >-
+    Technical Support Document for One Total Maximum Daily Load for Indicator
+    Bacteria in Arenosa Creek
+  type: report
+  URL: >-
+    https://www.tceq.texas.gov/downloads/water-quality/tmdl/arenosa-creek-recreational-108/108-arenosa-creek-tsd-final-10-02-20.pdf
+
+
 - id: kroonRiverLoadsSuspended2012
   author:
     - family: Kroon
@@ -573,7 +617,38 @@ references:
     catchment using the loads regression estimator tool
   type: article-journal
   volume: '48'
-  
+
+
+- id: lloydMethodsDetectingChange2014
+  author:
+    - family: Lloyd
+      given: C.E.M.
+    - family: Freer
+      given: J.E.
+    - family: Collins
+      given: A.L.
+    - family: Johnes
+      given: P.J.
+    - family: Jones
+      given: J.I.
+  citation-key: lloydMethodsDetectingChange2014
+  container-title: Journal of Hydrology
+  container-title-short: Journal of Hydrology
+  DOI: 10.1016/j.jhydrol.2014.04.036
+  ISSN: '00221694'
+  issued:
+    - year: 2014
+      month: 6
+  language: en
+  page: 297-312
+  source: DOI.org (Crossref)
+  title: >-
+    Methods for detecting change in hydrochemical time series in response to
+    targeted pollutant mitigation in river catchments
+  type: article-journal
+  volume: '514'
+
+
 - id: marraCoveragePropertiesConfidence2012
   author:
     - family: Marra
@@ -773,6 +848,7 @@ references:
   type: article-journal
   volume: '753'
 
+
 - id: rebichSourcesDeliveryNutrients2011
   author:
     - family: Rebich
@@ -827,7 +903,49 @@ references:
     coastal water quality model
   type: article-journal
   volume: '63'
+  
 
+- id: schramm_lavaca_2018
+  author:
+    - family: Schramm
+      given: Michael P.
+    - family: Berthold
+      given: Allen
+    - family: Entwistle
+      given: Clare
+    - family: Peddicord
+      given: Kirby
+  citation-key: schramm_lavaca_2018
+  event-place: College Station, Texas
+  genre: Technical Report
+  issued:
+    - year: 2018
+  number: TR-507
+  publisher: Texas Water Resources Institute
+  publisher-place: College Station, Texas
+  title: Lavaca River Watershed Protection Plan
+  type: report
+  URL: https://twri.tamu.edu/media/1456/tr-507.pdf
+
+- id: schrammTotalMaximumDaily2022
+  author:
+    - family: Schramm
+      given: Michael P.
+    - family: Gitter
+      given: Anna
+    - family: Gregory
+      given: Lucas
+  citation-key: schrammTotalMaximumDaily2022
+  container-title: Journal of Contemporary Water Research & Education
+  DOI: 10.1111/j.1936-704X.2022.3374.x
+  issue: '176'
+  issued:
+    - year: 2022
+  page: 36-49
+  title: >-
+    Total Maximum Daily Loads and *Escherichia coli* trends in Texas freshwater
+    streams
+  type: article-journal
 
 - id: schoenbaechlerCoastalHydrologyLavacaColorado2011
   author:
@@ -991,6 +1109,38 @@ references:
     semiparametric approach
   type: article-journal
   volume: '396'
+
+- id: wazniakLinkingWaterQuality2007
+  author:
+    - family: Wazniak
+      given: Catherine E.
+    - family: Hall
+      given: Matthew R.
+    - family: Carruthers
+      given: Tim J. B.
+    - family: Sturgis
+      given: Brian
+    - family: Dennison
+      given: William C.
+    - family: Orth
+      given: Robert J.
+  citation-key: wazniakLinkingWaterQuality2007
+  container-title: Ecological Applications
+  container-title-short: Ecological Applications
+  DOI: 10.1890/05-1554.1
+  ISSN: 1051-0761
+  issue: sp5
+  issued:
+    - year: 2007
+      month: 7
+  language: en
+  page: S64-S78
+  source: DOI.org (Crossref)
+  title: >-
+    Linking water quality to living resources in a Mid-Atlantic lagoon system,
+    USA
+  type: article-journal
+  volume: '17'
 
 
 - id: wetzExceptionallyHighOrganic2017

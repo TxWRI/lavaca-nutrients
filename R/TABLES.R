@@ -138,3 +138,48 @@ glance_gam <- function(model) {
     stringsAsFactors = FALSE
   )
 }
+
+
+
+## return dataframe with AIC scores for estuary models
+est_model_fits <- function(temporal,
+                           flow,
+                           full,
+                           site,
+                           param) {
+  # scores <- round(AICc(temporal, flow, full)$AICc,1)
+  # df <- tibble(`Parameter` = param,
+  #              `Site` = site,
+  #              `Model` = c("Temporal", "Flow", "Flow + Load"),
+  #              `AIC` = scores) |> 
+  #   pivot_wider(names_from = `Model`,
+  #               values_from = `AIC`)
+  # df
+  
+  if(!is.null(full)) {
+    
+    df <- model.sel(list("Temporal" = temporal,
+                         "Flow" = flow, 
+                         "Flow + Load" = full))
+    
+  } else {
+    
+    df <- model.sel(list("Temporal" = temporal,
+                         "Flow" = flow))
+  
+    }
+ 
+  models <- row.names(df)
+  
+  df <- as_tibble(df) |> 
+    mutate(Site = site,
+           Parameter = param,
+           Model = models) |> 
+    dplyr::select(AICc, weight, Site, Parameter, Model)
+  
+  # df <- df |> 
+  #   select(AICc, weight, Site, Parameter)
+  #   mutate(Model = row.names(df))
+    
+  df
+}
