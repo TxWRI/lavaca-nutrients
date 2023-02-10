@@ -116,7 +116,8 @@ prediction_bias_dam <- function(model,
 study_area_map <- function(){
   
   ## usgs sites
-  df_sites <- download_usgs_sites()
+  df_sites <- download_usgs_sites() |> 
+    filter(site_no == "08164000" | site_no == "08164525")
   
   df_sites <- st_as_sf(df_sites, coords = c("dec_long_va", "dec_lat_va"),
                        crs = 4326)  
@@ -171,12 +172,12 @@ study_area_map <- function(){
   
   nhd_stuff <- get_nhd(bounds,
                        "lavaca_plus",
-                       force.redo = TRUE)
+                       force.redo = FALSE)
   
   ## subset flowlines to streams
   nhd_stuff$Flowline |>
-    filter(FTYPE == 460) |>
-    mutate(VISIBILITYFILTER = as.factor(VISIBILITYFILTER)) ->nhd_stuff$Flowline
+    filter(ftype == 460) |>
+    mutate(visibilityfilter = as.factor(visibilityfilter)) ->nhd_stuff$Flowline
   
   ## melt the waterbodies to remove subunit lines
   waterbody <- waterbody |> 
@@ -194,27 +195,27 @@ study_area_map <- function(){
   
   p1 <- ggplot() +
     ## watersheds
-    geom_sf(data = ws, aes(fill = label, color = label), alpha = 0.45, size = 0.2, show.legend = FALSE) +
+    geom_sf(data = ws, aes(fill = label, color = label), alpha = 0.3, size = 0.2, show.legend = FALSE) +
     ## colorado, wharton, dewit, calhoun county label
     geom_sf_text(data = counties_sub |> 
                    filter(CNTY_NM == "Colorado"|CNTY_NM == "Lavaca"| 
                             CNTY_NM == "Wharton"|CNTY_NM == "Calhoun"|
                             CNTY_NM == "De Witt"), 
                  aes(label = glue::glue("{CNTY_NM}\nCounty")), 
-                 size = 2.5, family = "Atkinson Hyperlegible", 
+                 size = 2, family = "Atkinson Hyperlegible", 
                  alpha = 0.5, fontface = "bold") +
     ## Jackson county label
     geom_sf_text(data = counties_sub |> 
                    filter(CNTY_NM == "Jackson"), 
                  aes(label = glue::glue("{CNTY_NM}\nCounty")), 
-                 size = 2.5, family = "Atkinson Hyperlegible", 
+                 size = 2, family = "Atkinson Hyperlegible", 
                  alpha = 0.5, fontface = "bold",
                  nudge_x = 10000) +
     ## victoria county label
     geom_sf_text(data = counties_sub |> 
                    filter(CNTY_NM == "Victoria"), 
                  aes(label = glue::glue("{CNTY_NM}\nCounty")), 
-                 size = 2.5, family = "Atkinson Hyperlegible", 
+                 size = 2, family = "Atkinson Hyperlegible", 
                  alpha = 0.5, fontface = "bold",
                  nudge_x = -10000, nudge_y = -10000) +
     geom_sf(data = urban, fill = "azure4", size = 0.2, alpha = 0.5) +
@@ -228,7 +229,7 @@ study_area_map <- function(){
     ## city labels
     geom_text_repel(data = urban |> filter(NAME10 != "Schulenburg", NAME10 != "Yoakum, TX", NAME10 != "Wharton", NAME10 != "Cuero",
                                            NAME10 != "El Campo"), 
-                    aes(label = NAME10, geometry = Shape), size = 3, family = "Atkinson Hyperlegible",
+                    aes(label = NAME10, geometry = Shape), size = 2, family = "Atkinson Hyperlegible",
                     stat = "sf_coordinates",
                     hjust = 0,
                     nudge_x = -100,
@@ -243,7 +244,7 @@ study_area_map <- function(){
     ) +
     ## el campo label
     geom_text_repel(data = urban |> filter(NAME10 == "El Campo"), 
-                    aes(label = NAME10, geometry = Shape), size = 3, family = "Atkinson Hyperlegible",
+                    aes(label = NAME10, geometry = Shape), size = 2, family = "Atkinson Hyperlegible",
                     stat = "sf_coordinates",
                     # hjust = 0.5,
                     # vjust = 0,
@@ -258,26 +259,26 @@ study_area_map <- function(){
                     bg.color = "white",
                     bg.r = 0.15
     ) +
-    ## schulenburg label
-    geom_text_repel(data = urban |> filter(NAME10 == "Schulenburg"), 
-                    aes(label = NAME10, geometry = Shape), size = 3, family = "Atkinson Hyperlegible",
-                    stat = "sf_coordinates",
-                    hjust = 1,
-                    # vjust = 0,
-                    nudge_x = 10000,
-                    nudge_y = 10000,
-                    direction = "x",
-                    box.padding = 0.5,
-                    segment.curvature = -0.1,
-                    segment.ncp = 3,
-                    segment.angle = 20,
-                    color = "grey30",
-                    bg.color = "white",
-                    bg.r = 0.15) +
+    # ## schulenburg label
+    # geom_text_repel(data = urban |> filter(NAME10 == "Schulenburg"), 
+    #                 aes(label = NAME10, geometry = Shape), size = 3, family = "Atkinson Hyperlegible",
+    #                 stat = "sf_coordinates",
+    #                 hjust = 1,
+    #                 # vjust = 0,
+    #                 nudge_x = 10000,
+    #                 nudge_y = 10000,
+    #                 direction = "x",
+    #                 box.padding = 0.5,
+    #                 segment.curvature = -0.1,
+    #                 segment.ncp = 3,
+    #                 segment.angle = 20,
+    #                 color = "grey30",
+    #                 bg.color = "white",
+    #                 bg.r = 0.15) +
     ##lavaca and navidad labs
     geom_text_repel(data = ws |> filter(label != "Garcitas Creek,\nPlacedo Creek\nand Cox Bay"), 
                     aes(label = label, geometry = Shape, color = label), 
-                    size = 3, 
+                    size = 2.5, 
                     family = "Atkinson Hyperlegible",
                     fontface = "bold",
                     stat = "sf_coordinates",
@@ -285,7 +286,7 @@ study_area_map <- function(){
     ##garcitas labs
     geom_text_repel(data = ws |> filter(label == "Garcitas Creek,\nPlacedo Creek\nand Cox Bay"), 
                     aes(label = label, geometry = Shape, color = label), 
-                    size = 2.5, 
+                    size = 1.5, 
                     family = "Atkinson Hyperlegible",
                     fontface = "bold",
                     stat = "sf_coordinates",
@@ -297,7 +298,7 @@ study_area_map <- function(){
     ## Matagorda Bay Label
     geom_text_repel(data = waterbody_labs |> filter(lab == "Matagorda Bay"), 
                     aes(label = lab, geometry = geometry), 
-                    size = 3, 
+                    size = 2, 
                     family = "Atkinson Hyperlegible",
                     fontface = "bold",
                     stat = "sf_coordinates",
@@ -308,7 +309,7 @@ study_area_map <- function(){
     ## Lavaca Bay Label
     geom_text_repel(data = waterbody_labs |> filter(lab == "Lavaca Bay"), 
                     aes(label = lab, geometry = geometry), 
-                    size = 3, 
+                    size = 2, 
                     family = "Atkinson Hyperlegible",
                     fontface = "bold",
                     stat = "sf_coordinates",
@@ -320,7 +321,7 @@ study_area_map <- function(){
     ## Lk Texana Label
     geom_text_repel(data = waterbody_labs |> filter(lab == "Lake\nTexana"), 
                     aes(label = lab, geometry = geometry), 
-                    size = 2.5, 
+                    size = 2, 
                     family = "Atkinson Hyperlegible",
                     fontface = "bold",
                     stat = "sf_coordinates",
@@ -339,7 +340,7 @@ study_area_map <- function(){
                         geometry = geometry),
                     family = "Atkinson Hyperlegible",
                     stat = "sf_coordinates",
-                    size = 3.25,
+                    size = 2.5,
                     direction = "y",
                     min.segment.length = 0,
                     nudge_x = -200000,
@@ -358,7 +359,7 @@ study_area_map <- function(){
                         geometry = geometry),
                     family = "Atkinson Hyperlegible",
                     stat = "sf_coordinates",
-                    size = 3.25,
+                    size = 2.5,
                     direction = "y",
                     min.segment.length = 0,
                     nudge_x = 200000,
@@ -374,7 +375,7 @@ study_area_map <- function(){
                         geometry = geometry),
                     family = "Atkinson Hyperlegible",
                     stat = "sf_coordinates",
-                    size = 3.25,
+                    size = 2.5,
                     direction = "y",
                     min.segment.length = 0,
                     nudge_x = 200000,
@@ -397,14 +398,15 @@ study_area_map <- function(){
     labs(x = "", y = "") +
     theme_TWRI_print() +
     theme(panel.grid = element_line(color = "grey80", size = 0.1),
-          panel.background = element_rect(fill = "cornsilk2"))
+          panel.background = element_rect(fill = "cornsilk2"),
+          axis.text = element_text(size = 8))
   
   ## inset map
   project <- st_as_sfc(st_bbox(ws))
   
   p2 <- ggplot() +
     geom_sf(data = counties, fill = "white", size = 0.1) +
-    geom_sf(data = project, fill = "transparent", color = "firebrick", size = 2) +
+    geom_sf(data = project, fill = "transparent", color = "firebrick", size = 1) +
     theme_void()
   
   
