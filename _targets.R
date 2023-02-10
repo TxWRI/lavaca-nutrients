@@ -554,7 +554,7 @@ list(
                                  p2_y_title = "TP Concentration (mg/mL)")),
 
   ## assessment pdf
-  tar_quarto(assess_gams, "reports/model_assessment/model_assessment.qmd"),
+  #tar_quarto(assess_gams, "reports/model_assessment/model_assessment.qmd"),
 
 
   ## Model Predictions
@@ -963,7 +963,7 @@ list(
              format = "file"),
   
   # loading estimates pdf
-  tar_quarto(loading_estimates, "reports/load_estimates/load_estimates.qmd"),
+  #tar_quarto(loading_estimates, "reports/load_estimates/load_estimates.qmd"),
   
   ##############################################################################
   # This section creates gams that evaluate Lavaca Bay trends! -----------------
