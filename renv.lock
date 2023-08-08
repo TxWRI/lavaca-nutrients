@@ -1296,14 +1296,9 @@
     },
     "gratia": {
       "Package": "gratia",
-      "Version": "0.7.3.22",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "gratia",
-      "RemoteUsername": "gavinsimpson",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "6fd7312053e5e841e1bdafe8f2f4577c20b8af4c",
+      "Version": "0.8.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "cli",
@@ -1327,7 +1322,7 @@
         "tools",
         "vctrs"
       ],
-      "Hash": "8dc71ccd5d1cb118ca3b2ac69172fbcc"
+      "Hash": "aac574583d985c85f803e25089b35fe5"
     },
     "gridtext": {
       "Package": "gridtext",
@@ -2002,7 +1997,7 @@
     },
     "mgcv": {
       "Package": "mgcv",
-      "Version": "1.8-40",
+      "Version": "1.9-0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2015,7 +2010,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "c6b2fdb18cf68ab613bd564363e1ba0d"
+      "Hash": "086028ca0460d0c368028d3bda58f31b"
     },
     "mime": {
       "Package": "mime",

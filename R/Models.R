@@ -63,22 +63,35 @@ format_dam_data <- function(data) {
 
 # Estuary models -------------
 
+## peer review suggestion:
+## use the modeled FN loads here instead of
+## the originally used residuals.
+## additional this is now changed to calculate the
+## 1 day lagged 20 day sum loads used in the resulting regression model
+
 fn_estuary_tp_loads <- function(lavaca_loads,
                                 navidad_loads,
-                                flow) {
+                                lavaca_loads_fn,
+                                navidad_loads_fn) {
   loads <- lavaca_loads$daily |> 
     bind_rows(navidad_loads$daily) |> 
     select(Date, TP_Estimate) |> 
     group_by(Date) |> 
     summarise(TP = sum(TP_Estimate)) |> 
+    filter(Date >= as.Date("2000-01-02"))
+  
+  loads_fn <- lavaca_loads_fn$daily |> 
+    bind_rows(navidad_loads_fn$daily) |> 
+    select(Date, TP_Estimate) |> 
+    group_by(Date) |> 
+    summarise(TP_FN = sum(TP_Estimate)) |> 
     filter(Date >= as.Date("2000-01-02")) |> 
-    left_join(flow, by = c("Date" = "Date"))
+    mutate(sum_TP_FN = runner::sum_run(TP_FN,
+                                       k = 20,
+                                       lag = 1))
   
-  tp_flow <- gam(log(TP) ~ log1p(Discharge),
-                 data = loads,
-                 family = gaussian)
-  
-  loads$TP_resid <- residuals(tp_flow, type = "deviance")
+  loads <- loads |> 
+    left_join(loads_fn)
   
   loads
   
@@ -87,23 +100,31 @@ fn_estuary_tp_loads <- function(lavaca_loads,
 
 
 fn_estuary_no3_loads <- function(lavaca_loads,
-                                navidad_loads,
-                                flow) {
+                                 navidad_loads,
+                                 lavaca_loads_fn,
+                                 navidad_loads_fn) {
   loads <- lavaca_loads$daily |> 
     bind_rows(navidad_loads$daily) |> 
     select(Date, NO3_Estimate) |> 
     group_by(Date) |> 
     summarise(NO3 = sum(NO3_Estimate)) |> 
+    filter(Date >= as.Date("2005-01-02"))
+  
+  loads_fn <- lavaca_loads_fn$daily |> 
+    bind_rows(navidad_loads_fn$daily) |> 
+    select(Date, NO3_Estimate) |> 
+    group_by(Date) |> 
+    summarise(NO3_FN = sum(NO3_Estimate)) |> 
     filter(Date >= as.Date("2005-01-02")) |> 
-    left_join(flow, by = c("Date" = "Date"))
+    mutate(sum_NO3_FN = runner::sum_run(NO3_FN,
+                                        k = 20,
+                                        lag = 1))
   
-  no3_flow <- gam(log(NO3) ~ log1p(Discharge),
-                 data = loads,
-                 family = gaussian)
-  
-  loads$NO3_resid <- residuals(no3_flow, type = "deviance")
+  loads <- loads |> 
+    left_join(loads_fn)
   
   loads
+  
   
 }
 
@@ -138,7 +159,7 @@ estuary_gam_data <- function(model_data,
     filter(parameter_code == {{response_parameter}}) |> 
     filter(station_id == {{station}}) |> 
     filter(end_date >= as.Date(date)) |> 
-    left_join(loads |> select(-c(Discharge)), 
+    left_join(loads, 
               by = c("end_date" = "Date")) |> 
     mutate(value = case_when(
       greater_than_less_than == "<" ~ value/2,
