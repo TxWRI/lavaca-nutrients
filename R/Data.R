@@ -291,13 +291,19 @@ load_lb_inflow <- function() {
 
 adjust_lbay_inflow <- function(flow) {
   flow_out <- flow |> 
-    mutate(day = yday(Date))
+    mutate(day = yday(Date),
+           sum_flw = runner::sum_run(Discharge,
+                                     k = 20,
+                                     lag = 1,
+                                     na_pad = FALSE)) |> 
+    fill(sum_flw, .direction = "up")
   
-  m_flow <- gam(log1p(Discharge) ~ s(day, bs = "cc"),
+  m_flow <- gam(log1p(sum_flw) ~ s(day, bs = "cc"),
                 data = flow_out,
                 method = "REML")
   flow$flw_res <- residuals(m_flow, type = "response")
-  
+
+
   return(flow)
 }
 
